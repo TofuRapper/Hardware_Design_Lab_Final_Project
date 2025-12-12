@@ -50,7 +50,7 @@ module KeyboardDecoder(
     
     always @ (posedge clk, posedge rst) begin
     	if (rst) begin
-    		state <= INIT;
+    		state <= WAIT_FOR_SIGNAL;
     		been_ready  <= 1'b0;
     		been_extend <= 1'b0;
     		been_break  <= 1'b0;

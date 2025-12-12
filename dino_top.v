@@ -44,6 +44,7 @@ module dino_top (
         .clk(clk)
     );
 
+
     wire [11:0] pixel_out;
     dino_logic game_inst (
         .pclk(pclk),

@@ -15,51 +15,51 @@ Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 21300 
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:18]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:19]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:20]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:21]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:22]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:23]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:24]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:26]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:27]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:28]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:29]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:31]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:32]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:33]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:34]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:35]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:191]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:192]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:193]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:194]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:229]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:231]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:232]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:233]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:234]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:235]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:236]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:237]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:238]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:239]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:240]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:241]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:242]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:243]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:244]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:245]
+INFO: Helper process launched with PID 11592 
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:18]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:19]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:20]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:21]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:22]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:23]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:24]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:26]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:27]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:28]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:29]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:31]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:32]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:33]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:34]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:35]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:191]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:192]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:193]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:194]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:229]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:231]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:232]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:233]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:234]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:235]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:236]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:237]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:238]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:239]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:240]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:241]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:242]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:243]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:244]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:245]
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 838.930 ; gain = 238.336
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:03 . Memory (MB): peak = 773.098 ; gain = 238.020
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-6157] synthesizing module 'dino_top' [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/dino_top.v:1]
-INFO: [Synth 8-6157] synthesizing module 'clock_divider' [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/clock_divider.v:1]
+INFO: [Synth 8-6157] synthesizing module 'dino_top' [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/dino_top.v:1]
+INFO: [Synth 8-6157] synthesizing module 'clock_divider' [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/clock_divider.v:1]
 	Parameter n bound to: 2 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'clock_divider' (1#1) [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/clock_divider.v:1]
-INFO: [Synth 8-6157] synthesizing module 'vga_controller' [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/vga.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'clock_divider' (1#1) [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/clock_divider.v:1]
+INFO: [Synth 8-6157] synthesizing module 'vga_controller' [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/vga.v:6]
 	Parameter HD bound to: 640 - type: integer 
 	Parameter HF bound to: 16 - type: integer 
 	Parameter HS bound to: 96 - type: integer 
@@ -72,12 +72,12 @@ INFO: [Synth 8-6157] synthesizing module 'vga_controller' [C:/Users/USER/Desktop
 	Parameter VT bound to: 525 - type: integer 
 	Parameter hsync_default bound to: 1'b1 
 	Parameter vsync_default bound to: 1'b1 
-INFO: [Synth 8-6155] done synthesizing module 'vga_controller' (2#1) [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/vga.v:6]
-INFO: [Synth 8-6157] synthesizing module 'debounce' [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/debounce.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'debounce' (3#1) [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/debounce.v:1]
-INFO: [Synth 8-6157] synthesizing module 'one_pulse' [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/one_pulse.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'one_pulse' (4#1) [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/one_pulse.v:1]
-INFO: [Synth 8-6157] synthesizing module 'KeyboardDecoder' [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/KeyboardDecoder.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'vga_controller' (2#1) [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/vga.v:6]
+INFO: [Synth 8-6157] synthesizing module 'debounce' [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/debounce.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'debounce' (3#1) [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/debounce.v:1]
+INFO: [Synth 8-6157] synthesizing module 'one_pulse' [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/one_pulse.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'one_pulse' (4#1) [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/one_pulse.v:1]
+INFO: [Synth 8-6157] synthesizing module 'KeyboardDecoder' [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/KeyboardDecoder.v:1]
 	Parameter INIT bound to: 2'b00 
 	Parameter WAIT_FOR_SIGNAL bound to: 2'b01 
 	Parameter GET_SIGNAL_DOWN bound to: 2'b10 
@@ -85,7 +85,7 @@ INFO: [Synth 8-6157] synthesizing module 'KeyboardDecoder' [C:/Users/USER/Deskto
 	Parameter IS_INIT bound to: 8'b10101010 
 	Parameter IS_EXTEND bound to: 8'b11100000 
 	Parameter IS_BREAK bound to: 8'b11110000 
-INFO: [Synth 8-6157] synthesizing module 'KeyboardCtrl' [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:1]
+INFO: [Synth 8-6157] synthesizing module 'KeyboardCtrl' [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:1]
 	Parameter SYSCLK_FREQUENCY_HZ bound to: 100000000 - type: integer 
 	Parameter RESET bound to: 3'b000 
 	Parameter SEND_CMD bound to: 3'b001 
@@ -103,7 +103,7 @@ INFO: [Synth 8-6157] synthesizing module 'KeyboardCtrl' [C:/Users/USER/Desktop/3
 	Parameter CAPS_LOCK bound to: 8'b01011000 
 	Parameter NUM_LOCK bound to: 8'b01110111 
 	Parameter SCR_LOCK bound to: 8'b01111110 
-INFO: [Synth 8-6157] synthesizing module 'Ps2Interface' [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:164]
+INFO: [Synth 8-6157] synthesizing module 'Ps2Interface' [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:164]
 	Parameter SYSCLK_FREQUENCY_HZ bound to: 100000000 - type: integer 
 	Parameter CLOCK_CNT_100US bound to: 10000 - type: integer 
 	Parameter CLOCK_CNT_20US bound to: 2000 - type: integer 
@@ -125,17 +125,17 @@ INFO: [Synth 8-6157] synthesizing module 'Ps2Interface' [C:/Users/USER/Desktop/3
 	Parameter TX_WAIT_ACK bound to: 4'b1100 
 	Parameter TX_RECEIVED_ACK bound to: 4'b1101 
 	Parameter TX_ERROR_NO_ACK bound to: 4'b1110 
-INFO: [Synth 8-6157] synthesizing module 'IOBUF' [C:/Xilinx/Vivado/2019.2/scripts/rt/data/unisim_comp.v:36196]
+INFO: [Synth 8-6157] synthesizing module 'IOBUF' [E:/vivado/Vivado/2019.2/scripts/rt/data/unisim_comp.v:36196]
 	Parameter DRIVE bound to: 12 - type: integer 
 	Parameter IBUF_LOW_PWR bound to: TRUE - type: string 
 	Parameter IOSTANDARD bound to: DEFAULT - type: string 
 	Parameter SLEW bound to: SLOW - type: string 
-INFO: [Synth 8-6155] done synthesizing module 'IOBUF' (5#1) [C:/Xilinx/Vivado/2019.2/scripts/rt/data/unisim_comp.v:36196]
-INFO: [Synth 8-6155] done synthesizing module 'Ps2Interface' (6#1) [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:164]
-INFO: [Synth 8-6155] done synthesizing module 'KeyboardCtrl' (7#1) [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:1]
-INFO: [Synth 8-226] default block is never used [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/KeyboardDecoder.v:64]
-INFO: [Synth 8-6155] done synthesizing module 'KeyboardDecoder' (8#1) [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/KeyboardDecoder.v:1]
-INFO: [Synth 8-6157] synthesizing module 'dino_logic' [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/dino_logic.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'IOBUF' (5#1) [E:/vivado/Vivado/2019.2/scripts/rt/data/unisim_comp.v:36196]
+INFO: [Synth 8-6155] done synthesizing module 'Ps2Interface' (6#1) [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:164]
+INFO: [Synth 8-6155] done synthesizing module 'KeyboardCtrl' (7#1) [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:1]
+INFO: [Synth 8-226] default block is never used [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/KeyboardDecoder.v:64]
+INFO: [Synth 8-6155] done synthesizing module 'KeyboardDecoder' (8#1) [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/KeyboardDecoder.v:1]
+INFO: [Synth 8-6157] synthesizing module 'dino_logic' [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/dino_logic.v:1]
 	Parameter GROUND_Y bound to: 350 - type: integer 
 	Parameter DINO_X bound to: 80 - type: integer 
 	Parameter DINO_W bound to: 20 - type: integer 
@@ -145,13 +145,114 @@ INFO: [Synth 8-6157] synthesizing module 'dino_logic' [C:/Users/USER/Desktop/3-1
 	Parameter S_IDLE bound to: 2'b00 
 	Parameter S_RUN bound to: 2'b01 
 	Parameter S_OVER bound to: 2'b10 
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/dino_logic.v:81]
-INFO: [Synth 8-6155] done synthesizing module 'dino_logic' (9#1) [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/dino_logic.v:1]
-INFO: [Synth 8-6157] synthesizing module 'SevenSegment' [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/SevenSegment.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'SevenSegment' (10#1) [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/SevenSegment.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'dino_top' (11#1) [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/dino_top.v:1]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/dino_logic.v:68]
+INFO: [Synth 8-6155] done synthesizing module 'dino_logic' (9#1) [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/dino_logic.v:1]
+INFO: [Synth 8-6157] synthesizing module 'SevenSegment' [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/SevenSegment.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'SevenSegment' (10#1) [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/SevenSegment.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'dino_top' (11#1) [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/dino_top.v:1]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[511]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[510]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[509]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[508]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[507]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[506]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[505]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[504]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[503]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[502]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[501]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[500]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[499]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[498]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[497]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[496]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[495]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[494]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[493]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[492]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[491]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[490]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[489]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[488]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[487]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[486]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[485]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[484]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[483]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[482]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[481]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[480]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[479]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[478]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[477]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[476]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[475]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[474]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[473]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[472]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[471]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[470]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[469]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[468]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[467]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[466]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[465]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[464]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[463]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[462]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[461]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[460]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[459]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[458]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[457]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[456]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[455]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[454]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[453]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[452]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[451]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[450]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[449]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[448]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[447]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[446]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[445]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[444]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[443]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[442]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[441]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[440]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[439]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[438]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[437]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[436]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[435]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[434]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[433]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[432]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[431]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[430]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[429]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[428]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[427]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[426]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[425]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[424]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[423]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[422]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[421]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[420]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[419]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[418]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[417]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[416]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[415]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[414]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[413]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[412]
+INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:10 . Memory (MB): peak = 893.969 ; gain = 293.375
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 827.383 ; gain = 292.305
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -164,45 +265,45 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:09 ; elapsed = 00:00:11 . Memory (MB): peak = 893.969 ; gain = 293.375
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 827.383 ; gain = 292.305
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:11 . Memory (MB): peak = 893.969 ; gain = 293.375
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 827.383 ; gain = 292.305
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.052 . Memory (MB): peak = 893.969 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.038 . Memory (MB): peak = 827.383 ; gain = 0.000
 INFO: [Netlist 29-17] Analyzing 2 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/Final_Project.xdc]
-Finished Parsing XDC File [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/Final_Project.xdc]
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/Final_Project.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/dino_top_propImpl.xdc].
+Parsing XDC File [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/Final_Project.xdc]
+Finished Parsing XDC File [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/Final_Project.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/Final_Project.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/dino_top_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/dino_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1004.547 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 944.992 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 2 instances were transformed.
   IOBUF => IOBUF (IBUF, OBUFT): 2 instances
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.011 . Memory (MB): peak = 1004.547 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 944.992 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:20 ; elapsed = 00:00:23 . Memory (MB): peak = 1004.547 ; gain = 403.953
+Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 944.992 ; gain = 409.914
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:20 ; elapsed = 00:00:23 . Memory (MB): peak = 1004.547 ; gain = 403.953
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 944.992 ; gain = 409.914
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:23 . Memory (MB): peak = 1004.547 ; gain = 403.953
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 944.992 ; gain = 409.914
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'Ps2Interface'
 INFO: [Synth 8-5544] ROM "ps2_clk_out_next" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
@@ -273,7 +374,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'digit_reg' using encoding 'sequential' in module 'SevenSegment'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:22 ; elapsed = 00:00:25 . Memory (MB): peak = 1004.547 ; gain = 403.953
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 944.992 ; gain = 409.914
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -325,7 +426,7 @@ Detailed RTL Component Info :
 	   5 Input      3 Bit        Muxes := 1     
 	   4 Input      2 Bit        Muxes := 1     
 	   2 Input      2 Bit        Muxes := 3     
-	   2 Input      1 Bit        Muxes := 29    
+	   2 Input      1 Bit        Muxes := 28    
 	  15 Input      1 Bit        Muxes := 6     
 	   7 Input      1 Bit        Muxes := 7     
 	   4 Input      1 Bit        Muxes := 7     
@@ -437,7 +538,7 @@ Detailed RTL Component Info :
 	   2 Input     10 Bit        Muxes := 7     
 	   2 Input      5 Bit        Muxes := 1     
 	   3 Input      1 Bit        Muxes := 3     
-	   2 Input      1 Bit        Muxes := 3     
+	   2 Input      1 Bit        Muxes := 2     
 Module SevenSegment 
 Detailed RTL Component Info : 
 +---Registers : 
@@ -485,7 +586,7 @@ INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[6]' (FDCE) t
 INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[0]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[1]'
 INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[1]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[2]'
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:43 ; elapsed = 00:00:47 . Memory (MB): peak = 1004.547 ; gain = 403.953
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 944.992 ; gain = 409.914
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -514,13 +615,13 @@ Report RTL Partitions:
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:57 ; elapsed = 00:01:01 . Memory (MB): peak = 1004.547 ; gain = 403.953
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 944.992 ; gain = 409.914
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:01:09 ; elapsed = 00:01:13 . Memory (MB): peak = 1130.492 ; gain = 529.898
+Finished Timing Optimization : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 950.129 ; gain = 415.051
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -532,7 +633,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:01:10 ; elapsed = 00:01:15 . Memory (MB): peak = 1131.508 ; gain = 530.914
+Finished Technology Mapping : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 950.926 ; gain = 415.848
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -558,13 +659,13 @@ INFO: [Synth 8-5365] Flop kbd_decoder/inst/Ps2Interface_i/ps2_data_en_reg is bei
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:17 ; elapsed = 00:01:21 . Memory (MB): peak = 1131.508 ; gain = 530.914
+Finished IO Insertion : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 957.797 ; gain = 422.719
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:17 ; elapsed = 00:01:21 . Memory (MB): peak = 1131.508 ; gain = 530.914
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 957.797 ; gain = 422.719
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -583,25 +684,25 @@ Report Check Netlist:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:17 ; elapsed = 00:01:21 . Memory (MB): peak = 1131.508 ; gain = 530.914
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 957.797 ; gain = 422.719
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:01:17 ; elapsed = 00:01:21 . Memory (MB): peak = 1131.508 ; gain = 530.914
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 957.797 ; gain = 422.719
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:17 ; elapsed = 00:01:22 . Memory (MB): peak = 1131.508 ; gain = 530.914
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 957.797 ; gain = 422.719
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:01:17 ; elapsed = 00:01:22 . Memory (MB): peak = 1131.508 ; gain = 530.914
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 957.797 ; gain = 422.719
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -619,64 +720,62 @@ Report Cell Usage:
 +------+-------+------+
 |1     |BUFG   |     2|
 |2     |CARRY4 |    23|
-|3     |LUT1   |    14|
-|4     |LUT2   |    63|
-|5     |LUT3   |    37|
-|6     |LUT4   |   617|
-|7     |LUT5   |   119|
-|8     |LUT6   |   252|
-|9     |MUXF7  |    66|
-|10    |MUXF8  |     1|
-|11    |FDCE   |   701|
-|12    |FDPE   |    17|
-|13    |FDRE   |    41|
-|14    |FDSE   |     1|
-|15    |IBUF   |     4|
-|16    |IOBUF  |     2|
-|17    |OBUF   |    41|
+|3     |LUT1   |    15|
+|4     |LUT2   |    48|
+|5     |LUT3   |    38|
+|6     |LUT4   |    94|
+|7     |LUT5   |    96|
+|8     |LUT6   |    91|
+|9     |FDCE   |   186|
+|10    |FDPE   |    18|
+|11    |FDRE   |    41|
+|12    |FDSE   |     1|
+|13    |IBUF   |     4|
+|14    |IOBUF  |     2|
+|15    |OBUF   |    41|
 +------+-------+------+
 
 Report Instance Areas: 
 +------+---------------------+----------------+------+
 |      |Instance             |Module          |Cells |
 +------+---------------------+----------------+------+
-|1     |top                  |                |  2001|
+|1     |top                  |                |   700|
 |2     |  db_jump            |debounce        |     9|
 |3     |  db_start           |debounce_0      |    10|
 |4     |  display_inst       |SevenSegment    |    50|
-|5     |  game_inst          |dino_logic      |   204|
-|6     |  kbd_decoder        |KeyboardDecoder |  1529|
+|5     |  game_inst          |dino_logic      |   186|
+|6     |  kbd_decoder        |KeyboardDecoder |   242|
 |7     |    inst             |KeyboardCtrl    |   212|
 |8     |      Ps2Interface_i |Ps2Interface    |   177|
-|9     |    op               |one_pulse_1     |     3|
+|9     |    op               |one_pulse_1     |     4|
 |10    |  pclk_gen           |clock_divider   |     4|
 |11    |  pulse_start        |one_pulse       |     2|
-|12    |  vga_inst           |vga_controller  |   100|
+|12    |  vga_inst           |vga_controller  |   104|
 +------+---------------------+----------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:17 ; elapsed = 00:01:22 . Memory (MB): peak = 1131.508 ; gain = 530.914
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 957.797 ; gain = 422.719
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 14 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:01:04 ; elapsed = 00:01:17 . Memory (MB): peak = 1131.508 ; gain = 420.336
-Synthesis Optimization Complete : Time (s): cpu = 00:01:17 ; elapsed = 00:01:22 . Memory (MB): peak = 1131.508 ; gain = 530.914
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:19 ; elapsed = 00:00:25 . Memory (MB): peak = 957.797 ; gain = 305.109
+Synthesis Optimization Complete : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 957.797 ; gain = 422.719
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.029 . Memory (MB): peak = 1131.508 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 92 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 957.797 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 25 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1139.430 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 965.844 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 2 instances were transformed.
   IOBUF => IOBUF (IBUF, OBUFT): 2 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-62 Infos, 50 Warnings, 0 Critical Warnings and 0 Errors encountered.
+63 Infos, 150 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:25 ; elapsed = 00:01:33 . Memory (MB): peak = 1139.430 ; gain = 833.641
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1139.430 ; gain = 0.000
+synth_design: Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 965.844 ; gain = 667.508
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 965.844 ; gain = 0.000
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
-INFO: [Common 17-1381] The checkpoint 'C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/Final_Project/Final_Project.runs/synth_1/dino_top.dcp' has been generated.
+INFO: [Common 17-1381] The checkpoint 'C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/Final_Project/Final_Project.runs/synth_1/dino_top.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file dino_top_utilization_synth.rpt -pb dino_top_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Thu Dec 11 11:41:29 2025...
+INFO: [Common 17-206] Exiting Vivado at Sat Dec 13 00:43:12 2025...
