@@ -89,7 +89,7 @@ module dino_logic (
                 // --- JUMP LOGIC ---
                 if (dino_y >= GROUND_Y - DINO_H) begin
                     // On Ground
-                    if ((key_press_event && is_space && key_down[last_change]) || jump_signal) begin
+                    if ((key_down[9'h29]) || jump_signal) begin
                         dino_vel <= -12;
                         dino_y <= dino_y - 12;
                     end else begin
