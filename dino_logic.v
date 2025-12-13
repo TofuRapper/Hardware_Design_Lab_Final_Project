@@ -33,8 +33,9 @@ module dino_logic (
     
     //LFSR randomly create obstacle
     wire [9:0] random_val;
+    reg [9:0] next_spawn_offset;
     LFSR lfsr(
-        .clk(vsync),
+        .clk(pclk),
         .rst(rst),
         .random_out(random_val)
     );
@@ -53,7 +54,7 @@ module dino_logic (
     wire collision = (
         (DINO_X + DINO_W > cactus_x) && 
         (DINO_X < cactus_x + CACTUS_W) && 
-        (dino_y + DINO_H > GROUND_Y - CACTUS_H)
+        (dino_y + DINO_H > 100 - CACTUS_H)
     );
     
     wire frame_tick = vsync && !prev_vsync;
@@ -67,6 +68,7 @@ module dino_logic (
             cactus_x <= 630;
             score <= 0;
             prev_vsync <= 0;
+            next_spawn_offset <= 0;
             
             prev_key_valid <= 0;
             last_key <= 9'h000;
@@ -76,7 +78,12 @@ module dino_logic (
             prev_key_valid <= key_valid;
             if (key_press_event) last_key <= last_change;
             case (state)
-                S_IDLE: if (start_pulse) state <= S_RUN;
+                S_IDLE: begin
+                    if (start_pulse) begin
+                        state <= S_RUN;
+                        next_spawn_offset <= random_val;
+                    end
+                end
                 S_RUN:  if (collision)   state <= S_OVER;
                 S_OVER: if (start_pulse) begin
                             state <= S_IDLE;
@@ -89,13 +96,10 @@ module dino_logic (
             // 2. PHYSICS UPDATE
             if (frame_tick && state == S_RUN) begin
                 // Move Cactus
-                if(cactus_x > 1000) begin
-                    cactus_x <= 630 + {2'b0, random_val[7:0]};
+                if(cactus_x < 0 || cactus_x > 10'd700) begin
+                    cactus_x <= 630 + 100 + {1'b0, next_spawn_offset[8:0]};
                     score <= score + 1;
-                end
-                else if (cactus_x < 5) begin
-                    cactus_x <= 630 + {2'b0, random_val[7:0]};
-                    score <= score + 1;
+                    next_spawn_offset <= random_val;
                 end else begin
                     cactus_x <= cactus_x - 4 - (score[9:4]);
                 end
@@ -127,7 +131,7 @@ module dino_logic (
         led_out = 16'h0000;
         if (state == S_RUN) led_out[15] = 1'b1;
         if (jumped) led_out[0] = 1'b1;
-        led_out[10:3] = random_val[7:0];
+        led_out[10:3] = next_spawn_offset[7:0];
 
         pixel_out = 12'h000;
         if (v_cnt == GROUND_Y) pixel_out = 12'hFFF;
