@@ -31,10 +31,19 @@ module dino_logic (
     reg [9:0] score;
     reg prev_vsync;
     
+    //LFSR randomly create obstacle
+    wire [9:0] random_val;
+    LFSR lfsr(
+        .clk(vsync),
+        .rst(rst),
+        .random_out(random_val)
+    );
+
     reg [8:0] last_key;
     reg prev_key_valid;
     
     wire key_press_event = key_valid && !prev_key_valid && (last_change != last_key);
+    reg jumped;
 
     wire [7:0] scan_code = last_change[7:0];
     
@@ -48,6 +57,7 @@ module dino_logic (
     );
     
     wire frame_tick = vsync && !prev_vsync;
+
 
     always @(posedge pclk or posedge rst) begin
         if (rst) begin
@@ -79,8 +89,12 @@ module dino_logic (
             // 2. PHYSICS UPDATE
             if (frame_tick && state == S_RUN) begin
                 // Move Cactus
-                if (cactus_x < 5) begin
-                    cactus_x <= 630;
+                if(cactus_x > 1000) begin
+                    cactus_x <= 630 + {2'b0, random_val[7:0]};
+                    score <= score + 1;
+                end
+                else if (cactus_x < 5) begin
+                    cactus_x <= 630 + {2'b0, random_val[7:0]};
                     score <= score + 1;
                 end else begin
                     cactus_x <= cactus_x - 4 - (score[9:4]);
@@ -92,14 +106,17 @@ module dino_logic (
                     if ((key_down[9'h29]) || jump_signal) begin
                         dino_vel <= -12;
                         dino_y <= dino_y - 12;
+                        jumped <= 1'b1;
                     end else begin
                         dino_vel <= 0;
                         dino_y <= GROUND_Y - DINO_H;
+                        jumped <= 1'b0;
                     end
                 end else begin
                     // In Air
                     dino_vel <= dino_vel + 1;
                     dino_y <= dino_y + dino_vel;
+                    jumped <= 1'b1;
                 end
             end
         end
@@ -109,7 +126,8 @@ module dino_logic (
         // LED Debugging
         led_out = 16'h0000;
         if (state == S_RUN) led_out[15] = 1'b1;
-        if (key_press_event && is_space) led_out[0] = 1'b1;
+        if (jumped) led_out[0] = 1'b1;
+        led_out[10:3] = random_val[7:0];
 
         pixel_out = 12'h000;
         if (v_cnt == GROUND_Y) pixel_out = 12'hFFF;
