@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date         : Sat Dec 13 00:43:41 2025
+| Date         : Sat Dec 13 13:45:24 2025
 | Host         : DESKTOP-LCS45AM running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file dino_top_control_sets_placed.rpt
 | Design       : dino_top
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |    22 |
-|    Minimum number of control sets                        |    22 |
+| Total control sets                                       |    23 |
+|    Minimum number of control sets                        |    23 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    89 |
+| Unused register locations in slices containing registers |    96 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,15 +39,15 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |    22 |
-| >= 0 to < 4        |     2 |
-| >= 4 to < 6        |     6 |
-| >= 6 to < 8        |     3 |
-| >= 8 to < 10       |     3 |
+| Total control sets |    23 |
+| >= 0 to < 4        |     3 |
+| >= 4 to < 6        |     7 |
+| >= 6 to < 8        |     2 |
+| >= 8 to < 10       |     2 |
 | >= 10 to < 12      |     5 |
 | >= 12 to < 14      |     0 |
 | >= 14 to < 16      |     0 |
-| >= 16              |     3 |
+| >= 16              |     4 |
 +--------------------+-------+
 * Control sets can be remapped at either synth_design or opt_design
 
@@ -59,11 +59,11 @@ Table of Contents
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | No           | No                    | No                     |              22 |            9 |
-| No           | No                    | Yes                    |              90 |           33 |
+| No           | No                    | Yes                    |             115 |           38 |
 | No           | Yes                   | No                     |              11 |            5 |
 | Yes          | No                    | No                     |               0 |            0 |
-| Yes          | No                    | Yes                    |             114 |           37 |
-| Yes          | Yes                   | No                     |              10 |            4 |
+| Yes          | No                    | Yes                    |             105 |           31 |
+| Yes          | Yes                   | No                     |              11 |            5 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
@@ -73,28 +73,29 @@ Table of Contents
 +-----------------------------------+---------------------------------------------------+-------------------------------+------------------+----------------+
 |            Clock Signal           |                   Enable Signal                   |        Set/Reset Signal       | Slice Load Count | Bel Load Count |
 +-----------------------------------+---------------------------------------------------+-------------------------------+------------------+----------------+
-|  clk_IBUF_BUFG                    | kbd_decoder/inst/Ps2Interface_i/ps2_clk_s1        | rst_IBUF                      |                1 |              1 |
 |  clk_IBUF_BUFG                    | kbd_decoder/inst/Ps2Interface_i/ps2_data_s1       | rst_IBUF                      |                1 |              1 |
+|  clk_IBUF_BUFG                    | kbd_decoder/inst/Ps2Interface_i/ps2_clk_s1        | rst_IBUF                      |                1 |              1 |
+|  pclk_BUFG                        | game_inst/jumped                                  | game_inst/jumped_i_1_n_0      |                1 |              1 |
+|  clk_IBUF_BUFG                    | kbd_decoder/inst/Ps2Interface_i/bits_count        | rst_IBUF                      |                1 |              4 |
 |  clk_IBUF_BUFG                    | game_inst/E[0]                                    | rst_IBUF                      |                1 |              4 |
 |  clk_IBUF_BUFG                    | game_inst/FSM_onehot_state_reg[1]_0[0]            | rst_IBUF                      |                1 |              4 |
 |  clk_IBUF_BUFG                    | game_inst/sec_ones_reg[1][0]                      | rst_IBUF                      |                1 |              4 |
 |  clk_IBUF_BUFG                    | game_inst/sec_tens_reg[0][0]                      | rst_IBUF                      |                1 |              4 |
-|  clk_IBUF_BUFG                    | kbd_decoder/inst/Ps2Interface_i/bits_count        | rst_IBUF                      |                2 |              4 |
 |  pclk_BUFG                        |                                                   |                               |                3 |              4 |
+|  pclk_BUFG                        |                                                   | rst_IBUF                      |                2 |              5 |
 |  clk_IBUF_BUFG                    | vga_inst/E[0]                                     | rst_IBUF                      |                2 |              6 |
-|  pclk_BUFG                        |                                                   | rst_IBUF                      |                4 |              6 |
 |  display_inst/clk_divider_reg[15] |                                                   | rst_IBUF                      |                3 |              7 |
-|  clk_IBUF_BUFG                    | kbd_decoder/inst/Ps2Interface_i/rx_valid          | rst_IBUF                      |                3 |              8 |
-|  clk_IBUF_BUFG                    | kbd_decoder/inst/Ps2Interface_i/rx_finish         | rst_IBUF                      |                3 |              8 |
-|  pclk_BUFG                        | game_inst/p_1_in_0                                | rst_IBUF                      |                3 |              9 |
+|  clk_IBUF_BUFG                    | kbd_decoder/inst/Ps2Interface_i/rx_finish         | rst_IBUF                      |                2 |              8 |
+|  clk_IBUF_BUFG                    | kbd_decoder/inst/Ps2Interface_i/rx_valid          | rst_IBUF                      |                2 |              8 |
 |  clk_IBUF_BUFG                    | kbd_decoder/inst/E[0]                             | rst_IBUF                      |                2 |             10 |
 |  pclk_BUFG                        |                                                   | vga_inst/pixel_cnt[9]_i_1_n_0 |                4 |             10 |
-|  pclk_BUFG                        | game_inst/score[9]_i_1_n_0                        | rst_IBUF                      |                3 |             10 |
+|  pclk_BUFG                        | game_inst/score[9]_i_1_n_0                        | rst_IBUF                      |                2 |             10 |
 |  pclk_BUFG                        | vga_inst/line_cnt                                 | vga_inst/line_cnt[9]_i_1_n_0  |                4 |             10 |
 |  clk_IBUF_BUFG                    | kbd_decoder/inst/Ps2Interface_i/frame[10]_i_1_n_0 | rst_IBUF                      |                2 |             11 |
 |  clk_IBUF_BUFG                    |                                                   |                               |                6 |             18 |
-|  pclk_BUFG                        | game_inst/cactus_x                                | rst_IBUF                      |               11 |             30 |
-|  clk_IBUF_BUFG                    |                                                   | rst_IBUF                      |               27 |             78 |
+|  vga_inst/vsync_OBUF              |                                                   | rst_IBUF                      |               10 |             27 |
+|  pclk_BUFG                        | game_inst/cactus_x                                | rst_IBUF                      |               12 |             30 |
+|  clk_IBUF_BUFG                    |                                                   | rst_IBUF                      |               24 |             77 |
 +-----------------------------------+---------------------------------------------------+-------------------------------+------------------+----------------+
 
 

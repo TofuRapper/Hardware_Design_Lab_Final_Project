@@ -2,8 +2,8 @@
 # Vivado v2019.2 (64-bit)
 # SW Build 2708876 on Wed Nov  6 21:40:23 MST 2019
 # IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
-# Start of session at: Sat Dec 13 00:42:38 2025
-# Process ID: 14936
+# Start of session at: Sat Dec 13 13:44:20 2025
+# Process ID: 16088
 # Current directory: C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/Final_Project/Final_Project.runs/synth_1
 # Command line: vivado.exe -log dino_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source dino_top.tcl
 # Log file: C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/Final_Project/Final_Project.runs/synth_1/dino_top.vds
@@ -16,7 +16,7 @@ Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 11592 
+INFO: Helper process launched with PID 10624 
 WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:18]
 WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:19]
 WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:20]
@@ -54,7 +54,7 @@ WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with
 WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:244]
 WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:245]
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:03 . Memory (MB): peak = 773.098 ; gain = 238.020
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:03 . Memory (MB): peak = 773.840 ; gain = 238.984
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'dino_top' [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/dino_top.v:1]
 INFO: [Synth 8-6157] synthesizing module 'clock_divider' [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/clock_divider.v:1]
@@ -146,11 +146,16 @@ INFO: [Synth 8-6157] synthesizing module 'dino_logic' [C:/Users/jaylu/Desktop/Et
 	Parameter S_IDLE bound to: 2'b00 
 	Parameter S_RUN bound to: 2'b01 
 	Parameter S_OVER bound to: 2'b10 
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/dino_logic.v:68]
-INFO: [Synth 8-6155] done synthesizing module 'dino_logic' (9#1) [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/dino_logic.v:1]
+INFO: [Synth 8-6157] synthesizing module 'LFSR' [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/LFSR.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'LFSR' (9#1) [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/LFSR.v:1]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/dino_logic.v:78]
+WARNING: [Synth 8-6014] Unused sequential element prev_key_valid_reg was removed.  [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/dino_logic.v:45]
+WARNING: [Synth 8-6014] Unused sequential element last_key_reg was removed.  [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/dino_logic.v:45]
+WARNING: [Synth 8-5788] Register jumped_reg in module dino_logic is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/dino_logic.v:109]
+INFO: [Synth 8-6155] done synthesizing module 'dino_logic' (10#1) [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/dino_logic.v:1]
 INFO: [Synth 8-6157] synthesizing module 'SevenSegment' [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/SevenSegment.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'SevenSegment' (10#1) [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/SevenSegment.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'dino_top' (11#1) [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/dino_top.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'SevenSegment' (11#1) [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/SevenSegment.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'dino_top' (12#1) [C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/dino_top.v:1]
 WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[511]
 WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[510]
 WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[509]
@@ -253,7 +258,7 @@ WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[413]
 WARNING: [Synth 8-3331] design dino_logic has unconnected port key_down[412]
 INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 827.383 ; gain = 292.305
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 827.867 ; gain = 293.012
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -266,12 +271,12 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 827.383 ; gain = 292.305
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 827.867 ; gain = 293.012
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 827.383 ; gain = 292.305
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 827.867 ; gain = 293.012
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.038 . Memory (MB): peak = 827.383 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.038 . Memory (MB): peak = 827.867 ; gain = 0.000
 INFO: [Netlist 29-17] Analyzing 2 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -284,27 +289,27 @@ INFO: [Project 1-236] Implementation specific constraints were found while readi
 Resolution: To avoid this warning, move constraints listed in [.Xil/dino_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 944.992 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 943.039 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 2 instances were transformed.
   IOBUF => IOBUF (IBUF, OBUFT): 2 instances
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 944.992 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.007 . Memory (MB): peak = 943.039 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 944.992 ; gain = 409.914
+Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 943.039 ; gain = 408.184
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 944.992 ; gain = 409.914
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 943.039 ; gain = 408.184
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 944.992 ; gain = 409.914
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 943.039 ; gain = 408.184
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'Ps2Interface'
 INFO: [Synth 8-5544] ROM "ps2_clk_out_next" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
@@ -375,7 +380,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'digit_reg' using encoding 'sequential' in module 'SevenSegment'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 944.992 ; gain = 409.914
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 943.039 ; gain = 408.184
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -390,17 +395,19 @@ Detailed RTL Component Info :
 +---Adders : 
 	   2 Input     14 Bit       Adders := 1     
 	   2 Input     11 Bit       Adders := 2     
-	   2 Input     10 Bit       Adders := 6     
+	   2 Input     10 Bit       Adders := 7     
 	   3 Input     10 Bit       Adders := 1     
 	   2 Input      6 Bit       Adders := 1     
 	   2 Input      4 Bit       Adders := 7     
 	   2 Input      2 Bit       Adders := 1     
++---XORs : 
+	   4 Input      1 Bit         XORs := 1     
 +---Registers : 
 	              512 Bit    Registers := 1     
+	               16 Bit    Registers := 1     
 	               14 Bit    Registers := 1     
 	               11 Bit    Registers := 1     
-	               10 Bit    Registers := 7     
-	                9 Bit    Registers := 1     
+	               10 Bit    Registers := 8     
 	                8 Bit    Registers := 3     
 	                7 Bit    Registers := 2     
 	                6 Bit    Registers := 1     
@@ -416,7 +423,7 @@ Detailed RTL Component Info :
 	  15 Input     14 Bit        Muxes := 1     
 	   2 Input     12 Bit        Muxes := 2     
 	   2 Input     11 Bit        Muxes := 1     
-	   2 Input     10 Bit        Muxes := 9     
+	   2 Input     10 Bit        Muxes := 10    
 	   4 Input     10 Bit        Muxes := 1     
 	   7 Input      8 Bit        Muxes := 1     
 	   2 Input      6 Bit        Muxes := 1     
@@ -427,7 +434,7 @@ Detailed RTL Component Info :
 	   5 Input      3 Bit        Muxes := 1     
 	   4 Input      2 Bit        Muxes := 1     
 	   2 Input      2 Bit        Muxes := 3     
-	   2 Input      1 Bit        Muxes := 28    
+	   2 Input      1 Bit        Muxes := 30    
 	  15 Input      1 Bit        Muxes := 6     
 	   7 Input      1 Bit        Muxes := 7     
 	   4 Input      1 Bit        Muxes := 7     
@@ -524,22 +531,28 @@ Detailed RTL Component Info :
 	   2 Input      2 Bit        Muxes := 3     
 	   2 Input      1 Bit        Muxes := 8     
 	   4 Input      1 Bit        Muxes := 7     
+Module LFSR 
+Detailed RTL Component Info : 
++---XORs : 
+	   4 Input      1 Bit         XORs := 1     
++---Registers : 
+	               16 Bit    Registers := 1     
+	               10 Bit    Registers := 1     
 Module dino_logic 
 Detailed RTL Component Info : 
 +---Adders : 
 	   2 Input     11 Bit       Adders := 2     
-	   2 Input     10 Bit       Adders := 4     
+	   2 Input     10 Bit       Adders := 5     
 	   3 Input     10 Bit       Adders := 1     
 +---Registers : 
 	               10 Bit    Registers := 4     
-	                9 Bit    Registers := 1     
 	                1 Bit    Registers := 2     
 +---Muxes : 
 	   2 Input     12 Bit        Muxes := 2     
-	   2 Input     10 Bit        Muxes := 7     
+	   2 Input     10 Bit        Muxes := 8     
 	   2 Input      5 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 4     
 	   3 Input      1 Bit        Muxes := 3     
-	   2 Input      1 Bit        Muxes := 2     
 Module SevenSegment 
 Detailed RTL Component Info : 
 +---Registers : 
@@ -567,27 +580,25 @@ WARNING: [Synth 8-3917] design dino_top has port led[14] driven by constant 0
 WARNING: [Synth 8-3917] design dino_top has port led[13] driven by constant 0
 WARNING: [Synth 8-3917] design dino_top has port led[12] driven by constant 0
 WARNING: [Synth 8-3917] design dino_top has port led[11] driven by constant 0
-WARNING: [Synth 8-3917] design dino_top has port led[10] driven by constant 0
-WARNING: [Synth 8-3917] design dino_top has port led[9] driven by constant 0
-WARNING: [Synth 8-3917] design dino_top has port led[8] driven by constant 0
-WARNING: [Synth 8-3917] design dino_top has port led[7] driven by constant 0
-WARNING: [Synth 8-3917] design dino_top has port led[6] driven by constant 0
-WARNING: [Synth 8-3917] design dino_top has port led[5] driven by constant 0
-WARNING: [Synth 8-3917] design dino_top has port led[4] driven by constant 0
-WARNING: [Synth 8-3917] design dino_top has port led[3] driven by constant 0
 WARNING: [Synth 8-3917] design dino_top has port led[2] driven by constant 0
 WARNING: [Synth 8-3917] design dino_top has port led[1] driven by constant 0
-INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/lock_status_reg[0]' (FDCE) to 'kbd_decoder/inst/lock_status_reg[1]'
-INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/lock_status_reg[1]' (FDCE) to 'kbd_decoder/inst/lock_status_reg[2]'
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (\kbd_decoder/inst/lock_status_reg[2] )
-INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[3]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[4]'
-INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[4]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[5]'
-INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[5]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[6]'
-INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[6]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[7]'
-INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[0]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[1]'
-INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[1]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[2]'
+INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/lock_status_reg[2]' (FDCE) to 'kbd_decoder/inst/lock_status_reg[0]'
+INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/lock_status_reg[1]' (FDCE) to 'kbd_decoder/inst/lock_status_reg[0]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\kbd_decoder/inst/lock_status_reg[0] )
+INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[6]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[3]'
+INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[7]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[3]'
+INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[5]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[3]'
+INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[4]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[3]'
+INFO: [Synth 8-3886] merging instance 'game_inst/lfsr/lfsr_reg_reg[8]' (FDC) to 'game_inst/lfsr/random_out_reg[7]'
+INFO: [Synth 8-3886] merging instance 'game_inst/lfsr/random_out_reg[8]' (FDC) to 'game_inst/lfsr/lfsr_reg_reg[9]'
+INFO: [Synth 8-3886] merging instance 'game_inst/lfsr/lfsr_reg_reg[1]' (FDC) to 'game_inst/lfsr/random_out_reg[0]'
+INFO: [Synth 8-3886] merging instance 'game_inst/lfsr/lfsr_reg_reg[2]' (FDC) to 'game_inst/lfsr/random_out_reg[1]'
+INFO: [Synth 8-3886] merging instance 'game_inst/lfsr/lfsr_reg_reg[3]' (FDC) to 'game_inst/lfsr/random_out_reg[2]'
+INFO: [Synth 8-3886] merging instance 'game_inst/lfsr/lfsr_reg_reg[4]' (FDC) to 'game_inst/lfsr/random_out_reg[3]'
+INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[2]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[0]'
+INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[1]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[0]'
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 944.992 ; gain = 409.914
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 943.039 ; gain = 408.184
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -616,13 +627,13 @@ Report RTL Partitions:
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 944.992 ; gain = 409.914
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 943.039 ; gain = 408.184
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 950.129 ; gain = 415.051
+Finished Timing Optimization : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 951.312 ; gain = 416.457
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -634,7 +645,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 950.926 ; gain = 415.848
+Finished Technology Mapping : Time (s): cpu = 00:00:24 ; elapsed = 00:00:24 . Memory (MB): peak = 960.281 ; gain = 425.426
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -660,13 +671,13 @@ INFO: [Synth 8-5365] Flop kbd_decoder/inst/Ps2Interface_i/ps2_data_en_reg is bei
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 957.797 ; gain = 422.719
+Finished IO Insertion : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 966.148 ; gain = 431.293
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 957.797 ; gain = 422.719
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 966.148 ; gain = 431.293
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -685,25 +696,25 @@ Report Check Netlist:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 957.797 ; gain = 422.719
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 966.148 ; gain = 431.293
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 957.797 ; gain = 422.719
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 966.148 ; gain = 431.293
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 957.797 ; gain = 422.719
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 966.148 ; gain = 431.293
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 957.797 ; gain = 422.719
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 966.148 ; gain = 431.293
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -720,17 +731,17 @@ Report Cell Usage:
 |      |Cell   |Count |
 +------+-------+------+
 |1     |BUFG   |     2|
-|2     |CARRY4 |    23|
-|3     |LUT1   |    15|
-|4     |LUT2   |    48|
+|2     |CARRY4 |    22|
+|3     |LUT1   |    16|
+|4     |LUT2   |    47|
 |5     |LUT3   |    38|
-|6     |LUT4   |    94|
-|7     |LUT5   |    96|
-|8     |LUT6   |    91|
+|6     |LUT4   |    95|
+|7     |LUT5   |    90|
+|8     |LUT6   |    97|
 |9     |FDCE   |   186|
-|10    |FDPE   |    18|
+|10    |FDPE   |    26|
 |11    |FDRE   |    41|
-|12    |FDSE   |     1|
+|12    |FDSE   |     2|
 |13    |IBUF   |     4|
 |14    |IOBUF  |     2|
 |15    |OBUF   |    41|
@@ -740,43 +751,44 @@ Report Instance Areas:
 +------+---------------------+----------------+------+
 |      |Instance             |Module          |Cells |
 +------+---------------------+----------------+------+
-|1     |top                  |                |   700|
-|2     |  db_jump            |debounce        |     9|
+|1     |top                  |                |   709|
+|2     |  db_jump            |debounce        |    10|
 |3     |  db_start           |debounce_0      |    10|
 |4     |  display_inst       |SevenSegment    |    50|
-|5     |  game_inst          |dino_logic      |   186|
-|6     |  kbd_decoder        |KeyboardDecoder |   242|
-|7     |    inst             |KeyboardCtrl    |   212|
-|8     |      Ps2Interface_i |Ps2Interface    |   177|
-|9     |    op               |one_pulse_1     |     4|
-|10    |  pclk_gen           |clock_divider   |     4|
-|11    |  pulse_start        |one_pulse       |     2|
-|12    |  vga_inst           |vga_controller  |   104|
+|5     |  game_inst          |dino_logic      |   203|
+|6     |    lfsr             |LFSR            |    33|
+|7     |  kbd_decoder        |KeyboardDecoder |   236|
+|8     |    inst             |KeyboardCtrl    |   212|
+|9     |      Ps2Interface_i |Ps2Interface    |   177|
+|10    |    op               |one_pulse_1     |     4|
+|11    |  pclk_gen           |clock_divider   |     4|
+|12    |  pulse_start        |one_pulse       |     2|
+|13    |  vga_inst           |vga_controller  |   101|
 +------+---------------------+----------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 957.797 ; gain = 422.719
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 966.148 ; gain = 431.293
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 14 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:19 ; elapsed = 00:00:25 . Memory (MB): peak = 957.797 ; gain = 305.109
-Synthesis Optimization Complete : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 957.797 ; gain = 422.719
+Synthesis finished with 0 errors, 0 critical warnings and 6 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:20 ; elapsed = 00:00:25 . Memory (MB): peak = 966.148 ; gain = 316.121
+Synthesis Optimization Complete : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 966.148 ; gain = 431.293
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 957.797 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 25 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 966.148 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 24 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 965.844 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 975.230 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 2 instances were transformed.
   IOBUF => IOBUF (IBUF, OBUFT): 2 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-63 Infos, 150 Warnings, 0 Critical Warnings and 0 Errors encountered.
+71 Infos, 145 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 965.844 ; gain = 667.508
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 965.844 ; gain = 0.000
+synth_design: Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 975.230 ; gain = 676.875
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 975.230 ; gain = 0.000
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
 INFO: [Common 17-1381] The checkpoint 'C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/Final_Project/Final_Project.runs/synth_1/dino_top.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file dino_top_utilization_synth.rpt -pb dino_top_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Sat Dec 13 00:43:12 2025...
+INFO: [Common 17-206] Exiting Vivado at Sat Dec 13 13:44:54 2025...
