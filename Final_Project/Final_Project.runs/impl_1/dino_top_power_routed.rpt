@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date             : Sat Dec 13 14:48:34 2025
+| Date             : Sat Dec 13 15:52:18 2025
 | Host             : DESKTOP-LCS45AM running 64-bit major release  (build 9200)
 | Command          : report_power -file dino_top_power_routed.rpt -pb dino_top_power_summary_routed.pb -rpx dino_top_power_routed.rpx
 | Design           : dino_top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.103        |
+| Total On-Chip Power (W)  | 0.102        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.032        |
+| Dynamic (W)              | 0.030        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 5.0          |
 | Max Ambient (C)          | 84.5         |
@@ -52,17 +52,17 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.001 |        3 |       --- |             --- |
-| Slice Logic    |    <0.001 |      700 |       --- |             --- |
-|   LUT as Logic |    <0.001 |      288 |     20800 |            1.38 |
+| Clocks         |     0.002 |        3 |       --- |             --- |
+| Slice Logic    |    <0.001 |      731 |       --- |             --- |
+|   LUT as Logic |    <0.001 |      303 |     20800 |            1.46 |
 |   Register     |    <0.001 |      273 |     41600 |            0.66 |
 |   BUFG         |    <0.001 |        1 |        32 |            3.13 |
-|   CARRY4       |    <0.001 |       22 |      8150 |            0.27 |
+|   CARRY4       |    <0.001 |       25 |      8150 |            0.31 |
 |   Others       |     0.000 |       23 |       --- |             --- |
-| Signals        |     0.001 |      476 |       --- |             --- |
-| I/O            |     0.029 |       47 |       106 |           44.34 |
+| Signals        |    <0.001 |      485 |       --- |             --- |
+| I/O            |     0.027 |       47 |       106 |           44.34 |
 | Static Power   |     0.072 |          |           |                 |
-| Total          |     0.103 |          |           |                 |
+| Total          |     0.102 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -138,13 +138,12 @@ Table of Contents
 3.1 By Hierarchy
 ----------------
 
-+----------------+-----------+
-| Name           | Power (W) |
-+----------------+-----------+
-| dino_top       |     0.032 |
-|   display_inst |     0.001 |
-|   kbd_decoder  |     0.001 |
-|     inst       |     0.001 |
-+----------------+-----------+
++---------------+-----------+
+| Name          | Power (W) |
++---------------+-----------+
+| dino_top      |     0.030 |
+|   kbd_decoder |     0.001 |
+|     inst      |     0.001 |
++---------------+-----------+
 
 

@@ -27,7 +27,7 @@ module dino_logic (
 
     reg [9:0] dino_y;
     reg signed [9:0] dino_vel;
-    reg [9:0] cactus_x;
+    reg signed [10:0] cactus_x;
     reg [9:0] score;
     reg prev_vsync;
     
@@ -54,7 +54,7 @@ module dino_logic (
     wire collision = (
         (DINO_X + DINO_W > cactus_x) && 
         (DINO_X < cactus_x + CACTUS_W) && 
-        (dino_y + DINO_H > 100 - CACTUS_H)
+        (dino_y + DINO_H > GROUND_Y - CACTUS_H)
     );
     
     wire frame_tick = vsync && !prev_vsync;
@@ -96,14 +96,13 @@ module dino_logic (
             // 2. PHYSICS UPDATE
             if (frame_tick && state == S_RUN) begin
                 // Move Cactus
-                if(cactus_x < 0 || cactus_x > 10'd700) begin
-                    cactus_x <= 630 + 100 + {1'b0, next_spawn_offset[8:0]};
-                    score <= score + 1;
-                    next_spawn_offset <= random_val;
+                if (cactus_x > -40) begin
+                     cactus_x <= cactus_x - 4 - (score[9:4]);
                 end else begin
-                    cactus_x <= cactus_x - 4 - (score[9:4]);
+                     cactus_x <= 12'd650 + next_spawn_offset[7:0]; 
+                     score <= score + 1;
+                     next_spawn_offset <= random_val;
                 end
-
                 // --- JUMP LOGIC ---
                 if (dino_y >= GROUND_Y - DINO_H) begin
                     // On Ground
