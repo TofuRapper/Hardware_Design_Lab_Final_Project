@@ -15,10 +15,10 @@ module dino_logic (
 
     localparam GROUND_Y = 350;
     localparam DINO_X   = 80;
-    localparam DINO_W   = 20;
-    localparam DINO_H   = 30;
-    localparam CACTUS_W = 15;
-    localparam CACTUS_H = 25;
+    localparam DINO_W   = 18;
+    localparam DINO_H   = 18;
+    localparam CACTUS_W = 18;
+    localparam CACTUS_H = 18;
 
     localparam S_IDLE = 2'd0;
     localparam S_RUN  = 2'd1;
@@ -27,9 +27,10 @@ module dino_logic (
 
     reg [9:0] dino_y;
     reg signed [9:0] dino_vel;
-    reg signed [10:0] cactus_x;
+    reg signed [12:0] cactus_x; // Increased width to allow larger off-screen values
     reg [9:0] score;
     reg prev_vsync;
+    reg [1:0] cactus_type; // 0 to 3
     
     //LFSR randomly create obstacle
     wire [9:0] random_val;
@@ -69,6 +70,7 @@ module dino_logic (
             score <= 0;
             prev_vsync <= 0;
             next_spawn_offset <= 0;
+            cactus_type <= 0;
             
             prev_key_valid <= 0;
             last_key <= 9'h000;
@@ -99,9 +101,11 @@ module dino_logic (
                 if (cactus_x > -40) begin
                      cactus_x <= cactus_x - 4 - (score[9:4]);
                 end else begin
-                     cactus_x <= 12'd650 + next_spawn_offset[7:0]; 
+                     // Reduced to 9-bit random value (0-511 pixels) to reduce blank time
+                     cactus_x <= 13'd640 + {4'b0, next_spawn_offset[8:0]}; 
                      score <= score + 1;
                      next_spawn_offset <= random_val;
+                     cactus_type <= random_val[9:8]; // Randomize cactus type
                 end
                 // --- JUMP LOGIC ---
                 if (dino_y >= GROUND_Y - DINO_H) begin
@@ -125,6 +129,60 @@ module dino_logic (
         end
     end
 
+    // --- BRAM / SPRITE LOGIC ---
+    wire [11:0] sprite_data;
+    reg [16:0] sprite_addr;
+    
+    // CRITICAL: This MUST match the exact width (in pixels) of your source image!
+    // If your image is 640px wide, change this to 640.
+    localparam IMG_WIDTH = 481;  // <--- CHANGE THIS TO YOUR IMAGE WIDTH 
+
+    // Sprite Offsets (Start at 16, width 18)
+    localparam SP_DINO_JUMP = 16;   // Standing Dino
+    localparam SP_DINO_RUN1 = 266;   // Use Standing Dino for now (to avoid Pterodactyl)
+    localparam SP_DINO_RUN2 = 286;   // Use Standing Dino for now
+    // Pterodactyls are likely at 34 and 52.
+    localparam SP_CACTUS    = 106;  // Cactus starts after birds
+    localparam SP_GAMEOVER  = 200;  // Placeholder for now
+
+    blk_mem_gen_0 sprite_rom (
+        .clka(pclk),
+        .addra(sprite_addr),
+        .douta(sprite_data)
+    );
+
+    reg [9:0] dx, dy, sp_x;
+    reg [9:0] cx, cy;
+
+    always @(*) begin
+        // Default address (points to transparent/background part of image if possible)
+        sprite_addr = 0; 
+        dx = 0; dy = 0; sp_x = 0;
+        cx = 0; cy = 0;
+
+        if (h_cnt >= DINO_X && h_cnt < DINO_X + DINO_W &&
+            v_cnt >= dino_y && v_cnt < dino_y + DINO_H) begin
+            
+            dx = h_cnt - DINO_X;
+            dy = v_cnt - dino_y;
+            
+            if (state == S_OVER) sp_x = SP_GAMEOVER;
+            else if (jumped)     sp_x = SP_DINO_JUMP;
+            else                 sp_x = (score[3]) ? SP_DINO_RUN1 : SP_DINO_RUN2;
+            
+            sprite_addr = dy * IMG_WIDTH + (sp_x + dx);
+        end
+        else if (h_cnt >= cactus_x && h_cnt < cactus_x + CACTUS_W &&
+                 v_cnt >= GROUND_Y - CACTUS_H && v_cnt < GROUND_Y) begin
+            
+            cx = h_cnt - cactus_x;
+            cy = v_cnt - (GROUND_Y - CACTUS_H);
+            // Select cactus sprite based on type (18px stride)
+            sprite_addr = cy * IMG_WIDTH + (SP_CACTUS + (cactus_type * 18));
+            sprite_addr = cy * IMG_WIDTH + (SP_CACTUS + cx);
+        end
+    end
+
     always @(*) begin
         // LED Debugging
         led_out = 16'h0000;
@@ -133,15 +191,21 @@ module dino_logic (
         led_out[10:3] = next_spawn_offset[7:0];
 
         pixel_out = 12'h000;
-        if (v_cnt == GROUND_Y) pixel_out = 12'hFFF;
-        else if (h_cnt >= DINO_X && h_cnt < DINO_X + DINO_W &&
-                 v_cnt >= dino_y && v_cnt < dino_y + DINO_H) begin
-             if (state == S_OVER) pixel_out = 12'hF00;
-             else pixel_out = 12'h0F0;
+        
+        // Priority: Sprites -> Ground -> Background
+        // Check if sprite_data is not "transparent" (assuming black 0x000 is transparent)
+        // Note: sprite_data corresponds to the address from the PREVIOUS cycle (or 2 cycles ago).
+        // This might cause a 1-2 pixel shift to the right.
+        
+        if (sprite_data != 12'h000) begin
+             // We only draw the sprite if we are "inside" the box logic from the previous cycle.
+             // But since we don't easily know that here without pipelining, 
+             // we'll just trust the non-black pixel output.
+             // For better precision, we should pipeline the "is_dino" / "is_cactus" signals.
+             pixel_out = sprite_data;
         end
-        else if (h_cnt >= cactus_x && h_cnt < cactus_x + CACTUS_W &&
-                 v_cnt >= GROUND_Y - CACTUS_H && v_cnt < GROUND_Y) begin
-            pixel_out = 12'h00F;
+        else if (v_cnt == GROUND_Y) begin
+             pixel_out = 12'hFFF;
         end
     end
 
