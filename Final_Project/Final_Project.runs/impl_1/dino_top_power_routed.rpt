@@ -1,8 +1,8 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date             : Sun Dec 14 11:20:22 2025
-| Host             : LAPTOP-9C9D7G8P running 64-bit major release  (build 9200)
+| Date             : Thu Dec 18 15:15:05 2025
+| Host             : DESKTOP-LCS45AM running 64-bit major release  (build 9200)
 | Command          : report_power -file dino_top_power_routed.rpt -pb dino_top_power_summary_routed.pb -rpx dino_top_power_routed.rpx
 | Design           : dino_top
 | Device           : xc7a35tcpg236-1
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.106        |
+| Total On-Chip Power (W)  | 0.110        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.034        |
+| Dynamic (W)              | 0.038        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 5.0          |
-| Max Ambient (C)          | 84.5         |
-| Junction Temperature (C) | 25.5         |
+| Max Ambient (C)          | 84.4         |
+| Junction Temperature (C) | 25.6         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -53,19 +53,19 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.002 |        3 |       --- |             --- |
-| Slice Logic    |    <0.001 |      949 |       --- |             --- |
-|   LUT as Logic |    <0.001 |      419 |     20800 |            2.01 |
-|   Register     |    <0.001 |      300 |     41600 |            0.72 |
-|   CARRY4       |    <0.001 |       41 |      8150 |            0.50 |
+| Slice Logic    |     0.001 |     1309 |       --- |             --- |
+|   LUT as Logic |     0.001 |      627 |     20800 |            3.01 |
+|   CARRY4       |    <0.001 |       91 |      8150 |            1.12 |
+|   Register     |    <0.001 |      326 |     41600 |            0.78 |
 |   BUFG         |    <0.001 |        1 |        32 |            3.13 |
 |   F7/F8 Muxes  |    <0.001 |       12 |     32600 |            0.04 |
 |   Others       |     0.000 |       48 |       --- |             --- |
-| Signals        |     0.001 |      808 |       --- |             --- |
+| Signals        |     0.002 |     1274 |       --- |             --- |
 | Block RAM      |    <0.001 |      6.5 |        50 |           13.00 |
-| DSPs           |    <0.001 |        4 |        90 |            4.44 |
-| I/O            |     0.028 |       47 |       106 |           44.34 |
+| DSPs           |     0.002 |       11 |        90 |           12.22 |
+| I/O            |     0.031 |       47 |       106 |           44.34 |
 | Static Power   |     0.072 |          |           |                 |
-| Total          |     0.106 |          |           |                 |
+| Total          |     0.110 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -75,9 +75,9 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.015 |       0.005 |      0.010 |
+| Vccint    |       1.000 |     0.017 |       0.007 |      0.010 |
 | Vccaux    |       1.800 |     0.014 |       0.001 |      0.013 |
-| Vcco33    |       3.300 |     0.009 |       0.008 |      0.001 |
+| Vcco33    |       3.300 |     0.010 |       0.009 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
@@ -144,8 +144,8 @@ Table of Contents
 +----------------------+-----------+
 | Name                 | Power (W) |
 +----------------------+-----------+
-| dino_top             |     0.034 |
-|   game_inst          |     0.002 |
+| dino_top             |     0.038 |
+|   game_inst          |     0.004 |
 |   kbd_decoder        |     0.001 |
 |     inst             |     0.001 |
 |       Ps2Interface_i |     0.001 |

@@ -27,10 +27,15 @@ module dino_logic (
 
     reg [9:0] dino_y;
     reg signed [9:0] dino_vel;
-    reg signed [12:0] cactus_x; // Increased width to allow larger off-screen values
+    reg signed [12:0] cactus_x [0:2]; // Increased width to allow larger off-screen values
     reg [9:0] score;
     reg prev_vsync;
-    reg [1:0] cactus_type; // 0 to 3
+    reg [1:0] cactus_type [0:2]; // 0 to 3
+    reg [2:0] cactus_active;
+
+    integer i;
+    reg [1:0] last_spawn_idx;
+    reg [9:0] min_gap = 250; // Minimum gap between cactuses
     
     //LFSR randomly create obstacle
     wire [9:0] random_val;
@@ -52,12 +57,11 @@ module dino_logic (
     wire is_space = (scan_code == 8'h29);
 
     // Detect collision
-    wire collision = (
-        (DINO_X + DINO_W > cactus_x) && 
-        (DINO_X < cactus_x + CACTUS_W) && 
-        (dino_y + DINO_H > GROUND_Y - CACTUS_H)
-    );
-    
+    wire collision = 
+    (cactus_active[0] && (DINO_X + DINO_W > cactus_x[0]) && (DINO_X < cactus_x[0] + CACTUS_W) && (dino_y + DINO_H > GROUND_Y - CACTUS_H)) ||
+    (cactus_active[1] && (DINO_X + DINO_W > cactus_x[1]) && (DINO_X < cactus_x[1] + CACTUS_W) && (dino_y + DINO_H > GROUND_Y - CACTUS_H)) ||
+    (cactus_active[2] && (DINO_X + DINO_W > cactus_x[2]) && (DINO_X < cactus_x[2] + CACTUS_W) && (dino_y + DINO_H > GROUND_Y - CACTUS_H));
+
     wire frame_tick = vsync && !prev_vsync;
 
 
@@ -66,12 +70,17 @@ module dino_logic (
             state <= S_IDLE;
             dino_y <= GROUND_Y - DINO_H;
             dino_vel <= 0;
-            cactus_x <= 630;
+            cactus_x[0] <= 630;
+            cactus_active[0] <= 1'b1;   //use [0] first
+            cactus_active[1] <= 1'b0;
+            cactus_active[2] <= 1'b0;
+            last_spawn_idx <= 2'b0;
             score <= 0;
             prev_vsync <= 0;
-            next_spawn_offset <= 0;
-            cactus_type <= 0;
-            
+            next_spawn_offset  <= 0;
+            cactus_type[0] <= 2'b0;
+            cactus_type[1] <= 2'b0;
+            cactus_type[2] <= 2'b0;
             prev_key_valid <= 0;
             last_key <= 9'h000;
             
@@ -90,13 +99,38 @@ module dino_logic (
                 S_OVER: if (start_pulse) begin
                             state <= S_IDLE;
                             dino_y <= GROUND_Y - DINO_H;
-                            cactus_x <= 630;
+                            cactus_x[0] <= 630;
+                            cactus_active[0] <= 1'b1;       
+                            cactus_active[1] <= 1'b0;
+                            cactus_active[2] <= 1'b0;
+                            last_spawn_idx <= 0;
+                            score <= 0;
+                            next_spawn_offset <= 0;
                             dino_vel <= 0;
+                            cactus_type[0] <= 2'b0;
                         end
             endcase
 
             // 2. PHYSICS UPDATE
             if (frame_tick && state == S_RUN) begin
+                for(i = 0; i < 3; i = i + 1) begin
+                    if(cactus_active[i]) begin
+                        cactus_x[i] <= cactus_x[i] - 4 - (score[9:4]);
+                        if(cactus_x[i] < -40) cactus_active[i] <= 1'b0;
+                    end
+                end
+
+                if(cactus_x[last_spawn_idx] < (640 - min_gap - next_spawn_offset[8:0])) begin
+                    if(cactus_active[(last_spawn_idx + 1) % 3] == 0) begin
+                        last_spawn_idx <= (last_spawn_idx + 1) % 3;
+                        cactus_x[(last_spawn_idx + 1) % 3] <= 640;
+                        cactus_type[(last_spawn_idx + 1) % 3] <= random_val[9:8];
+                        cactus_active[(last_spawn_idx + 1) % 3] <= 1'b1;
+                        next_spawn_offset <= random_val;
+                    end
+                end
+
+                /*
                 // Move Cactus
                 if (cactus_x > -40) begin
                      cactus_x <= cactus_x - 4 - (score[9:4]);
@@ -107,6 +141,7 @@ module dino_logic (
                      next_spawn_offset <= random_val;
                      cactus_type <= random_val[9:8]; // Randomize cactus type
                 end
+                */
                 // --- JUMP LOGIC ---
                 if (dino_y >= GROUND_Y - DINO_H) begin
                     // On Ground
@@ -172,14 +207,28 @@ module dino_logic (
             
             sprite_addr = dy * IMG_WIDTH + (sp_x + dx);
         end
-        else if (h_cnt >= cactus_x && h_cnt < cactus_x + CACTUS_W &&
-                 v_cnt >= GROUND_Y - CACTUS_H && v_cnt < GROUND_Y) begin
-            
-            cx = h_cnt - cactus_x;
-            cy = v_cnt - (GROUND_Y - CACTUS_H);
-            // Select cactus sprite based on type (18px stride)
-            sprite_addr = cy * IMG_WIDTH + (SP_CACTUS + (cactus_type * 18));
-            sprite_addr = cy * IMG_WIDTH + (SP_CACTUS + cx);
+        else begin
+            if (cactus_active[0] && h_cnt >= cactus_x[0] && h_cnt < cactus_x[0] + CACTUS_W &&v_cnt >= GROUND_Y - CACTUS_H && v_cnt < GROUND_Y) begin
+                cx = h_cnt - cactus_x[0];
+                cy = v_cnt - (GROUND_Y - CACTUS_H);
+                // Select cactus sprite based on type (18px stride)
+                sprite_addr = cy * IMG_WIDTH + (SP_CACTUS + (cactus_type[i] * 18) + cx);
+                //sprite_addr = cy * IMG_WIDTH + (SP_CACTUS + cx);
+            end
+            else if (cactus_active[1] && h_cnt >= cactus_x[1] && h_cnt < cactus_x[1] + CACTUS_W &&v_cnt >= GROUND_Y - CACTUS_H && v_cnt < GROUND_Y) begin
+                cx = h_cnt - cactus_x[1];
+                cy = v_cnt - (GROUND_Y - CACTUS_H);
+                // Select cactus sprite based on type (18px stride)
+                sprite_addr = cy * IMG_WIDTH + (SP_CACTUS + (cactus_type[1] * 18) + cx);
+                //sprite_addr = cy * IMG_WIDTH + (SP_CACTUS + cx);
+            end
+            else if (cactus_active[2] && h_cnt >= cactus_x[2] && h_cnt < cactus_x[2] + CACTUS_W &&v_cnt >= GROUND_Y - CACTUS_H && v_cnt < GROUND_Y) begin
+                cx = h_cnt - cactus_x[2];
+                cy = v_cnt - (GROUND_Y - CACTUS_H);
+                // Select cactus sprite based on type (18px stride)
+                sprite_addr = cy * IMG_WIDTH + (SP_CACTUS + (cactus_type[2] * 18) + cx);
+                //sprite_addr = cy * IMG_WIDTH + (SP_CACTUS + cx);
+            end
         end
     end
 
