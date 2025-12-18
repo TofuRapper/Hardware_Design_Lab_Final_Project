@@ -17,8 +17,13 @@ module dino_logic (
     localparam DINO_X   = 80;
     localparam DINO_W   = 18;
     localparam DINO_H   = 18;
-    localparam CACTUS_W = 18;
-    localparam CACTUS_H = 18;
+    localparam CACTUS_H = 20; // General cactus height for collision
+    localparam CACTUS_S_W = 27;
+    localparam CACTUS_S_H = 15;
+    localparam CACTUS_B_W = 31;
+    localparam CACTUS_B_H = 20;
+    localparam PTERO_W = 18;
+    localparam PTERO_H = 17;
 
     localparam S_IDLE = 2'd0;
     localparam S_RUN  = 2'd1;
@@ -58,9 +63,9 @@ module dino_logic (
 
     // Detect collision
     wire collision = 
-    (cactus_active[0] && (DINO_X + DINO_W > cactus_x[0]) && (DINO_X < cactus_x[0] + CACTUS_W) && (dino_y + DINO_H > GROUND_Y - CACTUS_H)) ||
-    (cactus_active[1] && (DINO_X + DINO_W > cactus_x[1]) && (DINO_X < cactus_x[1] + CACTUS_W) && (dino_y + DINO_H > GROUND_Y - CACTUS_H)) ||
-    (cactus_active[2] && (DINO_X + DINO_W > cactus_x[2]) && (DINO_X < cactus_x[2] + CACTUS_W) && (dino_y + DINO_H > GROUND_Y - CACTUS_H));
+    (cactus_active[0] && (DINO_X + DINO_W > cactus_x[0]) && (DINO_X < cactus_x[0] + CACTUS_S_W) && (dino_y + DINO_H > GROUND_Y - CACTUS_S_H)) ||
+    (cactus_active[1] && (DINO_X + DINO_W > cactus_x[1]) && (DINO_X < cactus_x[1] + CACTUS_B_W) && (dino_y + DINO_H > GROUND_Y - CACTUS_B_H)) ||
+    (cactus_active[2] && (DINO_X + DINO_W > cactus_x[2]) && (DINO_X < cactus_x[2] + PTERO_W) && (dino_y + DINO_H > GROUND_Y - PTERO_H));
 
     wire frame_tick = vsync && !prev_vsync;
 
@@ -172,13 +177,18 @@ module dino_logic (
     // If your image is 640px wide, change this to 640.
     localparam IMG_WIDTH = 481;  // <--- CHANGE THIS TO YOUR IMAGE WIDTH 
 
+
     // Sprite Offsets (Start at 16, width 18)
     localparam SP_DINO_JUMP = 16;   // Standing Dino
-    localparam SP_DINO_RUN1 = 266;   // Use Standing Dino for now (to avoid Pterodactyl)
-    localparam SP_DINO_RUN2 = 286;   // Use Standing Dino for now
+    localparam SP_DINO_RUN1 = 268;   // Use Standing Dino for now (to avoid Pterodactyl)
+    localparam SP_DINO_RUN2 = 285;   // Use Standing Dino for now
     // Pterodactyls are likely at 34 and 52.
     localparam SP_CACTUS    = 106;  // Cactus starts after birds
     localparam SP_GAMEOVER  = 200;  // Placeholder for now
+
+    localparam SP_PTERO = 52; // Placeholder for Pterodactyl
+    localparam SP_CACTUS_B = 139;    // Big Cactus
+    localparam SP_CACTUS_S = 89;    // Small Cactus
 
     blk_mem_gen_0 sprite_rom (
         .clka(pclk),
@@ -188,6 +198,7 @@ module dino_logic (
 
     reg [9:0] dx, dy, sp_x;
     reg [9:0] cx, cy;
+    reg [9:0] sprite_base_x;
 
     always @(*) begin
         // Default address (points to transparent/background part of image if possible)
@@ -208,26 +219,29 @@ module dino_logic (
             sprite_addr = dy * IMG_WIDTH + (sp_x + dx);
         end
         else begin
-            if (cactus_active[0] && h_cnt >= cactus_x[0] && h_cnt < cactus_x[0] + CACTUS_W &&v_cnt >= GROUND_Y - CACTUS_H && v_cnt < GROUND_Y) begin
+            if (cactus_active[0] && h_cnt >= cactus_x[0] && h_cnt < cactus_x[0] + CACTUS_S_W &&v_cnt >= GROUND_Y - CACTUS_S_H && v_cnt < GROUND_Y) begin
                 cx = h_cnt - cactus_x[0];
-                cy = v_cnt - (GROUND_Y - CACTUS_H);
+                cy = v_cnt - (GROUND_Y - CACTUS_S_H);
                 // Select cactus sprite based on type (18px stride)
-                sprite_addr = cy * IMG_WIDTH + (SP_CACTUS + (cactus_type[i] * 18) + cx);
-                //sprite_addr = cy * IMG_WIDTH + (SP_CACTUS + cx);
+
+                sprite_base_x = SP_CACTUS_S;
+                sprite_addr = cy * IMG_WIDTH + (sprite_base_x + cx);
             end
-            else if (cactus_active[1] && h_cnt >= cactus_x[1] && h_cnt < cactus_x[1] + CACTUS_W &&v_cnt >= GROUND_Y - CACTUS_H && v_cnt < GROUND_Y) begin
+            else if (cactus_active[1] && h_cnt >= cactus_x[1] && h_cnt < cactus_x[1] + CACTUS_B_W &&v_cnt >= GROUND_Y - CACTUS_B_H && v_cnt < GROUND_Y) begin
                 cx = h_cnt - cactus_x[1];
-                cy = v_cnt - (GROUND_Y - CACTUS_H);
+                cy = v_cnt - (GROUND_Y - CACTUS_B_H);
                 // Select cactus sprite based on type (18px stride)
-                sprite_addr = cy * IMG_WIDTH + (SP_CACTUS + (cactus_type[1] * 18) + cx);
-                //sprite_addr = cy * IMG_WIDTH + (SP_CACTUS + cx);
+                
+                sprite_base_x = SP_CACTUS_B;
+                sprite_addr = cy * IMG_WIDTH + (sprite_base_x + cx);
             end
-            else if (cactus_active[2] && h_cnt >= cactus_x[2] && h_cnt < cactus_x[2] + CACTUS_W &&v_cnt >= GROUND_Y - CACTUS_H && v_cnt < GROUND_Y) begin
+            else if (cactus_active[2] && h_cnt >= cactus_x[2] && h_cnt < cactus_x[2] + PTERO_W &&v_cnt >= GROUND_Y - PTERO_H && v_cnt < GROUND_Y) begin
                 cx = h_cnt - cactus_x[2];
-                cy = v_cnt - (GROUND_Y - CACTUS_H);
+                cy = v_cnt - (GROUND_Y - PTERO_H);
                 // Select cactus sprite based on type (18px stride)
-                sprite_addr = cy * IMG_WIDTH + (SP_CACTUS + (cactus_type[2] * 18) + cx);
-                //sprite_addr = cy * IMG_WIDTH + (SP_CACTUS + cx);
+
+                sprite_base_x = SP_PTERO;
+                sprite_addr = cy * IMG_WIDTH + (sprite_base_x + cx);
             end
         end
     end
