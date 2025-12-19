@@ -14,16 +14,16 @@ module dino_logic (
 );
 
     localparam GROUND_Y = 350;
-    localparam DINO_X   = 80;
-    localparam DINO_W   = 18;
-    localparam DINO_H   = 18;
-    localparam CACTUS_H = 20; // General cactus height for collision
-    localparam CACTUS_S_W = 27;
-    localparam CACTUS_S_H = 15;
-    localparam CACTUS_B_W = 31;
-    localparam CACTUS_B_H = 20;
-    localparam PTERO_W = 18;
-    localparam PTERO_H = 17;
+    localparam DINO_X   = 160;
+    localparam DINO_W   = 34;
+    localparam DINO_H   = 36;
+    localparam CACTUS_H = 40; // General cactus height for collision
+    localparam CACTUS_S_W = 38;
+    localparam CACTUS_S_H = 30;
+    localparam CACTUS_B_W = 39;
+    localparam CACTUS_B_H = 40;
+    localparam PTERO_W = 36;
+    localparam PTERO_H = 34;
 
     localparam S_IDLE = 2'd0;
     localparam S_RUN  = 2'd1;
@@ -61,6 +61,9 @@ module dino_logic (
     
     wire is_space = (scan_code == 8'h29);
 
+    reg [4:0] anim_cnt;
+
+
     // Detect collision
     wire collision = 
     (cactus_active[0] && (DINO_X + DINO_W > cactus_x[0]) && (DINO_X < cactus_x[0] + CACTUS_S_W) && (dino_y + DINO_H > GROUND_Y - CACTUS_S_H)) ||
@@ -88,6 +91,7 @@ module dino_logic (
             cactus_type[2] <= 2'b0;
             prev_key_valid <= 0;
             last_key <= 9'h000;
+            anim_cnt <= 0;
             
         end else begin
             prev_vsync <= vsync;
@@ -151,8 +155,8 @@ module dino_logic (
                 if (dino_y >= GROUND_Y - DINO_H) begin
                     // On Ground
                     if ((key_down[9'h29]) || jump_signal) begin
-                        dino_vel <= -12;
-                        dino_y <= dino_y - 12;
+                        dino_vel <= -18;
+                        dino_y <= dino_y - 18;
                         jumped <= 1'b1;
                     end else begin
                         dino_vel <= 0;
@@ -165,6 +169,8 @@ module dino_logic (
                     dino_y <= dino_y + dino_vel;
                     jumped <= 1'b1;
                 end
+
+                anim_cnt <= anim_cnt + 1;
             end
         end
     end
@@ -181,14 +187,15 @@ module dino_logic (
     // Sprite Offsets (Start at 16, width 18)
     localparam SP_DINO_JUMP = 16;   // Standing Dino
     localparam SP_DINO_RUN1 = 268;   // Use Standing Dino for now (to avoid Pterodactyl)
-    localparam SP_DINO_RUN2 = 285;   // Use Standing Dino for now
+    localparam SP_DINO_RUN2 = 321;   // Use Standing Dino for now
     // Pterodactyls are likely at 34 and 52.
     localparam SP_CACTUS    = 106;  // Cactus starts after birds
     localparam SP_GAMEOVER  = 200;  // Placeholder for now
 
-    localparam SP_PTERO = 52; // Placeholder for Pterodactyl
-    localparam SP_CACTUS_B = 139;    // Big Cactus
-    localparam SP_CACTUS_S = 89;    // Small Cactus
+    localparam SP_PTERO_1 = 52; // Placeholder for Pterodactyl
+    localparam SP_PTERO_2 = 71; 
+    localparam SP_CACTUS_B = 141;    // Big Cactus
+    localparam SP_CACTUS_S = 90;    // Small Cactus
 
     blk_mem_gen_0 sprite_rom (
         .clka(pclk),
@@ -214,9 +221,9 @@ module dino_logic (
             
             if (state == S_OVER) sp_x = SP_GAMEOVER;
             else if (jumped)     sp_x = SP_DINO_JUMP;
-            else                 sp_x = (score[3]) ? SP_DINO_RUN1 : SP_DINO_RUN2;
+            else                 sp_x = (anim_cnt[4] == 1'b0) ? SP_DINO_RUN1 : SP_DINO_RUN2;
             
-            sprite_addr = dy * IMG_WIDTH + (sp_x + dx);
+            sprite_addr = (dy >> 1) * IMG_WIDTH + (sp_x + (dx >> 1));
         end
         else begin
             if (cactus_active[0] && h_cnt >= cactus_x[0] && h_cnt < cactus_x[0] + CACTUS_S_W &&v_cnt >= GROUND_Y - CACTUS_S_H && v_cnt < GROUND_Y) begin
@@ -225,7 +232,7 @@ module dino_logic (
                 // Select cactus sprite based on type (18px stride)
 
                 sprite_base_x = SP_CACTUS_S;
-                sprite_addr = cy * IMG_WIDTH + (sprite_base_x + cx);
+                sprite_addr = (cy >> 1) * IMG_WIDTH + (sprite_base_x + (cx >> 1));
             end
             else if (cactus_active[1] && h_cnt >= cactus_x[1] && h_cnt < cactus_x[1] + CACTUS_B_W &&v_cnt >= GROUND_Y - CACTUS_B_H && v_cnt < GROUND_Y) begin
                 cx = h_cnt - cactus_x[1];
@@ -233,15 +240,15 @@ module dino_logic (
                 // Select cactus sprite based on type (18px stride)
                 
                 sprite_base_x = SP_CACTUS_B;
-                sprite_addr = cy * IMG_WIDTH + (sprite_base_x + cx);
+                sprite_addr = (cy >> 1) * IMG_WIDTH + (sprite_base_x + (cx >> 1));
             end
             else if (cactus_active[2] && h_cnt >= cactus_x[2] && h_cnt < cactus_x[2] + PTERO_W &&v_cnt >= GROUND_Y - PTERO_H && v_cnt < GROUND_Y) begin
                 cx = h_cnt - cactus_x[2];
                 cy = v_cnt - (GROUND_Y - PTERO_H);
                 // Select cactus sprite based on type (18px stride)
 
-                sprite_base_x = SP_PTERO;
-                sprite_addr = cy * IMG_WIDTH + (sprite_base_x + cx);
+                sprite_base_x = (anim_cnt[4] == 1'b0) ? SP_PTERO_1 : SP_PTERO_2;
+                sprite_addr = (cy >> 1) * IMG_WIDTH + (sprite_base_x + (cx >> 1));
             end
         end
     end
