@@ -5,6 +5,8 @@ module dino_top (
     input wire jump,
     inout wire PS2_CLK,
     inout wire PS2_DATA,
+    input echo,
+    output wire trig,
     output reg [3:0] vgaRed,
     output reg [3:0] vgaGreen,
     output reg [3:0] vgaBlue,
@@ -44,6 +46,14 @@ module dino_top (
         .clk(clk)
     );
 
+    wire [19:0] distance;
+    sonic_top B(
+        .clk(clk), 
+        .rst(rst), 
+        .Echo(echo), 
+        .Trig(trig),
+        .distance(distance)
+    );
 
     wire [11:0] pixel_out;
     dino_logic game_inst (
@@ -58,8 +68,10 @@ module dino_top (
         .v_cnt(v_cnt),
         .vsync(vsync),
         .pixel_out(pixel_out),
-        .led_out(led)
+        .led_out(led),
+        .distance(distance)
     );
+
 
     always @(*) begin
         if (!valid) 

@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date             : Fri Dec 19 17:26:18 2025
+| Date             : Fri Dec 19 22:15:56 2025
 | Host             : DESKTOP-LCS45AM running 64-bit major release  (build 9200)
 | Command          : report_power -file dino_top_power_routed.rpt -pb dino_top_power_summary_routed.pb -rpx dino_top_power_routed.rpx
 | Design           : dino_top
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.107        |
+| Total On-Chip Power (W)  | 0.112        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.035        |
+| Dynamic (W)              | 0.040        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 5.0          |
-| Max Ambient (C)          | 84.5         |
-| Junction Temperature (C) | 25.5         |
+| Max Ambient (C)          | 84.4         |
+| Junction Temperature (C) | 25.6         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,19 +52,19 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.001 |        3 |       --- |             --- |
-| Slice Logic    |     0.001 |     1545 |       --- |             --- |
-|   LUT as Logic |     0.001 |      780 |     20800 |            3.75 |
-|   CARRY4       |    <0.001 |      127 |      8150 |            1.56 |
-|   Register     |    <0.001 |      326 |     41600 |            0.78 |
-|   BUFG         |    <0.001 |        1 |        32 |            3.13 |
+| Clocks         |     0.002 |        3 |       --- |             --- |
+| Slice Logic    |     0.004 |     1998 |       --- |             --- |
+|   LUT as Logic |     0.004 |     1009 |     20800 |            4.85 |
+|   CARRY4       |    <0.001 |      177 |      8150 |            2.17 |
+|   Register     |    <0.001 |      404 |     41600 |            0.97 |
+|   BUFG         |    <0.001 |        2 |        32 |            6.25 |
 |   F7/F8 Muxes  |    <0.001 |       12 |     32600 |            0.04 |
-|   Others       |     0.000 |       46 |       --- |             --- |
-| Signals        |     0.002 |     1066 |       --- |             --- |
+|   Others       |     0.000 |       52 |       --- |             --- |
+| Signals        |     0.004 |     1442 |       --- |             --- |
 | Block RAM      |    <0.001 |      6.5 |        50 |           13.00 |
-| I/O            |     0.029 |       47 |       106 |           44.34 |
+| I/O            |     0.029 |       49 |       106 |           46.23 |
 | Static Power   |     0.072 |          |           |                 |
-| Total          |     0.107 |          |           |                 |
+| Total          |     0.112 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -74,7 +74,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.015 |       0.005 |      0.010 |
+| Vccint    |       1.000 |     0.021 |       0.011 |      0.010 |
 | Vccaux    |       1.800 |     0.014 |       0.001 |      0.013 |
 | Vcco33    |       3.300 |     0.009 |       0.008 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -143,9 +143,11 @@ Table of Contents
 +----------------------+-----------+
 | Name                 | Power (W) |
 +----------------------+-----------+
-| dino_top             |     0.035 |
-|   game_inst          |     0.001 |
-|   kbd_decoder        |     0.001 |
+| dino_top             |     0.040 |
+|   B                  |     0.005 |
+|     u2               |     0.005 |
+|   game_inst          |     0.002 |
+|   kbd_decoder        |     0.002 |
 |     inst             |     0.001 |
 |       Ps2Interface_i |     0.001 |
 |   vga_inst           |     0.001 |

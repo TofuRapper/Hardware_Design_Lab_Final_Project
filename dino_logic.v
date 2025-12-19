@@ -9,6 +9,7 @@ module dino_logic (
     input wire [9:0] h_cnt,
     input wire [9:0] v_cnt,
     input wire vsync,
+    input wire [19:0] distance,
     output reg [11:0] pixel_out,
     output reg [15:0] led_out     // Debug LEDs
 );
@@ -154,7 +155,7 @@ module dino_logic (
                 // --- JUMP LOGIC ---
                 if (dino_y >= GROUND_Y - DINO_H) begin
                     // On Ground
-                    if ((key_down[9'h29]) || jump_signal) begin
+                    if ((key_down[9'h29]) || jump_signal || (distance <= 20'd5)) begin
                         dino_vel <= -18;
                         dino_y <= dino_y - 18;
                         jumped <= 1'b1;

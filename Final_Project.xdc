@@ -132,3 +132,11 @@ set_property IOSTANDARD LVCMOS33 [get_ports {Display[3]}]
 ## Jump Button (Button Up)
 set_property PACKAGE_PIN T18 [get_ports jump]
 set_property IOSTANDARD LVCMOS33 [get_ports jump]
+
+##Sonic
+## Sch name = JB3
+ set_property PACKAGE_PIN B15 [get_ports {trig}]
+    set_property IOSTANDARD LVCMOS33 [get_ports {trig}]
+## Sch name = JB4
+ set_property PACKAGE_PIN B16 [get_ports {echo}]
+    set_property IOSTANDARD LVCMOS33 [get_ports {echo}]
