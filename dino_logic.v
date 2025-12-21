@@ -18,7 +18,7 @@ module dino_logic (
 
     localparam GROUND_Y = 350;
     localparam DINO_X   = 160;
-    localparam DINO_W   = 36;   // 18 * 2
+    localparam DINO_W   = 34;   // 17 * 2 (Reduced to leave gap)
     localparam DINO_H   = 40;   // ~20 * 2
     localparam DINO_DUCK_H = 38; // 19 * 2
     localparam DINO_DUCK_W = 48; // 24 * 2
@@ -54,6 +54,12 @@ module dino_logic (
     reg [1:0] last_spawn_idx;
     reg [9:0] min_gap = 300; // Minimum gap between cactuses
     
+    // Manual Drop Logic
+    reg [9:0] drop_x;
+    reg prev_key_drop;
+    wire drop_key_active = key_down[9'h172] || key_down[9'h072]; // Down Arrow (Extended or Numpad)
+    wire key_drop_pressed = drop_key_active && !prev_key_drop;
+
     //LFSR randomly create obstacle
     wire [9:0] random_val;
     reg [9:0] next_spawn_offset;
@@ -131,8 +137,11 @@ module dino_logic (
 
     assign sensor_jump = (distance > 20'd20 && distance < 20'd50);
     assign sensor_duck = (distance < 20'd10 && distance > 20'd0);
-    assign key_jump = key_down[9'h029] || jump_signal;
-    assign key_duck = key_down[9'h172] || key_down[9'h01B] || sensor_duck || duck_signal;
+    assign key_jump = key_down[9'h01D] || jump_signal; // Only W (1D)
+    assign key_duck = key_down[9'h01B] || sensor_duck || duck_signal;      // S (1B)
+
+    reg prev_key_pause;
+    wire key_pause_pressed = (key_down[9'h04D] && !prev_key_pause) || pause_pulse;
 
     always @(posedge pclk or posedge rst) begin
         if (rst) begin
@@ -153,26 +162,30 @@ module dino_logic (
             prev_key_valid <= 0;
             last_key <= 9'h000;
             anim_cnt <= 0;
+            drop_x <= 320;
+            prev_key_drop <= 0;
+            prev_key_pause <= 0;
             
         end else begin
             prev_vsync <= vsync;
             prev_key_valid <= key_valid;
+            prev_key_pause <= key_down[9'h04D];
             if (key_press_event) last_key <= last_change;
             case (state)
                 S_IDLE: begin
-                    if (start_pulse) begin
+                    if (start_pulse || key_down[9'h029]) begin
                         state <= S_RUN;
                         next_spawn_offset <= random_val;
                     end
                 end
                 S_RUN: begin
                     if (collision)   state <= S_OVER;
-                    else if (pause_pulse) state <= S_PAUSE;
+                    else if (key_pause_pressed) state <= S_PAUSE;
                 end
                 S_PAUSE: begin
-                    if (pause_pulse) state <= S_RUN;
+                    if (key_pause_pressed) state <= S_RUN;
                 end
-                S_OVER: if (start_pulse) begin
+                S_OVER: if (start_pulse || key_down[9'h029]) begin
                             state <= S_IDLE;
                             dino_y <= GROUND_Y - DINO_H;
                             cactus_x[0] <= 630;
@@ -189,14 +202,14 @@ module dino_logic (
 
             // 2. PHYSICS UPDATE
             if (frame_tick && state == S_RUN) begin
+                prev_key_drop <= drop_key_active; // Update prev_key_drop only on frame tick
                 for(i = 0; i < 3; i = i + 1) begin
-                    if(cactus_active[i]) begin
-                        cactus_x[i] <= cactus_x[i] - 4 - (score[9:4]);
-                        if(cactus_x[i] < -40) cactus_active[i] <= 1'b0;
-                    end
+                    // Always move cactus to allow large gaps
+                    cactus_x[i] <= cactus_x[i] - 4 - (score[9:4]);
+                    if(cactus_active[i] && cactus_x[i] < -40) cactus_active[i] <= 1'b0;
                 end
 
-                if(cactus_x[last_spawn_idx] < (640 - min_gap - next_spawn_offset[7:0])) begin
+                if(cactus_x[last_spawn_idx] < (640 - min_gap - next_spawn_offset[8:0])) begin
                     if(cactus_active[(last_spawn_idx + 1) % 3] == 0) begin
                         last_spawn_idx <= (last_spawn_idx + 1) % 3;
                         cactus_x[(last_spawn_idx + 1) % 3] <= 640;
@@ -205,6 +218,29 @@ module dino_logic (
                         next_spawn_offset <= random_val;
                     end
                 end
+
+                // Manual Drop Cursor Movement
+                if ((key_down[9'h16B] || key_down[9'h06B]) && drop_x > 10) drop_x <= drop_x - 4;
+                if ((key_down[9'h174] || key_down[9'h074]) && drop_x < 630) drop_x <= drop_x + 4;
+
+                // Manual Drop Trigger
+                if (key_drop_pressed) begin
+                    if (!cactus_active[0]) begin
+                        cactus_active[0] <= 1'b1;
+                        cactus_x[0] <= drop_x;
+                        cactus_type[0] <= 1; // Big Cactus
+                    end else if (!cactus_active[1]) begin
+                        cactus_active[1] <= 1'b1;
+                        cactus_x[1] <= drop_x;
+                        cactus_type[1] <= 1;
+                    end else if (!cactus_active[2]) begin
+                        cactus_active[2] <= 1'b1;
+                        cactus_x[2] <= drop_x;
+                        cactus_type[2] <= 1;
+                    end
+                end
+                
+                // prev_key_drop <= key_down[9'h172]; // Moved to top of frame_tick block
 
                 /*
                 // Move Cactus
@@ -270,11 +306,11 @@ module dino_logic (
 
 
     // Sprite Offsets (Start at 16, width 18)
-    localparam SP_DINO_JUMP = 17;   // Standing Dino (17-34)
-    localparam SP_DINO_RUN1 = 267;   // Run Frame 1 (267-284)
-    localparam SP_DINO_RUN2 = 285;   // Run Frame 2 (285-302)
-    localparam SP_DINO_DUCK1 = 374;  // Duck Frame 1 (374-397)
-    localparam SP_DINO_DUCK2 = 398;  // Duck Frame 2 (398-421)
+    localparam SP_DINO_JUMP = 17;   // Standing Dino (16-32)
+    localparam SP_DINO_RUN1 = 268;   // Run Frame 1 (267-283)
+    localparam SP_DINO_RUN2 = 286;   // Run Frame 2 (285-301)
+    localparam SP_DINO_DUCK1 = 374;  // Duck Frame 1 (373-396)
+    localparam SP_DINO_DUCK2 = 399;  // Duck Frame 2 (398-421)
 
     // Pterodactyls are likely at 34 and 52.
     localparam SP_CACTUS    = 106;  // Cactus starts after birds
@@ -290,8 +326,8 @@ module dino_logic (
 
     localparam SP_PTERO_1 = 53; // Pterodactyl 1 (53-70)
     localparam SP_PTERO_2 = 71; // Pterodactyl 2 (71-89)
-    localparam SP_CACTUS_B = 132;    // Big Cactus (132-191)
-    localparam SP_CACTUS_S = 90;    // Small Cactus (90-131)
+    localparam SP_CACTUS_B = 131;    // Big Cactus (132-191)
+    localparam SP_CACTUS_S = 89;    // Small Cactus (90-131)
 
     blk_mem_gen_0 sprite_rom (
         .clka(pclk),
@@ -330,7 +366,7 @@ module dino_logic (
             sprite_addr = (dy >> 1) * IMG_WIDTH + (sp_x + (dx >> 1));
         end
         // Dino Rendering (Use curr_dino_h to crop height when ducking)
-        else if (h_cnt >= DINO_X && h_cnt < DINO_X + DINO_W &&
+        else if (h_cnt >= DINO_X && h_cnt < DINO_X + curr_dino_w &&
             v_cnt >= dino_y && v_cnt < dino_y + curr_dino_h) begin
             
             dx = h_cnt - DINO_X;
@@ -393,6 +429,15 @@ module dino_logic (
         led_out[10:3] = next_spawn_offset[7:0];
 
         pixel_out = 12'h000;
+
+        // Arrow Logic
+        if (state == S_RUN && v_cnt >= 50 && v_cnt < 70 &&
+            h_cnt + 10 >= drop_x && h_cnt <= drop_x + 10) begin
+            
+            if ( (h_cnt > drop_x ? (h_cnt - drop_x) : (drop_x - h_cnt)) < (70 - v_cnt) ) begin
+                 pixel_out = 12'hF00; // Red Arrow
+            end
+        end
         
         // Priority: Sprites -> Ground -> Background
         // Check if sprite_data is not "transparent" (assuming black 0x000 is transparent)
