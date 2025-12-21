@@ -32,10 +32,10 @@ module dino_logic (
     localparam PTERO_H = 34;
     localparam PTERO_FLY_OFFSET = 30; // Height above ground for Pterodactyl
 
-    localparam S_IDLE = 2'd0;
-    localparam S_RUN  = 2'd1;
-    localparam S_OVER = 2'd2;
-    localparam S_PAUSE = 2'd3;
+    localparam S_IDLE = 3'd0;
+    localparam S_RUN  = 3'd1;
+    localparam S_OVER = 3'd2;
+    localparam S_PAUSE = 3'd3;
     reg [1:0] state;
 
     reg [9:0] dino_y;
@@ -367,7 +367,7 @@ module dino_logic (
     
     // CRITICAL: This MUST match the exact width (in pixels) of your source image!
     // If your image is 640px wide, change this to 640.
-    localparam IMG_WIDTH = 481;  // <--- CHANGE THIS TO YOUR IMAGE WIDTH 
+    localparam IMG_WIDTH = 628;  // <--- CHANGE THIS TO YOUR IMAGE WIDTH 
 
 
     // Sprite Offsets (Start at 16, width 18)
@@ -382,12 +382,12 @@ module dino_logic (
     
     // Game Over Assets
     localparam SP_RESTART   = 0;    // Restart Icon (0-16)
-    localparam RESTART_W    = 34;   // 17 * 2
-    localparam RESTART_H    = 32;   // 16 * 2
+    localparam RESTART_W    = 30;   // 17 * 2
+    localparam RESTART_H    = 28;   // 16 * 2
     
-    localparam SP_TEXT_GAMEOVER = 192; // After Cacti (192-267)
-    localparam TEXT_GAMEOVER_W  = 152; // 76 * 2
-    localparam TEXT_GAMEOVER_H  = 42;  // 21 * 2
+    localparam SP_TEXT_GAMEOVER = 481; // After Cacti (192-267)
+    localparam TEXT_GAMEOVER_W  = 294; // 147 * 2
+    localparam TEXT_GAMEOVER_H  = 52;  // 26 * 2
 
     localparam SP_PTERO_1 = 53; // Pterodactyl 1 (53-70)
     localparam SP_PTERO_2 = 71; // Pterodactyl 2 (71-89)
@@ -431,24 +431,24 @@ module dino_logic (
         cx = 0; cy = 0;
 
         // Game Over Text
-        if (state == S_OVER && 
-            h_cnt >= 276 && h_cnt < 276 + TEXT_GAMEOVER_W &&
-            v_cnt >= 180 && v_cnt < 180 + TEXT_GAMEOVER_H) begin
-            
-            dx = h_cnt - 276;
-            dy = v_cnt - 180;
-            sp_x = SP_TEXT_GAMEOVER;
-            sprite_addr = (dy >> 1) * IMG_WIDTH + (sp_x + (dx >> 1));
-        end
-        // Restart Icon
-        else if (state == S_OVER && 
-            h_cnt >= 312 && h_cnt < 312 + RESTART_W &&
-            v_cnt >= 210 && v_cnt < 210 + RESTART_H) begin
-            
-            dx = h_cnt - 312;
-            dy = v_cnt - 210;
-            sp_x = SP_RESTART;
-            sprite_addr = (dy >> 1) * IMG_WIDTH + (sp_x + (dx >> 1));
+        if(state == S_OVER) begin
+            if (h_cnt >= 166 && h_cnt < 166 + TEXT_GAMEOVER_W &&
+                v_cnt >= 180 && v_cnt < 180 + TEXT_GAMEOVER_H) begin
+                
+                dx = h_cnt - 166;
+                dy = v_cnt - 180;
+                sp_x = SP_TEXT_GAMEOVER;
+                sprite_addr = (dy >> 1) * IMG_WIDTH + (sp_x + (dx >> 1));
+            end
+            // Restart Icon
+            else if (h_cnt >= 322 && h_cnt < 322 + RESTART_W &&
+                v_cnt >= 250 && v_cnt < 250 + RESTART_H) begin
+                
+                dx = h_cnt - 322;
+                dy = v_cnt - 250;
+                sp_x = SP_RESTART;
+                sprite_addr = (dy >> 1) * IMG_WIDTH + (sp_x + (dx >> 1));
+            end
         end
         else if (state == S_RUN && 
                  h_cnt >= drop_x && h_cnt < drop_x + prev_w &&
