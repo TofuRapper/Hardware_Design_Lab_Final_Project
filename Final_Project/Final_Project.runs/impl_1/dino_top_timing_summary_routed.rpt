@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date         : Sun Dec 21 20:09:38 2025
+| Date         : Sun Dec 21 21:41:47 2025
 | Host         : DESKTOP-LCS45AM running 64-bit major release  (build 9200)
 | Command      : report_timing_summary -max_paths 10 -file dino_top_timing_summary_routed.rpt -pb dino_top_timing_summary_routed.pb -rpx dino_top_timing_summary_routed.rpx -warn_on_violation
 | Design       : dino_top
@@ -58,7 +58,7 @@ Table of Contents
 
  There are 7 register/latch pins with no clock driven by root clock pin: display_inst/clk_divider_reg[15]/Q (HIGH)
 
- There are 221 register/latch pins with no clock driven by root clock pin: pclk_gen/num_reg[1]/Q (HIGH)
+ There are 222 register/latch pins with no clock driven by root clock pin: pclk_gen/num_reg[1]/Q (HIGH)
 
 
 2. checking constant_clock
@@ -73,7 +73,7 @@ Table of Contents
 
 4. checking unconstrained_internal_endpoints
 --------------------------------------------
- There are 769 pins that are not constrained for maximum delay. (HIGH)
+ There are 771 pins that are not constrained for maximum delay. (HIGH)
 
  There are 0 pins that are not constrained for maximum delay due to constant clock.
 
@@ -87,7 +87,7 @@ Table of Contents
 
 6. checking no_output_delay
 ---------------------------
- There are 38 ports with no output delay specified. (HIGH)
+ There are 39 ports with no output delay specified. (HIGH)
 
  There are 0 ports with no output delay but user has a false path constraint
 
@@ -132,7 +132,7 @@ Table of Contents
 
     WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
     -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-      5.694        0.000                      0                  303        0.153        0.000                      0                  303        4.500        0.000                       0                   223  
+      5.733        0.000                      0                  301        0.118        0.000                      0                  301        4.500        0.000                       0                   222  
 
 
 All user specified timing constraints are met.
@@ -155,7 +155,7 @@ sys_clk_pin  {0.000 5.000}      10.000          100.000
 
 Clock             WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
 -----             -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-sys_clk_pin         5.694        0.000                      0                  303        0.153        0.000                      0                  303        4.500        0.000                       0                   223  
+sys_clk_pin         5.733        0.000                      0                  301        0.118        0.000                      0                  301        4.500        0.000                       0                   222  
 
 
 ------------------------------------------------------------------------------------------------
@@ -186,27 +186,27 @@ Path Group    From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing 
 From Clock:  sys_clk_pin
   To Clock:  sys_clk_pin
 
-Setup :            0  Failing Endpoints,  Worst Slack        5.694ns,  Total Violation        0.000ns
-Hold  :            0  Failing Endpoints,  Worst Slack        0.153ns,  Total Violation        0.000ns
+Setup :            0  Failing Endpoints,  Worst Slack        5.733ns,  Total Violation        0.000ns
+Hold  :            0  Failing Endpoints,  Worst Slack        0.118ns,  Total Violation        0.000ns
 PW    :            0  Failing Endpoints,  Worst Slack        4.500ns,  Total Violation        0.000ns
 ---------------------------------------------------------------------------------------------------
 
 
 Max Delay Paths
 --------------------------------------------------------------------------------------
-Slack (MET) :             5.694ns  (required time - arrival time)
-  Source:                 kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/C
+Slack (MET) :             5.733ns  (required time - arrival time)
+  Source:                 kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/C
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            kbd_decoder/inst/Ps2Interface_i/counter_reg[12]/D
+  Destination:            kbd_decoder/inst/Ps2Interface_i/counter_reg[10]/D
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             sys_clk_pin
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            10.000ns  (sys_clk_pin rise@10.000ns - sys_clk_pin rise@0.000ns)
-  Data Path Delay:        4.259ns  (logic 1.381ns (32.425%)  route 2.878ns (67.575%))
-  Logic Levels:           4  (LUT4=3 LUT6=1)
-  Clock Path Skew:        -0.041ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.859ns = ( 14.859 - 10.000 ) 
-    Source Clock Delay      (SCD):    5.160ns
+  Data Path Delay:        4.229ns  (logic 1.242ns (29.371%)  route 2.987ns (70.629%))
+  Logic Levels:           4  (LUT4=2 LUT6=2)
+  Clock Path Skew:        -0.032ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.846ns = ( 14.846 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.138ns
     Clock Pessimism Removal (CPR):    0.260ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
     Total System Jitter     (TSJ):    0.071ns
@@ -222,21 +222,21 @@ Slack (MET) :             5.694ns  (required time - arrival time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  clk_IBUF_inst/O
                          net (fo=1, routed)           1.967     3.425    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.639     5.160    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X2Y1           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/C
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.617     5.138    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X60Y25         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X2Y1           FDCE (Prop_fdce_C_Q)         0.478     5.638 f  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/Q
-                         net (fo=3, routed)           0.795     6.433    kbd_decoder/inst/Ps2Interface_i/counter[8]
-    SLICE_X4Y2           LUT4 (Prop_lut4_I1_O)        0.295     6.728 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_4/O
-                         net (fo=2, routed)           0.416     7.144    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_4_n_0
-    SLICE_X5Y2           LUT6 (Prop_lut6_I5_O)        0.124     7.268 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[4]_i_2/O
-                         net (fo=3, routed)           0.810     8.078    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[4]_i_2_n_0
-    SLICE_X4Y4           LUT4 (Prop_lut4_I2_O)        0.152     8.230 f  kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2/O
-                         net (fo=14, routed)          0.857     9.087    kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2_n_0
-    SLICE_X4Y2           LUT4 (Prop_lut4_I0_O)        0.332     9.419 r  kbd_decoder/inst/Ps2Interface_i/counter[12]_i_1/O
-                         net (fo=1, routed)           0.000     9.419    kbd_decoder/inst/Ps2Interface_i/counter[12]_i_1_n_0
-    SLICE_X4Y2           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[12]/D
+    SLICE_X60Y25         FDCE (Prop_fdce_C_Q)         0.518     5.656 r  kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/Q
+                         net (fo=3, routed)           0.823     6.479    kbd_decoder/inst/Ps2Interface_i/counter[2]
+    SLICE_X60Y26         LUT6 (Prop_lut6_I0_O)        0.124     6.603 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_3/O
+                         net (fo=2, routed)           0.624     7.227    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_3_n_0
+    SLICE_X60Y27         LUT6 (Prop_lut6_I0_O)        0.124     7.351 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_2/O
+                         net (fo=3, routed)           0.730     8.081    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_2_n_0
+    SLICE_X58Y26         LUT4 (Prop_lut4_I0_O)        0.150     8.231 f  kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2/O
+                         net (fo=14, routed)          0.810     9.041    kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2_n_0
+    SLICE_X62Y27         LUT4 (Prop_lut4_I0_O)        0.326     9.367 r  kbd_decoder/inst/Ps2Interface_i/counter[10]_i_1/O
+                         net (fo=1, routed)           0.000     9.367    kbd_decoder/inst/Ps2Interface_i/counter[10]_i_1_n_0
+    SLICE_X62Y27         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[10]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk_pin rise edge)
@@ -245,31 +245,31 @@ Slack (MET) :             5.694ns  (required time - arrival time)
                          net (fo=0)                   0.000    10.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  clk_IBUF_inst/O
                          net (fo=1, routed)           1.862    13.250    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.518    14.859    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X4Y2           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[12]/C
-                         clock pessimism              0.260    15.119    
-                         clock uncertainty           -0.035    15.084    
-    SLICE_X4Y2           FDCE (Setup_fdce_C_D)        0.029    15.113    kbd_decoder/inst/Ps2Interface_i/counter_reg[12]
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.505    14.846    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X62Y27         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[10]/C
+                         clock pessimism              0.260    15.106    
+                         clock uncertainty           -0.035    15.071    
+    SLICE_X62Y27         FDCE (Setup_fdce_C_D)        0.029    15.100    kbd_decoder/inst/Ps2Interface_i/counter_reg[10]
   -------------------------------------------------------------------
-                         required time                         15.113    
-                         arrival time                          -9.419    
+                         required time                         15.100    
+                         arrival time                          -9.367    
   -------------------------------------------------------------------
-                         slack                                  5.694    
+                         slack                                  5.733    
 
-Slack (MET) :             5.714ns  (required time - arrival time)
-  Source:                 kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/C
+Slack (MET) :             5.753ns  (required time - arrival time)
+  Source:                 kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/C
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            kbd_decoder/inst/Ps2Interface_i/counter_reg[7]/D
+  Destination:            kbd_decoder/inst/Ps2Interface_i/counter_reg[13]/D
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             sys_clk_pin
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            10.000ns  (sys_clk_pin rise@10.000ns - sys_clk_pin rise@0.000ns)
-  Data Path Delay:        4.285ns  (logic 1.407ns (32.835%)  route 2.878ns (67.165%))
-  Logic Levels:           4  (LUT4=3 LUT6=1)
-  Clock Path Skew:        -0.041ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.859ns = ( 14.859 - 10.000 ) 
-    Source Clock Delay      (SCD):    5.160ns
+  Data Path Delay:        4.255ns  (logic 1.268ns (29.803%)  route 2.987ns (70.197%))
+  Logic Levels:           4  (LUT4=2 LUT6=2)
+  Clock Path Skew:        -0.032ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.846ns = ( 14.846 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.138ns
     Clock Pessimism Removal (CPR):    0.260ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
     Total System Jitter     (TSJ):    0.071ns
@@ -285,21 +285,21 @@ Slack (MET) :             5.714ns  (required time - arrival time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  clk_IBUF_inst/O
                          net (fo=1, routed)           1.967     3.425    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.639     5.160    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X2Y1           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/C
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.617     5.138    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X60Y25         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X2Y1           FDCE (Prop_fdce_C_Q)         0.478     5.638 f  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/Q
-                         net (fo=3, routed)           0.795     6.433    kbd_decoder/inst/Ps2Interface_i/counter[8]
-    SLICE_X4Y2           LUT4 (Prop_lut4_I1_O)        0.295     6.728 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_4/O
-                         net (fo=2, routed)           0.416     7.144    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_4_n_0
-    SLICE_X5Y2           LUT6 (Prop_lut6_I5_O)        0.124     7.268 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[4]_i_2/O
-                         net (fo=3, routed)           0.810     8.078    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[4]_i_2_n_0
-    SLICE_X4Y4           LUT4 (Prop_lut4_I2_O)        0.152     8.230 f  kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2/O
-                         net (fo=14, routed)          0.857     9.087    kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2_n_0
-    SLICE_X4Y2           LUT4 (Prop_lut4_I0_O)        0.358     9.445 r  kbd_decoder/inst/Ps2Interface_i/counter[7]_i_1/O
-                         net (fo=1, routed)           0.000     9.445    kbd_decoder/inst/Ps2Interface_i/counter[7]_i_1_n_0
-    SLICE_X4Y2           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[7]/D
+    SLICE_X60Y25         FDCE (Prop_fdce_C_Q)         0.518     5.656 r  kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/Q
+                         net (fo=3, routed)           0.823     6.479    kbd_decoder/inst/Ps2Interface_i/counter[2]
+    SLICE_X60Y26         LUT6 (Prop_lut6_I0_O)        0.124     6.603 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_3/O
+                         net (fo=2, routed)           0.624     7.227    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_3_n_0
+    SLICE_X60Y27         LUT6 (Prop_lut6_I0_O)        0.124     7.351 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_2/O
+                         net (fo=3, routed)           0.730     8.081    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_2_n_0
+    SLICE_X58Y26         LUT4 (Prop_lut4_I0_O)        0.150     8.231 f  kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2/O
+                         net (fo=14, routed)          0.810     9.041    kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2_n_0
+    SLICE_X62Y27         LUT4 (Prop_lut4_I0_O)        0.352     9.393 r  kbd_decoder/inst/Ps2Interface_i/counter[13]_i_1/O
+                         net (fo=1, routed)           0.000     9.393    kbd_decoder/inst/Ps2Interface_i/counter[13]_i_1_n_0
+    SLICE_X62Y27         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[13]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk_pin rise edge)
@@ -308,32 +308,32 @@ Slack (MET) :             5.714ns  (required time - arrival time)
                          net (fo=0)                   0.000    10.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  clk_IBUF_inst/O
                          net (fo=1, routed)           1.862    13.250    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.518    14.859    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X4Y2           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[7]/C
-                         clock pessimism              0.260    15.119    
-                         clock uncertainty           -0.035    15.084    
-    SLICE_X4Y2           FDCE (Setup_fdce_C_D)        0.075    15.159    kbd_decoder/inst/Ps2Interface_i/counter_reg[7]
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.505    14.846    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X62Y27         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[13]/C
+                         clock pessimism              0.260    15.106    
+                         clock uncertainty           -0.035    15.071    
+    SLICE_X62Y27         FDCE (Setup_fdce_C_D)        0.075    15.146    kbd_decoder/inst/Ps2Interface_i/counter_reg[13]
   -------------------------------------------------------------------
-                         required time                         15.159    
-                         arrival time                          -9.445    
+                         required time                         15.146    
+                         arrival time                          -9.393    
   -------------------------------------------------------------------
-                         slack                                  5.714    
+                         slack                                  5.753    
 
-Slack (MET) :             5.756ns  (required time - arrival time)
-  Source:                 kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/C
+Slack (MET) :             5.845ns  (required time - arrival time)
+  Source:                 kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/C
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            kbd_decoder/inst/Ps2Interface_i/counter_reg[0]/D
+  Destination:            kbd_decoder/inst/Ps2Interface_i/counter_reg[6]/D
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             sys_clk_pin
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            10.000ns  (sys_clk_pin rise@10.000ns - sys_clk_pin rise@0.000ns)
-  Data Path Delay:        4.196ns  (logic 1.381ns (32.909%)  route 2.815ns (67.091%))
-  Logic Levels:           4  (LUT4=2 LUT5=1 LUT6=1)
-  Clock Path Skew:        -0.041ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.859ns = ( 14.859 - 10.000 ) 
-    Source Clock Delay      (SCD):    5.160ns
-    Clock Pessimism Removal (CPR):    0.260ns
+  Data Path Delay:        4.129ns  (logic 1.242ns (30.083%)  route 2.887ns (69.917%))
+  Logic Levels:           4  (LUT4=2 LUT6=2)
+  Clock Path Skew:        -0.020ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.844ns = ( 14.844 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.138ns
+    Clock Pessimism Removal (CPR):    0.274ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
     Total System Jitter     (TSJ):    0.071ns
     Total Input Jitter      (TIJ):    0.000ns
@@ -348,21 +348,21 @@ Slack (MET) :             5.756ns  (required time - arrival time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  clk_IBUF_inst/O
                          net (fo=1, routed)           1.967     3.425    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.639     5.160    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X2Y1           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/C
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.617     5.138    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X60Y25         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X2Y1           FDCE (Prop_fdce_C_Q)         0.478     5.638 f  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/Q
-                         net (fo=3, routed)           0.795     6.433    kbd_decoder/inst/Ps2Interface_i/counter[8]
-    SLICE_X4Y2           LUT4 (Prop_lut4_I1_O)        0.295     6.728 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_4/O
-                         net (fo=2, routed)           0.416     7.144    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_4_n_0
-    SLICE_X5Y2           LUT6 (Prop_lut6_I5_O)        0.124     7.268 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[4]_i_2/O
-                         net (fo=3, routed)           0.810     8.078    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[4]_i_2_n_0
-    SLICE_X4Y4           LUT4 (Prop_lut4_I2_O)        0.152     8.230 f  kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2/O
-                         net (fo=14, routed)          0.795     9.025    kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2_n_0
-    SLICE_X4Y0           LUT5 (Prop_lut5_I3_O)        0.332     9.357 r  kbd_decoder/inst/Ps2Interface_i/counter[0]_i_1/O
-                         net (fo=1, routed)           0.000     9.357    kbd_decoder/inst/Ps2Interface_i/counter[0]_i_1_n_0
-    SLICE_X4Y0           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[0]/D
+    SLICE_X60Y25         FDCE (Prop_fdce_C_Q)         0.518     5.656 r  kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/Q
+                         net (fo=3, routed)           0.823     6.479    kbd_decoder/inst/Ps2Interface_i/counter[2]
+    SLICE_X60Y26         LUT6 (Prop_lut6_I0_O)        0.124     6.603 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_3/O
+                         net (fo=2, routed)           0.624     7.227    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_3_n_0
+    SLICE_X60Y27         LUT6 (Prop_lut6_I0_O)        0.124     7.351 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_2/O
+                         net (fo=3, routed)           0.730     8.081    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_2_n_0
+    SLICE_X58Y26         LUT4 (Prop_lut4_I0_O)        0.150     8.231 f  kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2/O
+                         net (fo=14, routed)          0.710     8.941    kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2_n_0
+    SLICE_X59Y26         LUT4 (Prop_lut4_I0_O)        0.326     9.267 r  kbd_decoder/inst/Ps2Interface_i/counter[6]_i_1/O
+                         net (fo=1, routed)           0.000     9.267    kbd_decoder/inst/Ps2Interface_i/counter[6]_i_1_n_0
+    SLICE_X59Y26         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[6]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk_pin rise edge)
@@ -371,32 +371,32 @@ Slack (MET) :             5.756ns  (required time - arrival time)
                          net (fo=0)                   0.000    10.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  clk_IBUF_inst/O
                          net (fo=1, routed)           1.862    13.250    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.518    14.859    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X4Y0           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[0]/C
-                         clock pessimism              0.260    15.119    
-                         clock uncertainty           -0.035    15.084    
-    SLICE_X4Y0           FDCE (Setup_fdce_C_D)        0.029    15.113    kbd_decoder/inst/Ps2Interface_i/counter_reg[0]
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.503    14.844    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X59Y26         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[6]/C
+                         clock pessimism              0.274    15.118    
+                         clock uncertainty           -0.035    15.083    
+    SLICE_X59Y26         FDCE (Setup_fdce_C_D)        0.029    15.112    kbd_decoder/inst/Ps2Interface_i/counter_reg[6]
   -------------------------------------------------------------------
-                         required time                         15.113    
-                         arrival time                          -9.357    
+                         required time                         15.112    
+                         arrival time                          -9.267    
   -------------------------------------------------------------------
-                         slack                                  5.756    
+                         slack                                  5.845    
 
-Slack (MET) :             5.766ns  (required time - arrival time)
-  Source:                 kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/C
+Slack (MET) :             5.865ns  (required time - arrival time)
+  Source:                 kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/C
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            kbd_decoder/inst/Ps2Interface_i/counter_reg[11]/D
+  Destination:            kbd_decoder/inst/Ps2Interface_i/counter_reg[9]/D
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             sys_clk_pin
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            10.000ns  (sys_clk_pin rise@10.000ns - sys_clk_pin rise@0.000ns)
-  Data Path Delay:        4.276ns  (logic 1.381ns (32.296%)  route 2.895ns (67.704%))
-  Logic Levels:           4  (LUT4=3 LUT6=1)
-  Clock Path Skew:        0.000ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.861ns = ( 14.861 - 10.000 ) 
-    Source Clock Delay      (SCD):    5.160ns
-    Clock Pessimism Removal (CPR):    0.299ns
+  Data Path Delay:        4.155ns  (logic 1.268ns (30.521%)  route 2.887ns (69.479%))
+  Logic Levels:           4  (LUT4=2 LUT6=2)
+  Clock Path Skew:        -0.020ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.844ns = ( 14.844 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.138ns
+    Clock Pessimism Removal (CPR):    0.274ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
     Total System Jitter     (TSJ):    0.071ns
     Total Input Jitter      (TIJ):    0.000ns
@@ -411,84 +411,21 @@ Slack (MET) :             5.766ns  (required time - arrival time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  clk_IBUF_inst/O
                          net (fo=1, routed)           1.967     3.425    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.639     5.160    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X2Y1           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/C
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.617     5.138    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X60Y25         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X2Y1           FDCE (Prop_fdce_C_Q)         0.478     5.638 f  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/Q
-                         net (fo=3, routed)           0.795     6.433    kbd_decoder/inst/Ps2Interface_i/counter[8]
-    SLICE_X4Y2           LUT4 (Prop_lut4_I1_O)        0.295     6.728 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_4/O
-                         net (fo=2, routed)           0.416     7.144    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_4_n_0
-    SLICE_X5Y2           LUT6 (Prop_lut6_I5_O)        0.124     7.268 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[4]_i_2/O
-                         net (fo=3, routed)           0.810     8.078    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[4]_i_2_n_0
-    SLICE_X4Y4           LUT4 (Prop_lut4_I2_O)        0.152     8.230 f  kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2/O
-                         net (fo=14, routed)          0.874     9.104    kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2_n_0
-    SLICE_X2Y1           LUT4 (Prop_lut4_I0_O)        0.332     9.436 r  kbd_decoder/inst/Ps2Interface_i/counter[11]_i_1/O
-                         net (fo=1, routed)           0.000     9.436    kbd_decoder/inst/Ps2Interface_i/counter[11]_i_1_n_0
-    SLICE_X2Y1           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[11]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock sys_clk_pin rise edge)
-                                                     10.000    10.000 r  
-    W5                                                0.000    10.000 r  clk (IN)
-                         net (fo=0)                   0.000    10.000    clk
-    W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  clk_IBUF_inst/O
-                         net (fo=1, routed)           1.862    13.250    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.520    14.861    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X2Y1           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[11]/C
-                         clock pessimism              0.299    15.160    
-                         clock uncertainty           -0.035    15.125    
-    SLICE_X2Y1           FDCE (Setup_fdce_C_D)        0.077    15.202    kbd_decoder/inst/Ps2Interface_i/counter_reg[11]
-  -------------------------------------------------------------------
-                         required time                         15.202    
-                         arrival time                          -9.436    
-  -------------------------------------------------------------------
-                         slack                                  5.766    
-
-Slack (MET) :             5.781ns  (required time - arrival time)
-  Source:                 kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/C
-                            (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/D
-                            (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             sys_clk_pin
-  Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            10.000ns  (sys_clk_pin rise@10.000ns - sys_clk_pin rise@0.000ns)
-  Data Path Delay:        4.302ns  (logic 1.407ns (32.705%)  route 2.895ns (67.295%))
-  Logic Levels:           4  (LUT4=3 LUT6=1)
-  Clock Path Skew:        0.000ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.861ns = ( 14.861 - 10.000 ) 
-    Source Clock Delay      (SCD):    5.160ns
-    Clock Pessimism Removal (CPR):    0.299ns
-  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter     (TSJ):    0.071ns
-    Total Input Jitter      (TIJ):    0.000ns
-    Discrete Jitter          (DJ):    0.000ns
-    Phase Error              (PE):    0.000ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock sys_clk_pin rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  clk (IN)
-                         net (fo=0)                   0.000     0.000    clk
-    W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  clk_IBUF_inst/O
-                         net (fo=1, routed)           1.967     3.425    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.639     5.160    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X2Y1           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X2Y1           FDCE (Prop_fdce_C_Q)         0.478     5.638 f  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/Q
-                         net (fo=3, routed)           0.795     6.433    kbd_decoder/inst/Ps2Interface_i/counter[8]
-    SLICE_X4Y2           LUT4 (Prop_lut4_I1_O)        0.295     6.728 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_4/O
-                         net (fo=2, routed)           0.416     7.144    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_4_n_0
-    SLICE_X5Y2           LUT6 (Prop_lut6_I5_O)        0.124     7.268 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[4]_i_2/O
-                         net (fo=3, routed)           0.810     8.078    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[4]_i_2_n_0
-    SLICE_X4Y4           LUT4 (Prop_lut4_I2_O)        0.152     8.230 f  kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2/O
-                         net (fo=14, routed)          0.874     9.104    kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2_n_0
-    SLICE_X2Y1           LUT4 (Prop_lut4_I0_O)        0.358     9.462 r  kbd_decoder/inst/Ps2Interface_i/counter[8]_i_1/O
-                         net (fo=1, routed)           0.000     9.462    kbd_decoder/inst/Ps2Interface_i/counter[8]_i_1_n_0
-    SLICE_X2Y1           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/D
+    SLICE_X60Y25         FDCE (Prop_fdce_C_Q)         0.518     5.656 r  kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/Q
+                         net (fo=3, routed)           0.823     6.479    kbd_decoder/inst/Ps2Interface_i/counter[2]
+    SLICE_X60Y26         LUT6 (Prop_lut6_I0_O)        0.124     6.603 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_3/O
+                         net (fo=2, routed)           0.624     7.227    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_3_n_0
+    SLICE_X60Y27         LUT6 (Prop_lut6_I0_O)        0.124     7.351 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_2/O
+                         net (fo=3, routed)           0.730     8.081    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_2_n_0
+    SLICE_X58Y26         LUT4 (Prop_lut4_I0_O)        0.150     8.231 f  kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2/O
+                         net (fo=14, routed)          0.710     8.941    kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2_n_0
+    SLICE_X59Y26         LUT4 (Prop_lut4_I0_O)        0.352     9.293 r  kbd_decoder/inst/Ps2Interface_i/counter[9]_i_1/O
+                         net (fo=1, routed)           0.000     9.293    kbd_decoder/inst/Ps2Interface_i/counter[9]_i_1_n_0
+    SLICE_X59Y26         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[9]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk_pin rise edge)
@@ -497,31 +434,31 @@ Slack (MET) :             5.781ns  (required time - arrival time)
                          net (fo=0)                   0.000    10.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  clk_IBUF_inst/O
                          net (fo=1, routed)           1.862    13.250    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.520    14.861    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X2Y1           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/C
-                         clock pessimism              0.299    15.160    
-                         clock uncertainty           -0.035    15.125    
-    SLICE_X2Y1           FDCE (Setup_fdce_C_D)        0.118    15.243    kbd_decoder/inst/Ps2Interface_i/counter_reg[8]
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.503    14.844    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X59Y26         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[9]/C
+                         clock pessimism              0.274    15.118    
+                         clock uncertainty           -0.035    15.083    
+    SLICE_X59Y26         FDCE (Setup_fdce_C_D)        0.075    15.158    kbd_decoder/inst/Ps2Interface_i/counter_reg[9]
   -------------------------------------------------------------------
-                         required time                         15.243    
-                         arrival time                          -9.462    
+                         required time                         15.158    
+                         arrival time                          -9.293    
   -------------------------------------------------------------------
-                         slack                                  5.781    
+                         slack                                  5.865    
 
-Slack (MET) :             5.855ns  (required time - arrival time)
-  Source:                 kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/C
+Slack (MET) :             5.922ns  (required time - arrival time)
+  Source:                 kbd_decoder/inst/Ps2Interface_i/counter_reg[11]/C
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
   Destination:            kbd_decoder/inst/Ps2Interface_i/counter_reg[4]/D
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             sys_clk_pin
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            10.000ns  (sys_clk_pin rise@10.000ns - sys_clk_pin rise@0.000ns)
-  Data Path Delay:        4.163ns  (logic 1.381ns (33.171%)  route 2.782ns (66.829%))
-  Logic Levels:           4  (LUT4=2 LUT5=1 LUT6=1)
-  Clock Path Skew:        -0.025ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.861ns = ( 14.861 - 10.000 ) 
-    Source Clock Delay      (SCD):    5.160ns
+  Data Path Delay:        4.098ns  (logic 1.242ns (30.311%)  route 2.856ns (69.689%))
+  Logic Levels:           4  (LUT4=1 LUT5=1 LUT6=2)
+  Clock Path Skew:        -0.024ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.842ns = ( 14.842 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.140ns
     Clock Pessimism Removal (CPR):    0.274ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
     Total System Jitter     (TSJ):    0.071ns
@@ -537,21 +474,21 @@ Slack (MET) :             5.855ns  (required time - arrival time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  clk_IBUF_inst/O
                          net (fo=1, routed)           1.967     3.425    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.639     5.160    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X2Y1           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/C
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.619     5.140    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X60Y26         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[11]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X2Y1           FDCE (Prop_fdce_C_Q)         0.478     5.638 f  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/Q
-                         net (fo=3, routed)           0.795     6.433    kbd_decoder/inst/Ps2Interface_i/counter[8]
-    SLICE_X4Y2           LUT4 (Prop_lut4_I1_O)        0.295     6.728 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_4/O
-                         net (fo=2, routed)           0.416     7.144    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_4_n_0
-    SLICE_X5Y2           LUT6 (Prop_lut6_I5_O)        0.124     7.268 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[4]_i_2/O
-                         net (fo=3, routed)           0.810     8.078    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[4]_i_2_n_0
-    SLICE_X4Y4           LUT4 (Prop_lut4_I2_O)        0.152     8.230 f  kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2/O
-                         net (fo=14, routed)          0.762     8.991    kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2_n_0
-    SLICE_X2Y0           LUT5 (Prop_lut5_I3_O)        0.332     9.323 r  kbd_decoder/inst/Ps2Interface_i/counter[4]_i_1/O
-                         net (fo=1, routed)           0.000     9.323    kbd_decoder/inst/Ps2Interface_i/counter[4]_i_1_n_0
-    SLICE_X2Y0           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[4]/D
+    SLICE_X60Y26         FDCE (Prop_fdce_C_Q)         0.518     5.658 r  kbd_decoder/inst/Ps2Interface_i/counter_reg[11]/Q
+                         net (fo=3, routed)           0.819     6.478    kbd_decoder/inst/Ps2Interface_i/counter[11]
+    SLICE_X60Y26         LUT6 (Prop_lut6_I1_O)        0.124     6.602 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_3/O
+                         net (fo=2, routed)           0.624     7.225    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_3_n_0
+    SLICE_X60Y27         LUT6 (Prop_lut6_I0_O)        0.124     7.349 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_2/O
+                         net (fo=3, routed)           0.730     8.079    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_2_n_0
+    SLICE_X58Y26         LUT4 (Prop_lut4_I0_O)        0.150     8.229 f  kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2/O
+                         net (fo=14, routed)          0.683     8.912    kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2_n_0
+    SLICE_X60Y25         LUT5 (Prop_lut5_I3_O)        0.326     9.238 r  kbd_decoder/inst/Ps2Interface_i/counter[4]_i_1/O
+                         net (fo=1, routed)           0.000     9.238    kbd_decoder/inst/Ps2Interface_i/counter[4]_i_1_n_0
+    SLICE_X60Y25         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[4]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk_pin rise edge)
@@ -560,32 +497,32 @@ Slack (MET) :             5.855ns  (required time - arrival time)
                          net (fo=0)                   0.000    10.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  clk_IBUF_inst/O
                          net (fo=1, routed)           1.862    13.250    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.520    14.861    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X2Y0           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[4]/C
-                         clock pessimism              0.274    15.135    
-                         clock uncertainty           -0.035    15.100    
-    SLICE_X2Y0           FDCE (Setup_fdce_C_D)        0.079    15.179    kbd_decoder/inst/Ps2Interface_i/counter_reg[4]
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.501    14.842    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X60Y25         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[4]/C
+                         clock pessimism              0.274    15.116    
+                         clock uncertainty           -0.035    15.081    
+    SLICE_X60Y25         FDCE (Setup_fdce_C_D)        0.079    15.160    kbd_decoder/inst/Ps2Interface_i/counter_reg[4]
   -------------------------------------------------------------------
-                         required time                         15.179    
-                         arrival time                          -9.323    
+                         required time                         15.160    
+                         arrival time                          -9.238    
   -------------------------------------------------------------------
-                         slack                                  5.855    
+                         slack                                  5.922    
 
-Slack (MET) :             5.859ns  (required time - arrival time)
-  Source:                 kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/C
+Slack (MET) :             5.953ns  (required time - arrival time)
+  Source:                 kbd_decoder/inst/key_in_reg[5]/C
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            kbd_decoder/inst/Ps2Interface_i/counter_reg[1]/D
+  Destination:            kbd_decoder/key_reg[0]/CE
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             sys_clk_pin
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            10.000ns  (sys_clk_pin rise@10.000ns - sys_clk_pin rise@0.000ns)
-  Data Path Delay:        4.157ns  (logic 1.381ns (33.219%)  route 2.776ns (66.781%))
-  Logic Levels:           4  (LUT4=2 LUT5=1 LUT6=1)
-  Clock Path Skew:        -0.025ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.861ns = ( 14.861 - 10.000 ) 
-    Source Clock Delay      (SCD):    5.160ns
-    Clock Pessimism Removal (CPR):    0.274ns
+  Data Path Delay:        3.548ns  (logic 1.047ns (29.509%)  route 2.501ns (70.491%))
+  Logic Levels:           3  (LUT3=1 LUT4=1 LUT5=1)
+  Clock Path Skew:        -0.035ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.779ns = ( 14.779 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.074ns
+    Clock Pessimism Removal (CPR):    0.260ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
     Total System Jitter     (TSJ):    0.071ns
     Total Input Jitter      (TIJ):    0.000ns
@@ -600,21 +537,19 @@ Slack (MET) :             5.859ns  (required time - arrival time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  clk_IBUF_inst/O
                          net (fo=1, routed)           1.967     3.425    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.639     5.160    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X2Y1           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/C
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.553     5.074    kbd_decoder/inst/ps2_data_out_reg
+    SLICE_X54Y26         FDCE                                         r  kbd_decoder/inst/key_in_reg[5]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X2Y1           FDCE (Prop_fdce_C_Q)         0.478     5.638 f  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/Q
-                         net (fo=3, routed)           0.795     6.433    kbd_decoder/inst/Ps2Interface_i/counter[8]
-    SLICE_X4Y2           LUT4 (Prop_lut4_I1_O)        0.295     6.728 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_4/O
-                         net (fo=2, routed)           0.416     7.144    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_4_n_0
-    SLICE_X5Y2           LUT6 (Prop_lut6_I5_O)        0.124     7.268 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[4]_i_2/O
-                         net (fo=3, routed)           0.810     8.078    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[4]_i_2_n_0
-    SLICE_X4Y4           LUT4 (Prop_lut4_I2_O)        0.152     8.230 f  kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2/O
-                         net (fo=14, routed)          0.756     8.985    kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2_n_0
-    SLICE_X2Y0           LUT5 (Prop_lut5_I3_O)        0.332     9.317 r  kbd_decoder/inst/Ps2Interface_i/counter[1]_i_1/O
-                         net (fo=1, routed)           0.000     9.317    kbd_decoder/inst/Ps2Interface_i/counter[1]_i_1_n_0
-    SLICE_X2Y0           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[1]/D
+    SLICE_X54Y26         FDCE (Prop_fdce_C_Q)         0.478     5.552 r  kbd_decoder/inst/key_in_reg[5]/Q
+                         net (fo=2, routed)           1.062     6.615    kbd_decoder/inst/key_in[5]
+    SLICE_X54Y23         LUT4 (Prop_lut4_I0_O)        0.295     6.910 f  kbd_decoder/inst/FSM_sequential_state[0]_i_3__0/O
+                         net (fo=1, routed)           0.286     7.196    kbd_decoder/inst/FSM_sequential_state[0]_i_3__0_n_0
+    SLICE_X54Y23         LUT5 (Prop_lut5_I4_O)        0.124     7.320 f  kbd_decoder/inst/FSM_sequential_state[0]_i_2__0/O
+                         net (fo=5, routed)           0.617     7.937    kbd_decoder/inst/FSM_sequential_state[0]_i_2__0_n_0
+    SLICE_X54Y22         LUT3 (Prop_lut3_I0_O)        0.150     8.087 r  kbd_decoder/inst/key[9]_i_1/O
+                         net (fo=10, routed)          0.535     8.622    kbd_decoder/key
+    SLICE_X55Y22         FDCE                                         r  kbd_decoder/key_reg[0]/CE
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk_pin rise edge)
@@ -623,32 +558,32 @@ Slack (MET) :             5.859ns  (required time - arrival time)
                          net (fo=0)                   0.000    10.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  clk_IBUF_inst/O
                          net (fo=1, routed)           1.862    13.250    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.520    14.861    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X2Y0           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[1]/C
-                         clock pessimism              0.274    15.135    
-                         clock uncertainty           -0.035    15.100    
-    SLICE_X2Y0           FDCE (Setup_fdce_C_D)        0.077    15.177    kbd_decoder/inst/Ps2Interface_i/counter_reg[1]
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.438    14.779    kbd_decoder/pb_in_delay_reg
+    SLICE_X55Y22         FDCE                                         r  kbd_decoder/key_reg[0]/C
+                         clock pessimism              0.260    15.039    
+                         clock uncertainty           -0.035    15.004    
+    SLICE_X55Y22         FDCE (Setup_fdce_C_CE)      -0.429    14.575    kbd_decoder/key_reg[0]
   -------------------------------------------------------------------
-                         required time                         15.177    
-                         arrival time                          -9.317    
+                         required time                         14.575    
+                         arrival time                          -8.622    
   -------------------------------------------------------------------
-                         slack                                  5.859    
+                         slack                                  5.953    
 
-Slack (MET) :             5.865ns  (required time - arrival time)
-  Source:                 kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/C
+Slack (MET) :             5.953ns  (required time - arrival time)
+  Source:                 kbd_decoder/inst/key_in_reg[5]/C
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            kbd_decoder/inst/Ps2Interface_i/counter_reg[3]/D
+  Destination:            kbd_decoder/key_reg[5]/CE
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             sys_clk_pin
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            10.000ns  (sys_clk_pin rise@10.000ns - sys_clk_pin rise@0.000ns)
-  Data Path Delay:        4.153ns  (logic 1.381ns (33.251%)  route 2.772ns (66.749%))
-  Logic Levels:           4  (LUT4=2 LUT5=1 LUT6=1)
-  Clock Path Skew:        -0.025ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.861ns = ( 14.861 - 10.000 ) 
-    Source Clock Delay      (SCD):    5.160ns
-    Clock Pessimism Removal (CPR):    0.274ns
+  Data Path Delay:        3.548ns  (logic 1.047ns (29.509%)  route 2.501ns (70.491%))
+  Logic Levels:           3  (LUT3=1 LUT4=1 LUT5=1)
+  Clock Path Skew:        -0.035ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.779ns = ( 14.779 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.074ns
+    Clock Pessimism Removal (CPR):    0.260ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
     Total System Jitter     (TSJ):    0.071ns
     Total Input Jitter      (TIJ):    0.000ns
@@ -663,21 +598,19 @@ Slack (MET) :             5.865ns  (required time - arrival time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  clk_IBUF_inst/O
                          net (fo=1, routed)           1.967     3.425    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.639     5.160    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X2Y1           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/C
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.553     5.074    kbd_decoder/inst/ps2_data_out_reg
+    SLICE_X54Y26         FDCE                                         r  kbd_decoder/inst/key_in_reg[5]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X2Y1           FDCE (Prop_fdce_C_Q)         0.478     5.638 f  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/Q
-                         net (fo=3, routed)           0.795     6.433    kbd_decoder/inst/Ps2Interface_i/counter[8]
-    SLICE_X4Y2           LUT4 (Prop_lut4_I1_O)        0.295     6.728 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_4/O
-                         net (fo=2, routed)           0.416     7.144    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_4_n_0
-    SLICE_X5Y2           LUT6 (Prop_lut6_I5_O)        0.124     7.268 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[4]_i_2/O
-                         net (fo=3, routed)           0.810     8.078    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[4]_i_2_n_0
-    SLICE_X4Y4           LUT4 (Prop_lut4_I2_O)        0.152     8.230 f  kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2/O
-                         net (fo=14, routed)          0.752     8.981    kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2_n_0
-    SLICE_X2Y0           LUT5 (Prop_lut5_I3_O)        0.332     9.313 r  kbd_decoder/inst/Ps2Interface_i/counter[3]_i_1/O
-                         net (fo=1, routed)           0.000     9.313    kbd_decoder/inst/Ps2Interface_i/counter[3]_i_1_n_0
-    SLICE_X2Y0           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[3]/D
+    SLICE_X54Y26         FDCE (Prop_fdce_C_Q)         0.478     5.552 r  kbd_decoder/inst/key_in_reg[5]/Q
+                         net (fo=2, routed)           1.062     6.615    kbd_decoder/inst/key_in[5]
+    SLICE_X54Y23         LUT4 (Prop_lut4_I0_O)        0.295     6.910 f  kbd_decoder/inst/FSM_sequential_state[0]_i_3__0/O
+                         net (fo=1, routed)           0.286     7.196    kbd_decoder/inst/FSM_sequential_state[0]_i_3__0_n_0
+    SLICE_X54Y23         LUT5 (Prop_lut5_I4_O)        0.124     7.320 f  kbd_decoder/inst/FSM_sequential_state[0]_i_2__0/O
+                         net (fo=5, routed)           0.617     7.937    kbd_decoder/inst/FSM_sequential_state[0]_i_2__0_n_0
+    SLICE_X54Y22         LUT3 (Prop_lut3_I0_O)        0.150     8.087 r  kbd_decoder/inst/key[9]_i_1/O
+                         net (fo=10, routed)          0.535     8.622    kbd_decoder/key
+    SLICE_X55Y22         FDCE                                         r  kbd_decoder/key_reg[5]/CE
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk_pin rise edge)
@@ -686,31 +619,31 @@ Slack (MET) :             5.865ns  (required time - arrival time)
                          net (fo=0)                   0.000    10.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  clk_IBUF_inst/O
                          net (fo=1, routed)           1.862    13.250    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.520    14.861    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X2Y0           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[3]/C
-                         clock pessimism              0.274    15.135    
-                         clock uncertainty           -0.035    15.100    
-    SLICE_X2Y0           FDCE (Setup_fdce_C_D)        0.079    15.179    kbd_decoder/inst/Ps2Interface_i/counter_reg[3]
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.438    14.779    kbd_decoder/pb_in_delay_reg
+    SLICE_X55Y22         FDCE                                         r  kbd_decoder/key_reg[5]/C
+                         clock pessimism              0.260    15.039    
+                         clock uncertainty           -0.035    15.004    
+    SLICE_X55Y22         FDCE (Setup_fdce_C_CE)      -0.429    14.575    kbd_decoder/key_reg[5]
   -------------------------------------------------------------------
-                         required time                         15.179    
-                         arrival time                          -9.313    
+                         required time                         14.575    
+                         arrival time                          -8.622    
   -------------------------------------------------------------------
-                         slack                                  5.865    
+                         slack                                  5.953    
 
-Slack (MET) :             5.866ns  (required time - arrival time)
-  Source:                 kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/C
+Slack (MET) :             5.978ns  (required time - arrival time)
+  Source:                 kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/C
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/D
+  Destination:            kbd_decoder/inst/Ps2Interface_i/counter_reg[12]/D
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             sys_clk_pin
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            10.000ns  (sys_clk_pin rise@10.000ns - sys_clk_pin rise@0.000ns)
-  Data Path Delay:        4.154ns  (logic 1.381ns (33.243%)  route 2.773ns (66.757%))
-  Logic Levels:           4  (LUT4=2 LUT5=1 LUT6=1)
-  Clock Path Skew:        -0.025ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.861ns = ( 14.861 - 10.000 ) 
-    Source Clock Delay      (SCD):    5.160ns
+  Data Path Delay:        4.044ns  (logic 1.242ns (30.710%)  route 2.802ns (69.291%))
+  Logic Levels:           4  (LUT4=2 LUT6=2)
+  Clock Path Skew:        -0.019ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.845ns = ( 14.845 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.138ns
     Clock Pessimism Removal (CPR):    0.274ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
     Total System Jitter     (TSJ):    0.071ns
@@ -726,21 +659,21 @@ Slack (MET) :             5.866ns  (required time - arrival time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  clk_IBUF_inst/O
                          net (fo=1, routed)           1.967     3.425    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.639     5.160    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X2Y1           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/C
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.617     5.138    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X60Y25         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X2Y1           FDCE (Prop_fdce_C_Q)         0.478     5.638 f  kbd_decoder/inst/Ps2Interface_i/counter_reg[8]/Q
-                         net (fo=3, routed)           0.795     6.433    kbd_decoder/inst/Ps2Interface_i/counter[8]
-    SLICE_X4Y2           LUT4 (Prop_lut4_I1_O)        0.295     6.728 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_4/O
-                         net (fo=2, routed)           0.416     7.144    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_4_n_0
-    SLICE_X5Y2           LUT6 (Prop_lut6_I5_O)        0.124     7.268 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[4]_i_2/O
-                         net (fo=3, routed)           0.810     8.078    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[4]_i_2_n_0
-    SLICE_X4Y4           LUT4 (Prop_lut4_I2_O)        0.152     8.230 f  kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2/O
-                         net (fo=14, routed)          0.753     8.982    kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2_n_0
-    SLICE_X2Y0           LUT5 (Prop_lut5_I3_O)        0.332     9.314 r  kbd_decoder/inst/Ps2Interface_i/counter[2]_i_1/O
-                         net (fo=1, routed)           0.000     9.314    kbd_decoder/inst/Ps2Interface_i/counter[2]_i_1_n_0
-    SLICE_X2Y0           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/D
+    SLICE_X60Y25         FDCE (Prop_fdce_C_Q)         0.518     5.656 r  kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/Q
+                         net (fo=3, routed)           0.823     6.479    kbd_decoder/inst/Ps2Interface_i/counter[2]
+    SLICE_X60Y26         LUT6 (Prop_lut6_I0_O)        0.124     6.603 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_3/O
+                         net (fo=2, routed)           0.624     7.227    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_3_n_0
+    SLICE_X60Y27         LUT6 (Prop_lut6_I0_O)        0.124     7.351 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_2/O
+                         net (fo=3, routed)           0.730     8.081    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_2_n_0
+    SLICE_X58Y26         LUT4 (Prop_lut4_I0_O)        0.150     8.231 f  kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2/O
+                         net (fo=14, routed)          0.626     8.857    kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2_n_0
+    SLICE_X60Y27         LUT4 (Prop_lut4_I0_O)        0.326     9.183 r  kbd_decoder/inst/Ps2Interface_i/counter[12]_i_1/O
+                         net (fo=1, routed)           0.000     9.183    kbd_decoder/inst/Ps2Interface_i/counter[12]_i_1_n_0
+    SLICE_X60Y27         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[12]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk_pin rise edge)
@@ -749,31 +682,31 @@ Slack (MET) :             5.866ns  (required time - arrival time)
                          net (fo=0)                   0.000    10.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  clk_IBUF_inst/O
                          net (fo=1, routed)           1.862    13.250    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.520    14.861    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X2Y0           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/C
-                         clock pessimism              0.274    15.135    
-                         clock uncertainty           -0.035    15.100    
-    SLICE_X2Y0           FDCE (Setup_fdce_C_D)        0.081    15.181    kbd_decoder/inst/Ps2Interface_i/counter_reg[2]
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.504    14.845    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X60Y27         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[12]/C
+                         clock pessimism              0.274    15.119    
+                         clock uncertainty           -0.035    15.084    
+    SLICE_X60Y27         FDCE (Setup_fdce_C_D)        0.077    15.161    kbd_decoder/inst/Ps2Interface_i/counter_reg[12]
   -------------------------------------------------------------------
-                         required time                         15.181    
-                         arrival time                          -9.314    
+                         required time                         15.161    
+                         arrival time                          -9.183    
   -------------------------------------------------------------------
-                         slack                                  5.866    
+                         slack                                  5.978    
 
-Slack (MET) :             5.880ns  (required time - arrival time)
-  Source:                 frame_count_reg[2]/C
+Slack (MET) :             5.979ns  (required time - arrival time)
+  Source:                 kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/C
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            sec_ones_reg[0]/CE
+  Destination:            kbd_decoder/inst/Ps2Interface_i/counter_reg[11]/D
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             sys_clk_pin
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            10.000ns  (sys_clk_pin rise@10.000ns - sys_clk_pin rise@0.000ns)
-  Data Path Delay:        3.647ns  (logic 0.732ns (20.072%)  route 2.915ns (79.928%))
-  Logic Levels:           2  (LUT5=1 LUT6=1)
-  Clock Path Skew:        -0.031ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.778ns = ( 14.778 - 10.000 ) 
-    Source Clock Delay      (SCD):    5.083ns
+  Data Path Delay:        4.042ns  (logic 1.242ns (30.724%)  route 2.800ns (69.276%))
+  Logic Levels:           4  (LUT4=2 LUT6=2)
+  Clock Path Skew:        -0.020ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.844ns = ( 14.844 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.138ns
     Clock Pessimism Removal (CPR):    0.274ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
     Total System Jitter     (TSJ):    0.071ns
@@ -789,17 +722,21 @@ Slack (MET) :             5.880ns  (required time - arrival time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  clk_IBUF_inst/O
                          net (fo=1, routed)           1.967     3.425    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.562     5.083    clk_IBUF_BUFG
-    SLICE_X47Y13         FDCE                                         r  frame_count_reg[2]/C
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.617     5.138    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X60Y25         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X47Y13         FDCE (Prop_fdce_C_Q)         0.456     5.539 f  frame_count_reg[2]/Q
-                         net (fo=5, routed)           1.331     6.870    frame_count[2]
-    SLICE_X47Y13         LUT6 (Prop_lut6_I0_O)        0.124     6.994 f  sec_tens[3]_i_3/O
-                         net (fo=2, routed)           0.959     7.953    game_inst/sec_ones_reg[0]
-    SLICE_X45Y15         LUT5 (Prop_lut5_I4_O)        0.152     8.105 r  game_inst/sec_ones[3]_i_1/O
-                         net (fo=4, routed)           0.625     8.730    sec_ones
-    SLICE_X47Y19         FDCE                                         r  sec_ones_reg[0]/CE
+    SLICE_X60Y25         FDCE (Prop_fdce_C_Q)         0.518     5.656 r  kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/Q
+                         net (fo=3, routed)           0.823     6.479    kbd_decoder/inst/Ps2Interface_i/counter[2]
+    SLICE_X60Y26         LUT6 (Prop_lut6_I0_O)        0.124     6.603 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_3/O
+                         net (fo=2, routed)           0.624     7.227    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_3_n_0
+    SLICE_X60Y27         LUT6 (Prop_lut6_I0_O)        0.124     7.351 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_2/O
+                         net (fo=3, routed)           0.730     8.081    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_2_n_0
+    SLICE_X58Y26         LUT4 (Prop_lut4_I0_O)        0.150     8.231 f  kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2/O
+                         net (fo=14, routed)          0.624     8.855    kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2_n_0
+    SLICE_X60Y26         LUT4 (Prop_lut4_I0_O)        0.326     9.181 r  kbd_decoder/inst/Ps2Interface_i/counter[11]_i_1/O
+                         net (fo=1, routed)           0.000     9.181    kbd_decoder/inst/Ps2Interface_i/counter[11]_i_1_n_0
+    SLICE_X60Y26         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[11]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk_pin rise edge)
@@ -808,17 +745,80 @@ Slack (MET) :             5.880ns  (required time - arrival time)
                          net (fo=0)                   0.000    10.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  clk_IBUF_inst/O
                          net (fo=1, routed)           1.862    13.250    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         1.437    14.778    clk_IBUF_BUFG
-    SLICE_X47Y19         FDCE                                         r  sec_ones_reg[0]/C
-                         clock pessimism              0.274    15.052    
-                         clock uncertainty           -0.035    15.017    
-    SLICE_X47Y19         FDCE (Setup_fdce_C_CE)      -0.407    14.610    sec_ones_reg[0]
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.503    14.844    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X60Y26         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[11]/C
+                         clock pessimism              0.274    15.118    
+                         clock uncertainty           -0.035    15.083    
+    SLICE_X60Y26         FDCE (Setup_fdce_C_D)        0.077    15.160    kbd_decoder/inst/Ps2Interface_i/counter_reg[11]
   -------------------------------------------------------------------
-                         required time                         14.610    
-                         arrival time                          -8.730    
+                         required time                         15.160    
+                         arrival time                          -9.181    
   -------------------------------------------------------------------
-                         slack                                  5.880    
+                         slack                                  5.979    
+
+Slack (MET) :             6.017ns  (required time - arrival time)
+  Source:                 kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/C
+                            (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            kbd_decoder/inst/Ps2Interface_i/counter_reg[0]/D
+                            (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             sys_clk_pin
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (sys_clk_pin rise@10.000ns - sys_clk_pin rise@0.000ns)
+  Data Path Delay:        3.941ns  (logic 1.242ns (31.513%)  route 2.699ns (68.487%))
+  Logic Levels:           4  (LUT4=1 LUT5=1 LUT6=2)
+  Clock Path Skew:        -0.035ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.843ns = ( 14.843 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.138ns
+    Clock Pessimism Removal (CPR):    0.260ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    W5                                                0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.000     0.000    clk
+    W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           1.967     3.425    clk_IBUF
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.096     3.521 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.617     5.138    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X60Y25         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X60Y25         FDCE (Prop_fdce_C_Q)         0.518     5.656 r  kbd_decoder/inst/Ps2Interface_i/counter_reg[2]/Q
+                         net (fo=3, routed)           0.823     6.479    kbd_decoder/inst/Ps2Interface_i/counter[2]
+    SLICE_X60Y26         LUT6 (Prop_lut6_I0_O)        0.124     6.603 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_3/O
+                         net (fo=2, routed)           0.624     7.227    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_3_n_0
+    SLICE_X60Y27         LUT6 (Prop_lut6_I0_O)        0.124     7.351 r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_2/O
+                         net (fo=3, routed)           0.730     8.081    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state[14]_i_2_n_0
+    SLICE_X58Y26         LUT4 (Prop_lut4_I0_O)        0.150     8.231 f  kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2/O
+                         net (fo=14, routed)          0.523     8.753    kbd_decoder/inst/Ps2Interface_i/counter[13]_i_2_n_0
+    SLICE_X62Y25         LUT5 (Prop_lut5_I3_O)        0.326     9.079 r  kbd_decoder/inst/Ps2Interface_i/counter[0]_i_1/O
+                         net (fo=1, routed)           0.000     9.079    kbd_decoder/inst/Ps2Interface_i/counter[0]_i_1_n_0
+    SLICE_X62Y25         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[0]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock sys_clk_pin rise edge)
+                                                     10.000    10.000 r  
+    W5                                                0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.000    10.000    clk
+    W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           1.862    13.250    clk_IBUF
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.091    13.341 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         1.502    14.843    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X62Y25         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/counter_reg[0]/C
+                         clock pessimism              0.260    15.103    
+                         clock uncertainty           -0.035    15.068    
+    SLICE_X62Y25         FDCE (Setup_fdce_C_D)        0.029    15.097    kbd_decoder/inst/Ps2Interface_i/counter_reg[0]
+  -------------------------------------------------------------------
+                         required time                         15.097    
+                         arrival time                          -9.079    
+  -------------------------------------------------------------------
+                         slack                                  6.017    
 
 
 
@@ -826,70 +826,19 @@ Slack (MET) :             5.880ns  (required time - arrival time)
 
 Min Delay Paths
 --------------------------------------------------------------------------------------
-Slack (MET) :             0.153ns  (arrival time - required time)
-  Source:                 kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state_reg[14]/C
-                            (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            kbd_decoder/inst/Ps2Interface_i/ps2_data_en_reg_inv/D
-                            (rising edge-triggered cell FDPE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             sys_clk_pin
-  Path Type:              Hold (Min at Fast Process Corner)
-  Requirement:            0.000ns  (sys_clk_pin rise@0.000ns - sys_clk_pin rise@0.000ns)
-  Data Path Delay:        0.258ns  (logic 0.186ns (72.200%)  route 0.072ns (27.800%))
-  Logic Levels:           1  (LUT6=1)
-  Clock Path Skew:        0.013ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    1.991ns
-    Source Clock Delay      (SCD):    1.476ns
-    Clock Pessimism Removal (CPR):    0.502ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock sys_clk_pin rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  clk (IN)
-                         net (fo=0)                   0.000     0.000    clk
-    W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  clk_IBUF_inst/O
-                         net (fo=1, routed)           0.631     0.858    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.593     1.476    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X5Y4           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state_reg[14]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X5Y4           FDCE (Prop_fdce_C_Q)         0.141     1.617 f  kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state_reg[14]/Q
-                         net (fo=3, routed)           0.072     1.689    kbd_decoder/inst/Ps2Interface_i/FSM_onehot_state_reg_n_0_[14]
-    SLICE_X4Y4           LUT6 (Prop_lut6_I3_O)        0.045     1.734 r  kbd_decoder/inst/Ps2Interface_i/ps2_data_en_inv_i_1/O
-                         net (fo=1, routed)           0.000     1.734    kbd_decoder/inst/Ps2Interface_i/ps2_data_en_next
-    SLICE_X4Y4           FDPE                                         r  kbd_decoder/inst/Ps2Interface_i/ps2_data_en_reg_inv/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock sys_clk_pin rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  clk (IN)
-                         net (fo=0)                   0.000     0.000    clk
-    W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  clk_IBUF_inst/O
-                         net (fo=1, routed)           0.685     1.099    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.864     1.991    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X4Y4           FDPE                                         r  kbd_decoder/inst/Ps2Interface_i/ps2_data_en_reg_inv/C
-                         clock pessimism             -0.502     1.489    
-    SLICE_X4Y4           FDPE (Hold_fdpe_C_D)         0.092     1.581    kbd_decoder/inst/Ps2Interface_i/ps2_data_en_reg_inv
-  -------------------------------------------------------------------
-                         required time                         -1.581    
-                         arrival time                           1.734    
-  -------------------------------------------------------------------
-                         slack                                  0.153    
-
-Slack (MET) :             0.155ns  (arrival time - required time)
-  Source:                 frame_count_reg[3]/C
+Slack (MET) :             0.118ns  (arrival time - required time)
+  Source:                 frame_count_reg[2]/C
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
   Destination:            frame_count_reg[5]/D
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             sys_clk_pin
   Path Type:              Hold (Min at Fast Process Corner)
   Requirement:            0.000ns  (sys_clk_pin rise@0.000ns - sys_clk_pin rise@0.000ns)
-  Data Path Delay:        0.289ns  (logic 0.186ns (64.293%)  route 0.103ns (35.707%))
+  Data Path Delay:        0.252ns  (logic 0.186ns (73.740%)  route 0.066ns (26.260%))
   Logic Levels:           1  (LUT6=1)
   Clock Path Skew:        0.013ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    1.956ns
-    Source Clock Delay      (SCD):    1.443ns
+    Destination Clock Delay (DCD):    1.965ns
+    Source Clock Delay      (SCD):    1.452ns
     Clock Pessimism Removal (CPR):    0.500ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
@@ -900,15 +849,15 @@ Slack (MET) :             0.155ns  (arrival time - required time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  clk_IBUF_inst/O
                          net (fo=1, routed)           0.631     0.858    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.560     1.443    clk_IBUF_BUFG
-    SLICE_X47Y13         FDCE                                         r  frame_count_reg[3]/C
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.569     1.452    clk_IBUF_BUFG
+    SLICE_X57Y1          FDCE                                         r  frame_count_reg[2]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X47Y13         FDCE (Prop_fdce_C_Q)         0.141     1.584 r  frame_count_reg[3]/Q
-                         net (fo=5, routed)           0.103     1.687    frame_count[3]
-    SLICE_X46Y13         LUT6 (Prop_lut6_I3_O)        0.045     1.732 r  frame_count[5]_i_2/O
-                         net (fo=1, routed)           0.000     1.732    frame_count[5]_i_2_n_0
-    SLICE_X46Y13         FDCE                                         r  frame_count_reg[5]/D
+    SLICE_X57Y1          FDCE (Prop_fdce_C_Q)         0.141     1.593 r  frame_count_reg[2]/Q
+                         net (fo=5, routed)           0.066     1.659    frame_count[2]
+    SLICE_X56Y1          LUT6 (Prop_lut6_I2_O)        0.045     1.704 r  frame_count[5]_i_2/O
+                         net (fo=1, routed)           0.000     1.704    frame_count[5]_i_2_n_0
+    SLICE_X56Y1          FDCE                                         r  frame_count_reg[5]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk_pin rise edge)
@@ -917,31 +866,31 @@ Slack (MET) :             0.155ns  (arrival time - required time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  clk_IBUF_inst/O
                          net (fo=1, routed)           0.685     1.099    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.829     1.956    clk_IBUF_BUFG
-    SLICE_X46Y13         FDCE                                         r  frame_count_reg[5]/C
-                         clock pessimism             -0.500     1.456    
-    SLICE_X46Y13         FDCE (Hold_fdce_C_D)         0.121     1.577    frame_count_reg[5]
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.838     1.965    clk_IBUF_BUFG
+    SLICE_X56Y1          FDCE                                         r  frame_count_reg[5]/C
+                         clock pessimism             -0.500     1.465    
+    SLICE_X56Y1          FDCE (Hold_fdce_C_D)         0.121     1.586    frame_count_reg[5]
   -------------------------------------------------------------------
-                         required time                         -1.577    
-                         arrival time                           1.732    
+                         required time                         -1.586    
+                         arrival time                           1.704    
   -------------------------------------------------------------------
-                         slack                                  0.155    
+                         slack                                  0.118    
 
-Slack (MET) :             0.175ns  (arrival time - required time)
-  Source:                 kbd_decoder/inst/Ps2Interface_i/data_inter_reg/C
-                            (rising edge-triggered cell FDPE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            kbd_decoder/inst/Ps2Interface_i/data_count_reg[2]/D
+Slack (MET) :             0.127ns  (arrival time - required time)
+  Source:                 kbd_decoder/inst/Ps2Interface_i/frame_reg[4]/C
+                            (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            kbd_decoder/inst/Ps2Interface_i/rx_data_reg[3]/D
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             sys_clk_pin
   Path Type:              Hold (Min at Fast Process Corner)
   Requirement:            0.000ns  (sys_clk_pin rise@0.000ns - sys_clk_pin rise@0.000ns)
-  Data Path Delay:        0.308ns  (logic 0.186ns (60.486%)  route 0.122ns (39.514%))
-  Logic Levels:           1  (LUT6=1)
+  Data Path Delay:        0.216ns  (logic 0.141ns (65.236%)  route 0.075ns (34.764%))
+  Logic Levels:           0  
   Clock Path Skew:        0.013ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    1.991ns
-    Source Clock Delay      (SCD):    1.476ns
-    Clock Pessimism Removal (CPR):    0.502ns
+    Destination Clock Delay (DCD):    1.952ns
+    Source Clock Delay      (SCD):    1.439ns
+    Clock Pessimism Removal (CPR):    0.500ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
@@ -951,15 +900,13 @@ Slack (MET) :             0.175ns  (arrival time - required time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  clk_IBUF_inst/O
                          net (fo=1, routed)           0.631     0.858    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.593     1.476    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X7Y5           FDPE                                         r  kbd_decoder/inst/Ps2Interface_i/data_inter_reg/C
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.556     1.439    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X55Y28         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/frame_reg[4]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X7Y5           FDPE (Prop_fdpe_C_Q)         0.141     1.617 r  kbd_decoder/inst/Ps2Interface_i/data_inter_reg/Q
-                         net (fo=6, routed)           0.122     1.739    kbd_decoder/inst/Ps2Interface_i/data_inter
-    SLICE_X6Y5           LUT6 (Prop_lut6_I5_O)        0.045     1.784 r  kbd_decoder/inst/Ps2Interface_i/data_count[2]_i_1/O
-                         net (fo=1, routed)           0.000     1.784    kbd_decoder/inst/Ps2Interface_i/data_count[2]_i_1_n_0
-    SLICE_X6Y5           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/data_count_reg[2]/D
+    SLICE_X55Y28         FDCE (Prop_fdce_C_Q)         0.141     1.580 r  kbd_decoder/inst/Ps2Interface_i/frame_reg[4]/Q
+                         net (fo=3, routed)           0.075     1.655    kbd_decoder/inst/Ps2Interface_i/p_0_in[3]
+    SLICE_X54Y28         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/rx_data_reg[3]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk_pin rise edge)
@@ -968,31 +915,31 @@ Slack (MET) :             0.175ns  (arrival time - required time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  clk_IBUF_inst/O
                          net (fo=1, routed)           0.685     1.099    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.864     1.991    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X6Y5           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/data_count_reg[2]/C
-                         clock pessimism             -0.502     1.489    
-    SLICE_X6Y5           FDCE (Hold_fdce_C_D)         0.120     1.609    kbd_decoder/inst/Ps2Interface_i/data_count_reg[2]
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.825     1.952    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X54Y28         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/rx_data_reg[3]/C
+                         clock pessimism             -0.500     1.452    
+    SLICE_X54Y28         FDCE (Hold_fdce_C_D)         0.076     1.528    kbd_decoder/inst/Ps2Interface_i/rx_data_reg[3]
   -------------------------------------------------------------------
-                         required time                         -1.609    
-                         arrival time                           1.784    
+                         required time                         -1.528    
+                         arrival time                           1.655    
   -------------------------------------------------------------------
-                         slack                                  0.175    
+                         slack                                  0.127    
 
-Slack (MET) :             0.178ns  (arrival time - required time)
-  Source:                 kbd_decoder/inst/Ps2Interface_i/data_inter_reg/C
-                            (rising edge-triggered cell FDPE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            kbd_decoder/inst/Ps2Interface_i/data_count_reg[3]/D
+Slack (MET) :             0.168ns  (arrival time - required time)
+  Source:                 kbd_decoder/key_reg[4]/C
+                            (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            kbd_decoder/key_down_reg[363]/D
                             (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             sys_clk_pin
   Path Type:              Hold (Min at Fast Process Corner)
   Requirement:            0.000ns  (sys_clk_pin rise@0.000ns - sys_clk_pin rise@0.000ns)
-  Data Path Delay:        0.312ns  (logic 0.186ns (59.709%)  route 0.126ns (40.291%))
+  Data Path Delay:        0.272ns  (logic 0.209ns (76.771%)  route 0.063ns (23.229%))
   Logic Levels:           1  (LUT6=1)
   Clock Path Skew:        0.013ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    1.991ns
-    Source Clock Delay      (SCD):    1.476ns
-    Clock Pessimism Removal (CPR):    0.502ns
+    Destination Clock Delay (DCD):    1.952ns
+    Source Clock Delay      (SCD):    1.439ns
+    Clock Pessimism Removal (CPR):    0.500ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
@@ -1002,15 +949,15 @@ Slack (MET) :             0.178ns  (arrival time - required time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  clk_IBUF_inst/O
                          net (fo=1, routed)           0.631     0.858    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.593     1.476    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X7Y5           FDPE                                         r  kbd_decoder/inst/Ps2Interface_i/data_inter_reg/C
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.556     1.439    kbd_decoder/pb_in_delay_reg
+    SLICE_X54Y21         FDCE                                         r  kbd_decoder/key_reg[4]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X7Y5           FDPE (Prop_fdpe_C_Q)         0.141     1.617 r  kbd_decoder/inst/Ps2Interface_i/data_inter_reg/Q
-                         net (fo=6, routed)           0.126     1.743    kbd_decoder/inst/Ps2Interface_i/data_inter
-    SLICE_X6Y5           LUT6 (Prop_lut6_I5_O)        0.045     1.788 r  kbd_decoder/inst/Ps2Interface_i/data_count[3]_i_1/O
-                         net (fo=1, routed)           0.000     1.788    kbd_decoder/inst/Ps2Interface_i/data_count[3]_i_1_n_0
-    SLICE_X6Y5           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/data_count_reg[3]/D
+    SLICE_X54Y21         FDCE (Prop_fdce_C_Q)         0.164     1.603 r  kbd_decoder/key_reg[4]/Q
+                         net (fo=7, routed)           0.063     1.666    kbd_decoder/key_reg_n_0_[4]
+    SLICE_X55Y21         LUT6 (Prop_lut6_I2_O)        0.045     1.711 r  kbd_decoder/key_down[363]_i_1/O
+                         net (fo=1, routed)           0.000     1.711    kbd_decoder/p_0_in[363]
+    SLICE_X55Y21         FDCE                                         r  kbd_decoder/key_down_reg[363]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk_pin rise edge)
@@ -1019,16 +966,65 @@ Slack (MET) :             0.178ns  (arrival time - required time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  clk_IBUF_inst/O
                          net (fo=1, routed)           0.685     1.099    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.864     1.991    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X6Y5           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/data_count_reg[3]/C
-                         clock pessimism             -0.502     1.489    
-    SLICE_X6Y5           FDCE (Hold_fdce_C_D)         0.121     1.610    kbd_decoder/inst/Ps2Interface_i/data_count_reg[3]
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.825     1.952    kbd_decoder/pb_in_delay_reg
+    SLICE_X55Y21         FDCE                                         r  kbd_decoder/key_down_reg[363]/C
+                         clock pessimism             -0.500     1.452    
+    SLICE_X55Y21         FDCE (Hold_fdce_C_D)         0.091     1.543    kbd_decoder/key_down_reg[363]
   -------------------------------------------------------------------
-                         required time                         -1.610    
-                         arrival time                           1.788    
+                         required time                         -1.543    
+                         arrival time                           1.711    
   -------------------------------------------------------------------
-                         slack                                  0.178    
+                         slack                                  0.168    
+
+Slack (MET) :             0.172ns  (arrival time - required time)
+  Source:                 db_jump/shift_reg_reg[4]/C
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            db_jump/shift_reg_reg[5]/D
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             sys_clk_pin
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (sys_clk_pin rise@0.000ns - sys_clk_pin rise@0.000ns)
+  Data Path Delay:        0.266ns  (logic 0.141ns (52.990%)  route 0.125ns (47.010%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.035ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.958ns
+    Source Clock Delay      (SCD):    1.445ns
+    Clock Pessimism Removal (CPR):    0.478ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    W5                                                0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.000     0.000    clk
+    W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           0.631     0.858    clk_IBUF
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.562     1.445    db_jump/shift_reg_reg[0]_0
+    SLICE_X55Y15         FDRE                                         r  db_jump/shift_reg_reg[4]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X55Y15         FDRE (Prop_fdre_C_Q)         0.141     1.586 r  db_jump/shift_reg_reg[4]/Q
+                         net (fo=2, routed)           0.125     1.711    db_jump/shift_reg_reg_n_0_[4]
+    SLICE_X56Y15         FDRE                                         r  db_jump/shift_reg_reg[5]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    W5                                                0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.000     0.000    clk
+    W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           0.685     1.099    clk_IBUF
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.831     1.958    db_jump/shift_reg_reg[0]_0
+    SLICE_X56Y15         FDRE                                         r  db_jump/shift_reg_reg[5]/C
+                         clock pessimism             -0.478     1.480    
+    SLICE_X56Y15         FDRE (Hold_fdre_C_D)         0.059     1.539    db_jump/shift_reg_reg[5]
+  -------------------------------------------------------------------
+                         required time                         -1.539    
+                         arrival time                           1.711    
+  -------------------------------------------------------------------
+                         slack                                  0.172    
 
 Slack (MET) :             0.183ns  (arrival time - required time)
   Source:                 db_pause/shift_reg_reg[0]/C
@@ -1041,9 +1037,9 @@ Slack (MET) :             0.183ns  (arrival time - required time)
   Data Path Delay:        0.266ns  (logic 0.141ns (53.084%)  route 0.125ns (46.916%))
   Logic Levels:           0  
   Clock Path Skew:        0.013ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    1.984ns
-    Source Clock Delay      (SCD):    1.472ns
-    Clock Pessimism Removal (CPR):    0.499ns
+    Destination Clock Delay (DCD):    1.981ns
+    Source Clock Delay      (SCD):    1.470ns
+    Clock Pessimism Removal (CPR):    0.498ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
@@ -1053,13 +1049,13 @@ Slack (MET) :             0.183ns  (arrival time - required time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  clk_IBUF_inst/O
                          net (fo=1, routed)           0.631     0.858    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.589     1.472    db_pause/shift_reg_reg[6]_0
-    SLICE_X0Y17          FDRE                                         r  db_pause/shift_reg_reg[0]/C
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.587     1.470    db_pause/shift_reg_reg[6]_0
+    SLICE_X58Y18         FDRE                                         r  db_pause/shift_reg_reg[0]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X0Y17          FDRE (Prop_fdre_C_Q)         0.141     1.613 r  db_pause/shift_reg_reg[0]/Q
-                         net (fo=2, routed)           0.125     1.738    db_pause/shift_reg_reg_n_0_[0]
-    SLICE_X1Y18          FDRE                                         r  db_pause/shift_reg_reg[1]/D
+    SLICE_X58Y18         FDRE (Prop_fdre_C_Q)         0.141     1.611 r  db_pause/shift_reg_reg[0]/Q
+                         net (fo=2, routed)           0.125     1.736    db_pause/shift_reg_reg_n_0_[0]
+    SLICE_X59Y19         FDRE                                         r  db_pause/shift_reg_reg[1]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk_pin rise edge)
@@ -1068,30 +1064,30 @@ Slack (MET) :             0.183ns  (arrival time - required time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  clk_IBUF_inst/O
                          net (fo=1, routed)           0.685     1.099    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.857     1.984    db_pause/shift_reg_reg[6]_0
-    SLICE_X1Y18          FDRE                                         r  db_pause/shift_reg_reg[1]/C
-                         clock pessimism             -0.499     1.485    
-    SLICE_X1Y18          FDRE (Hold_fdre_C_D)         0.070     1.555    db_pause/shift_reg_reg[1]
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.854     1.981    db_pause/shift_reg_reg[6]_0
+    SLICE_X59Y19         FDRE                                         r  db_pause/shift_reg_reg[1]/C
+                         clock pessimism             -0.498     1.483    
+    SLICE_X59Y19         FDRE (Hold_fdre_C_D)         0.070     1.553    db_pause/shift_reg_reg[1]
   -------------------------------------------------------------------
-                         required time                         -1.555    
-                         arrival time                           1.738    
+                         required time                         -1.553    
+                         arrival time                           1.736    
   -------------------------------------------------------------------
                          slack                                  0.183    
 
-Slack (MET) :             0.184ns  (arrival time - required time)
-  Source:                 kbd_decoder/inst/Ps2Interface_i/rx_data_reg[0]/C
-                            (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            kbd_decoder/inst/key_in_reg[0]/D
-                            (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
+Slack (MET) :             0.186ns  (arrival time - required time)
+  Source:                 db_pause/shift_reg_reg[2]/C
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            db_pause/shift_reg_reg[3]/D
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             sys_clk_pin
   Path Type:              Hold (Min at Fast Process Corner)
   Requirement:            0.000ns  (sys_clk_pin rise@0.000ns - sys_clk_pin rise@0.000ns)
-  Data Path Delay:        0.269ns  (logic 0.141ns (52.331%)  route 0.128ns (47.669%))
+  Data Path Delay:        0.274ns  (logic 0.141ns (51.436%)  route 0.133ns (48.564%))
   Logic Levels:           0  
-  Clock Path Skew:        0.015ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    1.992ns
-    Source Clock Delay      (SCD):    1.478ns
+  Clock Path Skew:        0.013ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.981ns
+    Source Clock Delay      (SCD):    1.469ns
     Clock Pessimism Removal (CPR):    0.499ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
@@ -1102,13 +1098,13 @@ Slack (MET) :             0.184ns  (arrival time - required time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  clk_IBUF_inst/O
                          net (fo=1, routed)           0.631     0.858    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.595     1.478    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
-    SLICE_X3Y5           FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/rx_data_reg[0]/C
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.586     1.469    db_pause/shift_reg_reg[6]_0
+    SLICE_X59Y19         FDRE                                         r  db_pause/shift_reg_reg[2]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X3Y5           FDCE (Prop_fdce_C_Q)         0.141     1.619 r  kbd_decoder/inst/Ps2Interface_i/rx_data_reg[0]/Q
-                         net (fo=3, routed)           0.128     1.748    kbd_decoder/inst/rx_data[0]
-    SLICE_X3Y7           FDCE                                         r  kbd_decoder/inst/key_in_reg[0]/D
+    SLICE_X59Y19         FDRE (Prop_fdre_C_Q)         0.141     1.610 r  db_pause/shift_reg_reg[2]/Q
+                         net (fo=2, routed)           0.133     1.743    db_pause/shift_reg_reg_n_0_[2]
+    SLICE_X58Y19         FDRE                                         r  db_pause/shift_reg_reg[3]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk_pin rise edge)
@@ -1117,30 +1113,132 @@ Slack (MET) :             0.184ns  (arrival time - required time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  clk_IBUF_inst/O
                          net (fo=1, routed)           0.685     1.099    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.865     1.992    kbd_decoder/inst/ps2_data_out_reg
-    SLICE_X3Y7           FDCE                                         r  kbd_decoder/inst/key_in_reg[0]/C
-                         clock pessimism             -0.499     1.493    
-    SLICE_X3Y7           FDCE (Hold_fdce_C_D)         0.070     1.563    kbd_decoder/inst/key_in_reg[0]
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.854     1.981    db_pause/shift_reg_reg[6]_0
+    SLICE_X58Y19         FDRE                                         r  db_pause/shift_reg_reg[3]/C
+                         clock pessimism             -0.499     1.482    
+    SLICE_X58Y19         FDRE (Hold_fdre_C_D)         0.075     1.557    db_pause/shift_reg_reg[3]
   -------------------------------------------------------------------
-                         required time                         -1.563    
-                         arrival time                           1.748    
+                         required time                         -1.557    
+                         arrival time                           1.743    
   -------------------------------------------------------------------
-                         slack                                  0.184    
+                         slack                                  0.186    
 
-Slack (MET) :             0.188ns  (arrival time - required time)
-  Source:                 db_start/shift_reg_reg[2]/C
-                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            db_start/shift_reg_reg[3]/D
-                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
+Slack (MET) :             0.191ns  (arrival time - required time)
+  Source:                 kbd_decoder/inst/Ps2Interface_i/clk_count_reg[2]/C
+                            (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            kbd_decoder/inst/Ps2Interface_i/clk_count_reg[1]/D
+                            (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             sys_clk_pin
   Path Type:              Hold (Min at Fast Process Corner)
   Requirement:            0.000ns  (sys_clk_pin rise@0.000ns - sys_clk_pin rise@0.000ns)
-  Data Path Delay:        0.271ns  (logic 0.141ns (52.036%)  route 0.130ns (47.964%))
+  Data Path Delay:        0.326ns  (logic 0.186ns (56.976%)  route 0.140ns (43.024%))
+  Logic Levels:           1  (LUT6=1)
+  Clock Path Skew:        0.014ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.981ns
+    Source Clock Delay      (SCD):    1.469ns
+    Clock Pessimism Removal (CPR):    0.498ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    W5                                                0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.000     0.000    clk
+    W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           0.631     0.858    clk_IBUF
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.586     1.469    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X59Y30         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/clk_count_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X59Y30         FDCE (Prop_fdce_C_Q)         0.141     1.610 r  kbd_decoder/inst/Ps2Interface_i/clk_count_reg[2]/Q
+                         net (fo=5, routed)           0.140     1.751    kbd_decoder/inst/Ps2Interface_i/clk_count[2]
+    SLICE_X60Y30         LUT6 (Prop_lut6_I1_O)        0.045     1.796 r  kbd_decoder/inst/Ps2Interface_i/clk_count[1]_i_1/O
+                         net (fo=1, routed)           0.000     1.796    kbd_decoder/inst/Ps2Interface_i/clk_count[1]_i_1_n_0
+    SLICE_X60Y30         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/clk_count_reg[1]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    W5                                                0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.000     0.000    clk
+    W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           0.685     1.099    clk_IBUF
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.854     1.981    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X60Y30         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/clk_count_reg[1]/C
+                         clock pessimism             -0.498     1.483    
+    SLICE_X60Y30         FDCE (Hold_fdce_C_D)         0.121     1.604    kbd_decoder/inst/Ps2Interface_i/clk_count_reg[1]
+  -------------------------------------------------------------------
+                         required time                         -1.604    
+                         arrival time                           1.796    
+  -------------------------------------------------------------------
+                         slack                                  0.191    
+
+Slack (MET) :             0.191ns  (arrival time - required time)
+  Source:                 kbd_decoder/inst/Ps2Interface_i/clk_count_reg[2]/C
+                            (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            kbd_decoder/inst/Ps2Interface_i/ps2_clk_s_reg/D
+                            (rising edge-triggered cell FDPE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             sys_clk_pin
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (sys_clk_pin rise@0.000ns - sys_clk_pin rise@0.000ns)
+  Data Path Delay:        0.326ns  (logic 0.186ns (56.976%)  route 0.140ns (43.024%))
+  Logic Levels:           1  (LUT6=1)
+  Clock Path Skew:        0.014ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.981ns
+    Source Clock Delay      (SCD):    1.469ns
+    Clock Pessimism Removal (CPR):    0.498ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    W5                                                0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.000     0.000    clk
+    W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           0.631     0.858    clk_IBUF
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.586     1.469    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X59Y30         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/clk_count_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X59Y30         FDCE (Prop_fdce_C_Q)         0.141     1.610 r  kbd_decoder/inst/Ps2Interface_i/clk_count_reg[2]/Q
+                         net (fo=5, routed)           0.140     1.751    kbd_decoder/inst/Ps2Interface_i/clk_count[2]
+    SLICE_X60Y30         LUT6 (Prop_lut6_I1_O)        0.045     1.796 r  kbd_decoder/inst/Ps2Interface_i/ps2_clk_s_i_1/O
+                         net (fo=1, routed)           0.000     1.796    kbd_decoder/inst/Ps2Interface_i/ps2_clk_s_i_1_n_0
+    SLICE_X60Y30         FDPE                                         r  kbd_decoder/inst/Ps2Interface_i/ps2_clk_s_reg/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    W5                                                0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.000     0.000    clk
+    W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           0.685     1.099    clk_IBUF
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.854     1.981    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X60Y30         FDPE                                         r  kbd_decoder/inst/Ps2Interface_i/ps2_clk_s_reg/C
+                         clock pessimism             -0.498     1.483    
+    SLICE_X60Y30         FDPE (Hold_fdpe_C_D)         0.121     1.604    kbd_decoder/inst/Ps2Interface_i/ps2_clk_s_reg
+  -------------------------------------------------------------------
+                         required time                         -1.604    
+                         arrival time                           1.796    
+  -------------------------------------------------------------------
+                         slack                                  0.191    
+
+Slack (MET) :             0.192ns  (arrival time - required time)
+  Source:                 kbd_decoder/inst/Ps2Interface_i/frame_reg[8]/C
+                            (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            kbd_decoder/inst/Ps2Interface_i/rx_data_reg[7]/D
+                            (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             sys_clk_pin
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (sys_clk_pin rise@0.000ns - sys_clk_pin rise@0.000ns)
+  Data Path Delay:        0.216ns  (logic 0.128ns (59.166%)  route 0.088ns (40.834%))
   Logic Levels:           0  
   Clock Path Skew:        0.013ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    1.960ns
-    Source Clock Delay      (SCD):    1.447ns
+    Destination Clock Delay (DCD):    1.952ns
+    Source Clock Delay      (SCD):    1.439ns
     Clock Pessimism Removal (CPR):    0.500ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
@@ -1151,64 +1249,13 @@ Slack (MET) :             0.188ns  (arrival time - required time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  clk_IBUF_inst/O
                          net (fo=1, routed)           0.631     0.858    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.564     1.447    db_start/shift_reg_reg[0]_0
-    SLICE_X37Y0          FDRE                                         r  db_start/shift_reg_reg[2]/C
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.556     1.439    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X55Y28         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/frame_reg[8]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X37Y0          FDRE (Prop_fdre_C_Q)         0.141     1.588 r  db_start/shift_reg_reg[2]/Q
-                         net (fo=2, routed)           0.130     1.718    db_start/shift_reg[2]
-    SLICE_X36Y0          FDRE                                         r  db_start/shift_reg_reg[3]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock sys_clk_pin rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  clk (IN)
-                         net (fo=0)                   0.000     0.000    clk
-    W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  clk_IBUF_inst/O
-                         net (fo=1, routed)           0.685     1.099    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.833     1.960    db_start/shift_reg_reg[0]_0
-    SLICE_X36Y0          FDRE                                         r  db_start/shift_reg_reg[3]/C
-                         clock pessimism             -0.500     1.460    
-    SLICE_X36Y0          FDRE (Hold_fdre_C_D)         0.070     1.530    db_start/shift_reg_reg[3]
-  -------------------------------------------------------------------
-                         required time                         -1.530    
-                         arrival time                           1.718    
-  -------------------------------------------------------------------
-                         slack                                  0.188    
-
-Slack (MET) :             0.192ns  (arrival time - required time)
-  Source:                 kbd_decoder/FSM_sequential_state_reg[0]/C
-                            (rising edge-triggered cell FDPE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            kbd_decoder/been_extend_reg/D
-                            (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             sys_clk_pin
-  Path Type:              Hold (Min at Fast Process Corner)
-  Requirement:            0.000ns  (sys_clk_pin rise@0.000ns - sys_clk_pin rise@0.000ns)
-  Data Path Delay:        0.323ns  (logic 0.186ns (57.580%)  route 0.137ns (42.420%))
-  Logic Levels:           1  (LUT6=1)
-  Clock Path Skew:        0.039ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    1.993ns
-    Source Clock Delay      (SCD):    1.476ns
-    Clock Pessimism Removal (CPR):    0.478ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock sys_clk_pin rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  clk (IN)
-                         net (fo=0)                   0.000     0.000    clk
-    W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  clk_IBUF_inst/O
-                         net (fo=1, routed)           0.631     0.858    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.593     1.476    kbd_decoder/pb_in_delay_reg
-    SLICE_X4Y6           FDPE                                         r  kbd_decoder/FSM_sequential_state_reg[0]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X4Y6           FDPE (Prop_fdpe_C_Q)         0.141     1.617 r  kbd_decoder/FSM_sequential_state_reg[0]/Q
-                         net (fo=6, routed)           0.137     1.754    kbd_decoder/inst/Q[0]
-    SLICE_X3Y6           LUT6 (Prop_lut6_I1_O)        0.045     1.799 r  kbd_decoder/inst/been_extend_i_1/O
-                         net (fo=1, routed)           0.000     1.799    kbd_decoder/inst_n_13
-    SLICE_X3Y6           FDCE                                         r  kbd_decoder/been_extend_reg/D
+    SLICE_X55Y28         FDCE (Prop_fdce_C_Q)         0.128     1.567 r  kbd_decoder/inst/Ps2Interface_i/frame_reg[8]/Q
+                         net (fo=3, routed)           0.088     1.655    kbd_decoder/inst/Ps2Interface_i/p_0_in[7]
+    SLICE_X54Y28         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/rx_data_reg[7]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk_pin rise edge)
@@ -1217,80 +1264,31 @@ Slack (MET) :             0.192ns  (arrival time - required time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  clk_IBUF_inst/O
                          net (fo=1, routed)           0.685     1.099    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.866     1.993    kbd_decoder/pb_in_delay_reg
-    SLICE_X3Y6           FDCE                                         r  kbd_decoder/been_extend_reg/C
-                         clock pessimism             -0.478     1.515    
-    SLICE_X3Y6           FDCE (Hold_fdce_C_D)         0.092     1.607    kbd_decoder/been_extend_reg
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.825     1.952    kbd_decoder/inst/Ps2Interface_i/ps2_data_out_reg_0
+    SLICE_X54Y28         FDCE                                         r  kbd_decoder/inst/Ps2Interface_i/rx_data_reg[7]/C
+                         clock pessimism             -0.500     1.452    
+    SLICE_X54Y28         FDCE (Hold_fdce_C_D)         0.011     1.463    kbd_decoder/inst/Ps2Interface_i/rx_data_reg[7]
   -------------------------------------------------------------------
-                         required time                         -1.607    
-                         arrival time                           1.799    
+                         required time                         -1.463    
+                         arrival time                           1.655    
   -------------------------------------------------------------------
                          slack                                  0.192    
 
-Slack (MET) :             0.193ns  (arrival time - required time)
-  Source:                 db_start/shift_reg_reg[4]/C
+Slack (MET) :             0.195ns  (arrival time - required time)
+  Source:                 B/clk1/cnt_reg[5]/C
                             (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            db_start/shift_reg_reg[5]/D
+  Destination:            B/clk1/cnt_reg[0]/D
                             (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             sys_clk_pin
   Path Type:              Hold (Min at Fast Process Corner)
   Requirement:            0.000ns  (sys_clk_pin rise@0.000ns - sys_clk_pin rise@0.000ns)
-  Data Path Delay:        0.263ns  (logic 0.141ns (53.672%)  route 0.122ns (46.328%))
-  Logic Levels:           0  
-  Clock Path Skew:        0.000ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    1.960ns
-    Source Clock Delay      (SCD):    1.447ns
-    Clock Pessimism Removal (CPR):    0.513ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock sys_clk_pin rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  clk (IN)
-                         net (fo=0)                   0.000     0.000    clk
-    W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  clk_IBUF_inst/O
-                         net (fo=1, routed)           0.631     0.858    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.564     1.447    db_start/shift_reg_reg[0]_0
-    SLICE_X36Y0          FDRE                                         r  db_start/shift_reg_reg[4]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X36Y0          FDRE (Prop_fdre_C_Q)         0.141     1.588 r  db_start/shift_reg_reg[4]/Q
-                         net (fo=3, routed)           0.122     1.710    db_start/shift_reg[4]
-    SLICE_X36Y0          FDRE                                         r  db_start/shift_reg_reg[5]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock sys_clk_pin rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  clk (IN)
-                         net (fo=0)                   0.000     0.000    clk
-    W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  clk_IBUF_inst/O
-                         net (fo=1, routed)           0.685     1.099    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.833     1.960    db_start/shift_reg_reg[0]_0
-    SLICE_X36Y0          FDRE                                         r  db_start/shift_reg_reg[5]/C
-                         clock pessimism             -0.513     1.447    
-    SLICE_X36Y0          FDRE (Hold_fdre_C_D)         0.070     1.517    db_start/shift_reg_reg[5]
-  -------------------------------------------------------------------
-                         required time                         -1.517    
-                         arrival time                           1.710    
-  -------------------------------------------------------------------
-                         slack                                  0.193    
-
-Slack (MET) :             0.198ns  (arrival time - required time)
-  Source:                 frame_count_reg[5]/C
-                            (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            frame_count_reg[2]/D
-                            (rising edge-triggered cell FDCE clocked by sys_clk_pin  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             sys_clk_pin
-  Path Type:              Hold (Min at Fast Process Corner)
-  Requirement:            0.000ns  (sys_clk_pin rise@0.000ns - sys_clk_pin rise@0.000ns)
-  Data Path Delay:        0.303ns  (logic 0.209ns (69.086%)  route 0.094ns (30.914%))
+  Data Path Delay:        0.332ns  (logic 0.186ns (56.008%)  route 0.146ns (43.992%))
   Logic Levels:           1  (LUT6=1)
-  Clock Path Skew:        0.013ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    1.956ns
-    Source Clock Delay      (SCD):    1.443ns
-    Clock Pessimism Removal (CPR):    0.500ns
+  Clock Path Skew:        0.016ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.959ns
+    Source Clock Delay      (SCD):    1.446ns
+    Clock Pessimism Removal (CPR):    0.497ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
@@ -1300,15 +1298,15 @@ Slack (MET) :             0.198ns  (arrival time - required time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  clk_IBUF_inst/O
                          net (fo=1, routed)           0.631     0.858    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.560     1.443    clk_IBUF_BUFG
-    SLICE_X46Y13         FDCE                                         r  frame_count_reg[5]/C
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.026     0.884 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.563     1.446    B/clk1/out_clk_reg_1
+    SLICE_X36Y46         FDRE                                         r  B/clk1/cnt_reg[5]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X46Y13         FDCE (Prop_fdce_C_Q)         0.164     1.607 f  frame_count_reg[5]/Q
-                         net (fo=5, routed)           0.094     1.701    frame_count[5]
-    SLICE_X47Y13         LUT6 (Prop_lut6_I1_O)        0.045     1.746 r  frame_count[2]_i_1/O
-                         net (fo=1, routed)           0.000     1.746    frame_count[2]_i_1_n_0
-    SLICE_X47Y13         FDCE                                         r  frame_count_reg[2]/D
+    SLICE_X36Y46         FDRE (Prop_fdre_C_Q)         0.141     1.587 f  B/clk1/cnt_reg[5]/Q
+                         net (fo=5, routed)           0.146     1.733    B/clk1/cnt_reg[5]
+    SLICE_X38Y46         LUT6 (Prop_lut6_I4_O)        0.045     1.778 r  B/clk1/cnt[0]_i_1/O
+                         net (fo=1, routed)           0.000     1.778    B/clk1/p_0_in__2[0]
+    SLICE_X38Y46         FDRE                                         r  B/clk1/cnt_reg[0]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk_pin rise edge)
@@ -1317,16 +1315,16 @@ Slack (MET) :             0.198ns  (arrival time - required time)
                          net (fo=0)                   0.000     0.000    clk
     W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  clk_IBUF_inst/O
                          net (fo=1, routed)           0.685     1.099    clk_IBUF
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
-                         net (fo=222, routed)         0.829     1.956    clk_IBUF_BUFG
-    SLICE_X47Y13         FDCE                                         r  frame_count_reg[2]/C
-                         clock pessimism             -0.500     1.456    
-    SLICE_X47Y13         FDCE (Hold_fdce_C_D)         0.092     1.548    frame_count_reg[2]
+    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.029     1.128 r  clk_IBUF_BUFG_inst/O
+                         net (fo=221, routed)         0.832     1.959    B/clk1/out_clk_reg_1
+    SLICE_X38Y46         FDRE                                         r  B/clk1/cnt_reg[0]/C
+                         clock pessimism             -0.497     1.462    
+    SLICE_X38Y46         FDRE (Hold_fdre_C_D)         0.121     1.583    B/clk1/cnt_reg[0]
   -------------------------------------------------------------------
-                         required time                         -1.548    
-                         arrival time                           1.746    
+                         required time                         -1.583    
+                         arrival time                           1.778    
   -------------------------------------------------------------------
-                         slack                                  0.198    
+                         slack                                  0.195    
 
 
 
@@ -1340,36 +1338,36 @@ Period(ns):         10.000
 Sources:            { clk }
 
 Check Type        Corner  Lib Pin  Reference Pin  Required(ns)  Actual(ns)  Slack(ns)  Location       Pin
-Min Period        n/a     BUFG/I   n/a            2.155         10.000      7.845      BUFGCTRL_X0Y0  clk_IBUF_BUFG_inst/I
-Min Period        n/a     FDRE/C   n/a            1.000         10.000      9.000      SLICE_X41Y46   B/clk1/cnt_reg[0]/C
-Min Period        n/a     FDRE/C   n/a            1.000         10.000      9.000      SLICE_X40Y47   B/clk1/cnt_reg[1]/C
-Min Period        n/a     FDRE/C   n/a            1.000         10.000      9.000      SLICE_X41Y46   B/clk1/cnt_reg[2]/C
-Min Period        n/a     FDRE/C   n/a            1.000         10.000      9.000      SLICE_X41Y46   B/clk1/cnt_reg[3]/C
-Min Period        n/a     FDRE/C   n/a            1.000         10.000      9.000      SLICE_X40Y47   B/clk1/cnt_reg[4]/C
-Min Period        n/a     FDRE/C   n/a            1.000         10.000      9.000      SLICE_X41Y46   B/clk1/cnt_reg[5]/C
-Min Period        n/a     FDRE/C   n/a            1.000         10.000      9.000      SLICE_X41Y46   B/clk1/cnt_reg[6]/C
-Min Period        n/a     FDRE/C   n/a            1.000         10.000      9.000      SLICE_X40Y46   B/clk1/out_clk_reg/C
-Min Period        n/a     FDCE/C   n/a            1.000         10.000      9.000      SLICE_X6Y68    B/u1/count_reg[0]/C
-Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X41Y46   B/clk1/cnt_reg[0]/C
-Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X41Y46   B/clk1/cnt_reg[2]/C
-Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X41Y46   B/clk1/cnt_reg[3]/C
-Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X41Y46   B/clk1/cnt_reg[5]/C
-Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X41Y46   B/clk1/cnt_reg[6]/C
-Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X40Y46   B/clk1/out_clk_reg/C
-Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X36Y3    db_start/shift_reg_reg[0]/C
-Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X37Y0    db_start/shift_reg_reg[1]/C
-Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X37Y0    db_start/shift_reg_reg[2]/C
-Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X36Y0    db_start/shift_reg_reg[3]/C
-High Pulse Width  Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X40Y47   B/clk1/cnt_reg[1]/C
-High Pulse Width  Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X40Y47   B/clk1/cnt_reg[4]/C
-High Pulse Width  Fast    FDCE/C   n/a            0.500         5.000       4.500      SLICE_X6Y68    B/u1/count_reg[0]/C
-High Pulse Width  Slow    FDCE/C   n/a            0.500         5.000       4.500      SLICE_X3Y70    B/u1/count_reg[10]/C
-High Pulse Width  Slow    FDCE/C   n/a            0.500         5.000       4.500      SLICE_X5Y72    B/u1/count_reg[17]/C
-High Pulse Width  Slow    FDCE/C   n/a            0.500         5.000       4.500      SLICE_X5Y72    B/u1/count_reg[18]/C
-High Pulse Width  Slow    FDCE/C   n/a            0.500         5.000       4.500      SLICE_X5Y72    B/u1/count_reg[19]/C
-High Pulse Width  Fast    FDCE/C   n/a            0.500         5.000       4.500      SLICE_X5Y68    B/u1/count_reg[1]/C
-High Pulse Width  Slow    FDCE/C   n/a            0.500         5.000       4.500      SLICE_X5Y73    B/u1/count_reg[20]/C
-High Pulse Width  Slow    FDCE/C   n/a            0.500         5.000       4.500      SLICE_X5Y73    B/u1/count_reg[21]/C
+Min Period        n/a     BUFG/I   n/a            2.155         10.000      7.845      BUFGCTRL_X0Y1  clk_IBUF_BUFG_inst/I
+Min Period        n/a     FDRE/C   n/a            1.000         10.000      9.000      SLICE_X38Y46   B/clk1/cnt_reg[0]/C
+Min Period        n/a     FDRE/C   n/a            1.000         10.000      9.000      SLICE_X38Y46   B/clk1/cnt_reg[1]/C
+Min Period        n/a     FDRE/C   n/a            1.000         10.000      9.000      SLICE_X37Y46   B/clk1/cnt_reg[2]/C
+Min Period        n/a     FDRE/C   n/a            1.000         10.000      9.000      SLICE_X37Y46   B/clk1/cnt_reg[3]/C
+Min Period        n/a     FDRE/C   n/a            1.000         10.000      9.000      SLICE_X38Y46   B/clk1/cnt_reg[4]/C
+Min Period        n/a     FDRE/C   n/a            1.000         10.000      9.000      SLICE_X36Y46   B/clk1/cnt_reg[5]/C
+Min Period        n/a     FDRE/C   n/a            1.000         10.000      9.000      SLICE_X36Y46   B/clk1/cnt_reg[6]/C
+Min Period        n/a     FDRE/C   n/a            1.000         10.000      9.000      SLICE_X36Y45   B/clk1/out_clk_reg/C
+Min Period        n/a     FDCE/C   n/a            1.000         10.000      9.000      SLICE_X6Y71    B/u1/count_reg[0]/C
+Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X38Y46   B/clk1/cnt_reg[0]/C
+Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X38Y46   B/clk1/cnt_reg[1]/C
+Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X37Y46   B/clk1/cnt_reg[2]/C
+Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X37Y46   B/clk1/cnt_reg[3]/C
+Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X38Y46   B/clk1/cnt_reg[4]/C
+Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X36Y46   B/clk1/cnt_reg[5]/C
+Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X36Y46   B/clk1/cnt_reg[6]/C
+Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X36Y45   B/clk1/out_clk_reg/C
+Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X54Y15   db_jump/shift_reg_reg[0]/C
+Low Pulse Width   Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X54Y15   db_jump/shift_reg_reg[1]/C
+High Pulse Width  Slow    FDCE/C   n/a            0.500         5.000       4.500      SLICE_X6Y72    B/u1/count_reg[13]/C
+High Pulse Width  Slow    FDCE/C   n/a            0.500         5.000       4.500      SLICE_X6Y72    B/u1/count_reg[14]/C
+High Pulse Width  Slow    FDCE/C   n/a            0.500         5.000       4.500      SLICE_X6Y72    B/u1/count_reg[15]/C
+High Pulse Width  Slow    FDCE/C   n/a            0.500         5.000       4.500      SLICE_X6Y72    B/u1/count_reg[16]/C
+High Pulse Width  Slow    FDCE/C   n/a            0.500         5.000       4.500      SLICE_X4Y73    B/u1/count_reg[18]/C
+High Pulse Width  Slow    FDCE/C   n/a            0.500         5.000       4.500      SLICE_X4Y73    B/u1/count_reg[19]/C
+High Pulse Width  Slow    FDCE/C   n/a            0.500         5.000       4.500      SLICE_X4Y73    B/u1/count_reg[20]/C
+High Pulse Width  Slow    FDCE/C   n/a            0.500         5.000       4.500      SLICE_X3Y70    B/u1/count_reg[5]/C
+High Pulse Width  Slow    FDCE/C   n/a            0.500         5.000       4.500      SLICE_X3Y70    B/u1/count_reg[7]/C
+High Pulse Width  Slow    FDRE/C   n/a            0.500         5.000       4.500      SLICE_X61Y17   db_pause/shift_reg_reg[5]/C
 
 
 

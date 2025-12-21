@@ -57,7 +57,7 @@ module dino_logic (
     // Manual Drop Logic
     reg [9:0] drop_x;
     reg prev_key_drop;
-    wire drop_key_active = key_down[9'h172] || key_down[9'h073]; // Down Arrow (Extended or Numpad)
+    wire drop_key_active = key_down[9'hE072] || key_down[9'h073]; // Down Arrow (Extended or Numpad)
     wire key_drop_pressed = drop_key_active && !prev_key_drop;
 
     reg [1:0] selected_drop_type; // 0: Small, 1: Big, 2: Ptero
@@ -305,7 +305,7 @@ module dino_logic (
                 end
                 */
                 
-                // prev_key_drop <= key_down[9'h172]; // Moved to top of frame_tick block
+                prev_key_drop <= key_down[9'hE072]; // Moved to top of frame_tick block
 
                 /*
                 // Move Cactus
@@ -529,6 +529,7 @@ module dino_logic (
         if (state == S_RUN) led_out[15] = 1'b1;
         if (jumped) led_out[0] = 1'b1;
         led_out[10:3] = next_spawn_offset[7:0];
+        led_out[13] = key_down[9'hE072];
 
         pixel_out = 12'h000;
 
