@@ -60,6 +60,15 @@ module dino_logic (
     wire drop_key_active = key_down[9'h172] || key_down[9'h072]; // Down Arrow (Extended or Numpad)
     wire key_drop_pressed = drop_key_active && !prev_key_drop;
 
+    reg signed [12:0] drop_obs_x; // X Position
+    reg [9:0] drop_obs_y;         // Y Position (for falling)
+    reg drop_obs_active;          // Is it currently on screen?
+    reg drop_obs_grounded;        // Has it hit the ground?
+    // Use Big Cactus dimensions for the dropped object
+    localparam DROP_W = CACTUS_B_W;
+    localparam DROP_H = CACTUS_B_H;
+    localparam DROP_VAL_SPEED = 6; // Falling speed (pixels per frame)
+
     //LFSR randomly create obstacle
     wire [9:0] random_val;
     reg [9:0] next_spawn_offset;
@@ -130,6 +139,14 @@ module dino_logic (
                 endcase
             end
         end
+        if (drop_obs_active) begin
+            // Collision box check against drop_obs_x and drop_obs_y
+            // Note: drop_obs_y is top-left of the obstacle
+            if ((DINO_X + curr_dino_w > drop_obs_x) && (DINO_X < drop_obs_x + DROP_W) && 
+                (col_y + col_h > drop_obs_y) && (col_y < drop_obs_y + DROP_H)) begin
+                collision = 1'b1;
+            end
+        end
     end
 
     wire frame_tick = vsync && !prev_vsync;
@@ -165,6 +182,10 @@ module dino_logic (
             drop_x <= 320;
             prev_key_drop <= 0;
             prev_key_pause <= 0;
+            drop_obs_active <= 0;
+            drop_obs_x <= 0;
+            drop_obs_y <= 0;
+            drop_obs_grounded <= 0;
             
         end else begin
             prev_vsync <= vsync;
@@ -197,6 +218,7 @@ module dino_logic (
                             next_spawn_offset <= 0;
                             dino_vel <= 0;
                             cactus_type[0] <= 2'b0;
+                            drop_obs_active <= 0;
                         end
             endcase
 
@@ -223,7 +245,33 @@ module dino_logic (
                 if ((key_down[9'h16B] || key_down[9'h06B]) && drop_x > 10) drop_x <= drop_x - 4;
                 if ((key_down[9'h174] || key_down[9'h074]) && drop_x < 630) drop_x <= drop_x + 4;
 
-                // Manual Drop Trigger
+
+                // Manual Drop Trigger Logic
+                // Spawns a dedicated obstacle (drop_obs) instead of using LFSR slots
+                if (key_drop_pressed && !drop_obs_active) begin
+                    drop_obs_active <= 1'b1;
+                    drop_obs_x <= {3'b0, drop_x}; // Initialize X at cursor
+                    drop_obs_y <= 0;              // Initialize Y at top (Sky)
+                    drop_obs_grounded <= 1'b0;    // Not grounded yet
+                end
+                // --- Dropped Obstacle Physics ---
+                if (drop_obs_active) begin
+                    if (!drop_obs_grounded) begin
+                        // FALLING STATE: Move Y down
+                        if (drop_obs_y + DROP_H >= GROUND_Y) begin
+                            // Hit the ground
+                            drop_obs_y <= GROUND_Y - DROP_H;
+                            drop_obs_grounded <= 1'b1;
+                        end else begin
+                            drop_obs_y <= drop_obs_y + DROP_VAL_SPEED;
+                        end
+                    end else begin
+                        // RUNNING STATE (Grounded): Move X left
+                        drop_obs_x <= drop_obs_x - 4 - (score[9:4]);
+                        if (drop_obs_x < -40) drop_obs_active <= 1'b0;
+                    end
+                end
+                /*
                 if (key_drop_pressed) begin
                     if (!cactus_active[0]) begin
                         cactus_active[0] <= 1'b1;
@@ -239,6 +287,7 @@ module dino_logic (
                         cactus_type[2] <= 1;
                     end
                 end
+                */
                 
                 // prev_key_drop <= key_down[9'h172]; // Moved to top of frame_tick block
 
@@ -377,6 +426,16 @@ module dino_logic (
             else                 sp_x = (anim_cnt[4] == 1'b0) ? SP_DINO_RUN1 : SP_DINO_RUN2;
             
             sprite_addr = (dy >> 1) * IMG_WIDTH + (sp_x + (dx >> 1));
+        end
+        //Dropped Obstacle Rendering
+        else if (drop_obs_active && 
+                 h_cnt >= drop_obs_x && h_cnt < drop_obs_x + DROP_W && 
+                 v_cnt >= drop_obs_y && v_cnt < drop_obs_y + DROP_H) begin
+            
+            cx = h_cnt - drop_obs_x;
+            cy = v_cnt - drop_obs_y;
+            // Use Big Cactus Sprite for dropped object
+            sprite_addr = (cy >> 1) * IMG_WIDTH + (SP_CACTUS_B + (cx >> 1));
         end
         else begin
             for(i = 0; i < 3; i = i + 1) begin

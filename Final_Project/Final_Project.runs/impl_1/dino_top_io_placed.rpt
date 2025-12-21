@@ -1,8 +1,8 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------
 | Tool Version              : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date                      : Sun Dec 21 17:45:17 2025
-| Host                      : LAPTOP-9C9D7G8P running 64-bit major release  (build 9200)
+| Date                      : Sun Dec 21 18:38:55 2025
+| Host                      : DESKTOP-LCS45AM running 64-bit major release  (build 9200)
 | Command                   : report_io -file dino_top_io_placed.rpt
 | Design                    : dino_top
 | Device                    : xc7a35t
