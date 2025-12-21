@@ -32,11 +32,12 @@ module dino_logic (
     localparam PTERO_H = 34;
     localparam PTERO_FLY_OFFSET = 30; // Height above ground for Pterodactyl
 
-    localparam S_IDLE = 3'd0;
-    localparam S_RUN  = 3'd1;
-    localparam S_OVER = 3'd2;
-    localparam S_PAUSE = 3'd3;
-    reg [1:0] state;
+    localparam S_MENU = 3'd0; 
+    localparam S_MODE_SELECT = 3'd1; 
+    localparam S_RUN = 3'd2; 
+    localparam S_PAUSE = 3'd3; 
+    localparam S_OVER = 3'd4;
+    reg [2:0] state;
 
     reg [9:0] dino_y;
     reg signed [9:0] dino_vel;
@@ -57,7 +58,7 @@ module dino_logic (
     // Manual Drop Logic
     reg [9:0] drop_x;
     reg prev_key_drop;
-    wire drop_key_active = key_down[9'hE072] || key_down[9'h073]; // Down Arrow (Extended or Numpad)
+    wire drop_key_active = (key_down[9'hE072] || key_down[9'h073]); // Down Arrow (Extended or Numpad)
     wire key_drop_pressed = drop_key_active && !prev_key_drop;
 
     reg [1:0] selected_drop_type; // 0: Small, 1: Big, 2: Ptero
@@ -110,6 +111,23 @@ module dino_logic (
     wire sensor_duck;
     wire key_jump;
     wire key_duck;
+
+
+    reg [1:0] selected_mode;    // 0: 合作, 1: 競技
+    reg [3:0] user_speed;       // 玩家設定的速度
+    reg [5:0] blink_cnt;
+
+    wire key_enter_pressed = (key_down[9'h05A] || key_down[9'h029]); // Enter Key
+    wire key_1_pressed     = key_down[9'h016] || key_down[9'h069]; // Main 1 or Numpad 1
+    wire key_2_pressed     = key_down[9'h01E] || key_down[9'h072]; // Main 2 or Numpad 2
+    wire key_pause_raw     = key_down[9'h04D]; // P Key
+    wire key_pause_trigger = (key_pause_raw && !prev_key_pause) || pause_pulse;
+
+    wire spd_1 = key_down[9'h016]; // 1
+    wire spd_2 = key_down[9'h01E]; // 2
+    wire spd_3 = key_down[9'h026]; // 3
+    wire spd_4 = key_down[9'h025]; // 4
+    wire spd_5 = key_down[9'h02E]; // 5
 
     // Collision Box Adjustments
     reg [9:0] col_y;
@@ -170,7 +188,7 @@ module dino_logic (
 
     always @(posedge pclk or posedge rst) begin
         if (rst) begin
-            state <= S_IDLE;
+            state <= S_MENU;
             dino_y <= GROUND_Y - DINO_H;
             dino_vel <= 0;
             cactus_x[0] <= 630;
@@ -196,28 +214,46 @@ module dino_logic (
             drop_obs_grounded <= 0;
             selected_drop_type <= 2'd1; // Default to Big Cactus
             drop_obs_type <= 2'd1;
+            selected_mode <= 0; 
+            user_speed <= 4;    
+            blink_cnt <= 0;
             
         end else begin
             prev_vsync <= vsync;
             prev_key_valid <= key_valid;
             prev_key_pause <= key_down[9'h04D];
             if (key_press_event) last_key <= last_change;
+            if (frame_tick) blink_cnt <= blink_cnt + 1;
             case (state)
-                S_IDLE: begin
-                    if (start_pulse || key_down[9'h029]) begin
+                S_MENU: begin
+                    if (key_enter_pressed) state <= S_MODE_SELECT;
+                end
+                S_MODE_SELECT: begin
+                    if (key_1_pressed) selected_mode <= 0;
+                    if (key_2_pressed) selected_mode <= 1;
+                    if (key_enter_pressed) begin
                         state <= S_RUN;
-                        next_spawn_offset <= random_val;
+                        score <= 0;
+                        dino_y <= GROUND_Y - DINO_H;
+                        cactus_x[0] <= 630; cactus_active[0] <= 1;
+                        cactus_active[1] <= 0; cactus_active[2] <= 0;
                     end
                 end
                 S_RUN: begin
-                    if (collision)   state <= S_OVER;
-                    else if (key_pause_pressed) state <= S_PAUSE;
+                    if (key_pause_trigger) state <= S_PAUSE;
+                    else if (collision) state <= S_OVER;
                 end
                 S_PAUSE: begin
-                    if (key_pause_pressed) state <= S_RUN;
+                    if (key_pause_trigger) state <= S_RUN;
+                    
+                    if (spd_1) user_speed <= 4;
+                    if (spd_2) user_speed <= 6;
+                    if (spd_3) user_speed <= 8;
+                    if (spd_4) user_speed <= 10;
+                    if (spd_5) user_speed <= 12;
                 end
-                S_OVER: if (start_pulse || key_down[9'h029]) begin
-                            state <= S_IDLE;
+                S_OVER: if (start_pulse || key_enter_pressed) begin
+                            state <= S_MENU;
                             dino_y <= GROUND_Y - DINO_H;
                             cactus_x[0] <= 630;
                             cactus_active[0] <= 1'b1;       
@@ -242,7 +278,7 @@ module dino_logic (
 
                 for(i = 0; i < 3; i = i + 1) begin
                     // Always move cactus to allow large gaps
-                    cactus_x[i] <= cactus_x[i] - 4 - (score[9:4]);
+                    cactus_x[i] <= cactus_x[i] - user_speed - (score[9:4]);
                     if(cactus_active[i] && cactus_x[i] < -40) cactus_active[i] <= 1'b0;
                 end
 
@@ -257,8 +293,8 @@ module dino_logic (
                 end
 
                 // Manual Drop Cursor Movement
-                if ((key_down[9'h16B] || key_down[9'h06B]) && drop_x > 10) drop_x <= drop_x - 4;
-                if ((key_down[9'h174] || key_down[9'h074]) && drop_x < 630) drop_x <= drop_x + 4;
+                if ((key_down[9'h16B] || key_down[9'h06B]) && drop_x > 10) drop_x <= drop_x - user_speed;
+                if ((key_down[9'h174] || key_down[9'h074]) && drop_x < 630) drop_x <= drop_x + user_speed;
 
 
                 // Manual Drop Trigger Logic
@@ -283,7 +319,7 @@ module dino_logic (
                         end
                     end else begin
                         // RUNNING STATE (Grounded): Move X left
-                        drop_obs_x <= drop_obs_x - 4 - (score[9:4]);
+                        drop_obs_x <= drop_obs_x - user_speed - (score[9:4]);
                         if (drop_obs_x < -40) drop_obs_active <= 1'b0;
                     end
                 end
@@ -394,6 +430,28 @@ module dino_logic (
     localparam SP_CACTUS_B = 131;    // Big Cactus (132-191)
     localparam SP_CACTUS_S = 89;    // Small Cactus (90-131)
 
+    localparam SP_TITLE_START_X = 0;
+    localparam SP_TITLE_START_Y = 26;
+    localparam TITLE_W        = 150; 
+    localparam TITLE_H        = 100;
+
+    localparam SP_WORD_X = 150;
+    localparam SP_WORD_Y = 26;
+    localparam WORD_W = 150; 
+    localparam WORD_H = 100;
+
+    // 模式選擇圖示 (合作/競技)
+    localparam SP_MODE_COOP_X = 300; 
+    localparam SP_MODE_COOP_Y = 26;
+    localparam MODE_ICON_W = 270;
+    localparam MODE_ICON_H = 180;
+
+    // 暫停畫面 (繼續圖示)
+    localparam SP_CONTINUE_X = 600;
+    localparam SP_CONTINUE_Y = 35;
+    localparam CONT_W = 22;
+    localparam CONT_H = 22;
+
     blk_mem_gen_0 sprite_rom (
         .clka(pclk),
         .addra(sprite_addr),
@@ -430,8 +488,45 @@ module dino_logic (
         dx = 0; dy = 0; sp_x = 0;
         cx = 0; cy = 0;
 
+        if(state == S_MENU) begin
+            if (h_cnt >= 300 && h_cnt < (300 + TITLE_W) &&
+                v_cnt >= 100 && v_cnt < 100 + TITLE_H) begin
+                cx = h_cnt - 300;
+                cy = v_cnt - 100;
+                sprite_addr = (SP_TITLE_START_Y +cy) * IMG_WIDTH + (SP_TITLE_START_X + cx);
+            end
+            if (h_cnt >= 300 && h_cnt < (320 + WORD_W) &&
+                v_cnt >= 300 && v_cnt < 300 + WORD_H) begin
+                cx = h_cnt - 300;
+                cy = v_cnt - 300;
+                sprite_addr = (SP_WORD_Y + cy) * IMG_WIDTH + (SP_WORD_X + cx);
+            end
+        end
+        else if(state == S_MODE_SELECT) begin
+            if (h_cnt >= 200 && h_cnt < 200 + MODE_ICON_W &&
+                v_cnt >= 200 && v_cnt < 200 + MODE_ICON_H) begin
+                cx = h_cnt - 200;
+                cy = v_cnt - 200;
+                sprite_addr = (SP_MODE_COOP_Y + cy) * IMG_WIDTH + (SP_MODE_COOP_X + cx);
+            end
+            
+        end
+        else if(state == S_PAUSE) begin
+            if (h_cnt >= 290 && h_cnt < 290 + CONT_W &&
+                v_cnt >= 200 && v_cnt < 200 + CONT_H) begin
+                cx = h_cnt - 290;
+                cy = v_cnt - 200;
+                sprite_addr = (SP_CONTINUE_Y + cy) * IMG_WIDTH + (SP_CONTINUE_X + cx);
+            end
+
+            if (v_cnt >= 300 && v_cnt < 310) begin
+                if (h_cnt >= 200 && h_cnt < 200 + (user_speed * 20)) begin
+                sprite_addr = (SP_CONTINUE_Y + cy) * IMG_WIDTH + (SP_CONTINUE_X + cx);
+                end
+            end
+        end
         // Game Over Text
-        if(state == S_OVER) begin
+        else if(state == S_OVER) begin
             if (h_cnt >= 166 && h_cnt < 166 + TEXT_GAMEOVER_W &&
                 v_cnt >= 180 && v_cnt < 180 + TEXT_GAMEOVER_H) begin
                 
@@ -554,9 +649,10 @@ module dino_logic (
              // But since we don't easily know that here without pipelining, 
              // we'll just trust the non-black pixel output.
              // For better precision, we should pipeline the "is_dino" / "is_cactus" signals.
+             if(state == S_RUN || state == S_MENU || state == S_MODE_SELECT || state == S_OVER) pixel_out = 15'h000 | sprite_data;
              pixel_out = sprite_data;
         end
-        else if (v_cnt == GROUND_Y) begin
+        else if (v_cnt == GROUND_Y && state == S_RUN) begin
              pixel_out = 12'hFFF;
         end
     end
