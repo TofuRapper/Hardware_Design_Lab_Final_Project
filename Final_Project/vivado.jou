@@ -2,12 +2,15 @@
 # Vivado v2019.2 (64-bit)
 # SW Build 2708876 on Wed Nov  6 21:40:23 MST 2019
 # IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
-# Start of session at: Fri Dec 19 22:12:15 2025
-# Process ID: 23128
-# Current directory: C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/Final_Project
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent22428 C:\Users\jaylu\Desktop\Ethan\HardwareDesign_finalproject\Hardware_Design_Lab_Final_Project\Final_Project\Final_Project.xpr
-# Log file: C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/Final_Project/vivado.log
-# Journal file: C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/Final_Project\vivado.jou
+# Start of session at: Sun Dec 21 14:42:45 2025
+# Process ID: 26264
+# Current directory: C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/Final_Project
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent31708 C:\Users\USER\Desktop\3-1\Hardware_Design_Lab\Final_Project\Final_Project\Final_Project.xpr
+# Log file: C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/Final_Project/vivado.log
+# Journal file: C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/Final_Project\vivado.jou
 #-----------------------------------------------------------
 start_gui
-open_project C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/Final_Project/Final_Project.xpr
+open_project C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/Final_Project/Final_Project.xpr
+set_property source_mgmt_mode None [current_project]
+reset_run impl_1
+reset_run synth_1

@@ -3,6 +3,8 @@ module dino_top (
     input wire rst,
     input wire start,
     input wire jump,
+    input wire duck,
+    input wire pause,
     inout wire PS2_CLK,
     inout wire PS2_DATA,
     input echo,
@@ -29,9 +31,13 @@ module dino_top (
     );
 
     wire start_db, start_pulse, jump_db;
+    wire duck_db, pause_db, pause_pulse;
     debounce db_start (.pb_debounced(start_db), .pb(start), .clk(clk));
     one_pulse pulse_start (.clk(pclk), .pb_in(start_db), .pb_out(start_pulse));
     debounce db_jump (.pb_debounced(jump_db), .pb(jump), .clk(clk));
+    debounce db_duck (.pb_debounced(duck_db), .pb(duck), .clk(clk));
+    debounce db_pause (.pb_debounced(pause_db), .pb(pause), .clk(clk));
+    one_pulse pulse_pause (.clk(pclk), .pb_in(pause_db), .pb_out(pause_pulse));
 
     wire [511:0] key_down;
     wire [8:0] last_change;
@@ -61,6 +67,8 @@ module dino_top (
         .rst(rst),
         .start_pulse(start_pulse),
         .jump_signal(jump_db),
+        .duck_signal(duck_db),
+        .pause_pulse(pause_pulse),
         .key_down(key_down),
         .last_change(last_change),
         .key_valid(key_valid),

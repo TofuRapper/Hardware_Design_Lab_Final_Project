@@ -133,6 +133,14 @@ set_property IOSTANDARD LVCMOS33 [get_ports {Display[3]}]
 set_property PACKAGE_PIN T18 [get_ports jump]
 set_property IOSTANDARD LVCMOS33 [get_ports jump]
 
+## Duck Button (Button Down)
+set_property PACKAGE_PIN U17 [get_ports duck]
+set_property IOSTANDARD LVCMOS33 [get_ports duck]
+
+## Pause Button (Button Left)
+set_property PACKAGE_PIN W19 [get_ports pause]
+set_property IOSTANDARD LVCMOS33 [get_ports pause]
+
 ##Sonic
 ## Sch name = JB3
  set_property PACKAGE_PIN B15 [get_ports {trig}]

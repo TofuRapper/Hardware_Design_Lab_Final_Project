@@ -3,6 +3,8 @@ module dino_logic (
     input wire rst,
     input wire start_pulse,
     input wire jump_signal,       // Button Input
+    input wire duck_signal,       // Button Input
+    input wire pause_pulse,       // Button Input
     input wire [511:0] key_down,  // Keyboard State
     input wire [8:0] last_change, // Raw change event
     input wire key_valid,         // Valid signal
@@ -16,19 +18,24 @@ module dino_logic (
 
     localparam GROUND_Y = 350;
     localparam DINO_X   = 160;
-    localparam DINO_W   = 34;
-    localparam DINO_H   = 36;
+    localparam DINO_W   = 36;   // 18 * 2
+    localparam DINO_H   = 40;   // ~20 * 2
+    localparam DINO_DUCK_H = 38; // 19 * 2
+    localparam DINO_DUCK_W = 48; // 24 * 2
+
     localparam CACTUS_H = 40; // General cactus height for collision
-    localparam CACTUS_S_W = 38;
+    localparam CACTUS_S_W = 14; // 7 * 2
     localparam CACTUS_S_H = 30;
-    localparam CACTUS_B_W = 39;
+    localparam CACTUS_B_W = 20; // 10 * 2
     localparam CACTUS_B_H = 40;
-    localparam PTERO_W = 36;
+    localparam PTERO_W = 36;    // 18 * 2
     localparam PTERO_H = 34;
+    localparam PTERO_FLY_OFFSET = 30; // Height above ground for Pterodactyl
 
     localparam S_IDLE = 2'd0;
     localparam S_RUN  = 2'd1;
     localparam S_OVER = 2'd2;
+    localparam S_PAUSE = 2'd3;
     reg [1:0] state;
 
     reg [9:0] dino_y;
@@ -40,8 +47,12 @@ module dino_logic (
     reg [2:0] cactus_active;
 
     integer i;
+    reg [9:0] obs_w, obs_h;
+    reg [9:0] obs_sprite_base;
+    reg collision;
+
     reg [1:0] last_spawn_idx;
-    reg [9:0] min_gap = 250; // Minimum gap between cactuses
+    reg [9:0] min_gap = 300; // Minimum gap between cactuses
     
     //LFSR randomly create obstacle
     wire [9:0] random_val;
@@ -57,6 +68,7 @@ module dino_logic (
     
     wire key_press_event = key_valid && !prev_key_valid && (last_change != last_key);
     reg jumped;
+    reg ducking;
 
     wire [7:0] scan_code = last_change[7:0];
     
@@ -64,15 +76,63 @@ module dino_logic (
 
     reg [4:0] anim_cnt;
 
+    // Dynamic Dino Dimensions
+    wire [9:0] curr_dino_w = ducking ? DINO_DUCK_W : DINO_W;
+    wire [9:0] curr_dino_h = ducking ? DINO_DUCK_H : DINO_H;
+
+    // Sensor and Keyboard Logic Wires
+    wire sensor_jump;
+    wire sensor_duck;
+    wire key_jump;
+    wire key_duck;
+
+    // Collision Box Adjustments
+    reg [9:0] col_y;
+    reg [9:0] col_h;
+
+    always @(*) begin
+        if (ducking) begin
+            col_y = dino_y + 12; // Lower the collision box top by 12 pixels
+            col_h = curr_dino_h - 12;
+        end else begin
+            col_y = dino_y;
+            col_h = curr_dino_h;
+        end
+    end
 
     // Detect collision
-    wire collision = 
-    (cactus_active[0] && (DINO_X + DINO_W > cactus_x[0]) && (DINO_X < cactus_x[0] + CACTUS_S_W) && (dino_y + DINO_H > GROUND_Y - CACTUS_S_H)) ||
-    (cactus_active[1] && (DINO_X + DINO_W > cactus_x[1]) && (DINO_X < cactus_x[1] + CACTUS_B_W) && (dino_y + DINO_H > GROUND_Y - CACTUS_B_H)) ||
-    (cactus_active[2] && (DINO_X + DINO_W > cactus_x[2]) && (DINO_X < cactus_x[2] + PTERO_W) && (dino_y + DINO_H > GROUND_Y - PTERO_H));
+    always @(*) begin
+        collision = 1'b0;
+        for(i = 0; i < 3; i = i + 1) begin
+            if(cactus_active[i]) begin
+                // Determine dimensions based on type
+                case(cactus_type[i])
+                    2'd0: begin // Small Cactus
+                        if ((DINO_X + curr_dino_w > cactus_x[i]) && (DINO_X < cactus_x[i] + CACTUS_S_W) && (col_y + col_h > GROUND_Y - CACTUS_S_H)) collision = 1'b1;
+                    end
+                    2'd1: begin // Big Cactus
+                        if ((DINO_X + curr_dino_w > cactus_x[i]) && (DINO_X < cactus_x[i] + CACTUS_B_W) && (col_y + col_h > GROUND_Y - CACTUS_B_H)) collision = 1'b1;
+                    end
+                    default: begin // Pterodactyl (Types 2 and 3)
+                        // Check Y overlap with flying pterodactyl
+                        // Ptero Y range: [GROUND_Y - PTERO_H - PTERO_FLY_OFFSET, GROUND_Y - PTERO_FLY_OFFSET]
+                        if ((DINO_X + curr_dino_w > cactus_x[i]) && (DINO_X < cactus_x[i] + PTERO_W) && 
+                            (col_y + col_h > GROUND_Y - PTERO_H - PTERO_FLY_OFFSET) && 
+                            (col_y < GROUND_Y - PTERO_FLY_OFFSET)) 
+                            collision = 1'b1;
+                    end
+                endcase
+            end
+        end
+    end
 
     wire frame_tick = vsync && !prev_vsync;
 
+
+    assign sensor_jump = (distance > 20'd20 && distance < 20'd50);
+    assign sensor_duck = (distance < 20'd10 && distance > 20'd0);
+    assign key_jump = key_down[9'h029] || jump_signal;
+    assign key_duck = key_down[9'h172] || key_down[9'h01B] || sensor_duck || duck_signal;
 
     always @(posedge pclk or posedge rst) begin
         if (rst) begin
@@ -105,7 +165,13 @@ module dino_logic (
                         next_spawn_offset <= random_val;
                     end
                 end
-                S_RUN:  if (collision)   state <= S_OVER;
+                S_RUN: begin
+                    if (collision)   state <= S_OVER;
+                    else if (pause_pulse) state <= S_PAUSE;
+                end
+                S_PAUSE: begin
+                    if (pause_pulse) state <= S_RUN;
+                end
                 S_OVER: if (start_pulse) begin
                             state <= S_IDLE;
                             dino_y <= GROUND_Y - DINO_H;
@@ -130,7 +196,7 @@ module dino_logic (
                     end
                 end
 
-                if(cactus_x[last_spawn_idx] < (640 - min_gap - next_spawn_offset[8:0])) begin
+                if(cactus_x[last_spawn_idx] < (640 - min_gap - next_spawn_offset[7:0])) begin
                     if(cactus_active[(last_spawn_idx + 1) % 3] == 0) begin
                         last_spawn_idx <= (last_spawn_idx + 1) % 3;
                         cactus_x[(last_spawn_idx + 1) % 3] <= 640;
@@ -152,23 +218,41 @@ module dino_logic (
                      cactus_type <= random_val[9:8]; // Randomize cactus type
                 end
                 */
-                // --- JUMP LOGIC ---
+                // --- JUMP & DUCK LOGIC ---
+                // Sensor Logic: < 10cm = Duck, 20-50cm = Jump
+                // Note: sensor_jump, sensor_duck, key_jump, key_duck declared at module level
+                
+                // Keyboard Logic: Space(29) or Up(E0,75 -> 175?) for Jump. Down(E0,72 -> 172) or S(1B) for Duck.
+                // Note: key_down index for extended keys depends on decoder. Assuming 1xx for extended.
+
                 if (dino_y >= GROUND_Y - DINO_H) begin
                     // On Ground
-                    if ((key_down[9'h29]) || jump_signal || (distance <= 20'd5)) begin
+                    if (key_jump || sensor_jump) begin
                         dino_vel <= -18;
                         dino_y <= dino_y - 18;
                         jumped <= 1'b1;
+                        ducking <= 1'b0;
+                    end else if (key_duck) begin
+                        dino_vel <= 0;
+                        dino_y <= GROUND_Y - DINO_DUCK_H; // Lower position
+                        jumped <= 1'b0;
+                        ducking <= 1'b1;
                     end else begin
                         dino_vel <= 0;
                         dino_y <= GROUND_Y - DINO_H;
                         jumped <= 1'b0;
+                        ducking <= 1'b0;
                     end
                 end else begin
                     // In Air
-                    dino_vel <= dino_vel + 1;
+                    if (key_duck) begin
+                        dino_vel <= dino_vel + 3; // Fast fall
+                    end else begin
+                        dino_vel <= dino_vel + 1;
+                    end
                     dino_y <= dino_y + dino_vel;
                     jumped <= 1'b1;
+                    ducking <= 1'b0; // Can't duck in air (usually becomes fast fall)
                 end
 
                 anim_cnt <= anim_cnt + 1;
@@ -186,17 +270,28 @@ module dino_logic (
 
 
     // Sprite Offsets (Start at 16, width 18)
-    localparam SP_DINO_JUMP = 16;   // Standing Dino
-    localparam SP_DINO_RUN1 = 268;   // Use Standing Dino for now (to avoid Pterodactyl)
-    localparam SP_DINO_RUN2 = 321;   // Use Standing Dino for now
+    localparam SP_DINO_JUMP = 17;   // Standing Dino (17-34)
+    localparam SP_DINO_RUN1 = 267;   // Run Frame 1 (267-284)
+    localparam SP_DINO_RUN2 = 285;   // Run Frame 2 (285-302)
+    localparam SP_DINO_DUCK1 = 374;  // Duck Frame 1 (374-397)
+    localparam SP_DINO_DUCK2 = 398;  // Duck Frame 2 (398-421)
+
     // Pterodactyls are likely at 34 and 52.
     localparam SP_CACTUS    = 106;  // Cactus starts after birds
-    localparam SP_GAMEOVER  = 200;  // Placeholder for now
+    
+    // Game Over Assets
+    localparam SP_RESTART   = 0;    // Restart Icon (0-16)
+    localparam RESTART_W    = 34;   // 17 * 2
+    localparam RESTART_H    = 32;   // 16 * 2
+    
+    localparam SP_TEXT_GAMEOVER = 192; // After Cacti (192-267)
+    localparam TEXT_GAMEOVER_W  = 152; // 76 * 2
+    localparam TEXT_GAMEOVER_H  = 42;  // 21 * 2
 
-    localparam SP_PTERO_1 = 52; // Placeholder for Pterodactyl
-    localparam SP_PTERO_2 = 71; 
-    localparam SP_CACTUS_B = 141;    // Big Cactus
-    localparam SP_CACTUS_S = 90;    // Small Cactus
+    localparam SP_PTERO_1 = 53; // Pterodactyl 1 (53-70)
+    localparam SP_PTERO_2 = 71; // Pterodactyl 2 (71-89)
+    localparam SP_CACTUS_B = 132;    // Big Cactus (132-191)
+    localparam SP_CACTUS_S = 90;    // Small Cactus (90-131)
 
     blk_mem_gen_0 sprite_rom (
         .clka(pclk),
@@ -214,42 +309,78 @@ module dino_logic (
         dx = 0; dy = 0; sp_x = 0;
         cx = 0; cy = 0;
 
-        if (h_cnt >= DINO_X && h_cnt < DINO_X + DINO_W &&
-            v_cnt >= dino_y && v_cnt < dino_y + DINO_H) begin
+        // Game Over Text
+        if (state == S_OVER && 
+            h_cnt >= 276 && h_cnt < 276 + TEXT_GAMEOVER_W &&
+            v_cnt >= 180 && v_cnt < 180 + TEXT_GAMEOVER_H) begin
+            
+            dx = h_cnt - 276;
+            dy = v_cnt - 180;
+            sp_x = SP_TEXT_GAMEOVER;
+            sprite_addr = (dy >> 1) * IMG_WIDTH + (sp_x + (dx >> 1));
+        end
+        // Restart Icon
+        else if (state == S_OVER && 
+            h_cnt >= 312 && h_cnt < 312 + RESTART_W &&
+            v_cnt >= 210 && v_cnt < 210 + RESTART_H) begin
+            
+            dx = h_cnt - 312;
+            dy = v_cnt - 210;
+            sp_x = SP_RESTART;
+            sprite_addr = (dy >> 1) * IMG_WIDTH + (sp_x + (dx >> 1));
+        end
+        // Dino Rendering (Use curr_dino_h to crop height when ducking)
+        else if (h_cnt >= DINO_X && h_cnt < DINO_X + DINO_W &&
+            v_cnt >= dino_y && v_cnt < dino_y + curr_dino_h) begin
             
             dx = h_cnt - DINO_X;
             dy = v_cnt - dino_y;
             
-            if (state == S_OVER) sp_x = SP_GAMEOVER;
-            else if (jumped)     sp_x = SP_DINO_JUMP;
+            if (jumped)          sp_x = SP_DINO_JUMP;
+            else if (ducking)    sp_x = (anim_cnt[4] == 1'b0) ? SP_DINO_DUCK1 : SP_DINO_DUCK2;
             else                 sp_x = (anim_cnt[4] == 1'b0) ? SP_DINO_RUN1 : SP_DINO_RUN2;
             
             sprite_addr = (dy >> 1) * IMG_WIDTH + (sp_x + (dx >> 1));
         end
         else begin
-            if (cactus_active[0] && h_cnt >= cactus_x[0] && h_cnt < cactus_x[0] + CACTUS_S_W &&v_cnt >= GROUND_Y - CACTUS_S_H && v_cnt < GROUND_Y) begin
-                cx = h_cnt - cactus_x[0];
-                cy = v_cnt - (GROUND_Y - CACTUS_S_H);
-                // Select cactus sprite based on type (18px stride)
-
-                sprite_base_x = SP_CACTUS_S;
-                sprite_addr = (cy >> 1) * IMG_WIDTH + (sprite_base_x + (cx >> 1));
-            end
-            else if (cactus_active[1] && h_cnt >= cactus_x[1] && h_cnt < cactus_x[1] + CACTUS_B_W &&v_cnt >= GROUND_Y - CACTUS_B_H && v_cnt < GROUND_Y) begin
-                cx = h_cnt - cactus_x[1];
-                cy = v_cnt - (GROUND_Y - CACTUS_B_H);
-                // Select cactus sprite based on type (18px stride)
-                
-                sprite_base_x = SP_CACTUS_B;
-                sprite_addr = (cy >> 1) * IMG_WIDTH + (sprite_base_x + (cx >> 1));
-            end
-            else if (cactus_active[2] && h_cnt >= cactus_x[2] && h_cnt < cactus_x[2] + PTERO_W &&v_cnt >= GROUND_Y - PTERO_H && v_cnt < GROUND_Y) begin
-                cx = h_cnt - cactus_x[2];
-                cy = v_cnt - (GROUND_Y - PTERO_H);
-                // Select cactus sprite based on type (18px stride)
-
-                sprite_base_x = (anim_cnt[4] == 1'b0) ? SP_PTERO_1 : SP_PTERO_2;
-                sprite_addr = (cy >> 1) * IMG_WIDTH + (sprite_base_x + (cx >> 1));
+            for(i = 0; i < 3; i = i + 1) begin
+                if(cactus_active[i]) begin
+                    // Determine dimensions and sprite based on type
+                    case(cactus_type[i])
+                        2'd0: begin 
+                            obs_w = CACTUS_S_W; 
+                            obs_h = CACTUS_S_H; 
+                            obs_sprite_base = SP_CACTUS_S; 
+                            if(h_cnt >= cactus_x[i] && h_cnt < cactus_x[i] + obs_w && v_cnt >= GROUND_Y - obs_h && v_cnt < GROUND_Y) begin
+                                cx = h_cnt - cactus_x[i];
+                                cy = v_cnt - (GROUND_Y - obs_h);
+                                sprite_addr = (cy >> 1) * IMG_WIDTH + (obs_sprite_base + (cx >> 1));
+                            end
+                        end
+                        2'd1: begin 
+                            obs_w = CACTUS_B_W; 
+                            obs_h = CACTUS_B_H; 
+                            obs_sprite_base = SP_CACTUS_B; 
+                            if(h_cnt >= cactus_x[i] && h_cnt < cactus_x[i] + obs_w && v_cnt >= GROUND_Y - obs_h && v_cnt < GROUND_Y) begin
+                                cx = h_cnt - cactus_x[i];
+                                cy = v_cnt - (GROUND_Y - obs_h);
+                                sprite_addr = (cy >> 1) * IMG_WIDTH + (obs_sprite_base + (cx >> 1));
+                            end
+                        end
+                        default: begin 
+                            obs_w = PTERO_W; 
+                            obs_h = PTERO_H; 
+                            obs_sprite_base = (anim_cnt[4] == 1'b0) ? SP_PTERO_1 : SP_PTERO_2; 
+                            // Pterodactyl Rendering with Offset
+                            if(h_cnt >= cactus_x[i] && h_cnt < cactus_x[i] + obs_w && 
+                               v_cnt >= GROUND_Y - obs_h - PTERO_FLY_OFFSET && v_cnt < GROUND_Y - PTERO_FLY_OFFSET) begin
+                                cx = h_cnt - cactus_x[i];
+                                cy = v_cnt - (GROUND_Y - obs_h - PTERO_FLY_OFFSET);
+                                sprite_addr = (cy >> 1) * IMG_WIDTH + (obs_sprite_base + (cx >> 1));
+                            end
+                        end
+                    endcase
+                end
             end
         end
     end
