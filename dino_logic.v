@@ -57,17 +57,28 @@ module dino_logic (
     // Manual Drop Logic
     reg [9:0] drop_x;
     reg prev_key_drop;
-    wire drop_key_active = key_down[9'h172] || key_down[9'h072]; // Down Arrow (Extended or Numpad)
+    wire drop_key_active = key_down[9'h172] || key_down[9'h073]; // Down Arrow (Extended or Numpad)
     wire key_drop_pressed = drop_key_active && !prev_key_drop;
+
+    reg [1:0] selected_drop_type; // 0: Small, 1: Big, 2: Ptero
+    reg [1:0] drop_obs_type;
 
     reg signed [12:0] drop_obs_x; // X Position
     reg [9:0] drop_obs_y;         // Y Position (for falling)
     reg drop_obs_active;          // Is it currently on screen?
     reg drop_obs_grounded;        // Has it hit the ground?
     // Use Big Cactus dimensions for the dropped object
-    localparam DROP_W = CACTUS_B_W;
-    localparam DROP_H = CACTUS_B_H;
+    
     localparam DROP_VAL_SPEED = 6; // Falling speed (pixels per frame)
+
+    reg [9:0] d_obs_w, d_obs_h;
+    always @(*) begin
+        case(drop_obs_type)
+            2'd0: begin d_obs_w = CACTUS_S_W; d_obs_h = CACTUS_S_H; end // Small
+            2'd1: begin d_obs_w = CACTUS_B_W; d_obs_h = CACTUS_B_H; end // Big
+            default: begin d_obs_w = PTERO_W; d_obs_h = PTERO_H; end    // Ptero
+        endcase
+    end
 
     //LFSR randomly create obstacle
     wire [9:0] random_val;
@@ -90,7 +101,6 @@ module dino_logic (
     wire is_space = (scan_code == 8'h29);
 
     reg [4:0] anim_cnt;
-
     // Dynamic Dino Dimensions
     wire [9:0] curr_dino_w = ducking ? DINO_DUCK_W : DINO_W;
     wire [9:0] curr_dino_h = ducking ? DINO_DUCK_H : DINO_H;
@@ -142,16 +152,14 @@ module dino_logic (
         if (drop_obs_active) begin
             // Collision box check against drop_obs_x and drop_obs_y
             // Note: drop_obs_y is top-left of the obstacle
-            if ((DINO_X + curr_dino_w > drop_obs_x) && (DINO_X < drop_obs_x + DROP_W) && 
-                (col_y + col_h > drop_obs_y) && (col_y < drop_obs_y + DROP_H)) begin
+            if ((DINO_X + curr_dino_w > drop_obs_x) && (DINO_X < drop_obs_x + d_obs_w) && 
+                (col_y + col_h > drop_obs_y) && (col_y < drop_obs_y + d_obs_h)) begin
                 collision = 1'b1;
             end
         end
     end
 
     wire frame_tick = vsync && !prev_vsync;
-
-
     assign sensor_jump = (distance > 20'd20 && distance < 20'd50);
     assign sensor_duck = (distance < 20'd10 && distance > 20'd0);
     assign key_jump = key_down[9'h01D] || jump_signal; // Only W (1D)
@@ -186,6 +194,8 @@ module dino_logic (
             drop_obs_x <= 0;
             drop_obs_y <= 0;
             drop_obs_grounded <= 0;
+            selected_drop_type <= 2'd1; // Default to Big Cactus
+            drop_obs_type <= 2'd1;
             
         end else begin
             prev_vsync <= vsync;
@@ -225,6 +235,11 @@ module dino_logic (
             // 2. PHYSICS UPDATE
             if (frame_tick && state == S_RUN) begin
                 prev_key_drop <= drop_key_active; // Update prev_key_drop only on frame tick
+
+                if (key_down[9'h016] || key_down[9'h69]) selected_drop_type <= 2'd0; // Key 1 -> Small
+                if (key_down[9'h01E] || key_down[9'h72]) selected_drop_type <= 2'd1; // Key 2 -> Big
+                if (key_down[9'h026] || key_down[9'h7A]) selected_drop_type <= 2'd2; // Key 3 -> Ptero
+
                 for(i = 0; i < 3; i = i + 1) begin
                     // Always move cactus to allow large gaps
                     cactus_x[i] <= cactus_x[i] - 4 - (score[9:4]);
@@ -253,14 +268,15 @@ module dino_logic (
                     drop_obs_x <= {3'b0, drop_x}; // Initialize X at cursor
                     drop_obs_y <= 0;              // Initialize Y at top (Sky)
                     drop_obs_grounded <= 1'b0;    // Not grounded yet
+                    drop_obs_type <= selected_drop_type; // Lock in the selected type
                 end
                 // --- Dropped Obstacle Physics ---
                 if (drop_obs_active) begin
                     if (!drop_obs_grounded) begin
                         // FALLING STATE: Move Y down
-                        if (drop_obs_y + DROP_H >= GROUND_Y) begin
+                        if (drop_obs_y + d_obs_h >= GROUND_Y) begin
                             // Hit the ground
-                            drop_obs_y <= GROUND_Y - DROP_H;
+                            drop_obs_y <= GROUND_Y - d_obs_h;
                             drop_obs_grounded <= 1'b1;
                         end else begin
                             drop_obs_y <= drop_obs_y + DROP_VAL_SPEED;
@@ -303,13 +319,13 @@ module dino_logic (
                      cactus_type <= random_val[9:8]; // Randomize cactus type
                 end
                 */
+
                 // --- JUMP & DUCK LOGIC ---
                 // Sensor Logic: < 10cm = Duck, 20-50cm = Jump
                 // Note: sensor_jump, sensor_duck, key_jump, key_duck declared at module level
                 
                 // Keyboard Logic: Space(29) or Up(E0,75 -> 175?) for Jump. Down(E0,72 -> 172) or S(1B) for Duck.
                 // Note: key_down index for extended keys depends on decoder. Assuming 1xx for extended.
-
                 if (dino_y >= GROUND_Y - DINO_H) begin
                     // On Ground
                     if (key_jump || sensor_jump) begin
@@ -388,6 +404,26 @@ module dino_logic (
     reg [9:0] cx, cy;
     reg [9:0] sprite_base_x;
 
+    // Helper to determine sprite parameters for the Preview Cursor
+    reg [9:0] prev_w, prev_h, prev_sp;
+    always @(*) begin
+        case(selected_drop_type)
+            2'd0: begin prev_w = CACTUS_S_W; prev_h = CACTUS_S_H; prev_sp = SP_CACTUS_S; end
+            2'd1: begin prev_w = CACTUS_B_W; prev_h = CACTUS_B_H; prev_sp = SP_CACTUS_B; end
+            default: begin prev_w = PTERO_W; prev_h = PTERO_H; prev_sp = SP_PTERO_1; end
+        endcase
+    end
+
+    // Helper to determine sprite parameters for the Dropped Object
+    reg [9:0] d_render_sp;
+    always @(*) begin
+        case(drop_obs_type)
+            2'd0: d_render_sp = SP_CACTUS_S;
+            2'd1: d_render_sp = SP_CACTUS_B;
+            default: d_render_sp = (anim_cnt[4]) ? SP_PTERO_2 : SP_PTERO_1; // Animate ptero if desired, or static
+        endcase
+    end
+
     always @(*) begin
         // Default address (points to transparent/background part of image if possible)
         sprite_addr = 0; 
@@ -414,6 +450,13 @@ module dino_logic (
             sp_x = SP_RESTART;
             sprite_addr = (dy >> 1) * IMG_WIDTH + (sp_x + (dx >> 1));
         end
+        else if (state == S_RUN && 
+                 h_cnt >= drop_x && h_cnt < drop_x + prev_w &&
+                 v_cnt >= 50 && v_cnt < 50 + prev_h) begin
+            cx = h_cnt - drop_x;
+            cy = v_cnt - 50;
+            sprite_addr = (cy >> 1) * IMG_WIDTH + (prev_sp + (cx >> 1));
+        end
         // Dino Rendering (Use curr_dino_h to crop height when ducking)
         else if (h_cnt >= DINO_X && h_cnt < DINO_X + curr_dino_w &&
             v_cnt >= dino_y && v_cnt < dino_y + curr_dino_h) begin
@@ -429,13 +472,13 @@ module dino_logic (
         end
         //Dropped Obstacle Rendering
         else if (drop_obs_active && 
-                 h_cnt >= drop_obs_x && h_cnt < drop_obs_x + DROP_W && 
-                 v_cnt >= drop_obs_y && v_cnt < drop_obs_y + DROP_H) begin
+                 h_cnt >= drop_obs_x && h_cnt < drop_obs_x + d_obs_w && 
+                 v_cnt >= drop_obs_y && v_cnt < drop_obs_y + d_obs_h) begin
             
             cx = h_cnt - drop_obs_x;
             cy = v_cnt - drop_obs_y;
             // Use Big Cactus Sprite for dropped object
-            sprite_addr = (cy >> 1) * IMG_WIDTH + (SP_CACTUS_B + (cx >> 1));
+            sprite_addr = (cy >> 1) * IMG_WIDTH + (d_render_sp + (cx >> 1));
         end
         else begin
             for(i = 0; i < 3; i = i + 1) begin
@@ -489,6 +532,7 @@ module dino_logic (
 
         pixel_out = 12'h000;
 
+        /*
         // Arrow Logic
         if (state == S_RUN && v_cnt >= 50 && v_cnt < 70 &&
             h_cnt + 10 >= drop_x && h_cnt <= drop_x + 10) begin
@@ -497,6 +541,7 @@ module dino_logic (
                  pixel_out = 12'hF00; // Red Arrow
             end
         end
+        */
         
         // Priority: Sprites -> Ground -> Background
         // Check if sprite_data is not "transparent" (assuming black 0x000 is transparent)
