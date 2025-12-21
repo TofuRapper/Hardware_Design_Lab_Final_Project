@@ -1,7 +1,7 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-// Date        : Sun Dec 21 23:06:58 2025
+// Date        : Mon Dec 22 02:02:18 2025
 // Host        : DESKTOP-LCS45AM running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub
 //               C:/Users/jaylu/Desktop/Ethan/HardwareDesign_finalproject/Hardware_Design_Lab_Final_Project/Final_Project/Final_Project.srcs/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0_stub.v
@@ -15,10 +15,10 @@
 // Please paste the declaration into a Verilog source file or add the file as an additional source.
 (* x_core_info = "blk_mem_gen_v8_4_4,Vivado 2019.2" *)
 module blk_mem_gen_0(clka, wea, addra, dina, douta)
-/* synthesis syn_black_box black_box_pad_pin="clka,wea[0:0],addra[13:0],dina[23:0],douta[23:0]" */;
+/* synthesis syn_black_box black_box_pad_pin="clka,wea[0:0],addra[16:0],dina[11:0],douta[11:0]" */;
   input clka;
   input [0:0]wea;
-  input [13:0]addra;
-  input [23:0]dina;
-  output [23:0]douta;
+  input [16:0]addra;
+  input [11:0]dina;
+  output [11:0]douta;
 endmodule
