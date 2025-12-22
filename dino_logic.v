@@ -87,11 +87,16 @@ module dino_logic (
     //LFSR randomly create obstacle
     wire [9:0] random_val;
     reg [9:0] next_spawn_offset;
-    LFSR lfsr(
-        .clk(pclk),
-        .rst(rst),
-        .random_out(random_val)
-    );
+    // LFSR module definition required for synthesis/simulation
+    // Dummy LFSR for compilation (replace with your actual implementation)
+    reg [9:0] lfsr_reg;
+    always @(posedge pclk or posedge rst) begin
+        if (rst)
+            lfsr_reg <= 10'h1;
+        else
+            lfsr_reg <= {lfsr_reg[8:0], lfsr_reg[9] ^ lfsr_reg[6]};
+    end
+    assign random_val = lfsr_reg;
 
     reg [8:0] last_key;
     reg prev_key_valid;
@@ -635,38 +640,66 @@ always @(*) begin
             end
         end
         // Manual Drop Cursor (Only visible in RUN)
-        else if (state == S_RUN && 
-                 h_cnt >= drop_x && h_cnt < drop_x + prev_w &&
-                 v_cnt >= 50 && v_cnt < 50 + prev_h) begin
-            cx = h_cnt - drop_x;
-            cy = v_cnt - 50;
-            sprite_addr = (cy >> 1) * IMG_WIDTH + (prev_sp + (cx >> 1));
+        else if (state == S_RUN) begin
+            // Manual Drop Cursor
+            if (h_cnt >= drop_x && h_cnt < drop_x + prev_w && v_cnt >= 50 && v_cnt < 50 + prev_h) begin
+                cx = h_cnt - drop_x;
+                cy = v_cnt - 50;
+                sprite_addr = (cy >> 1) * IMG_WIDTH + (prev_sp + (cx >> 1));
+            end
+            // Dino Rendering
+            if (h_cnt >= DINO_X && h_cnt < DINO_X + curr_dino_w && v_cnt >= dino_y && v_cnt < dino_y + curr_dino_h) begin
+                dx = h_cnt - DINO_X;
+                dy = v_cnt - dino_y;
+                if (jumped)          sp_x = SP_DINO_JUMP;
+                else if (ducking)    sp_x = (anim_cnt[4] == 1'b0) ? SP_DINO_DUCK1 : SP_DINO_DUCK2;
+                else                 sp_x = (anim_cnt[4] == 1'b0) ? SP_DINO_RUN1 : SP_DINO_RUN2;
+                sprite_addr = (dy >> 1) * IMG_WIDTH + (sp_x + (dx >> 1));
+            end
+            // Dropped Obstacle Rendering
+            if (drop_obs_active && h_cnt >= drop_obs_x && h_cnt < drop_obs_x + d_obs_w && v_cnt >= drop_obs_y && v_cnt < drop_obs_y + d_obs_h) begin
+                cx = h_cnt - drop_obs_x;
+                cy = v_cnt - drop_obs_y;
+                sprite_addr = (cy >> 1) * IMG_WIDTH + (d_render_sp + (cx >> 1));
+            end
+            // Cactus/Ptero Rendering Loop
+            for(i = 0; i < 3; i = i + 1) begin
+                if(cactus_active[i]) begin
+                    case(cactus_type[i])
+                        2'd0: begin 
+                            obs_w = CACTUS_S_W; 
+                            obs_h = CACTUS_S_H; 
+                            obs_sprite_base = SP_CACTUS_S; 
+                            if(h_cnt >= cactus_x[i] && h_cnt < cactus_x[i] + obs_w && v_cnt >= GROUND_Y - obs_h && v_cnt < GROUND_Y) begin
+                                cx = h_cnt - cactus_x[i];
+                                cy = v_cnt - (GROUND_Y - obs_h);
+                                sprite_addr = (cy >> 1) * IMG_WIDTH + (obs_sprite_base + (cx >> 1));
+                            end
+                        end
+                        2'd1: begin 
+                            obs_w = CACTUS_B_W; 
+                            obs_h = CACTUS_B_H; 
+                            obs_sprite_base = SP_CACTUS_B; 
+                            if(h_cnt >= cactus_x[i] && h_cnt < cactus_x[i] + obs_w && v_cnt >= GROUND_Y - obs_h && v_cnt < GROUND_Y) begin
+                                cx = h_cnt - cactus_x[i];
+                                cy = v_cnt - (GROUND_Y - obs_h);
+                                sprite_addr = (cy >> 1) * IMG_WIDTH + (obs_sprite_base + (cx >> 1));
+                            end
+                        end
+                        default: begin 
+                            obs_w = PTERO_W; 
+                            obs_h = PTERO_H; 
+                            obs_sprite_base = (anim_cnt[4] == 1'b0) ? SP_PTERO_1 : SP_PTERO_2; 
+                            if(h_cnt >= cactus_x[i] && h_cnt < cactus_x[i] + obs_w && v_cnt >= GROUND_Y - obs_h - PTERO_FLY_OFFSET && v_cnt < GROUND_Y - PTERO_FLY_OFFSET) begin
+                                cx = h_cnt - cactus_x[i];
+                                cy = v_cnt - (GROUND_Y - obs_h - PTERO_FLY_OFFSET);
+                                sprite_addr = (cy >> 1) * IMG_WIDTH + (obs_sprite_base + (cx >> 1));
+                            end
+                        end
+                    endcase
+                end
+            end
         end
-        // Dino Rendering - Added check: state != S_OVER
-        else if (state != S_OVER && h_cnt >= DINO_X && h_cnt < DINO_X + curr_dino_w &&
-            v_cnt >= dino_y && v_cnt < dino_y + curr_dino_h) begin
-            
-            dx = h_cnt - DINO_X;
-            dy = v_cnt - dino_y;
-            
-            if (jumped)          sp_x = SP_DINO_JUMP;
-            else if (ducking)    sp_x = (anim_cnt[4] == 1'b0) ? SP_DINO_DUCK1 : SP_DINO_DUCK2;
-            else                 sp_x = (anim_cnt[4] == 1'b0) ? SP_DINO_RUN1 : SP_DINO_RUN2;
-            
-            sprite_addr = (dy >> 1) * IMG_WIDTH + (sp_x + (dx >> 1));
-        end
-        // Dropped Obstacle Rendering - Added check: state != S_OVER
-        else if (state != S_OVER && drop_obs_active && 
-                 h_cnt >= drop_obs_x && h_cnt < drop_obs_x + d_obs_w && 
-                 v_cnt >= drop_obs_y && v_cnt < drop_obs_y + d_obs_h) begin
-            
-            cx = h_cnt - drop_obs_x;
-            cy = v_cnt - drop_obs_y;
-            // Use Big Cactus Sprite for dropped object
-            sprite_addr = (cy >> 1) * IMG_WIDTH + (d_render_sp + (cx >> 1));
-        end
-        // Cactus/Ptero Rendering Loop - Changed 'else' to 'else if' with check
-        else if (state != S_OVER) begin
             for(i = 0; i < 3; i = i + 1) begin
                 if(cactus_active[i]) begin
                     // Determine dimensions and sprite based on type
@@ -707,7 +740,6 @@ always @(*) begin
                 end
             end
         end
-    end
 
     reg score_pixel;
     reg [3:0] current_digit;
