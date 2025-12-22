@@ -148,3 +148,13 @@ set_property IOSTANDARD LVCMOS33 [get_ports pause]
 ## Sch name = JB4
  set_property PACKAGE_PIN B16 [get_ports {echo}]
     set_property IOSTANDARD LVCMOS33 [get_ports {echo}]
+
+## Pmod Header JC (for I2S Audio)
+set_property PACKAGE_PIN K17 [get_ports {audio_mclk}]
+set_property IOSTANDARD LVCMOS33 [get_ports {audio_mclk}]
+set_property PACKAGE_PIN M18 [get_ports {audio_lrck}]
+set_property IOSTANDARD LVCMOS33 [get_ports {audio_lrck}]
+set_property PACKAGE_PIN N17 [get_ports {audio_sck}]
+set_property IOSTANDARD LVCMOS33 [get_ports {audio_sck}]
+set_property PACKAGE_PIN P18 [get_ports {audio_sdin}]
+set_property IOSTANDARD LVCMOS33 [get_ports {audio_sdin}]
