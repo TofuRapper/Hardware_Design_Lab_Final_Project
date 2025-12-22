@@ -13,7 +13,9 @@ module dino_logic (
     input wire vsync,
     input wire [19:0] distance,
     output reg [11:0] pixel_out,
-    output reg [15:0] led_out     // Debug LEDs
+    output reg [15:0] led_out,    // Debug LEDs
+    output reg jump_event,        // Toggle on jump start (pclk domain)
+    output reg land_event         // Toggle on landing (pclk domain)
 );
 
     localparam GROUND_Y = 350;
@@ -110,6 +112,7 @@ module dino_logic (
     wire is_space = (scan_code == 8'h29);
 
     reg [4:0] anim_cnt;
+    reg prev_jumped_pclk;
     // Dynamic Dino Dimensions
     wire [9:0] curr_dino_w = ducking ? DINO_DUCK_W : DINO_W;
     wire [9:0] curr_dino_h = ducking ? DINO_DUCK_H : DINO_H;
@@ -278,6 +281,9 @@ module dino_logic (
             user_speed <= 4;    
             blink_cnt <= 0;
             prev_key_enter <= 0;
+            jump_event <= 1'b0;
+            land_event <= 1'b0;
+            prev_jumped_pclk <= 1'b0;
             
         end else begin
             prev_vsync <= vsync;
@@ -485,6 +491,15 @@ module dino_logic (
                     jumped <= 1'b1;
                     ducking <= 1'b0; // Can't duck in air (usually becomes fast fall)
                 end
+
+                // detect jump rising/falling edges and toggle event outputs
+                if (!prev_jumped_pclk && jumped) begin
+                    jump_event <= ~jump_event; // toggle to signal jump start
+                end
+                if (prev_jumped_pclk && !jumped) begin
+                    land_event <= ~land_event; // toggle to signal landing
+                end
+                prev_jumped_pclk <= jumped;
 
                 anim_cnt <= anim_cnt + 1;
             end

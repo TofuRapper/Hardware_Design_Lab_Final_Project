@@ -2,12 +2,12 @@
 # Vivado v2019.2 (64-bit)
 # SW Build 2708876 on Wed Nov  6 21:40:23 MST 2019
 # IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
-# Start of session at: Mon Dec 22 17:46:09 2025
-# Process ID: 19828
-# Current directory: C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/Final_Project/Final_Project.runs/synth_1
+# Start of session at: Tue Dec 23 01:19:16 2025
+# Process ID: 15460
+# Current directory: C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/Final_Project/Final_Project.runs/synth_1
 # Command line: vivado.exe -log dino_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source dino_top.tcl
-# Log file: C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/Final_Project/Final_Project.runs/synth_1/dino_top.vds
-# Journal file: C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/Final_Project/Final_Project.runs/synth_1\vivado.jou
+# Log file: C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/Final_Project/Final_Project.runs/synth_1/dino_top.vds
+# Journal file: C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/Final_Project/Final_Project.runs/synth_1\vivado.jou
 #-----------------------------------------------------------
 source dino_top.tcl -notrace
 Command: synth_design -top dino_top -part xc7a35tcpg236-1
@@ -16,48 +16,1039 @@ Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 38588 
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:18]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:19]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:20]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:21]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:22]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:23]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:24]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:26]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:27]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:28]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:29]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:31]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:32]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:33]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:34]
-WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:35]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:191]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:192]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:193]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:194]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:229]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:231]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:232]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:233]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:234]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:235]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:236]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:237]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:238]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:239]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:240]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:241]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:242]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:243]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:244]
-WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:245]
-ERROR: [Synth 8-2715] syntax error near end [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/dino_logic.v:738]
-INFO: [Synth 8-2350] module dino_logic ignored due to previous errors [C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/dino_logic.v:1]
-Failed to read verilog 'C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/dino_logic.v'
+INFO: Helper process launched with PID 16356 
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:18]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:19]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:20]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:21]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:22]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:23]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:24]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:26]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:27]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:28]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:29]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:31]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:32]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:33]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:34]
+WARNING: [Synth 8-2507] parameter declaration becomes local in KeyboardCtrl with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:35]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:191]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:192]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:193]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:194]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:229]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:231]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:232]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:233]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:234]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:235]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:236]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:237]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:238]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:239]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:240]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:241]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:242]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:243]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:244]
+WARNING: [Synth 8-2507] parameter declaration becomes local in Ps2Interface with formal parameter declaration list [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:245]
+WARNING: [Synth 8-6901] identifier 'jump_event_pclk' is used before its declaration [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_top.v:115]
+WARNING: [Synth 8-6901] identifier 'land_event_pclk' is used before its declaration [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_top.v:117]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 965.992 ; gain = 240.340
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'dino_top' [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_top.v:1]
+INFO: [Synth 8-6157] synthesizing module 'clock_divider' [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/clock_divider.v:1]
+	Parameter n bound to: 2 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'clock_divider' (1#1) [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/clock_divider.v:1]
+INFO: [Synth 8-6157] synthesizing module 'vga_controller' [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/vga.v:6]
+	Parameter HD bound to: 640 - type: integer 
+	Parameter HF bound to: 16 - type: integer 
+	Parameter HS bound to: 96 - type: integer 
+	Parameter HB bound to: 48 - type: integer 
+	Parameter HT bound to: 800 - type: integer 
+	Parameter VD bound to: 480 - type: integer 
+	Parameter VF bound to: 10 - type: integer 
+	Parameter VS bound to: 2 - type: integer 
+	Parameter VB bound to: 33 - type: integer 
+	Parameter VT bound to: 525 - type: integer 
+	Parameter hsync_default bound to: 1'b1 
+	Parameter vsync_default bound to: 1'b1 
+INFO: [Synth 8-6155] done synthesizing module 'vga_controller' (2#1) [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/vga.v:6]
+INFO: [Synth 8-6157] synthesizing module 'debounce' [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/debounce.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'debounce' (3#1) [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/debounce.v:1]
+INFO: [Synth 8-6157] synthesizing module 'one_pulse' [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/one_pulse.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'one_pulse' (4#1) [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/one_pulse.v:1]
+INFO: [Synth 8-6157] synthesizing module 'KeyboardDecoder' [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/KeyboardDecoder.v:1]
+	Parameter INIT bound to: 2'b00 
+	Parameter WAIT_FOR_SIGNAL bound to: 2'b01 
+	Parameter GET_SIGNAL_DOWN bound to: 2'b10 
+	Parameter WAIT_RELEASE bound to: 2'b11 
+	Parameter IS_INIT bound to: 8'b10101010 
+	Parameter IS_EXTEND bound to: 8'b11100000 
+	Parameter IS_BREAK bound to: 8'b11110000 
+INFO: [Synth 8-6157] synthesizing module 'KeyboardCtrl' [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:1]
+	Parameter SYSCLK_FREQUENCY_HZ bound to: 100000000 - type: integer 
+	Parameter RESET bound to: 3'b000 
+	Parameter SEND_CMD bound to: 3'b001 
+	Parameter WAIT_ACK bound to: 3'b010 
+	Parameter WAIT_KEYIN bound to: 3'b011 
+	Parameter GET_BREAK bound to: 3'b100 
+	Parameter GET_EXTEND bound to: 3'b101 
+	Parameter RESET_WAIT_BAT bound to: 3'b110 
+	Parameter CMD_RESET bound to: 8'b11111111 
+	Parameter CMD_SET_STATUS_LEDS bound to: 8'b11101101 
+	Parameter RSP_ACK bound to: 8'b11111010 
+	Parameter RSP_BAT_PASS bound to: 8'b10101010 
+	Parameter BREAK_CODE bound to: 8'b11110000 
+	Parameter EXTEND_CODE bound to: 8'b11100000 
+	Parameter CAPS_LOCK bound to: 8'b01011000 
+	Parameter NUM_LOCK bound to: 8'b01110111 
+	Parameter SCR_LOCK bound to: 8'b01111110 
+INFO: [Synth 8-6157] synthesizing module 'Ps2Interface' [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:164]
+	Parameter SYSCLK_FREQUENCY_HZ bound to: 100000000 - type: integer 
+	Parameter CLOCK_CNT_100US bound to: 10000 - type: integer 
+	Parameter CLOCK_CNT_20US bound to: 2000 - type: integer 
+	Parameter DEBOUNCE_DELAY bound to: 15 - type: integer 
+	Parameter BITS_NUM bound to: 11 - type: integer 
+	Parameter parity_table bound to: 256'b1001011001101001011010011001011001101001100101101001011001101001011010011001011010010110011010011001011001101001011010011001011001101001100101101001011001101001100101100110100101101001100101101001011001101001011010011001011001101001100101101001011001101001 
+	Parameter IDLE bound to: 4'b0000 
+	Parameter RX_NEG_EDGE bound to: 4'b0001 
+	Parameter RX_CLK_LOW bound to: 4'b0010 
+	Parameter RX_CLK_HIGH bound to: 4'b0011 
+	Parameter TX_FORCE_CLK_LOW bound to: 4'b0100 
+	Parameter TX_BRING_DATA_LOW bound to: 4'b0101 
+	Parameter TX_RELEASE_CLK bound to: 4'b0110 
+	Parameter TX_WAIT_FIRTS_NEG_EDGE bound to: 4'b0111 
+	Parameter TX_CLK_LOW bound to: 4'b1000 
+	Parameter TX_WAIT_POS_EDGE bound to: 4'b1001 
+	Parameter TX_CLK_HIGH bound to: 4'b1010 
+	Parameter TX_WAIT_POS_EDGE_BEFORE_ACK bound to: 4'b1011 
+	Parameter TX_WAIT_ACK bound to: 4'b1100 
+	Parameter TX_RECEIVED_ACK bound to: 4'b1101 
+	Parameter TX_ERROR_NO_ACK bound to: 4'b1110 
+INFO: [Synth 8-6157] synthesizing module 'IOBUF' [C:/Xilinx/Vivado/2019.2/scripts/rt/data/unisim_comp.v:36196]
+	Parameter DRIVE bound to: 12 - type: integer 
+	Parameter IBUF_LOW_PWR bound to: TRUE - type: string 
+	Parameter IOSTANDARD bound to: DEFAULT - type: string 
+	Parameter SLEW bound to: SLOW - type: string 
+INFO: [Synth 8-6155] done synthesizing module 'IOBUF' (5#1) [C:/Xilinx/Vivado/2019.2/scripts/rt/data/unisim_comp.v:36196]
+INFO: [Synth 8-6155] done synthesizing module 'Ps2Interface' (6#1) [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/Ps2Interface.v:164]
+INFO: [Synth 8-6155] done synthesizing module 'KeyboardCtrl' (7#1) [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/ip/Keyboard-Controller/keyboard_cntr_1.0/src/KeyboardCtrl.v:1]
+INFO: [Synth 8-226] default block is never used [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/KeyboardDecoder.v:64]
+INFO: [Synth 8-6155] done synthesizing module 'KeyboardDecoder' (8#1) [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/KeyboardDecoder.v:1]
+INFO: [Synth 8-6157] synthesizing module 'sonic_top' [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/sonic.v:5]
+INFO: [Synth 8-6157] synthesizing module 'div' [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/sonic.v:115]
+INFO: [Synth 8-6155] done synthesizing module 'div' (9#1) [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/sonic.v:115]
+INFO: [Synth 8-6157] synthesizing module 'TrigSignal' [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/sonic.v:84]
+INFO: [Synth 8-6155] done synthesizing module 'TrigSignal' (10#1) [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/sonic.v:84]
+INFO: [Synth 8-6157] synthesizing module 'PosCounter' [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/sonic.v:22]
+	Parameter S0 bound to: 2'b00 
+	Parameter S1 bound to: 2'b01 
+	Parameter S2 bound to: 2'b10 
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/sonic.v:47]
+INFO: [Synth 8-6155] done synthesizing module 'PosCounter' (11#1) [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/sonic.v:22]
+INFO: [Synth 8-6155] done synthesizing module 'sonic_top' (12#1) [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/sonic.v:5]
+INFO: [Synth 8-6157] synthesizing module 'note_gen' [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_top.v:261]
+INFO: [Synth 8-6155] done synthesizing module 'note_gen' (13#1) [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_top.v:261]
+INFO: [Synth 8-6157] synthesizing module 'speaker_control' [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_top.v:339]
+INFO: [Synth 8-226] default block is never used [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_top.v:383]
+INFO: [Synth 8-6155] done synthesizing module 'speaker_control' (14#1) [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_top.v:339]
+INFO: [Synth 8-6157] synthesizing module 'dino_logic' [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_logic.v:1]
+	Parameter GROUND_Y bound to: 350 - type: integer 
+	Parameter DINO_X bound to: 160 - type: integer 
+	Parameter DINO_W bound to: 34 - type: integer 
+	Parameter DINO_H bound to: 40 - type: integer 
+	Parameter DINO_DUCK_H bound to: 38 - type: integer 
+	Parameter DINO_DUCK_W bound to: 48 - type: integer 
+	Parameter CACTUS_H bound to: 40 - type: integer 
+	Parameter CACTUS_S_W bound to: 14 - type: integer 
+	Parameter CACTUS_S_H bound to: 30 - type: integer 
+	Parameter CACTUS_B_W bound to: 20 - type: integer 
+	Parameter CACTUS_B_H bound to: 40 - type: integer 
+	Parameter PTERO_W bound to: 36 - type: integer 
+	Parameter PTERO_H bound to: 34 - type: integer 
+	Parameter PTERO_FLY_OFFSET bound to: 30 - type: integer 
+	Parameter S_MENU bound to: 3'b000 
+	Parameter S_MODE_SELECT bound to: 3'b001 
+	Parameter S_RUN bound to: 3'b010 
+	Parameter S_PAUSE bound to: 3'b011 
+	Parameter S_OVER bound to: 3'b100 
+	Parameter S_LEADERBOARD bound to: 3'b101 
+	Parameter S_NAME_INPUT bound to: 3'b110 
+	Parameter DROP_VAL_SPEED bound to: 6 - type: integer 
+	Parameter IMG_WIDTH bound to: 628 - type: integer 
+	Parameter SP_DINO_JUMP bound to: 17 - type: integer 
+	Parameter SP_DINO_RUN1 bound to: 268 - type: integer 
+	Parameter SP_DINO_RUN2 bound to: 286 - type: integer 
+	Parameter SP_DINO_DUCK1 bound to: 374 - type: integer 
+	Parameter SP_DINO_DUCK2 bound to: 399 - type: integer 
+	Parameter SP_CACTUS bound to: 106 - type: integer 
+	Parameter SP_RESTART bound to: 0 - type: integer 
+	Parameter RESTART_W bound to: 30 - type: integer 
+	Parameter RESTART_H bound to: 28 - type: integer 
+	Parameter SP_TEXT_GAMEOVER bound to: 481 - type: integer 
+	Parameter TEXT_GAMEOVER_W bound to: 294 - type: integer 
+	Parameter TEXT_GAMEOVER_H bound to: 52 - type: integer 
+	Parameter SP_PTERO_1 bound to: 53 - type: integer 
+	Parameter SP_PTERO_2 bound to: 71 - type: integer 
+	Parameter SP_CACTUS_B bound to: 131 - type: integer 
+	Parameter SP_CACTUS_S bound to: 89 - type: integer 
+	Parameter SP_TITLE_START_X bound to: 0 - type: integer 
+	Parameter SP_TITLE_START_Y bound to: 26 - type: integer 
+	Parameter TITLE_W bound to: 150 - type: integer 
+	Parameter TITLE_H bound to: 100 - type: integer 
+	Parameter SP_WORD_X bound to: 150 - type: integer 
+	Parameter SP_WORD_Y bound to: 26 - type: integer 
+	Parameter WORD_W bound to: 150 - type: integer 
+	Parameter WORD_H bound to: 100 - type: integer 
+	Parameter SP_MODE_COOP_X bound to: 300 - type: integer 
+	Parameter SP_MODE_COOP_Y bound to: 26 - type: integer 
+	Parameter MODE_ICON_W bound to: 270 - type: integer 
+	Parameter MODE_ICON_H bound to: 180 - type: integer 
+	Parameter SP_CONTINUE_X bound to: 600 - type: integer 
+	Parameter SP_CONTINUE_Y bound to: 35 - type: integer 
+	Parameter CONT_W bound to: 22 - type: integer 
+	Parameter CONT_H bound to: 22 - type: integer 
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_logic.v:295]
+INFO: [Synth 8-6157] synthesizing module 'blk_mem_gen_0' [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/Final_Project/Final_Project.runs/synth_1/.Xil/Vivado-15460-R328-40/realtime/blk_mem_gen_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'blk_mem_gen_0' (15#1) [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/Final_Project/Final_Project.runs/synth_1/.Xil/Vivado-15460-R328-40/realtime/blk_mem_gen_0_stub.v:6]
+WARNING: [Synth 8-7023] instance 'sprite_rom' of module 'blk_mem_gen_0' has 5 connections declared, but only 3 given [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_logic.v:564]
+WARNING: [Synth 8-6014] Unused sequential element hs_name_reg[0] was removed.  [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_logic.v:260]
+WARNING: [Synth 8-6014] Unused sequential element hs_name_reg[1] was removed.  [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_logic.v:260]
+WARNING: [Synth 8-6014] Unused sequential element hs_name_reg[2] was removed.  [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_logic.v:260]
+WARNING: [Synth 8-6014] Unused sequential element last_key_reg was removed.  [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_logic.v:106]
+WARNING: [Synth 8-6014] Unused sequential element selected_mode_reg was removed.  [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_logic.v:280]
+WARNING: [Synth 8-5788] Register cactus_x_reg[1] in module dino_logic is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_logic.v:251]
+WARNING: [Synth 8-5788] Register cactus_x_reg[2] in module dino_logic is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_logic.v:251]
+WARNING: [Synth 8-5788] Register jumped_reg in module dino_logic is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_logic.v:470]
+WARNING: [Synth 8-5788] Register ducking_reg in module dino_logic is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_logic.v:471]
+INFO: [Synth 8-6155] done synthesizing module 'dino_logic' (16#1) [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_logic.v:1]
+INFO: [Synth 8-6157] synthesizing module 'SevenSegment' [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/SevenSegment.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'SevenSegment' (17#1) [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/SevenSegment.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'dino_top' (18#1) [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_top.v:1]
+WARNING: [Synth 8-3331] design dino_logic has unconnected port start_pulse
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1045.715 ; gain = 320.062
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1045.715 ; gain = 320.062
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1045.715 ; gain = 320.062
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.043 . Memory (MB): peak = 1053.980 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 2 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [c:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/Final_Project/Final_Project.srcs/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0/blk_mem_gen_0_in_context.xdc] for cell 'game_inst/sprite_rom'
+Finished Parsing XDC File [c:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/Final_Project/Final_Project.srcs/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0/blk_mem_gen_0_in_context.xdc] for cell 'game_inst/sprite_rom'
+Parsing XDC File [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/Final_Project.xdc]
+Finished Parsing XDC File [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/Final_Project.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/Final_Project.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/dino_top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/dino_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1181.148 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 2 instances were transformed.
+  IOBUF => IOBUF (IBUF, OBUFT): 2 instances
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.012 . Memory (MB): peak = 1181.148 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1181.148 ; gain = 455.496
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcpg236-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1181.148 ; gain = 455.496
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property DONT_TOUCH = true for game_inst/sprite_rom. (constraint file  auto generated constraint, line ).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1181.148 ; gain = 455.496
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'Ps2Interface'
+INFO: [Synth 8-5544] ROM "ps2_clk_out_next" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "ps2_clk_en_next" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'KeyboardCtrl'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'KeyboardDecoder'
+INFO: [Synth 8-802] inferred FSM for state register 'curr_state_reg' in module 'PosCounter'
+INFO: [Synth 8-5818] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the output of the operator [C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/dino_logic.v:427]
+INFO: [Synth 8-5587] ROM size for "scancode_to_char" is below threshold of ROM address width. It will be mapped to LUTs
+INFO: [Synth 8-5587] ROM size for "scancode_to_char" is below threshold of ROM address width. It will be mapped to LUTs
+INFO: [Synth 8-5544] ROM "d_obs_w" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "d_obs_h" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "prev_w" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "prev_h" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "prev_sp" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-802] inferred FSM for state register 'digit_reg' in module 'SevenSegment'
+INFO: [Synth 8-5544] ROM "digit" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                  000000000000010 |                             0000
+        TX_FORCE_CLK_LOW |                  000000000001000 |                             0100
+       TX_BRING_DATA_LOW |                  000000000010000 |                             0101
+          TX_RELEASE_CLK |                  100000000000000 |                             0110
+  TX_WAIT_FIRTS_NEG_EDGE |                  001000000000000 |                             0111
+              TX_CLK_LOW |                  000100000000000 |                             1000
+        TX_WAIT_POS_EDGE |                  010000000000000 |                             1001
+TX_WAIT_POS_EDGE_BEFORE_ACK |                  000001000000000 |                             1011
+             TX_WAIT_ACK |                  000000010000000 |                             1100
+         TX_RECEIVED_ACK |                  000000000100000 |                             1101
+         TX_ERROR_NO_ACK |                  000000100000000 |                             1110
+             TX_CLK_HIGH |                  000010000000000 |                             1010
+             RX_NEG_EDGE |                  000000000000100 |                             0001
+              RX_CLK_LOW |                  000000001000000 |                             0010
+             RX_CLK_HIGH |                  000000000000001 |                             0011
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'Ps2Interface'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                   RESET |                              000 |                              000
+                SEND_CMD |                              001 |                              001
+                WAIT_ACK |                              010 |                              010
+          RESET_WAIT_BAT |                              011 |                              110
+              WAIT_KEYIN |                              100 |                              011
+              GET_EXTEND |                              101 |                              101
+               GET_BREAK |                              110 |                              100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'KeyboardCtrl'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    INIT |                               00 |                               00
+         WAIT_FOR_SIGNAL |                               01 |                               01
+         GET_SIGNAL_DOWN |                               10 |                               10
+            WAIT_RELEASE |                               11 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'KeyboardDecoder'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                      S0 |                              001 |                               00
+                      S1 |                              010 |                               01
+                      S2 |                              100 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'curr_state_reg' using encoding 'one-hot' in module 'PosCounter'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 iSTATE3 |                              000 |                             1111
+*
+                  iSTATE |                              001 |                             1110
+                 iSTATE0 |                              010 |                             1101
+                 iSTATE1 |                              011 |                             1011
+                 iSTATE2 |                              100 |                             0111
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'digit_reg' using encoding 'sequential' in module 'SevenSegment'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1181.148 ; gain = 455.496
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 12    
+	   3 Input     32 Bit       Adders := 10    
+	   2 Input     24 Bit       Adders := 1     
+	   2 Input     20 Bit       Adders := 1     
+	   3 Input     17 Bit       Adders := 9     
+	   2 Input     14 Bit       Adders := 11    
+	   3 Input     14 Bit       Adders := 10    
+	   4 Input     13 Bit       Adders := 4     
+	   2 Input     13 Bit       Adders := 10    
+	   3 Input     12 Bit       Adders := 15    
+	   2 Input     11 Bit       Adders := 3     
+	   3 Input     11 Bit       Adders := 4     
+	   2 Input     10 Bit       Adders := 40    
+	   3 Input     10 Bit       Adders := 9     
+	   2 Input      9 Bit       Adders := 4     
+	   2 Input      7 Bit       Adders := 2     
+	   2 Input      6 Bit       Adders := 2     
+	   2 Input      5 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 14    
+	   2 Input      3 Bit       Adders := 1     
+	   2 Input      2 Bit       Adders := 2     
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	              512 Bit    Registers := 1     
+	               32 Bit    Registers := 2     
+	               24 Bit    Registers := 1     
+	               20 Bit    Registers := 2     
+	               16 Bit    Registers := 2     
+	               14 Bit    Registers := 1     
+	               13 Bit    Registers := 4     
+	               11 Bit    Registers := 1     
+	               10 Bit    Registers := 11    
+	                9 Bit    Registers := 1     
+	                8 Bit    Registers := 3     
+	                7 Bit    Registers := 5     
+	                6 Bit    Registers := 2     
+	                5 Bit    Registers := 4     
+	                4 Bit    Registers := 17    
+	                3 Bit    Registers := 3     
+	                2 Bit    Registers := 8     
+	                1 Bit    Registers := 52    
++---Muxes : 
+	   2 Input    512 Bit        Muxes := 1     
+	   2 Input     32 Bit        Muxes := 2     
+	   2 Input     26 Bit        Muxes := 2     
+	   2 Input     24 Bit        Muxes := 1     
+	   3 Input     20 Bit        Muxes := 1     
+	   2 Input     17 Bit        Muxes := 46    
+	   2 Input     16 Bit        Muxes := 13    
+	  15 Input     15 Bit        Muxes := 1     
+	   2 Input     15 Bit        Muxes := 17    
+	   2 Input     14 Bit        Muxes := 3     
+	  15 Input     14 Bit        Muxes := 1     
+	   2 Input     13 Bit        Muxes := 12    
+	   3 Input     13 Bit        Muxes := 1     
+	   2 Input     12 Bit        Muxes := 3     
+	   2 Input     11 Bit        Muxes := 2     
+	   2 Input     10 Bit        Muxes := 17    
+	   4 Input     10 Bit        Muxes := 2     
+	   2 Input      9 Bit        Muxes := 4     
+	   5 Input      9 Bit        Muxes := 1     
+	   7 Input      8 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 6     
+	   2 Input      7 Bit        Muxes := 4     
+	   2 Input      6 Bit        Muxes := 12    
+	  27 Input      5 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 2     
+	   8 Input      5 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 42    
+	   5 Input      4 Bit        Muxes := 3     
+	   4 Input      4 Bit        Muxes := 1     
+	  25 Input      3 Bit        Muxes := 1     
+	   8 Input      3 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 6     
+	   9 Input      3 Bit        Muxes := 1     
+	   5 Input      3 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 15    
+	   8 Input      2 Bit        Muxes := 1     
+	   3 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 145   
+	  15 Input      1 Bit        Muxes := 6     
+	   7 Input      1 Bit        Muxes := 7     
+	   4 Input      1 Bit        Muxes := 8     
+	   3 Input      1 Bit        Muxes := 2     
+	   8 Input      1 Bit        Muxes := 11    
+	   5 Input      1 Bit        Muxes := 2     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module dino_top 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 1     
+	   2 Input      6 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 4     
++---Registers : 
+	               32 Bit    Registers := 2     
+	                6 Bit    Registers := 1     
+	                4 Bit    Registers := 4     
+	                1 Bit    Registers := 8     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 2     
+	   2 Input     26 Bit        Muxes := 2     
+	   2 Input      9 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 6     
+	   2 Input      1 Bit        Muxes := 15    
+	   5 Input      1 Bit        Muxes := 1     
+Module clock_divider 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      2 Bit       Adders := 1     
++---Registers : 
+	                2 Bit    Registers := 1     
+Module vga_controller 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     10 Bit       Adders := 2     
++---Registers : 
+	               10 Bit    Registers := 2     
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   2 Input     10 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 2     
+Module debounce 
+Detailed RTL Component Info : 
++---Registers : 
+	                7 Bit    Registers := 1     
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 1     
+Module one_pulse 
+Detailed RTL Component Info : 
++---Registers : 
+	                1 Bit    Registers := 2     
+Module Ps2Interface 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     14 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 3     
++---Registers : 
+	               14 Bit    Registers := 1     
+	               11 Bit    Registers := 1     
+	                8 Bit    Registers := 1     
+	                4 Bit    Registers := 3     
+	                1 Bit    Registers := 10    
++---Muxes : 
+	  15 Input     15 Bit        Muxes := 1     
+	   2 Input     15 Bit        Muxes := 17    
+	   2 Input     14 Bit        Muxes := 3     
+	  15 Input     14 Bit        Muxes := 1     
+	   2 Input     11 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 5     
+	   2 Input      1 Bit        Muxes := 8     
+	  15 Input      1 Bit        Muxes := 6     
+Module KeyboardCtrl 
+Detailed RTL Component Info : 
++---Registers : 
+	                8 Bit    Registers := 2     
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 4     
++---Muxes : 
+	   7 Input      8 Bit        Muxes := 1     
+	  25 Input      3 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+	   7 Input      1 Bit        Muxes := 7     
+Module KeyboardDecoder 
+Detailed RTL Component Info : 
++---Registers : 
+	              512 Bit    Registers := 1     
+	               10 Bit    Registers := 1     
+	                1 Bit    Registers := 4     
++---Muxes : 
+	   2 Input    512 Bit        Muxes := 1     
+	   4 Input     10 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 3     
+	   2 Input      1 Bit        Muxes := 8     
+	   4 Input      1 Bit        Muxes := 7     
+Module div 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      7 Bit       Adders := 2     
++---Registers : 
+	                7 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   2 Input      7 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 4     
+Module TrigSignal 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     24 Bit       Adders := 1     
++---Registers : 
+	               24 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     24 Bit        Muxes := 1     
+Module PosCounter 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     20 Bit       Adders := 1     
++---Registers : 
+	               20 Bit    Registers := 2     
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   3 Input     20 Bit        Muxes := 1     
+	   3 Input      1 Bit        Muxes := 2     
+Module note_gen 
+Detailed RTL Component Info : 
++---Registers : 
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   2 Input     16 Bit        Muxes := 12    
+Module speaker_control 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      9 Bit       Adders := 1     
++---Registers : 
+	               16 Bit    Registers := 2     
+	                9 Bit    Registers := 1     
+Module dino_logic 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 11    
+	   3 Input     32 Bit       Adders := 10    
+	   3 Input     17 Bit       Adders := 9     
+	   2 Input     14 Bit       Adders := 10    
+	   3 Input     14 Bit       Adders := 10    
+	   4 Input     13 Bit       Adders := 4     
+	   2 Input     13 Bit       Adders := 10    
+	   3 Input     12 Bit       Adders := 15    
+	   2 Input     11 Bit       Adders := 3     
+	   3 Input     11 Bit       Adders := 4     
+	   2 Input     10 Bit       Adders := 38    
+	   3 Input     10 Bit       Adders := 9     
+	   2 Input      9 Bit       Adders := 3     
+	   2 Input      6 Bit       Adders := 1     
+	   2 Input      5 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 7     
+	   2 Input      3 Bit       Adders := 1     
+	   2 Input      2 Bit       Adders := 1     
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	               13 Bit    Registers := 4     
+	               10 Bit    Registers := 8     
+	                6 Bit    Registers := 1     
+	                5 Bit    Registers := 4     
+	                4 Bit    Registers := 9     
+	                3 Bit    Registers := 2     
+	                2 Bit    Registers := 7     
+	                1 Bit    Registers := 12    
++---Muxes : 
+	   2 Input     17 Bit        Muxes := 46    
+	   2 Input     16 Bit        Muxes := 1     
+	   2 Input     13 Bit        Muxes := 12    
+	   3 Input     13 Bit        Muxes := 1     
+	   2 Input     12 Bit        Muxes := 3     
+	   2 Input     11 Bit        Muxes := 1     
+	   2 Input     10 Bit        Muxes := 15    
+	   4 Input     10 Bit        Muxes := 1     
+	   2 Input      9 Bit        Muxes := 3     
+	   5 Input      9 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 6     
+	   2 Input      7 Bit        Muxes := 2     
+	   2 Input      6 Bit        Muxes := 11    
+	  27 Input      5 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 2     
+	   8 Input      5 Bit        Muxes := 1     
+	   5 Input      4 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 31    
+	   4 Input      4 Bit        Muxes := 1     
+	   8 Input      3 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 6     
+	   9 Input      3 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 12    
+	   8 Input      2 Bit        Muxes := 1     
+	   3 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 103   
+	   8 Input      1 Bit        Muxes := 11    
+	   5 Input      1 Bit        Muxes := 1     
+	   4 Input      1 Bit        Muxes := 1     
+Module SevenSegment 
+Detailed RTL Component Info : 
++---Registers : 
+	                4 Bit    Registers := 1     
++---Muxes : 
+	   5 Input      4 Bit        Muxes := 2     
+	   5 Input      3 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+Warning: Parallel synthesis criteria is not met 
+INFO: [Synth 8-5587] ROM size for "scancode_to_char" is below threshold of ROM address width. It will be mapped to LUTs
+DSP Report: Generating DSP sprite_addr1, operation Mode is: A*(B:0x274).
+DSP Report: operator sprite_addr1 is absorbed into DSP sprite_addr1.
+DSP Report: Generating DSP sprite_addr0, operation Mode is: PCIN+(A:0x0):B+(C:0x258).
+DSP Report: operator sprite_addr0 is absorbed into DSP sprite_addr0.
+DSP Report: Generating DSP sprite_addr0, operation Mode is: C+((D:0x1a)+A)*(B:0x274).
+DSP Report: operator sprite_addr0 is absorbed into DSP sprite_addr0.
+DSP Report: operator sprite_addr1 is absorbed into DSP sprite_addr0.
+DSP Report: operator sprite_addr2 is absorbed into DSP sprite_addr0.
+DSP Report: Generating DSP sprite_addr1, operation Mode is: ((D:0x1a)+A)*(B:0x274).
+DSP Report: operator sprite_addr1 is absorbed into DSP sprite_addr1.
+DSP Report: operator sprite_addr2 is absorbed into DSP sprite_addr1.
+DSP Report: Generating DSP sprite_addr0, operation Mode is: PCIN+(A:0x0):B+(C:0x96).
+DSP Report: operator sprite_addr0 is absorbed into DSP sprite_addr0.
+DSP Report: Generating DSP sprite_addr1, operation Mode is: ((D:0x1a)+A)*(B:0x274).
+DSP Report: operator sprite_addr1 is absorbed into DSP sprite_addr1.
+DSP Report: operator sprite_addr2 is absorbed into DSP sprite_addr1.
+DSP Report: Generating DSP sprite_addr0, operation Mode is: PCIN+(A:0x0):B+(C:0x12c).
+DSP Report: operator sprite_addr0 is absorbed into DSP sprite_addr0.
+DSP Report: Generating DSP sprite_addr1, operation Mode is: A*(B:0x274).
+DSP Report: operator sprite_addr1 is absorbed into DSP sprite_addr1.
+DSP Report: Generating DSP sprite_addr0, operation Mode is: PCIN+(A:0x0):B+(C:0x258).
+DSP Report: operator sprite_addr0 is absorbed into DSP sprite_addr0.
+DSP Report: Generating DSP sprite_addr0, operation Mode is: C+(A:0x274)*B.
+DSP Report: operator sprite_addr0 is absorbed into DSP sprite_addr0.
+DSP Report: operator sprite_addr1 is absorbed into DSP sprite_addr0.
+DSP Report: Generating DSP sprite_addr1, operation Mode is: (A:0x274)*B.
+DSP Report: operator sprite_addr1 is absorbed into DSP sprite_addr1.
+DSP Report: Generating DSP sprite_addr0, operation Mode is: PCIN+(A:0x0):B+(C:0x1e1).
+DSP Report: operator sprite_addr0 is absorbed into DSP sprite_addr0.
+DSP Report: Generating DSP sprite_addr1, operation Mode is: (A:0x274)*B.
+DSP Report: operator sprite_addr1 is absorbed into DSP sprite_addr1.
+DSP Report: Generating DSP sprite_addr0, operation Mode is: PCIN+(A:0x0):B+C.
+DSP Report: operator sprite_addr0 is absorbed into DSP sprite_addr0.
+DSP Report: Generating DSP sprite_addr1, operation Mode is: (A:0x274)*B.
+DSP Report: operator sprite_addr1 is absorbed into DSP sprite_addr1.
+DSP Report: Generating DSP sprite_addr0, operation Mode is: PCIN+(A:0x0):B+C.
+DSP Report: operator sprite_addr0 is absorbed into DSP sprite_addr0.
+DSP Report: Generating DSP sprite_addr1, operation Mode is: (A:0x274)*B.
+DSP Report: operator sprite_addr1 is absorbed into DSP sprite_addr1.
+DSP Report: Generating DSP sprite_addr0, operation Mode is: PCIN+(A:0x0):B+C.
+DSP Report: operator sprite_addr0 is absorbed into DSP sprite_addr0.
+DSP Report: Generating DSP sprite_addr1, operation Mode is: (A:0x274)*B.
+DSP Report: operator sprite_addr1 is absorbed into DSP sprite_addr1.
+DSP Report: Generating DSP sprite_addr1, operation Mode is: (A:0x274)*B.
+DSP Report: operator sprite_addr1 is absorbed into DSP sprite_addr1.
+DSP Report: Generating DSP sprite_addr1, operation Mode is: (A:0x274)*B.
+DSP Report: operator sprite_addr1 is absorbed into DSP sprite_addr1.
+WARNING: [Synth 8-3331] design dino_logic has unconnected port start_pulse
+INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/lock_status_reg[1]' (FDCE) to 'kbd_decoder/inst/lock_status_reg[0]'
+INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/lock_status_reg[2]' (FDCE) to 'kbd_decoder/inst/lock_status_reg[0]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (kbd_decoder/\inst/lock_status_reg[0] )
+INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[3]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[4]'
+INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[4]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[5]'
+INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[5]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[6]'
+INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[6]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (game_inst/\user_speed_reg[0] )
+INFO: [Synth 8-3886] merging instance 'sc/audio_right_reg[1]' (FDC) to 'sc/audio_right_reg[2]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_right_reg[2]' (FDC) to 'sc/audio_right_reg[0]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_right_reg[4]' (FDC) to 'sc/audio_right_reg[10]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_right_reg[5]' (FDC) to 'sc/audio_right_reg[6]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_right_reg[6]' (FDC) to 'sc/audio_right_reg[7]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_right_reg[7]' (FDC) to 'sc/audio_right_reg[8]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_right_reg[8]' (FDC) to 'sc/audio_right_reg[9]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_right_reg[10]' (FDC) to 'sc/audio_right_reg[11]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_right_reg[11]' (FDC) to 'sc/audio_right_reg[12]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_right_reg[12]' (FDC) to 'sc/audio_right_reg[13]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_right_reg[13]' (FDC) to 'sc/audio_right_reg[14]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_right_reg[14]' (FDC) to 'sc/audio_right_reg[15]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_left_reg[0]' (FDC) to 'sc/audio_right_reg[0]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_left_reg[1]' (FDC) to 'sc/audio_right_reg[0]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_left_reg[2]' (FDC) to 'sc/audio_right_reg[0]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_left_reg[4]' (FDC) to 'sc/audio_left_reg[10]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_left_reg[5]' (FDC) to 'sc/audio_left_reg[6]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_left_reg[6]' (FDC) to 'sc/audio_left_reg[7]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_left_reg[7]' (FDC) to 'sc/audio_left_reg[8]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_left_reg[8]' (FDC) to 'sc/audio_left_reg[9]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_left_reg[10]' (FDC) to 'sc/audio_left_reg[11]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_left_reg[11]' (FDC) to 'sc/audio_left_reg[12]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_left_reg[12]' (FDC) to 'sc/audio_left_reg[13]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_left_reg[13]' (FDC) to 'sc/audio_left_reg[14]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_left_reg[14]' (FDC) to 'sc/audio_left_reg[15]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (sc/\audio_right_reg[0] )
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[2]' (FDCE) to 'tone_freq_reg[1]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[3]' (FDCE) to 'tone_freq_reg[5]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[0]' (FDCE) to 'tone_freq_reg[31]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[21]' (FDPE) to 'tone_freq_reg[25]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[22]' (FDPE) to 'tone_freq_reg[25]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[23]' (FDPE) to 'tone_freq_reg[25]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[25]' (FDPE) to 'tone_freq_reg[20]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[12]' (FDPE) to 'tone_freq_reg[20]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[13]' (FDPE) to 'tone_freq_reg[20]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[14]' (FDPE) to 'tone_freq_reg[20]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[15]' (FDPE) to 'tone_freq_reg[20]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[17]' (FDPE) to 'tone_freq_reg[20]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[19]' (FDPE) to 'tone_freq_reg[20]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[31]' (FDCE) to 'tone_freq_reg[30]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[30]' (FDCE) to 'tone_freq_reg[29]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[28]' (FDCE) to 'tone_freq_reg[29]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[29]' (FDCE) to 'tone_freq_reg[27]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[18]' (FDCE) to 'tone_freq_reg[27]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[24]' (FDCE) to 'tone_freq_reg[27]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[26]' (FDCE) to 'tone_freq_reg[27]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[27]' (FDCE) to 'tone_freq_reg[16]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[6]' (FDCE) to 'tone_freq_reg[16]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[4]' (FDCE) to 'tone_freq_reg[5]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[11]' (FDCE) to 'tone_freq_reg[16]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[16]' (FDCE) to 'tone_freq_reg[10]'
+INFO: [Synth 8-3886] merging instance 'tone_freq_reg[9]' (FDCE) to 'tone_freq_reg[10]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\tone_freq_reg[10] )
+INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[1]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[0]'
+INFO: [Synth 8-3886] merging instance 'kbd_decoder/inst/tx_data_reg[2]' (FDCE) to 'kbd_decoder/inst/tx_data_reg[0]'
+INFO: [Synth 8-3886] merging instance 'sc/audio_right_reg[3]' (FDC) to 'sc/audio_left_reg[3]'
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:34 ; elapsed = 00:00:36 . Memory (MB): peak = 1181.148 ; gain = 455.496
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+ROM:
++-------------+-----------------------------+---------------+----------------+
+|Module Name  | RTL Object                  | Depth x Width | Implemented As | 
++-------------+-----------------------------+---------------+----------------+
+|Ps2Interface | parity_table                | 256x1         | LUT            | 
+|Ps2Interface | parity_table                | 256x1         | LUT            | 
+|KeyboardCtrl | Ps2Interface_i/parity_table | 256x1         | LUT            | 
+|KeyboardCtrl | Ps2Interface_i/parity_table | 256x1         | LUT            | 
++-------------+-----------------------------+---------------+----------------+
+
+
+DSP: Preliminary Mapping	Report (see note below)
++------------+--------------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping              | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+--------------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|dino_logic  | A*(B:0x274)              | 11     | 10     | -      | -      | 21     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|dino_logic  | PCIN+(A:0x0):B+(C:0x258) | 30     | 10     | 10     | -      | -1     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|dino_logic  | C+((D:0x1a)+A)*(B:0x274) | 10     | 10     | 10     | 5      | 17     | 0    | 0    | 0    | 0    | 0     | 0    | 0    | 
+|dino_logic  | ((D:0x1a)+A)*(B:0x274)   | 10     | 10     | -      | 5      | 21     | 0    | 0    | -    | 0    | 0     | 0    | 0    | 
+|dino_logic  | PCIN+(A:0x0):B+(C:0x96)  | 30     | 10     | 8      | -      | -1     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|dino_logic  | ((D:0x1a)+A)*(B:0x274)   | 10     | 10     | -      | 5      | 21     | 0    | 0    | -    | 0    | 0     | 0    | 0    | 
+|dino_logic  | PCIN+(A:0x0):B+(C:0x12c) | 30     | 10     | 9      | -      | -1     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|dino_logic  | A*(B:0x274)              | 11     | 10     | -      | -      | 21     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|dino_logic  | PCIN+(A:0x0):B+(C:0x258) | 30     | 10     | 10     | -      | -1     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|dino_logic  | C+(A:0x274)*B            | 9      | 10     | 9      | -      | 17     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|dino_logic  | (A:0x274)*B              | 9      | 10     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|dino_logic  | PCIN+(A:0x0):B+(C:0x1e1) | 30     | 9      | 9      | -      | -1     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|dino_logic  | (A:0x274)*B              | 9      | 10     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|dino_logic  | PCIN+(A:0x0):B+C         | 30     | 9      | 8      | -      | -1     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|dino_logic  | (A:0x274)*B              | 9      | 10     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|dino_logic  | PCIN+(A:0x0):B+C         | 30     | 9      | 9      | -      | -1     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|dino_logic  | (A:0x274)*B              | 9      | 10     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|dino_logic  | PCIN+(A:0x0):B+C         | 30     | 9      | 8      | -      | -1     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|dino_logic  | (A:0x274)*B              | 9      | 10     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|dino_logic  | (A:0x274)*B              | 9      | 10     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|dino_logic  | (A:0x274)*B              | 9      | 10     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++------------+--------------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:42 ; elapsed = 00:00:44 . Memory (MB): peak = 1208.574 ; gain = 482.922
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:44 ; elapsed = 00:00:45 . Memory (MB): peak = 1235.254 ; gain = 509.602
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:46 ; elapsed = 00:00:48 . Memory (MB): peak = 1379.453 ; gain = 653.801
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5365] Flop kbd_decoder/inst/Ps2Interface_i/ps2_clk_en_reg is being inverted and renamed to kbd_decoder/inst/Ps2Interface_i/ps2_clk_en_reg_inv.
+INFO: [Synth 8-5365] Flop kbd_decoder/inst/Ps2Interface_i/ps2_data_en_reg is being inverted and renamed to kbd_decoder/inst/Ps2Interface_i/ps2_data_en_reg_inv.
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \game_inst/sprite_rom  has unconnected pin wea[0]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \game_inst/sprite_rom  has unconnected pin dina[11]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \game_inst/sprite_rom  has unconnected pin dina[10]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \game_inst/sprite_rom  has unconnected pin dina[9]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \game_inst/sprite_rom  has unconnected pin dina[8]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \game_inst/sprite_rom  has unconnected pin dina[7]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \game_inst/sprite_rom  has unconnected pin dina[6]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \game_inst/sprite_rom  has unconnected pin dina[5]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \game_inst/sprite_rom  has unconnected pin dina[4]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \game_inst/sprite_rom  has unconnected pin dina[3]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \game_inst/sprite_rom  has unconnected pin dina[2]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \game_inst/sprite_rom  has unconnected pin dina[1]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \game_inst/sprite_rom  has unconnected pin dina[0]
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:50 ; elapsed = 00:00:51 . Memory (MB): peak = 1384.262 ; gain = 658.609
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:50 ; elapsed = 00:00:51 . Memory (MB): peak = 1384.262 ; gain = 658.609
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:50 ; elapsed = 00:00:52 . Memory (MB): peak = 1384.262 ; gain = 658.609
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:50 ; elapsed = 00:00:52 . Memory (MB): peak = 1384.262 ; gain = 658.609
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:50 ; elapsed = 00:00:52 . Memory (MB): peak = 1384.262 ; gain = 658.609
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:50 ; elapsed = 00:00:52 . Memory (MB): peak = 1384.262 ; gain = 658.609
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+--------------+----------+
+|      |BlackBox name |Instances |
++------+--------------+----------+
+|1     |blk_mem_gen_0 |         1|
++------+--------------+----------+
+
+Report Cell Usage: 
++------+--------------+------+
+|      |Cell          |Count |
++------+--------------+------+
+|1     |blk_mem_gen_0 |     1|
+|2     |BUFG          |     3|
+|3     |CARRY4        |   690|
+|4     |DSP48E1       |     9|
+|5     |DSP48E1_1     |     8|
+|6     |DSP48E1_2     |     1|
+|7     |DSP48E1_3     |     2|
+|8     |DSP48E1_4     |     1|
+|9     |LUT1          |   181|
+|10    |LUT2          |  1029|
+|11    |LUT3          |   874|
+|12    |LUT4          |  1299|
+|13    |LUT5          |   753|
+|14    |LUT6          |  1197|
+|15    |MUXF7         |     4|
+|16    |MUXF8         |     1|
+|17    |FDCE          |   950|
+|18    |FDPE          |    38|
+|19    |FDRE          |   135|
+|20    |FDSE          |     1|
+|21    |IBUF          |     6|
+|22    |IOBUF         |     2|
+|23    |OBUF          |    46|
++------+--------------+------+
+
+Report Instance Areas: 
++------+---------------------+----------------+------+
+|      |Instance             |Module          |Cells |
++------+---------------------+----------------+------+
+|1     |top                  |                |  7242|
+|2     |  B                  |sonic_top       |   453|
+|3     |    clk1             |div             |    21|
+|4     |    u1               |TrigSignal      |    64|
+|5     |    u2               |PosCounter      |   368|
+|6     |  db_duck            |debounce        |     9|
+|7     |  db_jump            |debounce_0      |    11|
+|8     |  db_pause           |debounce_1      |    10|
+|9     |  display_inst       |SevenSegment    |    50|
+|10    |  game_inst          |dino_logic      |  1907|
+|11    |  kbd_decoder        |KeyboardDecoder |  2447|
+|12    |    inst             |KeyboardCtrl    |   212|
+|13    |      Ps2Interface_i |Ps2Interface    |   177|
+|14    |    op               |one_pulse_2     |     3|
+|15    |  noteGen_00         |note_gen        |   399|
+|16    |  pclk_gen           |clock_divider   |     4|
+|17    |  pulse_pause        |one_pulse       |     2|
+|18    |  sc                 |speaker_control |    44|
+|19    |  vga_inst           |vga_controller  |  1617|
++------+---------------------+----------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:50 ; elapsed = 00:00:52 . Memory (MB): peak = 1384.262 ; gain = 658.609
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 13 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:44 ; elapsed = 00:00:50 . Memory (MB): peak = 1384.262 ; gain = 523.176
+Synthesis Optimization Complete : Time (s): cpu = 00:00:51 ; elapsed = 00:00:52 . Memory (MB): peak = 1384.262 ; gain = 658.609
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.059 . Memory (MB): peak = 1384.262 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 718 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1384.262 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 2 instances were transformed.
+  IOBUF => IOBUF (IBUF, OBUFT): 2 instances
+
 INFO: [Common 17-83] Releasing license: Synthesis
-4 Infos, 36 Warnings, 0 Critical Warnings and 2 Errors encountered.
-synth_design failed
-ERROR: [Common 17-69] Command failed: Synthesis failed - please see the console or run log file for details
-INFO: [Common 17-206] Exiting Vivado at Mon Dec 22 17:46:43 2025...
+142 Infos, 50 Warnings, 13 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:55 ; elapsed = 00:00:57 . Memory (MB): peak = 1384.262 ; gain = 927.250
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1384.262 ; gain = 0.000
+WARNING: [Constraints 18-5210] No constraints selected for write.
+Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
+INFO: [Common 17-1381] The checkpoint 'C:/Users/NTHU-328/Downloads/Hardware_Design_Lab_Final_Project/Final_Project/Final_Project.runs/synth_1/dino_top.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file dino_top_utilization_synth.rpt -pb dino_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Dec 23 01:20:19 2025...
