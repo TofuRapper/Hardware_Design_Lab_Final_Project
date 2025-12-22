@@ -37,12 +37,15 @@ module dino_logic (
     localparam S_RUN = 3'd2; 
     localparam S_PAUSE = 3'd3; 
     localparam S_OVER = 3'd4;
+    localparam S_LEADERBOARD = 3'd5;
+    localparam S_NAME_INPUT = 3'd6;
     reg [2:0] state;
 
     reg [9:0] dino_y;
     reg signed [9:0] dino_vel;
     reg signed [12:0] cactus_x [0:2]; // Increased width to allow larger off-screen values
     reg [9:0] score;
+    reg [3:0] score_ones, score_tens, score_hund, score_thou;
     reg prev_vsync;
     reg [1:0] cactus_type [0:2]; // 0 to 3
     reg [2:0] cactus_active;
@@ -58,7 +61,7 @@ module dino_logic (
     // Manual Drop Logic
     reg [9:0] drop_x;
     reg prev_key_drop;
-    wire drop_key_active = (key_down[9'hE072] || key_down[9'h073]); // Down Arrow (Extended or Numpad)
+    wire drop_key_active = (key_down[9'h172] || key_down[9'h073]); // Down Arrow (Extended or Numpad)
     wire key_drop_pressed = drop_key_active && !prev_key_drop;
 
     reg [1:0] selected_drop_type; // 0: Small, 1: Big, 2: Ptero
@@ -117,9 +120,14 @@ module dino_logic (
     reg [3:0] user_speed;       // 玩家設定的速度
     reg [5:0] blink_cnt;
 
-    wire key_enter_pressed = (key_down[9'h05A] || key_down[9'h029]); // Enter Key
+    reg prev_key_enter;
+    wire key_enter_down = (key_down[9'h05A] || key_down[9'h029]); // Enter Key
+    wire key_enter_pressed = key_enter_down && !prev_key_enter;
+
     wire key_1_pressed     = key_down[9'h016] || key_down[9'h069]; // Main 1 or Numpad 1
     wire key_2_pressed     = key_down[9'h01E] || key_down[9'h072]; // Main 2 or Numpad 2
+    
+    reg prev_key_pause;
     wire key_pause_raw     = key_down[9'h04D]; // P Key
     wire key_pause_trigger = (key_pause_raw && !prev_key_pause) || pause_pulse;
 
@@ -183,8 +191,49 @@ module dino_logic (
     assign key_jump = key_down[9'h01D] || jump_signal; // Only W (1D)
     assign key_duck = key_down[9'h01B] || sensor_duck || duck_signal;      // S (1B)
 
-    reg prev_key_pause;
     wire key_pause_pressed = (key_down[9'h04D] && !prev_key_pause) || pause_pulse;
+
+    reg [9:0] high_score;
+    reg [3:0] hs_ones, hs_tens, hs_hund, hs_thou;
+    
+    reg [4:0] player_name [0:2]; // 3 chars, 0-25 (A-Z), 26=Space
+    reg [1:0] name_idx;
+    reg [4:0] hs_name [0:2];     // High Score Name
+
+    function [4:0] scancode_to_char;
+        input [7:0] code;
+        begin
+            case(code)
+                8'h1C: scancode_to_char = 0; // A
+                8'h32: scancode_to_char = 1; // B
+                8'h21: scancode_to_char = 2; // C
+                8'h23: scancode_to_char = 3; // D
+                8'h24: scancode_to_char = 4; // E
+                8'h2B: scancode_to_char = 5; // F
+                8'h34: scancode_to_char = 6; // G
+                8'h33: scancode_to_char = 7; // H
+                8'h43: scancode_to_char = 8; // I
+                8'h3B: scancode_to_char = 9; // J
+                8'h42: scancode_to_char = 10; // K
+                8'h4B: scancode_to_char = 11; // L
+                8'h3A: scancode_to_char = 12; // M
+                8'h31: scancode_to_char = 13; // N
+                8'h44: scancode_to_char = 14; // O
+                8'h4D: scancode_to_char = 15; // P
+                8'h15: scancode_to_char = 16; // Q
+                8'h2D: scancode_to_char = 17; // R
+                8'h1B: scancode_to_char = 18; // S
+                8'h2C: scancode_to_char = 19; // T
+                8'h3C: scancode_to_char = 20; // U
+                8'h2A: scancode_to_char = 21; // V
+                8'h1D: scancode_to_char = 22; // W
+                8'h22: scancode_to_char = 23; // X
+                8'h35: scancode_to_char = 24; // Y
+                8'h1A: scancode_to_char = 25; // Z
+                default: scancode_to_char = 26; // Space/Invalid
+            endcase
+        end
+    endfunction
 
     always @(posedge pclk or posedge rst) begin
         if (rst) begin
@@ -197,6 +246,12 @@ module dino_logic (
             cactus_active[2] <= 1'b0;
             last_spawn_idx <= 2'b0;
             score <= 0;
+            score_ones <= 0; score_tens <= 0; score_hund <= 0; score_thou <= 0;
+            high_score <= 0;
+            hs_ones <= 0; hs_tens <= 0; hs_hund <= 0; hs_thou <= 0;
+            hs_name[0] <= 26; hs_name[1] <= 26; hs_name[2] <= 26;
+            player_name[0] <= 26; player_name[1] <= 26; player_name[2] <= 26;
+            name_idx <= 0;
             prev_vsync <= 0;
             next_spawn_offset  <= 0;
             cactus_type[0] <= 2'b0;
@@ -217,11 +272,13 @@ module dino_logic (
             selected_mode <= 0; 
             user_speed <= 4;    
             blink_cnt <= 0;
+            prev_key_enter <= 0;
             
         end else begin
             prev_vsync <= vsync;
             prev_key_valid <= key_valid;
             prev_key_pause <= key_down[9'h04D];
+            prev_key_enter <= key_enter_down;
             if (key_press_event) last_key <= last_change;
             if (frame_tick) blink_cnt <= blink_cnt + 1;
             case (state)
@@ -232,8 +289,29 @@ module dino_logic (
                     if (key_1_pressed) selected_mode <= 0;
                     if (key_2_pressed) selected_mode <= 1;
                     if (key_enter_pressed) begin
+                        state <= S_NAME_INPUT;
+                        player_name[0] <= 26; player_name[1] <= 26; player_name[2] <= 26;
+                        name_idx <= 0;
+                    end
+                end
+                S_NAME_INPUT: begin
+                    if (key_press_event) begin
+                        if (scancode_to_char(last_change[7:0]) != 26) begin
+                            if (name_idx < 3) begin
+                                player_name[name_idx] <= scancode_to_char(last_change[7:0]);
+                                name_idx <= name_idx + 1;
+                            end
+                        end else if (last_change[7:0] == 8'h66) begin // Backspace
+                            if (name_idx > 0) begin
+                                name_idx <= name_idx - 1;
+                                player_name[name_idx - 1] <= 26;
+                            end
+                        end
+                    end
+                    if (key_enter_pressed && name_idx > 0) begin // Must enter at least 1 char
                         state <= S_RUN;
                         score <= 0;
+                        score_ones <= 0; score_tens <= 0; score_hund <= 0; score_thou <= 0;
                         dino_y <= GROUND_Y - DINO_H;
                         cactus_x[0] <= 630; cactus_active[0] <= 1;
                         cactus_active[1] <= 0; cactus_active[2] <= 0;
@@ -241,7 +319,19 @@ module dino_logic (
                 end
                 S_RUN: begin
                     if (key_pause_trigger) state <= S_PAUSE;
-                    else if (collision) state <= S_OVER;
+                    else if (collision) begin
+                        state <= S_OVER;
+                        if (score > high_score) begin
+                            high_score <= score;
+                            hs_ones <= score_ones;
+                            hs_tens <= score_tens;
+                            hs_hund <= score_hund;
+                            hs_thou <= score_thou;
+                            hs_name[0] <= player_name[0];
+                            hs_name[1] <= player_name[1];
+                            hs_name[2] <= player_name[2];
+                        end
+                    end
                 end
                 S_PAUSE: begin
                     if (key_pause_trigger) state <= S_RUN;
@@ -252,7 +342,10 @@ module dino_logic (
                     if (spd_4) user_speed <= 10;
                     if (spd_5) user_speed <= 12;
                 end
-                S_OVER: if (start_pulse || key_enter_pressed) begin
+                S_OVER: if (key_enter_pressed) begin
+                            state <= S_LEADERBOARD;
+                        end
+                S_LEADERBOARD: if (key_enter_pressed) begin
                             state <= S_MENU;
                             dino_y <= GROUND_Y - DINO_H;
                             cactus_x[0] <= 630;
@@ -261,6 +354,7 @@ module dino_logic (
                             cactus_active[2] <= 1'b0;
                             last_spawn_idx <= 0;
                             score <= 0;
+                            score_ones <= 0; score_tens <= 0; score_hund <= 0; score_thou <= 0;
                             next_spawn_offset <= 0;
                             dino_vel <= 0;
                             cactus_type[0] <= 2'b0;
@@ -279,14 +373,39 @@ module dino_logic (
                 for(i = 0; i < 3; i = i + 1) begin
                     // Always move cactus to allow large gaps
                     cactus_x[i] <= cactus_x[i] - user_speed - (score[9:4]);
-                    if(cactus_active[i] && cactus_x[i] < -40) cactus_active[i] <= 1'b0;
+                    if(cactus_active[i] && cactus_x[i] < -40) begin
+                        cactus_active[i] <= 1'b0;
+                        score <= score + 1;
+                        if (score_ones == 9) begin
+                            score_ones <= 0;
+                            if (score_tens == 9) begin
+                                score_tens <= 0;
+                                if (score_hund == 9) begin
+                                    score_hund <= 0;
+                                    score_thou <= score_thou + 1;
+                                end else begin
+                                    score_hund <= score_hund + 1;
+                                end
+                            end else begin
+                                score_tens <= score_tens + 1;
+                            end
+                        end else begin
+                            score_ones <= score_ones + 1;
+                        end
+                    end
                 end
 
                 if(cactus_x[last_spawn_idx] < (640 - min_gap - next_spawn_offset[8:0])) begin
                     if(cactus_active[(last_spawn_idx + 1) % 3] == 0) begin
                         last_spawn_idx <= (last_spawn_idx + 1) % 3;
                         cactus_x[(last_spawn_idx + 1) % 3] <= 640;
-                        cactus_type[(last_spawn_idx + 1) % 3] <= random_val[9:8];
+                        
+                        // Prevent Ptero after Cactus to avoid impossible jumps
+                        if (cactus_type[last_spawn_idx] < 2 && random_val[9:8] >= 2)
+                            cactus_type[(last_spawn_idx + 1) % 3] <= 2'b00; // Force Small Cactus
+                        else
+                            cactus_type[(last_spawn_idx + 1) % 3] <= random_val[9:8];
+
                         cactus_active[(last_spawn_idx + 1) % 3] <= 1'b1;
                         next_spawn_offset <= random_val;
                     end
@@ -323,38 +442,8 @@ module dino_logic (
                         if (drop_obs_x < -40) drop_obs_active <= 1'b0;
                     end
                 end
-                /*
-                if (key_drop_pressed) begin
-                    if (!cactus_active[0]) begin
-                        cactus_active[0] <= 1'b1;
-                        cactus_x[0] <= drop_x;
-                        cactus_type[0] <= 1; // Big Cactus
-                    end else if (!cactus_active[1]) begin
-                        cactus_active[1] <= 1'b1;
-                        cactus_x[1] <= drop_x;
-                        cactus_type[1] <= 1;
-                    end else if (!cactus_active[2]) begin
-                        cactus_active[2] <= 1'b1;
-                        cactus_x[2] <= drop_x;
-                        cactus_type[2] <= 1;
-                    end
-                end
-                */
                 
-                prev_key_drop <= key_down[9'hE072]; // Moved to top of frame_tick block
-
-                /*
-                // Move Cactus
-                if (cactus_x > -40) begin
-                     cactus_x <= cactus_x - 4 - (score[9:4]);
-                end else begin
-                     // Reduced to 9-bit random value (0-511 pixels) to reduce blank time
-                     cactus_x <= 13'd640 + {4'b0, next_spawn_offset[8:0]}; 
-                     score <= score + 1;
-                     next_spawn_offset <= random_val;
-                     cactus_type <= random_val[9:8]; // Randomize cactus type
-                end
-                */
+                prev_key_drop <= key_down[9'h172]; // Moved to top of frame_tick block
 
                 // --- JUMP & DUCK LOGIC ---
                 // Sensor Logic: < 10cm = Duck, 20-50cm = Jump
@@ -618,6 +707,250 @@ module dino_logic (
         end
     end
 
+    reg score_pixel;
+    reg [3:0] current_digit;
+    reg [2:0] digit_x;
+    reg [2:0] digit_y;
+    
+    // High Score Display Logic
+    reg hs_pixel;
+    reg [3:0] hs_digit;
+    reg [2:0] hs_dx;
+    reg [2:0] hs_dy;
+
+    function get_digit_pixel;
+        input [3:0] digit;
+        input [2:0] x;
+        input [2:0] y;
+        begin
+            case(digit)
+                0: get_digit_pixel = (x==0 || x==4 || y==0 || y==6 || (x==0 && y>0 && y<6) || (x==4 && y>0 && y<6));
+                1: get_digit_pixel = (x==4);
+                2: get_digit_pixel = (y==0 || y==3 || y==6 || (x==4 && y<3) || (x==0 && y>3));
+                3: get_digit_pixel = (y==0 || y==3 || y==6 || x==4);
+                4: get_digit_pixel = ((x==0 && y<3) || y==3 || x==4);
+                5: get_digit_pixel = (y==0 || y==3 || y==6 || (x==0 && y<3) || (x==4 && y>3));
+                6: get_digit_pixel = (y==0 || y==3 || y==6 || x==0 || (x==4 && y>3));
+                7: get_digit_pixel = (y==0 || x==4);
+                8: get_digit_pixel = (y==0 || y==3 || y==6 || x==0 || x==4);
+                9: get_digit_pixel = (y==0 || y==3 || y==6 || x==4 || (x==0 && y<3));
+                default: get_digit_pixel = 0;
+            endcase
+        end
+    endfunction
+
+    always @(*) begin
+        score_pixel = 0;
+        current_digit = 0;
+        digit_x = 0;
+        digit_y = 0;
+        
+        // Current Score (Top Right)
+        if (v_cnt >= 20 && v_cnt < 34) begin
+            digit_y = (v_cnt - 20) >> 1;
+            if (h_cnt >= 550 && h_cnt < 560) begin
+                current_digit = score_thou;
+                digit_x = (h_cnt - 550) >> 1;
+                score_pixel = get_digit_pixel(current_digit, digit_x, digit_y);
+            end else if (h_cnt >= 564 && h_cnt < 574) begin
+                current_digit = score_hund;
+                digit_x = (h_cnt - 564) >> 1;
+                score_pixel = get_digit_pixel(current_digit, digit_x, digit_y);
+            end else if (h_cnt >= 578 && h_cnt < 588) begin
+                current_digit = score_tens;
+                digit_x = (h_cnt - 578) >> 1;
+                score_pixel = get_digit_pixel(current_digit, digit_x, digit_y);
+            end else if (h_cnt >= 592 && h_cnt < 602) begin
+                current_digit = score_ones;
+                digit_x = (h_cnt - 592) >> 1;
+                score_pixel = get_digit_pixel(current_digit, digit_x, digit_y);
+            end
+        end
+    end
+
+    reg [9:0] hs_base_x, hs_base_y;
+    always @(*) begin
+        if (state == S_LEADERBOARD) begin
+            hs_base_x = 200;
+            hs_base_y = 200;
+        end else begin
+            hs_base_x = 20;
+            hs_base_y = 20;
+        end
+    end
+
+    reg [4:0] char_code;
+    reg [2:0] char_dx, char_dy;
+    reg char_pixel;
+
+    function get_char_pixel_func;
+        input [4:0] code;
+        input [2:0] x;
+        input [2:0] y;
+        begin
+            case(code)
+                0: get_char_pixel_func = (y==0 || y==3 || x==0 || x==4); // A
+                1: get_char_pixel_func = (x==0 || y==0 || y==3 || y==6 || x==4); // B (Rough)
+                2: get_char_pixel_func = (y==0 || y==6 || x==0); // C
+                3: get_char_pixel_func = (x==0 || y==0 || y==6 || x==4); // D
+                4: get_char_pixel_func = (x==0 || y==0 || y==3 || y==6); // E
+                5: get_char_pixel_func = (x==0 || y==0 || y==3); // F
+                6: get_char_pixel_func = (x==0 || y==0 || y==6 || (x==4 && y>3) || (y==3 && x>2)); // G
+                7: get_char_pixel_func = (x==0 || x==4 || y==3); // H
+                8: get_char_pixel_func = (x==2 || y==0 || y==6); // I
+                9: get_char_pixel_func = (x==4 || y==6 || (x==0 && y>4)); // J
+                10: get_char_pixel_func = (x==0 || (x==4 && (y==0 || y==6)) || (x==2 && y==3) || (x==3 && (y==2 || y==4))); // K
+                11: get_char_pixel_func = (x==0 || y==6); // L
+                12: get_char_pixel_func = (x==0 || x==4 || (y==1 && (x==1 || x==3)) || (y==2 && x==2)); // M
+                13: get_char_pixel_func = (x==0 || x==4 || (x==y)); // N (Rough)
+                14: get_char_pixel_func = (x==0 || x==4 || y==0 || y==6); // O
+                15: get_char_pixel_func = (x==0 || y==0 || y==3 || (x==4 && y<3)); // P
+                16: get_char_pixel_func = (x==0 || x==4 || y==0 || y==6 || (x==3 && y==5)); // Q
+                17: get_char_pixel_func = (x==0 || y==0 || y==3 || (x==4 && y<3) || (x==y && y>3)); // R
+                18: get_char_pixel_func = (y==0 || y==3 || y==6 || (x==0 && y<3) || (x==4 && y>3)); // S
+                19: get_char_pixel_func = (y==0 || x==2); // T
+                20: get_char_pixel_func = (x==0 || x==4 || y==6); // U
+                21: get_char_pixel_func = ((x==0 || x==4) && y<5) || (y==6 && x==2); // V
+                22: get_char_pixel_func = (x==0 || x==4 || (y==5 && (x==1 || x==3)) || (y==4 && x==2)); // W
+                23: get_char_pixel_func = (x==0 || x==4 || (y==3 && x==2)); // X (Rough)
+                24: get_char_pixel_func = ((x==0 || x==4) && y<3) || (x==2 && y>=3); // Y
+                25: get_char_pixel_func = (y==0 || y==6 || (x+y==6)); // Z (Rough)
+                default: get_char_pixel_func = 0;
+            endcase
+        end
+    endfunction
+
+    always @(*) begin
+        hs_pixel = 0;
+        hs_digit = 0;
+        hs_dx = 0;
+        hs_dy = 0;
+        char_pixel = 0;
+        char_code = 26;
+        char_dx = 0;
+        char_dy = 0;
+
+        // Name Input Display
+        if (state == S_NAME_INPUT) begin
+            if (v_cnt >= 200 && v_cnt < 214) begin
+                char_dy = (v_cnt - 200) >> 1;
+                // Char 1
+                if (h_cnt >= 280 && h_cnt < 290) begin
+                    char_code = player_name[0];
+                    char_dx = (h_cnt - 280) >> 1;
+                    char_pixel = get_char_pixel_func(char_code, char_dx, char_dy);
+                    if (name_idx == 0 && blink_cnt[5]) char_pixel = 1; // Cursor
+                end
+                // Char 2
+                else if (h_cnt >= 294 && h_cnt < 304) begin
+                    char_code = player_name[1];
+                    char_dx = (h_cnt - 294) >> 1;
+                    char_pixel = get_char_pixel_func(char_code, char_dx, char_dy);
+                    if (name_idx == 1 && blink_cnt[5]) char_pixel = 1; // Cursor
+                end
+                // Char 3
+                else if (h_cnt >= 308 && h_cnt < 318) begin
+                    char_code = player_name[2];
+                    char_dx = (h_cnt - 308) >> 1;
+                    char_pixel = get_char_pixel_func(char_code, char_dx, char_dy);
+                    if (name_idx == 2 && blink_cnt[5]) char_pixel = 1; // Cursor
+                end
+            end
+        end
+
+        // High Score (Leaderboard only)
+        if (state == S_LEADERBOARD && v_cnt >= hs_base_y && v_cnt < hs_base_y + 14) begin
+            hs_dy = (v_cnt - hs_base_y) >> 1;
+            // Display Name
+            if (h_cnt >= hs_base_x - 90 && h_cnt < hs_base_x - 80) begin
+                char_code = hs_name[0];
+                char_dx = (h_cnt - (hs_base_x - 90)) >> 1;
+                char_pixel = get_char_pixel_func(char_code, char_dx, char_dy);
+            end else if (h_cnt >= hs_base_x - 76 && h_cnt < hs_base_x - 66) begin
+                char_code = hs_name[1];
+                char_dx = (h_cnt - (hs_base_x - 76)) >> 1;
+                char_pixel = get_char_pixel_func(char_code, char_dx, char_dy);
+            end else if (h_cnt >= hs_base_x - 62 && h_cnt < hs_base_x - 52) begin
+                char_code = hs_name[2];
+                char_dx = (h_cnt - (hs_base_x - 62)) >> 1;
+                char_pixel = get_char_pixel_func(char_code, char_dx, char_dy);
+            end
+            // Display 'HIGHSCORE'
+            // H
+            else if (h_cnt >= hs_base_x && h_cnt < hs_base_x + 10) begin
+                char_code = 7; // H
+                char_dx = (h_cnt - hs_base_x) >> 1;
+                char_pixel = get_char_pixel_func(char_code, char_dx, hs_dy);
+            end
+            // I
+            else if (h_cnt >= hs_base_x + 12 && h_cnt < hs_base_x + 22) begin
+                char_code = 8; // I
+                char_dx = (h_cnt - (hs_base_x + 12)) >> 1;
+                char_pixel = get_char_pixel_func(char_code, char_dx, hs_dy);
+            end
+            // G
+            else if (h_cnt >= hs_base_x + 24 && h_cnt < hs_base_x + 34) begin
+                char_code = 6; // G
+                char_dx = (h_cnt - (hs_base_x + 24)) >> 1;
+                char_pixel = get_char_pixel_func(char_code, char_dx, hs_dy);
+            end
+            // H
+            else if (h_cnt >= hs_base_x + 36 && h_cnt < hs_base_x + 46) begin
+                char_code = 7; // H
+                char_dx = (h_cnt - (hs_base_x + 36)) >> 1;
+                char_pixel = get_char_pixel_func(char_code, char_dx, hs_dy);
+            end
+            // S
+            else if (h_cnt >= hs_base_x + 48 && h_cnt < hs_base_x + 58) begin
+                char_code = 18; // S
+                char_dx = (h_cnt - (hs_base_x + 48)) >> 1;
+                char_pixel = get_char_pixel_func(char_code, char_dx, hs_dy);
+            end
+            // C
+            else if (h_cnt >= hs_base_x + 60 && h_cnt < hs_base_x + 70) begin
+                char_code = 2; // C
+                char_dx = (h_cnt - (hs_base_x + 60)) >> 1;
+                char_pixel = get_char_pixel_func(char_code, char_dx, hs_dy);
+            end
+            // O
+            else if (h_cnt >= hs_base_x + 72 && h_cnt < hs_base_x + 82) begin
+                char_code = 14; // O
+                char_dx = (h_cnt - (hs_base_x + 72)) >> 1;
+                char_pixel = get_char_pixel_func(char_code, char_dx, hs_dy);
+            end
+            // R
+            else if (h_cnt >= hs_base_x + 84 && h_cnt < hs_base_x + 94) begin
+                char_code = 17; // R
+                char_dx = (h_cnt - (hs_base_x + 84)) >> 1;
+                char_pixel = get_char_pixel_func(char_code, char_dx, hs_dy);
+            end
+            // E
+            else if (h_cnt >= hs_base_x + 96 && h_cnt < hs_base_x + 106) begin
+                char_code = 4; // E
+                char_dx = (h_cnt - (hs_base_x + 96)) >> 1;
+                char_pixel = get_char_pixel_func(char_code, char_dx, hs_dy);
+            end
+            // Score digits
+            else if (h_cnt >= hs_base_x + 120 && h_cnt < hs_base_x + 130) begin
+                hs_digit = hs_thou;
+                hs_dx = (h_cnt - (hs_base_x + 120)) >> 1;
+                hs_pixel = get_digit_pixel(hs_digit, hs_dx, hs_dy);
+            end else if (h_cnt >= hs_base_x + 134 && h_cnt < hs_base_x + 144) begin
+                hs_digit = hs_hund;
+                hs_dx = (h_cnt - (hs_base_x + 134)) >> 1;
+                hs_pixel = get_digit_pixel(hs_digit, hs_dx, hs_dy);
+            end else if (h_cnt >= hs_base_x + 148 && h_cnt < hs_base_x + 158) begin
+                hs_digit = hs_tens;
+                hs_dx = (h_cnt - (hs_base_x + 148)) >> 1;
+                hs_pixel = get_digit_pixel(hs_digit, hs_dx, hs_dy);
+            end else if (h_cnt >= hs_base_x + 162 && h_cnt < hs_base_x + 172) begin
+                hs_digit = hs_ones;
+                hs_dx = (h_cnt - (hs_base_x + 162)) >> 1;
+                hs_pixel = get_digit_pixel(hs_digit, hs_dx, hs_dy);
+            end
+        end
+    end
+
     always @(*) begin
         // LED Debugging
         led_out = 16'h0000;
@@ -627,17 +960,6 @@ module dino_logic (
         led_out[14:12] = state;
 
         pixel_out = 12'h000;
-
-        /*
-        // Arrow Logic
-        if (state == S_RUN && v_cnt >= 50 && v_cnt < 70 &&
-            h_cnt + 10 >= drop_x && h_cnt <= drop_x + 10) begin
-            
-            if ( (h_cnt > drop_x ? (h_cnt - drop_x) : (drop_x - h_cnt)) < (70 - v_cnt) ) begin
-                 pixel_out = 12'hF00; // Red Arrow
-            end
-        end
-        */
         
         // Priority: Sprites -> Ground -> Background
         // Check if sprite_data is not "transparent" (assuming black 0x000 is transparent)
@@ -649,9 +971,12 @@ module dino_logic (
              // But since we don't easily know that here without pipelining, 
              // we'll just trust the non-black pixel output.
              // For better precision, we should pipeline the "is_dino" / "is_cactus" signals.
-             if(state == S_RUN || state == S_PAUSE || state == S_MENU || state == S_MODE_SELECT || state == S_OVER) pixel_out = 12'h000;
+             if(state == S_RUN || state == S_PAUSE || state == S_MENU || state == S_MODE_SELECT || state == S_OVER || state == S_LEADERBOARD || state == S_NAME_INPUT) pixel_out = 12'h000;
              pixel_out = sprite_data;
         end
+        
+        if ((state == S_LEADERBOARD && (hs_pixel || char_pixel)) || score_pixel) pixel_out = 12'hFFF;
+        
         else if (v_cnt == GROUND_Y && state == S_RUN) begin
              pixel_out = 12'hFFF;
         end
