@@ -61,7 +61,7 @@ module dino_logic (
     // Manual Drop Logic
     reg [9:0] drop_x;
     reg prev_key_drop;
-    wire drop_key_active = (key_down[9'h172] || key_down[9'h073]); // Down Arrow (Extended or Numpad)
+    wire drop_key_active = (key_down[9'h172] || key_down[9'h073] || key_down[9'h072]); // Down Arrow (Extended or Numpad)
     wire key_drop_pressed = drop_key_active && !prev_key_drop;
 
     reg [1:0] selected_drop_type; // 0: Small, 1: Big, 2: Ptero
@@ -295,7 +295,7 @@ module dino_logic (
                     end
                 end
                 S_NAME_INPUT: begin
-                    if (key_press_event) begin
+                    if (key_valid && !prev_key_valid && key_down[last_change]) begin  // Accept any key press, not just different ones
                         if (scancode_to_char(last_change[7:0]) != 26) begin
                             if (name_idx < 3) begin
                                 player_name[name_idx] <= scancode_to_char(last_change[7:0]);
@@ -571,7 +571,7 @@ module dino_logic (
         endcase
     end
 
-    always @(*) begin
+always @(*) begin
         // Default address (points to transparent/background part of image if possible)
         sprite_addr = 0; 
         dx = 0; dy = 0; sp_x = 0;
@@ -634,6 +634,7 @@ module dino_logic (
                 sprite_addr = (dy >> 1) * IMG_WIDTH + (sp_x + (dx >> 1));
             end
         end
+        // Manual Drop Cursor (Only visible in RUN)
         else if (state == S_RUN && 
                  h_cnt >= drop_x && h_cnt < drop_x + prev_w &&
                  v_cnt >= 50 && v_cnt < 50 + prev_h) begin
@@ -641,8 +642,8 @@ module dino_logic (
             cy = v_cnt - 50;
             sprite_addr = (cy >> 1) * IMG_WIDTH + (prev_sp + (cx >> 1));
         end
-        // Dino Rendering (Use curr_dino_h to crop height when ducking)
-        else if (h_cnt >= DINO_X && h_cnt < DINO_X + curr_dino_w &&
+        // Dino Rendering - Added check: state != S_OVER
+        else if (state != S_OVER && h_cnt >= DINO_X && h_cnt < DINO_X + curr_dino_w &&
             v_cnt >= dino_y && v_cnt < dino_y + curr_dino_h) begin
             
             dx = h_cnt - DINO_X;
@@ -654,8 +655,8 @@ module dino_logic (
             
             sprite_addr = (dy >> 1) * IMG_WIDTH + (sp_x + (dx >> 1));
         end
-        //Dropped Obstacle Rendering
-        else if (drop_obs_active && 
+        // Dropped Obstacle Rendering - Added check: state != S_OVER
+        else if (state != S_OVER && drop_obs_active && 
                  h_cnt >= drop_obs_x && h_cnt < drop_obs_x + d_obs_w && 
                  v_cnt >= drop_obs_y && v_cnt < drop_obs_y + d_obs_h) begin
             
@@ -664,7 +665,8 @@ module dino_logic (
             // Use Big Cactus Sprite for dropped object
             sprite_addr = (cy >> 1) * IMG_WIDTH + (d_render_sp + (cx >> 1));
         end
-        else begin
+        // Cactus/Ptero Rendering Loop - Changed 'else' to 'else if' with check
+        else if (state != S_OVER) begin
             for(i = 0; i < 3; i = i + 1) begin
                 if(cactus_active[i]) begin
                     // Determine dimensions and sprite based on type
@@ -771,8 +773,11 @@ module dino_logic (
     reg [9:0] hs_base_x, hs_base_y;
     always @(*) begin
         if (state == S_LEADERBOARD) begin
-            hs_base_x = 200;
+            hs_base_x = 280;
             hs_base_y = 200;
+        end else if (state == S_OVER) begin
+            hs_base_x = 280;
+            hs_base_y = 240;
         end else begin
             hs_base_x = 20;
             hs_base_y = 20;
@@ -858,94 +863,53 @@ module dino_logic (
             end
         end
 
-        // High Score (Leaderboard only)
-        if (state == S_LEADERBOARD && v_cnt >= hs_base_y && v_cnt < hs_base_y + 14) begin
+        // High Score (Display only in S_OVER)
+        if (state == S_OVER && v_cnt >= hs_base_y && v_cnt < hs_base_y + 14) begin
             hs_dy = (v_cnt - hs_base_y) >> 1;
-            // Display Name
-            if (h_cnt >= hs_base_x - 90 && h_cnt < hs_base_x - 80) begin
-                char_code = hs_name[0];
-                char_dx = (h_cnt - (hs_base_x - 90)) >> 1;
-                char_pixel = get_char_pixel_func(char_code, char_dx, char_dy);
-            end else if (h_cnt >= hs_base_x - 76 && h_cnt < hs_base_x - 66) begin
-                char_code = hs_name[1];
-                char_dx = (h_cnt - (hs_base_x - 76)) >> 1;
-                char_pixel = get_char_pixel_func(char_code, char_dx, char_dy);
-            end else if (h_cnt >= hs_base_x - 62 && h_cnt < hs_base_x - 52) begin
-                char_code = hs_name[2];
-                char_dx = (h_cnt - (hs_base_x - 62)) >> 1;
-                char_pixel = get_char_pixel_func(char_code, char_dx, char_dy);
-            end
-            // Display 'HIGHSCORE'
+            // Display 'HIGHSCORE' at S_OVER
             // H
-            else if (h_cnt >= hs_base_x && h_cnt < hs_base_x + 10) begin
-                char_code = 7; // H
-                char_dx = (h_cnt - hs_base_x) >> 1;
-                char_pixel = get_char_pixel_func(char_code, char_dx, hs_dy);
-            end
+            if (h_cnt >= hs_base_x && h_cnt < hs_base_x + 10)
+                hs_pixel = (h_cnt == hs_base_x || h_cnt == hs_base_x + 8 || (v_cnt == hs_base_y + 6 || v_cnt == hs_base_y + 7));
             // I
-            else if (h_cnt >= hs_base_x + 12 && h_cnt < hs_base_x + 22) begin
-                char_code = 8; // I
-                char_dx = (h_cnt - (hs_base_x + 12)) >> 1;
-                char_pixel = get_char_pixel_func(char_code, char_dx, hs_dy);
-            end
+            else if (h_cnt >= hs_base_x + 12 && h_cnt < hs_base_x + 22)
+                hs_pixel = (h_cnt == hs_base_x + 16 || v_cnt == hs_base_y || v_cnt == hs_base_y + 13);
             // G
-            else if (h_cnt >= hs_base_x + 24 && h_cnt < hs_base_x + 34) begin
-                char_code = 6; // G
-                char_dx = (h_cnt - (hs_base_x + 24)) >> 1;
-                char_pixel = get_char_pixel_func(char_code, char_dx, hs_dy);
-            end
+            else if (h_cnt >= hs_base_x + 24 && h_cnt < hs_base_x + 34)
+                hs_pixel = get_char_pixel_func(6, (h_cnt - (hs_base_x + 24)) >> 1, hs_dy);
             // H
-            else if (h_cnt >= hs_base_x + 36 && h_cnt < hs_base_x + 46) begin
-                char_code = 7; // H
-                char_dx = (h_cnt - (hs_base_x + 36)) >> 1;
-                char_pixel = get_char_pixel_func(char_code, char_dx, hs_dy);
-            end
+            else if (h_cnt >= hs_base_x + 36 && h_cnt < hs_base_x + 46)
+                hs_pixel = (h_cnt == hs_base_x + 36 || h_cnt == hs_base_x + 44 || (v_cnt == hs_base_y + 6 || v_cnt == hs_base_y + 7));
             // S
-            else if (h_cnt >= hs_base_x + 48 && h_cnt < hs_base_x + 58) begin
-                char_code = 18; // S
-                char_dx = (h_cnt - (hs_base_x + 48)) >> 1;
-                char_pixel = get_char_pixel_func(char_code, char_dx, hs_dy);
-            end
+            else if (h_cnt >= hs_base_x + 48 && h_cnt < hs_base_x + 58)
+                hs_pixel = get_char_pixel_func(18, (h_cnt - (hs_base_x + 48)) >> 1, hs_dy);
             // C
-            else if (h_cnt >= hs_base_x + 60 && h_cnt < hs_base_x + 70) begin
-                char_code = 2; // C
-                char_dx = (h_cnt - (hs_base_x + 60)) >> 1;
-                char_pixel = get_char_pixel_func(char_code, char_dx, hs_dy);
-            end
+            else if (h_cnt >= hs_base_x + 60 && h_cnt < hs_base_x + 70)
+                hs_pixel = get_char_pixel_func(2, (h_cnt - (hs_base_x + 60)) >> 1, hs_dy);
             // O
-            else if (h_cnt >= hs_base_x + 72 && h_cnt < hs_base_x + 82) begin
-                char_code = 14; // O
-                char_dx = (h_cnt - (hs_base_x + 72)) >> 1;
-                char_pixel = get_char_pixel_func(char_code, char_dx, hs_dy);
-            end
+            else if (h_cnt >= hs_base_x + 72 && h_cnt < hs_base_x + 82)
+                hs_pixel = get_char_pixel_func(14, (h_cnt - (hs_base_x + 72)) >> 1, hs_dy);
             // R
-            else if (h_cnt >= hs_base_x + 84 && h_cnt < hs_base_x + 94) begin
-                char_code = 17; // R
-                char_dx = (h_cnt - (hs_base_x + 84)) >> 1;
-                char_pixel = get_char_pixel_func(char_code, char_dx, hs_dy);
-            end
+            else if (h_cnt >= hs_base_x + 84 && h_cnt < hs_base_x + 94)
+                hs_pixel = get_char_pixel_func(17, (h_cnt - (hs_base_x + 84)) >> 1, hs_dy);
             // E
-            else if (h_cnt >= hs_base_x + 96 && h_cnt < hs_base_x + 106) begin
-                char_code = 4; // E
-                char_dx = (h_cnt - (hs_base_x + 96)) >> 1;
-                char_pixel = get_char_pixel_func(char_code, char_dx, hs_dy);
-            end
+            else if (h_cnt >= hs_base_x + 96 && h_cnt < hs_base_x + 106)
+                hs_pixel = get_char_pixel_func(4, (h_cnt - (hs_base_x + 96)) >> 1, hs_dy);
             // Score digits
-            else if (h_cnt >= hs_base_x + 120 && h_cnt < hs_base_x + 130) begin
+            else if (h_cnt >= hs_base_x + 110 && h_cnt < hs_base_x + 120) begin
                 hs_digit = hs_thou;
-                hs_dx = (h_cnt - (hs_base_x + 120)) >> 1;
+                hs_dx = (h_cnt - (hs_base_x + 110)) >> 1;
                 hs_pixel = get_digit_pixel(hs_digit, hs_dx, hs_dy);
-            end else if (h_cnt >= hs_base_x + 134 && h_cnt < hs_base_x + 144) begin
+            end else if (h_cnt >= hs_base_x + 124 && h_cnt < hs_base_x + 134) begin
                 hs_digit = hs_hund;
-                hs_dx = (h_cnt - (hs_base_x + 134)) >> 1;
+                hs_dx = (h_cnt - (hs_base_x + 124)) >> 1;
                 hs_pixel = get_digit_pixel(hs_digit, hs_dx, hs_dy);
-            end else if (h_cnt >= hs_base_x + 148 && h_cnt < hs_base_x + 158) begin
+            end else if (h_cnt >= hs_base_x + 138 && h_cnt < hs_base_x + 148) begin
                 hs_digit = hs_tens;
-                hs_dx = (h_cnt - (hs_base_x + 148)) >> 1;
+                hs_dx = (h_cnt - (hs_base_x + 138)) >> 1;
                 hs_pixel = get_digit_pixel(hs_digit, hs_dx, hs_dy);
-            end else if (h_cnt >= hs_base_x + 162 && h_cnt < hs_base_x + 172) begin
+            end else if (h_cnt >= hs_base_x + 152 && h_cnt < hs_base_x + 162) begin
                 hs_digit = hs_ones;
-                hs_dx = (h_cnt - (hs_base_x + 162)) >> 1;
+                hs_dx = (h_cnt - (hs_base_x + 152)) >> 1;
                 hs_pixel = get_digit_pixel(hs_digit, hs_dx, hs_dy);
             end
         end
@@ -975,7 +939,7 @@ module dino_logic (
              pixel_out = sprite_data;
         end
         
-        if ((state == S_LEADERBOARD && (hs_pixel || char_pixel)) || score_pixel) pixel_out = 12'hFFF;
+        if (score_pixel || hs_pixel || char_pixel) pixel_out = 12'hFFF;
         
         else if (v_cnt == GROUND_Y && state == S_RUN) begin
              pixel_out = 12'hFFF;

@@ -65,7 +65,6 @@ module dino_top (
     dino_logic game_inst (
         .pclk(pclk),
         .rst(rst),
-        .start_pulse(start_pulse),
         .jump_signal(jump_db),
         .duck_signal(duck_db),
         .pause_pulse(pause_pulse),

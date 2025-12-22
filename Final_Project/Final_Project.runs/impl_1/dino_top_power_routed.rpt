@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date             : Mon Dec 22 15:56:27 2025
+| Date             : Mon Dec 22 17:36:14 2025
 | Host             : LAPTOP-9C9D7G8P running 64-bit major release  (build 9200)
 | Command          : report_power -file dino_top_power_routed.rpt -pb dino_top_power_summary_routed.pb -rpx dino_top_power_routed.rpx
 | Design           : dino_top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.135        |
+| Total On-Chip Power (W)  | 0.139        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.061        |
+| Dynamic (W)              | 0.065        |
 | Device Static (W)        | 0.074        |
 | Effective TJA (C/W)      | 5.0          |
 | Max Ambient (C)          | 84.3         |
@@ -53,19 +53,19 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.003 |        3 |       --- |             --- |
-| Slice Logic    |     0.007 |     4213 |       --- |             --- |
-|   LUT as Logic |     0.007 |     2251 |     20800 |           10.82 |
-|   CARRY4       |    <0.001 |      395 |      8150 |            4.85 |
-|   Register     |    <0.001 |      561 |     41600 |            1.35 |
+| Slice Logic    |     0.008 |     5921 |       --- |             --- |
+|   LUT as Logic |     0.007 |     3185 |     20800 |           15.31 |
+|   CARRY4       |    <0.001 |      432 |      8150 |            5.30 |
+|   Register     |    <0.001 |     1081 |     41600 |            2.60 |
+|   F7/F8 Muxes  |    <0.001 |      159 |     32600 |            0.49 |
 |   BUFG         |    <0.001 |        2 |        32 |            6.25 |
-|   F7/F8 Muxes  |    <0.001 |       53 |     32600 |            0.16 |
-|   Others       |     0.000 |      150 |       --- |             --- |
-| Signals        |     0.008 |     3794 |       --- |             --- |
+|   Others       |     0.000 |      149 |       --- |             --- |
+| Signals        |     0.009 |     4620 |       --- |             --- |
 | Block RAM      |     0.003 |       44 |        50 |           88.00 |
 | DSPs           |     0.003 |       21 |        90 |           23.33 |
-| I/O            |     0.038 |       50 |       106 |           47.17 |
+| I/O            |     0.039 |       50 |       106 |           47.17 |
 | Static Power   |     0.074 |          |           |                 |
-| Total          |     0.135 |          |           |                 |
+| Total          |     0.139 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -75,7 +75,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.034 |       0.023 |      0.011 |
+| Vccint    |       1.000 |     0.037 |       0.026 |      0.011 |
 | Vccaux    |       1.800 |     0.014 |       0.001 |      0.013 |
 | Vcco33    |       3.300 |     0.012 |       0.011 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -141,19 +141,17 @@ Table of Contents
 3.1 By Hierarchy
 ----------------
 
-+----------------------+-----------+
-| Name                 | Power (W) |
-+----------------------+-----------+
-| dino_top             |     0.061 |
-|   B                  |     0.005 |
-|     u2               |     0.005 |
-|   game_inst          |     0.011 |
-|     sprite_rom       |     0.004 |
-|       U0             |     0.004 |
-|   kbd_decoder        |     0.002 |
-|     inst             |     0.001 |
-|       Ps2Interface_i |     0.001 |
-|   vga_inst           |     0.003 |
-+----------------------+-----------+
++----------------+-----------+
+| Name           | Power (W) |
++----------------+-----------+
+| dino_top       |     0.065 |
+|   B            |     0.005 |
+|     u2         |     0.005 |
+|   game_inst    |     0.012 |
+|     sprite_rom |     0.005 |
+|       U0       |     0.005 |
+|   kbd_decoder  |     0.003 |
+|   vga_inst     |     0.005 |
++----------------+-----------+
 
 
