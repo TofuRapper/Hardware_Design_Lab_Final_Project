@@ -489,32 +489,32 @@ module dino_logic (
         cx = 0; cy = 0;
 
         if(state == S_MENU) begin
-            if (h_cnt >= 300 && h_cnt < (300 + TITLE_W) &&
+            if (h_cnt >= 245 && h_cnt < (245 + TITLE_W) &&
                 v_cnt >= 100 && v_cnt < 100 + TITLE_H) begin
-                cx = h_cnt - 300;
+                cx = h_cnt - 245;
                 cy = v_cnt - 100;
                 sprite_addr = (SP_TITLE_START_Y +cy) * IMG_WIDTH + (SP_TITLE_START_X + cx);
             end
-            if (h_cnt >= 300 && h_cnt < (320 + WORD_W) &&
+            if (h_cnt >= 245 && h_cnt < (245 + WORD_W) &&
                 v_cnt >= 300 && v_cnt < 300 + WORD_H) begin
-                cx = h_cnt - 300;
+                cx = h_cnt - 245;
                 cy = v_cnt - 300;
                 sprite_addr = (SP_WORD_Y + cy) * IMG_WIDTH + (SP_WORD_X + cx);
             end
         end
         else if(state == S_MODE_SELECT) begin
-            if (h_cnt >= 200 && h_cnt < 200 + MODE_ICON_W &&
+            if (h_cnt >= 100 && h_cnt < 100 + MODE_ICON_W &&
                 v_cnt >= 200 && v_cnt < 200 + MODE_ICON_H) begin
-                cx = h_cnt - 200;
+                cx = h_cnt - 100;
                 cy = v_cnt - 200;
                 sprite_addr = (SP_MODE_COOP_Y + cy) * IMG_WIDTH + (SP_MODE_COOP_X + cx);
             end
             
         end
         else if(state == S_PAUSE) begin
-            if (h_cnt >= 290 && h_cnt < 290 + CONT_W &&
+            if (h_cnt >= 310 && h_cnt < 310 + CONT_W &&
                 v_cnt >= 200 && v_cnt < 200 + CONT_H) begin
-                cx = h_cnt - 290;
+                cx = h_cnt - 310;
                 cy = v_cnt - 200;
                 sprite_addr = (SP_CONTINUE_Y + cy) * IMG_WIDTH + (SP_CONTINUE_X + cx);
             end
@@ -536,10 +536,10 @@ module dino_logic (
                 sprite_addr = (dy >> 1) * IMG_WIDTH + (sp_x + (dx >> 1));
             end
             // Restart Icon
-            else if (h_cnt >= 322 && h_cnt < 322 + RESTART_W &&
+            else if (h_cnt >= 312 && h_cnt < 312 + RESTART_W &&
                 v_cnt >= 250 && v_cnt < 250 + RESTART_H) begin
                 
-                dx = h_cnt - 322;
+                dx = h_cnt - 312;
                 dy = v_cnt - 250;
                 sp_x = SP_RESTART;
                 sprite_addr = (dy >> 1) * IMG_WIDTH + (sp_x + (dx >> 1));
@@ -624,7 +624,7 @@ module dino_logic (
         if (state == S_RUN) led_out[15] = 1'b1;
         if (jumped) led_out[0] = 1'b1;
         led_out[10:3] = next_spawn_offset[7:0];
-        led_out[13] = key_down[9'hE072];
+        led_out[14:12] = state;
 
         pixel_out = 12'h000;
 
@@ -649,7 +649,7 @@ module dino_logic (
              // But since we don't easily know that here without pipelining, 
              // we'll just trust the non-black pixel output.
              // For better precision, we should pipeline the "is_dino" / "is_cactus" signals.
-             if(state == S_RUN || state == S_MENU || state == S_MODE_SELECT || state == S_OVER) pixel_out = 15'h000 | sprite_data;
+             if(state == S_RUN || state == S_PAUSE || state == S_MENU || state == S_MODE_SELECT || state == S_OVER) pixel_out = 12'h000;
              pixel_out = sprite_data;
         end
         else if (v_cnt == GROUND_Y && state == S_RUN) begin
