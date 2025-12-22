@@ -82,16 +82,72 @@ module dino_top (
     wire [21:0] freq_outL = 50000000 / freqL;
     wire [21:0] freq_outR = 50000000 / freqR;
 
-    // Determine frequency based on key presses
+    // Keyboard-based base frequency (kept intact)
+    reg [31:0] keyboard_freq;
     always @(*) begin
-        if (key_down[9'h01C]) freqL = `c4; // A key
-        else if (key_down[9'h032]) freqL = `d4; // B key
-        else if (key_down[9'h021]) freqL = `e4; // C key
-        else if (key_down[9'h023]) freqL = `f4; // D key
-        else if (key_down[9'h024]) freqL = `g4; // E key
-        else if (key_down[9'h02B]) freqL = `a4; // F key
-        else if (key_down[9'h034]) freqL = `b4; // G key
-        else freqL = `silence;
+        if (key_down[9'h01C]) keyboard_freq = `c4; // A key
+        else if (key_down[9'h032]) keyboard_freq = `d4; // B key
+        else if (key_down[9'h021]) keyboard_freq = `e4; // C key
+        else if (key_down[9'h023]) keyboard_freq = `f4; // D key
+        else if (key_down[9'h024]) keyboard_freq = `g4; // E key
+        else if (key_down[9'h02B]) keyboard_freq = `a4; // F key
+        else if (key_down[9'h034]) keyboard_freq = `b4; // G key
+        else keyboard_freq = `silence;
+    end
+
+    // Event-driven tone logic (synchronized from pclk domain)
+    reg jump_sync0, jump_sync1, prev_jump_sync;
+    reg land_sync0, land_sync1, prev_land_sync;
+    reg tone_active;
+    reg [31:0] tone_counter;
+    reg [31:0] tone_freq;
+
+    // Synchronize event toggles and detect changes (clk domain)
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            jump_sync0 <= 1'b0; jump_sync1 <= 1'b0; prev_jump_sync <= 1'b0;
+            land_sync0 <= 1'b0; land_sync1 <= 1'b0; prev_land_sync <= 1'b0;
+            tone_active <= 1'b0;
+            tone_counter <= 32'd0;
+            tone_freq <= `silence;
+        end else begin
+            // two-stage synchronizers
+            jump_sync0 <= jump_event_pclk;
+            jump_sync1 <= jump_sync0;
+            land_sync0 <= land_event_pclk;
+            land_sync1 <= land_sync0;
+
+            // detect toggle changes
+            if (jump_sync1 != prev_jump_sync) begin
+                tone_freq <= `c4; // play C4 on jump start
+                tone_counter <= 32'd50000000; // 1 second @ 50MHz
+                tone_active <= 1'b1;
+            end
+            if (land_sync1 != prev_land_sync) begin
+                tone_freq <= `a4; // play A4 on landing
+                tone_counter <= 32'd50000000; // 1 second @ 50MHz
+                tone_active <= 1'b1;
+            end
+
+            prev_jump_sync <= jump_sync1;
+            prev_land_sync <= land_sync1;
+
+            // countdown
+            if (tone_active) begin
+                if (tone_counter == 0) begin
+                    tone_active <= 1'b0;
+                    tone_freq <= `silence;
+                end else begin
+                    tone_counter <= tone_counter - 1;
+                end
+            end
+        end
+    end
+
+    // Final frequency selection: event tone has priority, else keyboard
+    always @(*) begin
+        if (tone_active) freqL = tone_freq;
+        else freqL = keyboard_freq;
         freqR = freqL;
     end
 
@@ -118,6 +174,8 @@ module dino_top (
 
     wire [11:0] pixel_out;
     wire [15:0] led_out_wire;
+    wire jump_event_pclk;
+    wire land_event_pclk;
     dino_logic game_inst (
         .pclk(pclk),
         .rst(rst),
@@ -133,6 +191,8 @@ module dino_top (
         .vsync(vsync),
         .pixel_out(pixel_out),
         .led_out(led_out_wire),
+        .jump_event(jump_event_pclk),
+        .land_event(land_event_pclk),
         .distance(distance)
     );
 
