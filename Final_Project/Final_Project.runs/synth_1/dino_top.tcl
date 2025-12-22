@@ -46,6 +46,8 @@ read_verilog -library xil_defaultlib {
   C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/sonic.v
   C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/vga.v
   C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/dino_top.v
+  C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/note_generator.v
+  C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/note_gen.v
 }
 read_ip -quiet C:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/Final_Project/Final_Project.srcs/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0.xci
 set_property used_in_implementation false [get_files -all c:/Users/USER/Desktop/3-1/Hardware_Design_Lab/Final_Project/Final_Project/Final_Project.srcs/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0_ooc.xdc]

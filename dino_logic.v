@@ -13,7 +13,9 @@ module dino_logic (
     input wire vsync,
     input wire [19:0] distance,
     output reg [11:0] pixel_out,
-    output reg [15:0] led_out     // Debug LEDs
+    output reg [15:0] led_out,    // Debug LEDs
+    output reg jump_event,        // Toggle on jump start (pclk domain)
+    output reg land_event         // Toggle on landing (pclk domain)
 );
 
     localparam GROUND_Y = 350;
@@ -22,6 +24,9 @@ module dino_logic (
     localparam DINO_H   = 40;   // ~20 * 2
     localparam DINO_DUCK_H = 38; // 19 * 2
     localparam DINO_DUCK_W = 48; // 24 * 2
+
+    // Movable dino X position (allows left/right movement with A/D)
+    reg [9:0] dino_x;
 
     localparam CACTUS_H = 40; // General cactus height for collision
     localparam CACTUS_S_W = 14; // 7 * 2
@@ -110,6 +115,7 @@ module dino_logic (
     wire is_space = (scan_code == 8'h29);
 
     reg [4:0] anim_cnt;
+    reg prev_jumped_pclk;
     // Dynamic Dino Dimensions
     wire [9:0] curr_dino_w = ducking ? DINO_DUCK_W : DINO_W;
     wire [9:0] curr_dino_h = ducking ? DINO_DUCK_H : DINO_H;
@@ -164,15 +170,15 @@ module dino_logic (
                 // Determine dimensions based on type
                 case(cactus_type[i])
                     2'd0: begin // Small Cactus
-                        if ((DINO_X + curr_dino_w > cactus_x[i]) && (DINO_X < cactus_x[i] + CACTUS_S_W) && (col_y + col_h > GROUND_Y - CACTUS_S_H)) collision = 1'b1;
+                            if ((dino_x + curr_dino_w > cactus_x[i]) && (dino_x < cactus_x[i] + CACTUS_S_W) && (col_y + col_h > GROUND_Y - CACTUS_S_H)) collision = 1'b1;
                     end
                     2'd1: begin // Big Cactus
-                        if ((DINO_X + curr_dino_w > cactus_x[i]) && (DINO_X < cactus_x[i] + CACTUS_B_W) && (col_y + col_h > GROUND_Y - CACTUS_B_H)) collision = 1'b1;
+                            if ((dino_x + curr_dino_w > cactus_x[i]) && (dino_x < cactus_x[i] + CACTUS_B_W) && (col_y + col_h > GROUND_Y - CACTUS_B_H)) collision = 1'b1;
                     end
                     default: begin // Pterodactyl (Types 2 and 3)
                         // Check Y overlap with flying pterodactyl
                         // Ptero Y range: [GROUND_Y - PTERO_H - PTERO_FLY_OFFSET, GROUND_Y - PTERO_FLY_OFFSET]
-                        if ((DINO_X + curr_dino_w > cactus_x[i]) && (DINO_X < cactus_x[i] + PTERO_W) && 
+                            if ((dino_x + curr_dino_w > cactus_x[i]) && (dino_x < cactus_x[i] + PTERO_W) && 
                             (col_y + col_h > GROUND_Y - PTERO_H - PTERO_FLY_OFFSET) && 
                             (col_y < GROUND_Y - PTERO_FLY_OFFSET)) 
                             collision = 1'b1;
@@ -183,7 +189,7 @@ module dino_logic (
         if (drop_obs_active) begin
             // Collision box check against drop_obs_x and drop_obs_y
             // Note: drop_obs_y is top-left of the obstacle
-            if ((DINO_X + curr_dino_w > drop_obs_x) && (DINO_X < drop_obs_x + d_obs_w) && 
+                if ((dino_x + curr_dino_w > drop_obs_x) && (dino_x < drop_obs_x + d_obs_w) && 
                 (col_y + col_h > drop_obs_y) && (col_y < drop_obs_y + d_obs_h)) begin
                 collision = 1'b1;
             end
@@ -266,6 +272,7 @@ module dino_logic (
             last_key <= 9'h000;
             anim_cnt <= 0;
             drop_x <= 320;
+            dino_x <= DINO_X;
             prev_key_drop <= 0;
             prev_key_pause <= 0;
             drop_obs_active <= 0;
@@ -278,6 +285,9 @@ module dino_logic (
             user_speed <= 4;    
             blink_cnt <= 0;
             prev_key_enter <= 0;
+            jump_event <= 1'b0;
+            land_event <= 1'b0;
+            prev_jumped_pclk <= 1'b0;
             
         end else begin
             prev_vsync <= vsync;
@@ -420,6 +430,10 @@ module dino_logic (
                 if ((key_down[9'h16B] || key_down[9'h06B]) && drop_x > 10) drop_x <= drop_x - user_speed;
                 if ((key_down[9'h174] || key_down[9'h074]) && drop_x < 630) drop_x <= drop_x + user_speed;
 
+                // Dino left/right movement: A (0x1C) = move left, D (0x23) = move right
+                if (key_down[9'h01C] && dino_x > 10) dino_x <= dino_x - user_speed;
+                if (key_down[9'h023] && dino_x < 630 - curr_dino_w) dino_x <= dino_x + user_speed;
+
 
                 // Manual Drop Trigger Logic
                 // Spawns a dedicated obstacle (drop_obs) instead of using LFSR slots
@@ -485,6 +499,15 @@ module dino_logic (
                     jumped <= 1'b1;
                     ducking <= 1'b0; // Can't duck in air (usually becomes fast fall)
                 end
+
+                // detect jump rising/falling edges and toggle event outputs
+                if (!prev_jumped_pclk && jumped) begin
+                    jump_event <= ~jump_event; // toggle to signal jump start
+                end
+                if (prev_jumped_pclk && !jumped) begin
+                    land_event <= ~land_event; // toggle to signal landing
+                end
+                prev_jumped_pclk <= jumped;
 
                 anim_cnt <= anim_cnt + 1;
             end
@@ -648,8 +671,8 @@ always @(*) begin
                 sprite_addr = (cy >> 1) * IMG_WIDTH + (prev_sp + (cx >> 1));
             end
             // Dino Rendering
-            if (h_cnt >= DINO_X && h_cnt < DINO_X + curr_dino_w && v_cnt >= dino_y && v_cnt < dino_y + curr_dino_h) begin
-                dx = h_cnt - DINO_X;
+            if (h_cnt >= dino_x && h_cnt < dino_x + curr_dino_w && v_cnt >= dino_y && v_cnt < dino_y + curr_dino_h) begin
+                dx = h_cnt - dino_x;
                 dy = v_cnt - dino_y;
                 if (jumped)          sp_x = SP_DINO_JUMP;
                 else if (ducking)    sp_x = (anim_cnt[4] == 1'b0) ? SP_DINO_DUCK1 : SP_DINO_DUCK2;
