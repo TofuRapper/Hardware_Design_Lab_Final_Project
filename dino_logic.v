@@ -215,6 +215,7 @@ module dino_logic (
     // Countdown state variables
     reg [1:0] countdown_step; // 3,2,1
     reg [5:0] countdown_frame; // frame counter for each digit display
+    reg initial_tone;
     
     // Theme selection: 0 = light, 1 = dark
     reg theme_sel;
@@ -302,6 +303,7 @@ module dino_logic (
             countdown_tone <= 3'd0;
             countdown_step <= 2'd0;
             countdown_frame <= 6'd0;
+            initial_tone <= 1'b0;
             
         end else begin
             prev_vsync <= vsync;
@@ -327,7 +329,7 @@ module dino_logic (
                         // initialize countdown (3,2,1)
                         countdown_step <= 2'd3;
                         countdown_frame <= 6'd0;
-                        countdown_event <= 1'b0;
+                        initial_tone <= 1'b1;
                         // reset game variables
                         score <= 0;
                         score_ones <= 0; score_tens <= 0; score_hund <= 0; score_thou <= 0;
@@ -342,10 +344,11 @@ module dino_logic (
                     // Wait for a few frames per digit and emit tones on each step
                     if (frame_tick) begin
                         countdown_frame <= countdown_frame + 1;
-                        if (countdown_frame >= 6'd60) begin // ~1s per digit at 60Hz
-                            // latch tone based on step (3->C4,2->D4,1->E4 mapped later in top)
-                            countdown_tone <= countdown_step;
-                            countdown_event <= ~countdown_event; // toggle to request tone
+                        if (initial_tone) begin
+                            initial_tone <= 1'b0;
+                            countdown_tone <= 3'd3;
+                            countdown_event <= ~countdown_event;
+                        end else if (countdown_frame >= 6'd60) begin // ~1s per digit at 60Hz
                             // move to next step
                             if (countdown_step == 2'd1) begin
                                 // finished countdown -> RUN
@@ -355,6 +358,8 @@ module dino_logic (
                             end else begin
                                 countdown_step <= countdown_step - 1;
                                 countdown_frame <= 6'd0;
+                                countdown_tone <= countdown_step; // Set tone for new step
+                                countdown_event <= ~countdown_event; // Toggle for tone
                             end
                         end
                     end
