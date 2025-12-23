@@ -82,18 +82,6 @@ module dino_top (
     wire [21:0] freq_outL = 50000000 / freqL;
     wire [21:0] freq_outR = 50000000 / freqR;
 
-    // Keyboard-based base frequency (kept intact)
-    reg [31:0] keyboard_freq;
-    always @(*) begin
-        if (key_down[9'h01C]) keyboard_freq = `c4; // A key
-        else if (key_down[9'h032]) keyboard_freq = `d4; // B key
-        else if (key_down[9'h021]) keyboard_freq = `e4; // C key
-        else if (key_down[9'h023]) keyboard_freq = `f4; // D key
-        else if (key_down[9'h024]) keyboard_freq = `g4; // E key
-        else if (key_down[9'h02B]) keyboard_freq = `a4; // F key
-        else if (key_down[9'h034]) keyboard_freq = `b4; // G key
-        else keyboard_freq = `silence;
-    end
 
     // Event-driven tone logic (synchronized from pclk domain)
     reg jump_sync0, jump_sync1, prev_jump_sync;
@@ -147,7 +135,6 @@ module dino_top (
     // Final frequency selection: event tone has priority, else keyboard
     always @(*) begin
         if (tone_active) freqL = tone_freq;
-        else freqL = keyboard_freq;
         freqR = freqL;
     end
 
