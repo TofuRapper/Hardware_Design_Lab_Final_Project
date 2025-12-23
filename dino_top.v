@@ -92,6 +92,12 @@ module dino_top (
     reg [31:0] tone_counter;
     reg [31:0] tone_freq;
 
+    // Event wires from `dino_logic` (pclk domain) — declare before use in synchronizer
+    wire jump_event_pclk;
+    wire land_event_pclk;
+    wire countdown_event_pclk;
+    wire [2:0] countdown_tone_pclk;
+
     // Synchronize event toggles and detect changes (clk domain)
     always @(posedge clk or posedge rst) begin
         if (rst) begin
@@ -171,7 +177,7 @@ module dino_top (
         .audio_right(audio_in_right)
     );
 
-    speaker_control sc(
+    audio_output sc(
         .clk(clk),
         .rst(rst),
         .audio_in_left(audio_in_left),
@@ -184,8 +190,6 @@ module dino_top (
 
     wire [11:0] pixel_out;
     wire [15:0] led_out_wire;
-    wire jump_event_pclk;
-    wire land_event_pclk;
     dino_logic game_inst (
         .pclk(pclk),
         .rst(rst),

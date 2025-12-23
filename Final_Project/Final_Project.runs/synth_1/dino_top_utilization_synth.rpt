@@ -1,8 +1,8 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date         : Tue Dec 23 16:50:56 2025
-| Host         : R328-40 running 64-bit major release  (build 9200)
+| Date         : Tue Dec 23 17:07:35 2025
+| Host         : LAPTOP-9C9D7G8P running 64-bit major release  (build 9200)
 | Command      : report_utilization -file dino_top_utilization_synth.rpt -pb dino_top_utilization_synth.pb
 | Design       : dino_top
 | Device       : 7a35tcpg236-1
@@ -30,14 +30,14 @@ Table of Contents
 +-------------------------+------+-------+-----------+-------+
 |        Site Type        | Used | Fixed | Available | Util% |
 +-------------------------+------+-------+-----------+-------+
-| Slice LUTs*             | 3452 |     0 |     20800 | 16.60 |
-|   LUT as Logic          | 3452 |     0 |     20800 | 16.60 |
+| Slice LUTs*             | 3428 |     0 |     20800 | 16.48 |
+|   LUT as Logic          | 3428 |     0 |     20800 | 16.48 |
 |   LUT as Memory         |    0 |     0 |      9600 |  0.00 |
-| Slice Registers         |  668 |     0 |     41600 |  1.61 |
-|   Register as Flip Flop |  658 |     0 |     41600 |  1.58 |
-|   Register as Latch     |   10 |     0 |     41600 |  0.02 |
-| F7 Muxes                |   28 |     0 |     16300 |  0.17 |
-| F8 Muxes                |    3 |     0 |      8150 |  0.04 |
+| Slice Registers         |  657 |     0 |     41600 |  1.58 |
+|   Register as Flip Flop |  646 |     0 |     41600 |  1.55 |
+|   Register as Latch     |   11 |     0 |     41600 |  0.03 |
+| F7 Muxes                |   30 |     0 |     16300 |  0.18 |
+| F8 Muxes                |    4 |     0 |      8150 |  0.05 |
 +-------------------------+------+-------+-----------+-------+
 * Warning! The Final LUT count, after physical optimizations and full implementation, is typically lower. Run opt_design after synthesis, if not already completed, for a more realistic count.
 
@@ -55,9 +55,9 @@ Table of Contents
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
 | 33    |          Yes |           - |          Set |
-| 481   |          Yes |           - |        Reset |
+| 477   |          Yes |           - |        Reset |
 | 1     |          Yes |         Set |            - |
-| 153   |          Yes |       Reset |            - |
+| 146   |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -150,22 +150,22 @@ Table of Contents
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| LUT2     | 1014 |                 LUT |
-| LUT3     |  947 |                 LUT |
-| LUT6     |  900 |                 LUT |
-| LUT4     |  804 |                 LUT |
-| CARRY4   |  693 |          CarryLogic |
-| LUT5     |  503 |                 LUT |
-| FDCE     |  471 |        Flop & Latch |
-| LUT1     |  229 |                 LUT |
-| FDRE     |  153 |        Flop & Latch |
+| LUT2     | 1006 |                 LUT |
+| LUT3     |  946 |                 LUT |
+| LUT6     |  891 |                 LUT |
+| LUT4     |  798 |                 LUT |
+| CARRY4   |  695 |          CarryLogic |
+| LUT5     |  500 |                 LUT |
+| FDCE     |  466 |        Flop & Latch |
+| LUT1     |  238 |                 LUT |
+| FDRE     |  146 |        Flop & Latch |
 | OBUF     |   46 |                  IO |
 | FDPE     |   33 |        Flop & Latch |
-| MUXF7    |   28 |               MuxFx |
+| MUXF7    |   30 |               MuxFx |
 | DSP48E1  |   20 |    Block Arithmetic |
-| LDCE     |   10 |        Flop & Latch |
+| LDCE     |   11 |        Flop & Latch |
 | IBUF     |    8 |                  IO |
-| MUXF8    |    3 |               MuxFx |
+| MUXF8    |    4 |               MuxFx |
 | BUFG     |    3 |               Clock |
 | OBUFT    |    2 |                  IO |
 | FDSE     |    1 |        Flop & Latch |

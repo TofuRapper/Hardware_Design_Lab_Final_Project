@@ -204,8 +204,16 @@ module dino_logic (
     wire frame_tick = vsync && !prev_vsync;
     assign sensor_jump = (distance > 20'd20 && distance < 20'd50);
     assign sensor_duck = (distance < 20'd10 && distance > 20'd0);
-    assign key_jump = key_down[9'h01D] || jump_signal; // Only W (1D)
-    assign key_duck = key_down[9'h01B] || sensor_duck || duck_signal;      // S (1B)
+    // Theme-aware input: in dark theme (theme_sel==1) keyboard WASD works;
+    // in light theme (theme_sel==0) W/S do nothing and jump/duck are sensor-driven.
+    wire key_jump_raw = key_down[9'h01D] || jump_signal; // W
+    wire key_duck_raw  = key_down[9'h01B] || duck_signal; // S
+
+    // Theme selection: 0 = light, 1 = dark
+    reg theme_sel;
+
+    assign key_jump = theme_sel ? key_jump_raw : 1'b0;
+    assign key_duck  = theme_sel ? (key_duck_raw || sensor_duck) : sensor_duck;
 
     wire key_pause_pressed = (key_down[9'h04D] && !prev_key_pause) || pause_pulse;
 
@@ -218,8 +226,6 @@ module dino_logic (
     reg initial_tone;
     reg to_enter_run;
     
-    // Theme selection: 0 = light, 1 = dark
-    reg theme_sel;
     reg [4:0] hs_name [0:2];     // High Score Name
 
     function [4:0] scancode_to_char;
@@ -352,6 +358,14 @@ module dino_logic (
                             countdown_event <= ~countdown_event;
                         end else if (to_enter_run) begin
                             state <= S_RUN;
+                                // If light theme, ensure no auto-generated obstacles are present
+                                if (!theme_sel) begin
+                                    cactus_active[0] <= 1'b0;
+                                    cactus_active[1] <= 1'b0;
+                                    cactus_active[2] <= 1'b0;
+                                    next_spawn_offset <= 0;
+                                    drop_obs_active <= 1'b0;
+                                end
                             countdown_step <= 2'd0;
                             countdown_frame <= 6'd0;
                             to_enter_run <= 1'b0;
@@ -421,7 +435,8 @@ module dino_logic (
                         state <= S_MENU;
                         dino_y <= GROUND_Y - DINO_H;
                         cactus_x[0] <= 630;
-                        cactus_active[0] <= 1'b1;       
+                            // Only enable initial auto-obstacle if dark theme
+                        cactus_active[0] <= theme_sel ? 1'b1 : 1'b0;
                         cactus_active[1] <= 1'b0;
                         cactus_active[2] <= 1'b0;
                         last_spawn_idx <= 0;
@@ -485,11 +500,17 @@ module dino_logic (
 
                 if(cactus_x[last_spawn_idx] < (640 - min_gap - next_spawn_offset[8:0])) begin
                     if(cactus_active[(last_spawn_idx + 1) % 3] == 0) begin
-                        last_spawn_idx <= (last_spawn_idx + 1) % 3;
-                        cactus_x[(last_spawn_idx + 1) % 3] <= 640;
-                        cactus_type[(last_spawn_idx + 1) % 3] <= random_val[9:8];
-                        cactus_active[(last_spawn_idx + 1) % 3] <= 1'b1;
-                        next_spawn_offset <= {2'b00, random_val[7:0]};
+                        // Only auto-spawn obstacles when in dark theme
+                        if (theme_sel) begin
+                            last_spawn_idx <= (last_spawn_idx + 1) % 3;
+                            cactus_x[(last_spawn_idx + 1) % 3] <= 640;
+                            cactus_type[(last_spawn_idx + 1) % 3] <= random_val[9:8];
+                            cactus_active[(last_spawn_idx + 1) % 3] <= 1'b1;
+                            next_spawn_offset <= {2'b00, random_val[7:0]};
+                        end else begin
+                            // Light theme: do not spawn; keep offset minimal to avoid repeated triggering
+                            next_spawn_offset <= 0;
+                        end
                     end
                 end
 
