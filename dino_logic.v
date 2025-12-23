@@ -341,7 +341,7 @@ module dino_logic (
                     // Wait for a few frames per digit and emit tones on each step
                     if (frame_tick) begin
                         countdown_frame <= countdown_frame + 1;
-                        if (countdown_frame >= 6'd30) begin // ~0.5s per digit at 60Hz
+                        if (countdown_frame >= 6'd60) begin // ~1s per digit at 60Hz
                             // latch tone based on step (3->C4,2->D4,1->E4 mapped later in top)
                             countdown_tone <= countdown_step;
                             countdown_event <= ~countdown_event; // toggle to request tone
@@ -818,7 +818,7 @@ always @(*) begin
             case(digit)
                 0: get_digit_pixel = (x==0 || x==4 || y==0 || y==6 || (x==0 && y>0 && y<6) || (x==4 && y>0 && y<6));
                 1: get_digit_pixel = (x==4);
-                2: get_digit_pixel = (y==0 || y==3 || y==6 || (x==4 && y<3) || (x==0 && y>3));
+                2: get_digit_pixel = (y==0 || y==3 || y==6 || ((x==4) && (y==1 || y==2)) || (x==0 && y>3));
                 3: get_digit_pixel = (y==0 || y==3 || y==6 || x==4);
                 4: get_digit_pixel = ((x==0 && y<3) || y==3 || x==4);
                 5: get_digit_pixel = (y==0 || y==3 || y==6 || (x==0 && y<3) || (x==4 && y>3));
@@ -956,9 +956,9 @@ always @(*) begin
         if (state == S_COUNT) begin
             if (v_cnt >= 200 && v_cnt < 214) begin
                 char_dy = (v_cnt - 200) >> 1;
-                if (h_cnt >= 300 && h_cnt < 320) begin
+                if (h_cnt >= 305 && h_cnt < 315) begin
                     char_code = countdown_step; // 3,2,1 -> digit render
-                    char_dx = (h_cnt - 300) >> 1;
+                    char_dx = (h_cnt - 305) >> 1;
                     // use digit renderer for numeric display
                     char_pixel = get_digit_pixel(countdown_step, char_dx, char_dy);
                 end
@@ -1038,7 +1038,7 @@ always @(*) begin
             else if (v_cnt == GROUND_Y) pixel_out = text_color;
         end else begin
             // Legacy behavior for non-game scenes: black background, sprites, white HUD text
-            if (state == S_NAME_INPUT) begin
+            if (state == S_NAME_INPUT || state == S_COUNT) begin
                 // Full-screen preview: background follows theme_sel
                 bg_color  = theme_sel ? 12'h000 : 12'hFFF;
                 text_color = theme_sel ? 12'hFFF : 12'h000;
@@ -1046,6 +1046,13 @@ always @(*) begin
                 // draw sprites on top if present
                 if (sprite_data != 12'h000) pixel_out = sprite_data;
                 // draw selection text in contrasting color
+                if (score_pixel || hs_pixel || char_pixel) pixel_out = text_color;
+            end else if (state == S_PAUSE) begin
+                // Pause scene: use selected theme for background and HUD
+                bg_color  = theme_sel ? 12'h000 : 12'hFFF;
+                text_color = theme_sel ? 12'hFFF : 12'h000;
+                pixel_out = bg_color;
+                if (sprite_data != 12'h000) pixel_out = sprite_data;
                 if (score_pixel || hs_pixel || char_pixel) pixel_out = text_color;
             end else begin
                 // Legacy behavior for other non-game scenes
