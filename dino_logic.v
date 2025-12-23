@@ -103,6 +103,8 @@ module dino_logic (
 
     reg [8:0] last_key;
     reg prev_key_valid;
+    // Sample raw key_down edges to avoid missed short decoder events
+    reg [511:0] prev_key_down;
     
     wire key_press_event = key_valid && !prev_key_valid && (last_change != last_key);
     reg jumped;
@@ -208,8 +210,8 @@ module dino_logic (
     reg [3:0] hs_ones, hs_tens, hs_hund, hs_thou;
     reg [1:0] lives; // 3 lives: 3,2,1,0
     
-    reg [4:0] player_name [0:2]; // 3 chars, 0-25 (A-Z), 26=Space
-    reg [1:0] name_idx;
+    // Theme selection: 0 = light, 1 = dark
+    reg theme_sel;
     reg [4:0] hs_name [0:2];     // High Score Name
 
     function [4:0] scancode_to_char;
@@ -262,8 +264,7 @@ module dino_logic (
             high_score <= 0;
             hs_ones <= 0; hs_tens <= 0; hs_hund <= 0; hs_thou <= 0;
             hs_name[0] <= 26; hs_name[1] <= 26; hs_name[2] <= 26;
-            player_name[0] <= 26; player_name[1] <= 26; player_name[2] <= 26;
-            name_idx <= 0;
+            theme_sel <= 1'b0; // default to light theme
             prev_vsync <= 0;
             next_spawn_offset  <= 0;
             cactus_type[0] <= 2'b0;
@@ -297,38 +298,28 @@ module dino_logic (
             prev_key_valid <= key_valid;
             prev_key_pause <= key_down[9'h04D];
             prev_key_enter <= key_enter_down;
+            // track previous raw key_down state for edge detection (name input, etc.)
+            prev_key_down <= key_down;
             if (key_press_event) last_key <= last_change;
             if (frame_tick) blink_cnt <= blink_cnt + 1;
             case (state)
                 S_MENU: begin
                     if (key_enter_pressed) begin
-                        state <= S_NAME_INPUT;
-                        player_name[0] <= 26; player_name[1] <= 26; player_name[2] <= 26;
-                        name_idx <= 0;
-                    end
+                            state <= S_NAME_INPUT;
+                            theme_sel <= 1'b0; // default selection
+                        end
                 end
                 S_NAME_INPUT: begin
-                    if (key_valid && !prev_key_valid && key_down[last_change]) begin  // Accept any key press, not just different ones
-                        if (scancode_to_char(last_change[7:0]) != 26) begin
-                            if (name_idx < 3) begin
-                                player_name[name_idx] <= scancode_to_char(last_change[7:0]);
-                                name_idx <= name_idx + 1;
-                            end
-                        end else if (last_change[7:0] == 8'h66) begin // Backspace
-                            if (name_idx > 0) begin
-                                name_idx <= name_idx - 1;
-                                player_name[name_idx - 1] <= 26;
-                            end
-                        end
-                    end
-                    if (key_enter_pressed && name_idx > 0) begin // Must enter at least 1 char
+                    // Theme selection screen: Enter confirms selection and starts game
+                    if (key_enter_pressed) begin // Confirm selection
+                        // Apply theme (stub — visual-only here). Proceed to RUN.
                         state <= S_RUN;
                         score <= 0;
                         score_ones <= 0; score_tens <= 0; score_hund <= 0; score_thou <= 0;
                         dino_y <= GROUND_Y - DINO_H;
                         cactus_x[0] <= 630; cactus_active[0] <= 1;
                         cactus_active[1] <= 0; cactus_active[2] <= 0;
-                            lives <= 2'd3;
+                        lives <= 2'd3;
                     end
                 end
                 S_RUN: begin
@@ -358,9 +349,9 @@ module dino_logic (
                                         hs_tens <= score_tens;
                                         hs_hund <= score_hund;
                                         hs_thou <= score_thou;
-                                        hs_name[0] <= player_name[0];
-                                        hs_name[1] <= player_name[1];
-                                        hs_name[2] <= player_name[2];
+                                        hs_name[0] <= 26;
+                                        hs_name[1] <= 26;
+                                        hs_name[2] <= 26;
                                     end
                                 end
                             end
@@ -392,6 +383,17 @@ module dino_logic (
                             lives <= 2'd3;
                         end
             endcase
+
+            // --- THEME SELECTION (edge-detect on pclk using prev_key_down) ---
+            if (state == S_NAME_INPUT) begin
+                // Key '1' -> Light, Key '2' -> Dark (use rising edge of key_down)
+                if ((key_down[9'h016] || key_down[9'h069]) && !(prev_key_down[9'h016] || prev_key_down[9'h069])) theme_sel <= 1'b0; // 1 -> Light
+                if ((key_down[9'h01E] || key_down[9'h072]) && !(prev_key_down[9'h01E] || prev_key_down[9'h072])) theme_sel <= 1'b1; // 2 -> Dark
+                // Also allow left/right A/D to toggle
+                if ((key_down[9'h01C] || key_down[9'h023]) && !((prev_key_down[9'h01C] || prev_key_down[9'h023]))) begin
+                    theme_sel <= ~theme_sel;
+                end
+            end
 
             // 2. PHYSICS UPDATE
             if (frame_tick && state == S_RUN) begin
@@ -431,15 +433,9 @@ module dino_logic (
                     if(cactus_active[(last_spawn_idx + 1) % 3] == 0) begin
                         last_spawn_idx <= (last_spawn_idx + 1) % 3;
                         cactus_x[(last_spawn_idx + 1) % 3] <= 640;
-                        
-                        // Prevent Ptero after Cactus to avoid impossible jumps
-                        if (cactus_type[last_spawn_idx] < 2 && random_val[9:8] >= 2)
-                            cactus_type[(last_spawn_idx + 1) % 3] <= 2'b00; // Force Small Cactus
-                        else
-                            cactus_type[(last_spawn_idx + 1) % 3] <= random_val[9:8];
-
+                        cactus_type[(last_spawn_idx + 1) % 3] <= random_val[9:8];
                         cactus_active[(last_spawn_idx + 1) % 3] <= 1'b1;
-                        next_spawn_offset <= random_val;
+                        next_spawn_offset <= {2'b00, random_val[7:0]};
                     end
                 end
 
@@ -448,8 +444,8 @@ module dino_logic (
                 if ((key_down[9'h174] || key_down[9'h074]) && drop_x < 630) drop_x <= drop_x + user_speed;
 
                 // Dino left/right movement: A (0x1C) = move left, D (0x23) = move right
-                if (key_down[9'h01C] && dino_x > 10) dino_x <= dino_x - user_speed;
-                if (key_down[9'h023] && dino_x < 630 - curr_dino_w) dino_x <= dino_x + user_speed;
+                if (key_down[9'h01C]) dino_x <= dino_x - user_speed;
+                if (key_down[9'h023]) dino_x <= dino_x + user_speed;
 
 
                 // Manual Drop Trigger Logic
@@ -586,6 +582,12 @@ module dino_logic (
     localparam SP_CONTINUE_Y = 35;
     localparam CONT_W = 22;
     localparam CONT_H = 22;
+
+    // Theme preview monitor rectangle (used in theme selection scene)
+    localparam MON_X = 240;
+    localparam MON_Y = 120;
+    localparam MON_W = 160;
+    localparam MON_H = 90;
 
     blk_mem_gen_0 sprite_rom (
         .clka(pclk),
@@ -812,6 +814,9 @@ always @(*) begin
     reg [4:0] char_code;
     reg [2:0] char_dx, char_dy;
     reg char_pixel;
+    // Theme colors (computed in combinational block)
+    reg [11:0] bg_color;
+    reg [11:0] text_color;
 
     function get_char_pixel_func;
         input [4:0] code;
@@ -836,7 +841,7 @@ always @(*) begin
                 14: get_char_pixel_func = (x==0 || x==4 || y==0 || y==6); // O
                 15: get_char_pixel_func = (x==0 || y==0 || y==3 || (x==4 && y<3)); // P
                 16: get_char_pixel_func = (x==0 || x==4 || y==0 || y==6 || (x==3 && y==5)); // Q
-                17: get_char_pixel_func = (x==0 || y==0 || y==3 || (x==4 && y<3) || (x==y && y>3)); // R
+                17: get_char_pixel_func = (x==0 || y==0 || y==3 || (x==4 && y<3) || (x==4 && y==4) || (x==3 && y==5) || (x==2 && y==4)); // R (improved leg)
                 18: get_char_pixel_func = (y==0 || y==3 || y==6 || (x==0 && y<3) || (x==4 && y>3)); // S
                 19: get_char_pixel_func = (y==0 || x==2); // T
                 20: get_char_pixel_func = (x==0 || x==4 || y==6); // U
@@ -860,31 +865,29 @@ always @(*) begin
         char_dx = 0;
         char_dy = 0;
 
-        // Name Input Display
+        // Theme Selection Display (replaces previous Name Input)
         if (state == S_NAME_INPUT) begin
             if (v_cnt >= 200 && v_cnt < 214) begin
                 char_dy = (v_cnt - 200) >> 1;
-                // Char 1
-                if (h_cnt >= 280 && h_cnt < 290) begin
-                    char_code = player_name[0];
-                    char_dx = (h_cnt - 280) >> 1;
-                    char_pixel = get_char_pixel_func(char_code, char_dx, char_dy);
-                    if (name_idx == 0 && blink_cnt[5]) char_pixel = 1; // Cursor
+                // LIGHT (5 letters) starting at x=240
+                if (h_cnt >= 240 && h_cnt < 290) begin
+                    // L I G H T spaced by 10px + 4px gap
+                    if (h_cnt >= 240 && h_cnt < 250) begin char_code = 11; char_dx = (h_cnt - 240) >> 1; char_pixel = get_char_pixel_func(char_code, char_dx, char_dy); end
+                    else if (h_cnt >= 254 && h_cnt < 264) begin char_code = 8;  char_dx = (h_cnt - 254) >> 1; char_pixel = get_char_pixel_func(char_code, char_dx, char_dy); end
+                    else if (h_cnt >= 268 && h_cnt < 278) begin char_code = 6;  char_dx = (h_cnt - 268) >> 1; char_pixel = get_char_pixel_func(char_code, char_dx, char_dy); end
+                    else if (h_cnt >= 282 && h_cnt < 292) begin char_code = 7;  char_dx = (h_cnt - 282) >> 1; char_pixel = get_char_pixel_func(char_code, char_dx, char_dy); end
+                    else if (h_cnt >= 296 && h_cnt < 306) begin char_code = 19; char_dx = (h_cnt - 296) >> 1; char_pixel = get_char_pixel_func(char_code, char_dx, char_dy); end
                 end
-                // Char 2
-                else if (h_cnt >= 294 && h_cnt < 304) begin
-                    char_code = player_name[1];
-                    char_dx = (h_cnt - 294) >> 1;
-                    char_pixel = get_char_pixel_func(char_code, char_dx, char_dy);
-                    if (name_idx == 1 && blink_cnt[5]) char_pixel = 1; // Cursor
+                // DARK (4 letters) starting at x=360
+                else if (h_cnt >= 360 && h_cnt < 420) begin
+                    if (h_cnt >= 360 && h_cnt < 370) begin char_code = 3;  char_dx = (h_cnt - 360) >> 1; char_pixel = get_char_pixel_func(char_code, char_dx, char_dy); end // D
+                    else if (h_cnt >= 374 && h_cnt < 384) begin char_code = 0;  char_dx = (h_cnt - 374) >> 1; char_pixel = get_char_pixel_func(char_code, char_dx, char_dy); end // A
+                    else if (h_cnt >= 388 && h_cnt < 398) begin char_code = 17; char_dx = (h_cnt - 388) >> 1; char_pixel = get_char_pixel_func(char_code, char_dx, char_dy); end // R
+                    else if (h_cnt >= 402 && h_cnt < 412) begin char_code = 10; char_dx = (h_cnt - 402) >> 1; char_pixel = get_char_pixel_func(char_code, char_dx, char_dy); end // K
                 end
-                // Char 3
-                else if (h_cnt >= 308 && h_cnt < 318) begin
-                    char_code = player_name[2];
-                    char_dx = (h_cnt - 308) >> 1;
-                    char_pixel = get_char_pixel_func(char_code, char_dx, char_dy);
-                    if (name_idx == 2 && blink_cnt[5]) char_pixel = 1; // Cursor
-                end
+                // Highlight selection by drawing a simple underline box
+                if (theme_sel == 1'b0 && (h_cnt >= 240 && h_cnt < 306) && (v_cnt >= 214 && v_cnt < 220)) char_pixel = 1; // underline LIGHT
+                if (theme_sel == 1'b1 && (h_cnt >= 360 && h_cnt < 412) && (v_cnt >= 214 && v_cnt < 220)) char_pixel = 1; // underline DARK
             end
         end
 
@@ -919,22 +922,22 @@ always @(*) begin
             // E
             else if (h_cnt >= hs_base_x + 96 && h_cnt < hs_base_x + 106)
                 hs_pixel = get_char_pixel_func(4, (h_cnt - (hs_base_x + 96)) >> 1, hs_dy);
-            // Score digits
-            else if (h_cnt >= hs_base_x + 110 && h_cnt < hs_base_x + 120) begin
+            // Score digits (shifted right for extra spacing)
+            else if (h_cnt >= hs_base_x + 120 && h_cnt < hs_base_x + 130) begin
                 hs_digit = hs_thou;
-                hs_dx = (h_cnt - (hs_base_x + 110)) >> 1;
+                hs_dx = (h_cnt - (hs_base_x + 120)) >> 1;
                 hs_pixel = get_digit_pixel(hs_digit, hs_dx, hs_dy);
-            end else if (h_cnt >= hs_base_x + 124 && h_cnt < hs_base_x + 134) begin
+            end else if (h_cnt >= hs_base_x + 134 && h_cnt < hs_base_x + 144) begin
                 hs_digit = hs_hund;
-                hs_dx = (h_cnt - (hs_base_x + 124)) >> 1;
+                hs_dx = (h_cnt - (hs_base_x + 134)) >> 1;
                 hs_pixel = get_digit_pixel(hs_digit, hs_dx, hs_dy);
-            end else if (h_cnt >= hs_base_x + 138 && h_cnt < hs_base_x + 148) begin
+            end else if (h_cnt >= hs_base_x + 148 && h_cnt < hs_base_x + 158) begin
                 hs_digit = hs_tens;
-                hs_dx = (h_cnt - (hs_base_x + 138)) >> 1;
+                hs_dx = (h_cnt - (hs_base_x + 148)) >> 1;
                 hs_pixel = get_digit_pixel(hs_digit, hs_dx, hs_dy);
-            end else if (h_cnt >= hs_base_x + 152 && h_cnt < hs_base_x + 162) begin
+            end else if (h_cnt >= hs_base_x + 162 && h_cnt < hs_base_x + 172) begin
                 hs_digit = hs_ones;
-                hs_dx = (h_cnt - (hs_base_x + 152)) >> 1;
+                hs_dx = (h_cnt - (hs_base_x + 162)) >> 1;
                 hs_pixel = get_digit_pixel(hs_digit, hs_dx, hs_dy);
             end
         end
@@ -947,27 +950,35 @@ always @(*) begin
         if (jumped) led_out[0] = 1'b1;
         led_out[10:3] = next_spawn_offset[7:0];
         led_out[14:12] = state;
+        // Choose behavior depending on scene. Apply theme only in RUN.
+        if (state == S_RUN) begin
+            bg_color  = theme_sel ? 12'h000 : 12'hFFF;
+            text_color = theme_sel ? 12'hFFF : 12'h000;
 
-        pixel_out = 12'h000;
-        
-        // Priority: Sprites -> Ground -> Background
-        // Check if sprite_data is not "transparent" (assuming black 0x000 is transparent)
-        // Note: sprite_data corresponds to the address from the PREVIOUS cycle (or 2 cycles ago).
-        // This might cause a 1-2 pixel shift to the right.
-        
-        if (sprite_data != 12'h000) begin
-             // We only draw the sprite if we are "inside" the box logic from the previous cycle.
-             // But since we don't easily know that here without pipelining, 
-             // we'll just trust the non-black pixel output.
-             // For better precision, we should pipeline the "is_dino" / "is_cactus" signals.
-             if(state == S_RUN || state == S_PAUSE || state == S_MENU || state == S_OVER || state == S_NAME_INPUT) pixel_out = 12'h000;
-             pixel_out = sprite_data;
-        end
-        
-        if (score_pixel || hs_pixel || char_pixel) pixel_out = 12'hFFF;
-        
-        else if (v_cnt == GROUND_Y && state == S_RUN) begin
-             pixel_out = 12'hFFF;
+            // background
+            pixel_out = bg_color;
+            // sprites over background
+            if (sprite_data != 12'h000) pixel_out = sprite_data;
+            // text/score/ground on top
+            if (score_pixel || hs_pixel || char_pixel) pixel_out = text_color;
+            else if (v_cnt == GROUND_Y) pixel_out = text_color;
+        end else begin
+            // Legacy behavior for non-game scenes: black background, sprites, white HUD text
+            if (state == S_NAME_INPUT) begin
+                // Full-screen preview: background follows theme_sel
+                bg_color  = theme_sel ? 12'h000 : 12'hFFF;
+                text_color = theme_sel ? 12'hFFF : 12'h000;
+                pixel_out = bg_color;
+                // draw sprites on top if present
+                if (sprite_data != 12'h000) pixel_out = sprite_data;
+                // draw selection text in contrasting color
+                if (score_pixel || hs_pixel || char_pixel) pixel_out = text_color;
+            end else begin
+                // Legacy behavior for other non-game scenes
+                pixel_out = 12'h000;
+                if (sprite_data != 12'h000) pixel_out = sprite_data;
+                if (score_pixel || hs_pixel || char_pixel) pixel_out = 12'hFFF;
+            end
         end
     end
 

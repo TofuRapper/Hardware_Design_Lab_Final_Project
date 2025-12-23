@@ -1,8 +1,8 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date         : Tue Dec 23 12:31:35 2025
-| Host         : R328-40 running 64-bit major release  (build 9200)
+| Date         : Tue Dec 23 14:39:30 2025
+| Host         : LAPTOP-9C9D7G8P running 64-bit major release  (build 9200)
 | Command      : report_utilization -file dino_top_utilization_synth.rpt -pb dino_top_utilization_synth.pb
 | Design       : dino_top
 | Device       : 7a35tcpg236-1
@@ -30,14 +30,14 @@ Table of Contents
 +-------------------------+------+-------+-----------+-------+
 |        Site Type        | Used | Fixed | Available | Util% |
 +-------------------------+------+-------+-----------+-------+
-| Slice LUTs*             | 4027 |     0 |     20800 | 19.36 |
-|   LUT as Logic          | 4027 |     0 |     20800 | 19.36 |
+| Slice LUTs*             | 3248 |     0 |     20800 | 15.62 |
+|   LUT as Logic          | 3248 |     0 |     20800 | 15.62 |
 |   LUT as Memory         |    0 |     0 |      9600 |  0.00 |
-| Slice Registers         | 1155 |     0 |     41600 |  2.78 |
-|   Register as Flip Flop | 1148 |     0 |     41600 |  2.76 |
+| Slice Registers         |  632 |     0 |     41600 |  1.52 |
+|   Register as Flip Flop |  625 |     0 |     41600 |  1.50 |
 |   Register as Latch     |    7 |     0 |     41600 |  0.02 |
-| F7 Muxes                |   91 |     0 |     16300 |  0.56 |
-| F8 Muxes                |   34 |     0 |      8150 |  0.42 |
+| F7 Muxes                |   10 |     0 |     16300 |  0.06 |
+| F8 Muxes                |    3 |     0 |      8150 |  0.04 |
 +-------------------------+------+-------+-----------+-------+
 * Warning! The Final LUT count, after physical optimizations and full implementation, is typically lower. Run opt_design after synthesis, if not already completed, for a more realistic count.
 
@@ -54,10 +54,10 @@ Table of Contents
 | 0     |            _ |         Set |            - |
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
-| 42    |          Yes |           - |          Set |
-| 970   |          Yes |           - |        Reset |
+| 33    |          Yes |           - |          Set |
+| 457   |          Yes |           - |        Reset |
 | 1     |          Yes |         Set |            - |
-| 142   |          Yes |       Reset |            - |
+| 141   |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -150,23 +150,23 @@ Table of Contents
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| LUT4     | 1302 |                 LUT |
-| LUT2     | 1025 |                 LUT |
-| LUT6     |  971 |                 LUT |
-| FDCE     |  963 |        Flop & Latch |
-| LUT3     |  883 |                 LUT |
-| CARRY4   |  682 |          CarryLogic |
-| LUT5     |  524 |                 LUT |
-| LUT1     |  238 |                 LUT |
-| FDRE     |  142 |        Flop & Latch |
-| MUXF7    |   91 |               MuxFx |
+| LUT2     | 1003 |                 LUT |
+| LUT3     |  871 |                 LUT |
+| LUT4     |  769 |                 LUT |
+| LUT6     |  765 |                 LUT |
+| CARRY4   |  678 |          CarryLogic |
+| LUT5     |  513 |                 LUT |
+| FDCE     |  450 |        Flop & Latch |
+| LUT1     |  227 |                 LUT |
+| FDRE     |  141 |        Flop & Latch |
 | OBUF     |   46 |                  IO |
-| FDPE     |   42 |        Flop & Latch |
-| MUXF8    |   34 |               MuxFx |
+| FDPE     |   33 |        Flop & Latch |
 | DSP48E1  |   19 |    Block Arithmetic |
+| MUXF7    |   10 |               MuxFx |
 | IBUF     |    8 |                  IO |
 | LDCE     |    7 |        Flop & Latch |
 | BUFG     |    4 |               Clock |
+| MUXF8    |    3 |               MuxFx |
 | OBUFT    |    2 |                  IO |
 | FDSE     |    1 |        Flop & Latch |
 +----------+------+---------------------+
