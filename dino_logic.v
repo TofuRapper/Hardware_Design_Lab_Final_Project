@@ -37,7 +37,7 @@ module dino_logic (
     localparam CACTUS_B_H = 40;
     localparam PTERO_W = 36;    // 18 * 2
     localparam PTERO_H = 34;
-    localparam PTERO_FLY_OFFSET = 30; // Height above ground for Pterodactyl
+    localparam PTERO_FLY_OFFSET = 36; // Height above ground for Pterodactyl (lowered so player must duck)
 
     localparam S_MENU = 3'd0; 
     localparam S_COUNT = 3'd1;
@@ -202,8 +202,8 @@ module dino_logic (
     end
 
     wire frame_tick = vsync && !prev_vsync;
-    assign sensor_jump = (distance > 20'd60 && distance < 20'd90);
-    assign sensor_duck = (distance < 20'd30);
+    assign sensor_jump = (distance > 20'd90);
+    assign sensor_duck = (distance < 20'd50);
     // Theme-aware input: in dark theme (theme_sel==1) keyboard WASD works;
     // in light theme (theme_sel==0) W/S do nothing and jump/duck are sensor-driven.
     wire key_jump_raw = key_down[9'h01D] || jump_signal; // W
@@ -212,8 +212,10 @@ module dino_logic (
     // Theme selection: 0 = light, 1 = dark
     reg theme_sel;
 
-    assign key_jump = theme_sel ? key_jump_raw : 1'b0;
-    assign key_duck  = theme_sel ? (key_duck_raw || sensor_duck) : sensor_duck;
+    // In dark theme (theme_sel==1) ignore sensor inputs — rely only on keyboard (W/S).
+    // In light theme (theme_sel==0) rely on sensor for jump/duck; keyboard W/S do nothing.
+    assign key_jump = theme_sel ? key_jump_raw : sensor_jump;
+    assign key_duck  = theme_sel ? key_duck_raw : sensor_duck;
 
     wire key_pause_pressed = (key_down[9'h04D] && !prev_key_pause) || pause_pulse;
 
@@ -498,6 +500,8 @@ module dino_logic (
                     end
                 end
 
+                // No automatic time-based scoring; scoring happens when obstacles leave screen
+
                 if(cactus_x[last_spawn_idx] < (640 - min_gap - next_spawn_offset[8:0])) begin
                     if(cactus_active[(last_spawn_idx + 1) % 3] == 0) begin
                         // Only auto-spawn obstacles when in dark theme
@@ -536,17 +540,48 @@ module dino_logic (
                 if (drop_obs_active) begin
                     if (!drop_obs_grounded) begin
                         // FALLING STATE: Move Y down
-                        if (drop_obs_y + d_obs_h >= GROUND_Y) begin
-                            // Hit the ground
-                            drop_obs_y <= GROUND_Y - d_obs_h;
-                            drop_obs_grounded <= 1'b1;
+                        // For pterodactyls, stop at flying height (above ground)
+                        if (drop_obs_type == 2'd2) begin
+                            if (drop_obs_y + d_obs_h >= (GROUND_Y - PTERO_FLY_OFFSET)) begin
+                                // Land at ptero flight height
+                                drop_obs_y <= GROUND_Y - d_obs_h - PTERO_FLY_OFFSET;
+                                drop_obs_grounded <= 1'b1;
+                            end else begin
+                                drop_obs_y <= drop_obs_y + DROP_VAL_SPEED;
+                            end
                         end else begin
-                            drop_obs_y <= drop_obs_y + DROP_VAL_SPEED;
+                            if (drop_obs_y + d_obs_h >= GROUND_Y) begin
+                                // Hit the ground
+                                drop_obs_y <= GROUND_Y - d_obs_h;
+                                drop_obs_grounded <= 1'b1;
+                            end else begin
+                                drop_obs_y <= drop_obs_y + DROP_VAL_SPEED;
+                            end
                         end
                     end else begin
                         // RUNNING STATE (Grounded): Move X left
                         drop_obs_x <= drop_obs_x - user_speed - (score[9:4]);
-                        if (drop_obs_x < -40) drop_obs_active <= 1'b0;
+                        if (drop_obs_x < -40) begin
+                            drop_obs_active <= 1'b0;
+                            // Award a point for a dropped obstacle that left the screen
+                            score <= score + 1;
+                            if (score_ones == 9) begin
+                                score_ones <= 0;
+                                if (score_tens == 9) begin
+                                    score_tens <= 0;
+                                    if (score_hund == 9) begin
+                                        score_hund <= 0;
+                                        score_thou <= score_thou + 1;
+                                    end else begin
+                                        score_hund <= score_hund + 1;
+                                    end
+                                end else begin
+                                    score_tens <= score_tens + 1;
+                                end
+                            end else begin
+                                score_ones <= score_ones + 1;
+                            end
+                        end
                     end
                 end
                 
@@ -565,7 +600,7 @@ module dino_logic (
                 // Note: key_down index for extended keys depends on decoder. Assuming 1xx for extended.
                 if (dino_y >= GROUND_Y - DINO_H) begin
                     // On Ground
-                    if (key_jump || sensor_jump) begin
+                    if (key_jump) begin
                         dino_vel <= -18;
                         dino_y <= dino_y - 18;
                         jumped <= 1'b1;
@@ -970,7 +1005,7 @@ always @(*) begin
             if (v_cnt >= 200 && v_cnt < 214) begin
                 char_dy = (v_cnt - 200) >> 1;
                 // LIGHT (5 letters) starting at x=240
-                if (h_cnt >= 240 && h_cnt < 290) begin
+                if (h_cnt >= 240 && h_cnt < 306) begin
                     // L I G H T spaced by 10px + 4px gap
                     if (h_cnt >= 240 && h_cnt < 250) begin char_code = 11; char_dx = (h_cnt - 240) >> 1; char_pixel = get_char_pixel_func(char_code, char_dx, char_dy); end
                     else if (h_cnt >= 254 && h_cnt < 264) begin char_code = 8;  char_dx = (h_cnt - 254) >> 1; char_pixel = get_char_pixel_func(char_code, char_dx, char_dy); end
@@ -1007,34 +1042,31 @@ always @(*) begin
         // High Score (Display only in S_OVER)
         if (state == S_OVER && v_cnt >= hs_base_y && v_cnt < hs_base_y + 14) begin
             hs_dy = (v_cnt - hs_base_y) >> 1;
-            // Display 'HIGHSCORE' at S_OVER
-            // H
-            if (h_cnt >= hs_base_x && h_cnt < hs_base_x + 10)
-                hs_pixel = (h_cnt == hs_base_x || h_cnt == hs_base_x + 8 || (v_cnt == hs_base_y + 6 || v_cnt == hs_base_y + 7));
-            // I
-            else if (h_cnt >= hs_base_x + 12 && h_cnt < hs_base_x + 22)
-                hs_pixel = (h_cnt == hs_base_x + 16 || v_cnt == hs_base_y || v_cnt == hs_base_y + 13);
-            // G
-            else if (h_cnt >= hs_base_x + 24 && h_cnt < hs_base_x + 34)
-                hs_pixel = get_char_pixel_func(6, (h_cnt - (hs_base_x + 24)) >> 1, hs_dy);
-            // H
-            else if (h_cnt >= hs_base_x + 36 && h_cnt < hs_base_x + 46)
-                hs_pixel = (h_cnt == hs_base_x + 36 || h_cnt == hs_base_x + 44 || (v_cnt == hs_base_y + 6 || v_cnt == hs_base_y + 7));
-            // S
-            else if (h_cnt >= hs_base_x + 48 && h_cnt < hs_base_x + 58)
-                hs_pixel = get_char_pixel_func(18, (h_cnt - (hs_base_x + 48)) >> 1, hs_dy);
-            // C
-            else if (h_cnt >= hs_base_x + 60 && h_cnt < hs_base_x + 70)
-                hs_pixel = get_char_pixel_func(2, (h_cnt - (hs_base_x + 60)) >> 1, hs_dy);
-            // O
-            else if (h_cnt >= hs_base_x + 72 && h_cnt < hs_base_x + 82)
-                hs_pixel = get_char_pixel_func(14, (h_cnt - (hs_base_x + 72)) >> 1, hs_dy);
-            // R
-            else if (h_cnt >= hs_base_x + 84 && h_cnt < hs_base_x + 94)
-                hs_pixel = get_char_pixel_func(17, (h_cnt - (hs_base_x + 84)) >> 1, hs_dy);
-            // E
-            else if (h_cnt >= hs_base_x + 96 && h_cnt < hs_base_x + 106)
-                hs_pixel = get_char_pixel_func(4, (h_cnt - (hs_base_x + 96)) >> 1, hs_dy);
+            // Display 'HIGHSCORE' using shared 5x7 font for consistent stroke thickness
+            // Letters spaced by 12 pixels (10px letter + 2px gap)
+            if (h_cnt >= hs_base_x && h_cnt < hs_base_x + 106) begin
+                // Compute per-letter region and map to font (5x7 -> 10px wide on screen using >>1 scaling)
+                // Letter indices: H(7), I(8), G(6), H(7), S(18), C(2), O(14), R(17), E(4)
+                if (h_cnt >= hs_base_x && h_cnt < hs_base_x + 10) begin
+                    hs_pixel = get_char_pixel_func(7, (h_cnt - hs_base_x) >> 1, hs_dy);
+                end else if (h_cnt >= hs_base_x + 12 && h_cnt < hs_base_x + 22) begin
+                    hs_pixel = get_char_pixel_func(8, (h_cnt - (hs_base_x + 12)) >> 1, hs_dy);
+                end else if (h_cnt >= hs_base_x + 24 && h_cnt < hs_base_x + 34) begin
+                    hs_pixel = get_char_pixel_func(6, (h_cnt - (hs_base_x + 24)) >> 1, hs_dy);
+                end else if (h_cnt >= hs_base_x + 36 && h_cnt < hs_base_x + 46) begin
+                    hs_pixel = get_char_pixel_func(7, (h_cnt - (hs_base_x + 36)) >> 1, hs_dy);
+                end else if (h_cnt >= hs_base_x + 48 && h_cnt < hs_base_x + 58) begin
+                    hs_pixel = get_char_pixel_func(18, (h_cnt - (hs_base_x + 48)) >> 1, hs_dy);
+                end else if (h_cnt >= hs_base_x + 60 && h_cnt < hs_base_x + 70) begin
+                    hs_pixel = get_char_pixel_func(2, (h_cnt - (hs_base_x + 60)) >> 1, hs_dy);
+                end else if (h_cnt >= hs_base_x + 72 && h_cnt < hs_base_x + 82) begin
+                    hs_pixel = get_char_pixel_func(14, (h_cnt - (hs_base_x + 72)) >> 1, hs_dy);
+                end else if (h_cnt >= hs_base_x + 84 && h_cnt < hs_base_x + 94) begin
+                    hs_pixel = get_char_pixel_func(17, (h_cnt - (hs_base_x + 84)) >> 1, hs_dy);
+                end else if (h_cnt >= hs_base_x + 96 && h_cnt < hs_base_x + 106) begin
+                    hs_pixel = get_char_pixel_func(4, (h_cnt - (hs_base_x + 96)) >> 1, hs_dy);
+                end
+            end
             // Score digits (shifted right for extra spacing)
             else if (h_cnt >= hs_base_x + 120 && h_cnt < hs_base_x + 130) begin
                 hs_digit = hs_thou;
