@@ -1,8 +1,8 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date         : Tue Dec 23 12:07:03 2025
-| Host         : LAPTOP-9C9D7G8P running 64-bit major release  (build 9200)
+| Date         : Tue Dec 23 12:31:35 2025
+| Host         : R328-40 running 64-bit major release  (build 9200)
 | Command      : report_utilization -file dino_top_utilization_synth.rpt -pb dino_top_utilization_synth.pb
 | Design       : dino_top
 | Device       : 7a35tcpg236-1
@@ -30,12 +30,12 @@ Table of Contents
 +-------------------------+------+-------+-----------+-------+
 |        Site Type        | Used | Fixed | Available | Util% |
 +-------------------------+------+-------+-----------+-------+
-| Slice LUTs*             | 4090 |     0 |     20800 | 19.66 |
-|   LUT as Logic          | 4090 |     0 |     20800 | 19.66 |
+| Slice LUTs*             | 4027 |     0 |     20800 | 19.36 |
+|   LUT as Logic          | 4027 |     0 |     20800 | 19.36 |
 |   LUT as Memory         |    0 |     0 |      9600 |  0.00 |
-| Slice Registers         | 1148 |     0 |     41600 |  2.76 |
+| Slice Registers         | 1155 |     0 |     41600 |  2.78 |
 |   Register as Flip Flop | 1148 |     0 |     41600 |  2.76 |
-|   Register as Latch     |    0 |     0 |     41600 |  0.00 |
+|   Register as Latch     |    7 |     0 |     41600 |  0.02 |
 | F7 Muxes                |   91 |     0 |     16300 |  0.56 |
 | F8 Muxes                |   34 |     0 |      8150 |  0.42 |
 +-------------------------+------+-------+-----------+-------+
@@ -55,7 +55,7 @@ Table of Contents
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
 | 42    |          Yes |           - |          Set |
-| 963   |          Yes |           - |        Reset |
+| 970   |          Yes |           - |        Reset |
 | 1     |          Yes |         Set |            - |
 | 142   |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
@@ -116,7 +116,7 @@ Table of Contents
 +------------+------+-------+-----------+-------+
 |  Site Type | Used | Fixed | Available | Util% |
 +------------+------+-------+-----------+-------+
-| BUFGCTRL   |    3 |     0 |        32 |  9.38 |
+| BUFGCTRL   |    4 |     0 |        32 | 12.50 |
 | BUFIO      |    0 |     0 |        20 |  0.00 |
 | MMCME2_ADV |    0 |     0 |         5 |  0.00 |
 | PLLE2_ADV  |    0 |     0 |         5 |  0.00 |
@@ -150,14 +150,14 @@ Table of Contents
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| LUT4     | 1304 |                 LUT |
-| LUT6     | 1031 |                 LUT |
-| LUT2     |  979 |                 LUT |
+| LUT4     | 1302 |                 LUT |
+| LUT2     | 1025 |                 LUT |
+| LUT6     |  971 |                 LUT |
 | FDCE     |  963 |        Flop & Latch |
-| LUT3     |  910 |                 LUT |
-| CARRY4   |  689 |          CarryLogic |
-| LUT5     |  544 |                 LUT |
-| LUT1     |  202 |                 LUT |
+| LUT3     |  883 |                 LUT |
+| CARRY4   |  682 |          CarryLogic |
+| LUT5     |  524 |                 LUT |
+| LUT1     |  238 |                 LUT |
 | FDRE     |  142 |        Flop & Latch |
 | MUXF7    |   91 |               MuxFx |
 | OBUF     |   46 |                  IO |
@@ -165,7 +165,8 @@ Table of Contents
 | MUXF8    |   34 |               MuxFx |
 | DSP48E1  |   19 |    Block Arithmetic |
 | IBUF     |    8 |                  IO |
-| BUFG     |    3 |               Clock |
+| LDCE     |    7 |        Flop & Latch |
+| BUFG     |    4 |               Clock |
 | OBUFT    |    2 |                  IO |
 | FDSE     |    1 |        Flop & Latch |
 +----------+------+---------------------+

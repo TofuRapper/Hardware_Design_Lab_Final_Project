@@ -1,8 +1,8 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date         : Tue Dec 23 12:11:10 2025
-| Host         : LAPTOP-9C9D7G8P running 64-bit major release  (build 9200)
+| Date         : Tue Dec 23 12:32:46 2025
+| Host         : R328-40 running 64-bit major release  (build 9200)
 | Command      : report_methodology -file dino_top_methodology_drc_routed.rpt -pb dino_top_methodology_drc_routed.pb -rpx dino_top_methodology_drc_routed.rpx
 | Design       : dino_top
 | Device       : xc7a35tcpg236-1
@@ -23,14 +23,14 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 469
+             Violations found: 400
 +-----------+------------------+-------------------------------+------------+
 | Rule      | Severity         | Description                   | Violations |
 +-----------+------------------+-------------------------------+------------+
-| TIMING-17 | Critical Warning | Non-clocked sequential cell   | 394        |
+| TIMING-17 | Critical Warning | Non-clocked sequential cell   | 380        |
 | DPIR-1    | Warning          | Asynchronous driver check     | 3          |
-| TIMING-16 | Warning          | Large setup violation         | 46         |
-| TIMING-18 | Warning          | Missing input or output delay | 26         |
+| TIMING-18 | Warning          | Missing input or output delay | 10         |
+| TIMING-20 | Warning          | Non-clocked latch             | 7          |
 +-----------+------------------+-------------------------------+------------+
 
 2. REPORT DETAILS
@@ -1517,137 +1517,137 @@ Related violations: <none>
 
 TIMING-17#297 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/has_mux_a.A/no_softecc_sel_reg.ce_pri.sel_pipe_reg[0]/C is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/has_mux_a.A/no_softecc_norm_sel2.has_mem_regs.WITHOUT_ECC_PIPE.ce_pri.sel_pipe_d1_reg[5]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#298 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/has_mux_a.A/no_softecc_sel_reg.ce_pri.sel_pipe_reg[1]/C is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/has_mux_a.A/no_softecc_sel_reg.ce_pri.sel_pipe_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#299 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/has_mux_a.A/no_softecc_sel_reg.ce_pri.sel_pipe_reg[2]/C is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/has_mux_a.A/no_softecc_sel_reg.ce_pri.sel_pipe_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#300 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/has_mux_a.A/no_softecc_sel_reg.ce_pri.sel_pipe_reg[3]/C is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/has_mux_a.A/no_softecc_sel_reg.ce_pri.sel_pipe_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#301 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/has_mux_a.A/no_softecc_sel_reg.ce_pri.sel_pipe_reg[4]/C is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/has_mux_a.A/no_softecc_sel_reg.ce_pri.sel_pipe_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#302 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/has_mux_a.A/no_softecc_sel_reg.ce_pri.sel_pipe_reg[4]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#303 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[10].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/has_mux_a.A/no_softecc_sel_reg.ce_pri.sel_pipe_reg[5]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#304 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[11].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.CASCADED_PRIM36.ram_B/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#305 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[12].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.CASCADED_PRIM36.ram_T/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#306 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[13].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[10].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#307 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[14].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[11].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#308 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[15].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[12].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#309 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[16].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[13].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#310 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[17].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[14].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#311 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[18].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[15].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#312 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[19].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[16].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#313 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[1].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[17].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#314 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[20].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[18].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#315 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[21].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[19].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#316 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[22].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[1].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM18.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#317 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[23].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[20].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#318 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[24].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[21].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM18.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#319 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[25].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[22].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.CASCADED_PRIM36.ram_B/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#320 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[26].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[22].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.CASCADED_PRIM36.ram_T/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#321 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[27].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[23].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#322 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[28].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[24].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.CASCADED_PRIM36.ram_B/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#323 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[29].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[24].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.CASCADED_PRIM36.ram_T/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#324 Critical Warning
@@ -1657,350 +1657,280 @@ Related violations: <none>
 
 TIMING-17#325 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[30].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[3].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#326 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[31].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[4].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#327 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[32].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.CASCADED_PRIM36.ram_B/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[5].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#328 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[32].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.CASCADED_PRIM36.ram_T/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[6].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#329 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[33].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.CASCADED_PRIM36.ram_B/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[7].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#330 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[33].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.CASCADED_PRIM36.ram_T/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[8].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#331 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[34].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.CASCADED_PRIM36.ram_B/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[9].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#332 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[34].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.CASCADED_PRIM36.ram_T/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/state_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#333 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[35].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.CASCADED_PRIM36.ram_B/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/state_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#334 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[35].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.CASCADED_PRIM36.ram_T/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/state_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#335 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[36].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.CASCADED_PRIM36.ram_B/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/user_speed_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#336 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[36].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.CASCADED_PRIM36.ram_T/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/user_speed_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#337 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[37].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.CASCADED_PRIM36.ram_B/CLKARDCLK is not reached by a timing clock
+The clock pin game_inst/user_speed_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#338 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[37].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.CASCADED_PRIM36.ram_T/CLKARDCLK is not reached by a timing clock
+The clock pin pulse_pause/pb_in_delay_reg/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#339 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[3].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin pulse_pause/pb_out_reg/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#340 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[4].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin sc/audio_left_reg[15]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#341 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[5].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin sc/audio_left_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#342 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[6].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin sc/audio_left_reg[9]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#343 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[7].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin sc/audio_right_reg[15]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#344 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[8].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin sc/audio_right_reg[9]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#345 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/sprite_rom/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[9].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram/CLKARDCLK is not reached by a timing clock
+The clock pin vga_inst/hsync_i_reg/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#346 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/state_reg[0]/C is not reached by a timing clock
+The clock pin vga_inst/line_cnt_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#347 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/state_reg[1]/C is not reached by a timing clock
+The clock pin vga_inst/line_cnt_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#348 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/state_reg[2]/C is not reached by a timing clock
+The clock pin vga_inst/line_cnt_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#349 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/user_speed_reg[1]/C is not reached by a timing clock
+The clock pin vga_inst/line_cnt_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#350 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/user_speed_reg[2]/C is not reached by a timing clock
+The clock pin vga_inst/line_cnt_reg[4]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#351 Critical Warning
 Non-clocked sequential cell  
-The clock pin game_inst/user_speed_reg[3]/C is not reached by a timing clock
+The clock pin vga_inst/line_cnt_reg[5]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#352 Critical Warning
 Non-clocked sequential cell  
-The clock pin pulse_pause/pb_in_delay_reg/C is not reached by a timing clock
+The clock pin vga_inst/line_cnt_reg[6]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#353 Critical Warning
 Non-clocked sequential cell  
-The clock pin pulse_pause/pb_out_reg/C is not reached by a timing clock
+The clock pin vga_inst/line_cnt_reg[7]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#354 Critical Warning
 Non-clocked sequential cell  
-The clock pin sc/audio_left_reg[15]/C is not reached by a timing clock
+The clock pin vga_inst/line_cnt_reg[8]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#355 Critical Warning
 Non-clocked sequential cell  
-The clock pin sc/audio_left_reg[3]/C is not reached by a timing clock
+The clock pin vga_inst/line_cnt_reg[9]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#356 Critical Warning
 Non-clocked sequential cell  
-The clock pin sc/audio_left_reg[9]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#357 Critical Warning
 Non-clocked sequential cell  
-The clock pin sc/audio_right_reg[15]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#358 Critical Warning
 Non-clocked sequential cell  
-The clock pin sc/audio_right_reg[9]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#359 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/hsync_i_reg/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#360 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/line_cnt_reg[0]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[4]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#361 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/line_cnt_reg[1]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[5]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#362 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/line_cnt_reg[2]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[6]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#363 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/line_cnt_reg[3]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[7]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#364 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/line_cnt_reg[4]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[7]_rep/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#365 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/line_cnt_reg[5]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[7]_rep__0/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#366 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/line_cnt_reg[6]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[7]_rep__1/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#367 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/line_cnt_reg[7]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[7]_rep__2/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#368 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/line_cnt_reg[8]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[7]_rep__3/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#369 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/line_cnt_reg[9]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[7]_rep__4/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#370 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[0]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[8]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#371 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[1]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[8]_rep/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#372 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[2]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[8]_rep__0/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#373 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[3]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[8]_rep__1/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#374 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[4]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[8]_rep__2/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#375 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[5]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[8]_rep__3/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#376 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[6]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[8]_rep__4/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#377 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[7]/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[8]_rep__5/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#378 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[7]_rep/C is not reached by a timing clock
+The clock pin vga_inst/pixel_cnt_reg[9]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#379 Critical Warning
 Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[7]_rep__0/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#380 Critical Warning
-Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[7]_rep__1/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#381 Critical Warning
-Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[7]_rep__2/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#382 Critical Warning
-Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[7]_rep__3/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#383 Critical Warning
-Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[7]_rep__4/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#384 Critical Warning
-Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[8]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#385 Critical Warning
-Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[8]_rep/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#386 Critical Warning
-Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[8]_rep__0/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#387 Critical Warning
-Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[8]_rep__1/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#388 Critical Warning
-Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[8]_rep__2/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#389 Critical Warning
-Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[8]_rep__3/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#390 Critical Warning
-Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[8]_rep__4/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#391 Critical Warning
-Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[8]_rep__5/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#392 Critical Warning
-Non-clocked sequential cell  
-The clock pin vga_inst/pixel_cnt_reg[9]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#393 Critical Warning
-Non-clocked sequential cell  
 The clock pin vga_inst/vsync_i_reg/C is not reached by a timing clock
 Related violations: <none>
 
-TIMING-17#394 Critical Warning
+TIMING-17#380 Critical Warning
 Non-clocked sequential cell  
 The clock pin vga_inst/vsync_i_reg_lopt_replica/C is not reached by a timing clock
 Related violations: <none>
@@ -2018,236 +1948,6 @@ Related violations: <none>
 DPIR-1#3 Warning
 Asynchronous driver check  
 DSP game_inst/sprite_addr0__7 input pin game_inst/sprite_addr0__7/C[2] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
-Related violations: <none>
-
-TIMING-16#1 Warning
-Large setup violation  
-There is a large setup violation of -61.783 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/c_clk_reg/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#2 Warning
-Large setup violation  
-There is a large setup violation of -62.000 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/b_clk_reg/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#3 Warning
-Large setup violation  
-There is a large setup violation of -62.228 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[0]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#4 Warning
-Large setup violation  
-There is a large setup violation of -62.405 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[1]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#5 Warning
-Large setup violation  
-There is a large setup violation of -62.528 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[2]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#6 Warning
-Large setup violation  
-There is a large setup violation of -62.587 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[3]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#7 Warning
-Large setup violation  
-There is a large setup violation of -62.616 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[0]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#8 Warning
-Large setup violation  
-There is a large setup violation of -62.736 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[4]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#9 Warning
-Large setup violation  
-There is a large setup violation of -62.752 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[6]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#10 Warning
-Large setup violation  
-There is a large setup violation of -62.791 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[1]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#11 Warning
-Large setup violation  
-There is a large setup violation of -62.826 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[7]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#12 Warning
-Large setup violation  
-There is a large setup violation of -62.847 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[5]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#13 Warning
-Large setup violation  
-There is a large setup violation of -62.850 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[8]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#14 Warning
-Large setup violation  
-There is a large setup violation of -62.866 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[10]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#15 Warning
-Large setup violation  
-There is a large setup violation of -62.908 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[2]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#16 Warning
-Large setup violation  
-There is a large setup violation of -62.940 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[11]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#17 Warning
-Large setup violation  
-There is a large setup violation of -62.961 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[9]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#18 Warning
-Large setup violation  
-There is a large setup violation of -62.963 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[12]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#19 Warning
-Large setup violation  
-There is a large setup violation of -62.972 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[3]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#20 Warning
-Large setup violation  
-There is a large setup violation of -62.979 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[14]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#21 Warning
-Large setup violation  
-There is a large setup violation of -63.053 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[15]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#22 Warning
-Large setup violation  
-There is a large setup violation of -63.074 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[13]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#23 Warning
-Large setup violation  
-There is a large setup violation of -63.077 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[16]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#24 Warning
-Large setup violation  
-There is a large setup violation of -63.093 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[18]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#25 Warning
-Large setup violation  
-There is a large setup violation of -63.096 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[4]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#26 Warning
-Large setup violation  
-There is a large setup violation of -63.116 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[6]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#27 Warning
-Large setup violation  
-There is a large setup violation of -63.167 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[19]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#28 Warning
-Large setup violation  
-There is a large setup violation of -63.188 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[17]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#29 Warning
-Large setup violation  
-There is a large setup violation of -63.191 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[20]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#30 Warning
-Large setup violation  
-There is a large setup violation of -63.192 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[7]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#31 Warning
-Large setup violation  
-There is a large setup violation of -63.200 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[5]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#32 Warning
-Large setup violation  
-There is a large setup violation of -63.213 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[8]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#33 Warning
-Large setup violation  
-There is a large setup violation of -63.233 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[10]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#34 Warning
-Large setup violation  
-There is a large setup violation of -63.302 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_2_reg[21]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#35 Warning
-Large setup violation  
-There is a large setup violation of -63.309 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[11]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#36 Warning
-Large setup violation  
-There is a large setup violation of -63.317 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[9]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#37 Warning
-Large setup violation  
-There is a large setup violation of -63.329 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[12]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#38 Warning
-Large setup violation  
-There is a large setup violation of -63.349 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[14]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#39 Warning
-Large setup violation  
-There is a large setup violation of -63.425 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[15]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#40 Warning
-Large setup violation  
-There is a large setup violation of -63.433 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[13]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#41 Warning
-Large setup violation  
-There is a large setup violation of -63.446 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[16]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#42 Warning
-Large setup violation  
-There is a large setup violation of -63.466 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[18]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#43 Warning
-Large setup violation  
-There is a large setup violation of -63.542 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[19]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#44 Warning
-Large setup violation  
-There is a large setup violation of -63.550 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[17]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#45 Warning
-Large setup violation  
-There is a large setup violation of -63.563 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[20]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#46 Warning
-Large setup violation  
-There is a large setup violation of -63.667 ns between kbd_decoder/key_down_reg[52]_replica/C (clocked by sys_clk_pin) and noteGen_00/clk_cnt_reg[21]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-18#1 Warning
@@ -2297,87 +1997,42 @@ Related violations: <none>
 
 TIMING-18#10 Warning
 Missing input or output delay  
-An output delay is missing on led[0] relative to clock(s) sys_clk_pin
-Related violations: <none>
-
-TIMING-18#11 Warning
-Missing input or output delay  
-An output delay is missing on led[10] relative to clock(s) sys_clk_pin
-Related violations: <none>
-
-TIMING-18#12 Warning
-Missing input or output delay  
-An output delay is missing on led[11] relative to clock(s) sys_clk_pin
-Related violations: <none>
-
-TIMING-18#13 Warning
-Missing input or output delay  
-An output delay is missing on led[12] relative to clock(s) sys_clk_pin
-Related violations: <none>
-
-TIMING-18#14 Warning
-Missing input or output delay  
-An output delay is missing on led[13] relative to clock(s) sys_clk_pin
-Related violations: <none>
-
-TIMING-18#15 Warning
-Missing input or output delay  
-An output delay is missing on led[14] relative to clock(s) sys_clk_pin
-Related violations: <none>
-
-TIMING-18#16 Warning
-Missing input or output delay  
-An output delay is missing on led[15] relative to clock(s) sys_clk_pin
-Related violations: <none>
-
-TIMING-18#17 Warning
-Missing input or output delay  
-An output delay is missing on led[1] relative to clock(s) sys_clk_pin
-Related violations: <none>
-
-TIMING-18#18 Warning
-Missing input or output delay  
-An output delay is missing on led[2] relative to clock(s) sys_clk_pin
-Related violations: <none>
-
-TIMING-18#19 Warning
-Missing input or output delay  
-An output delay is missing on led[3] relative to clock(s) sys_clk_pin
-Related violations: <none>
-
-TIMING-18#20 Warning
-Missing input or output delay  
-An output delay is missing on led[4] relative to clock(s) sys_clk_pin
-Related violations: <none>
-
-TIMING-18#21 Warning
-Missing input or output delay  
-An output delay is missing on led[5] relative to clock(s) sys_clk_pin
-Related violations: <none>
-
-TIMING-18#22 Warning
-Missing input or output delay  
-An output delay is missing on led[6] relative to clock(s) sys_clk_pin
-Related violations: <none>
-
-TIMING-18#23 Warning
-Missing input or output delay  
-An output delay is missing on led[7] relative to clock(s) sys_clk_pin
-Related violations: <none>
-
-TIMING-18#24 Warning
-Missing input or output delay  
-An output delay is missing on led[8] relative to clock(s) sys_clk_pin
-Related violations: <none>
-
-TIMING-18#25 Warning
-Missing input or output delay  
-An output delay is missing on led[9] relative to clock(s) sys_clk_pin
-Related violations: <none>
-
-TIMING-18#26 Warning
-Missing input or output delay  
 An output delay is missing on trig relative to clock(s) sys_clk_pin
+Related violations: <none>
+
+TIMING-20#1 Warning
+Non-clocked latch  
+The latch freqR_reg[1] cannot be properly analyzed as its control pin freqR_reg[1]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#2 Warning
+Non-clocked latch  
+The latch freqR_reg[20] cannot be properly analyzed as its control pin freqR_reg[20]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#3 Warning
+Non-clocked latch  
+The latch freqR_reg[20]_rep cannot be properly analyzed as its control pin freqR_reg[20]_rep/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#4 Warning
+Non-clocked latch  
+The latch freqR_reg[20]_rep__0 cannot be properly analyzed as its control pin freqR_reg[20]_rep__0/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#5 Warning
+Non-clocked latch  
+The latch freqR_reg[5] cannot be properly analyzed as its control pin freqR_reg[5]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#6 Warning
+Non-clocked latch  
+The latch freqR_reg[7] cannot be properly analyzed as its control pin freqR_reg[7]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#7 Warning
+Non-clocked latch  
+The latch freqR_reg[8] cannot be properly analyzed as its control pin freqR_reg[8]/G is not reached by a timing clock
 Related violations: <none>
 
 
