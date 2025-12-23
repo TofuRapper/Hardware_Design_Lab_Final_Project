@@ -1,0 +1,19 @@
+Design Route Status
+                                               :      # nets :
+   ------------------------------------------- : ----------- :
+<<<<<<< HEAD
+   # of logical nets.......................... :       10623 :
+       # of nets not needing routing.......... :        4327 :
+           # of internally routed nets........ :        4327 :
+       # of routable nets..................... :        6296 :
+           # of fully routed nets............. :        6296 :
+=======
+   # of logical nets.......................... :       10666 :
+       # of nets not needing routing.......... :        4482 :
+           # of internally routed nets........ :        4482 :
+       # of routable nets..................... :        6184 :
+           # of fully routed nets............. :        6184 :
+>>>>>>> ac72c90 (Added movement)
+       # of nets with routing errors.......... :           0 :
+   ------------------------------------------- : ----------- :
+

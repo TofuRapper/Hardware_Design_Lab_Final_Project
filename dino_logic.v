@@ -25,6 +25,9 @@ module dino_logic (
     localparam DINO_DUCK_H = 38; // 19 * 2
     localparam DINO_DUCK_W = 48; // 24 * 2
 
+    // Movable dino X position (allows left/right movement with A/D)
+    reg [9:0] dino_x;
+
     localparam CACTUS_H = 40; // General cactus height for collision
     localparam CACTUS_S_W = 14; // 7 * 2
     localparam CACTUS_S_H = 30;
@@ -35,11 +38,9 @@ module dino_logic (
     localparam PTERO_FLY_OFFSET = 30; // Height above ground for Pterodactyl
 
     localparam S_MENU = 3'd0; 
-    localparam S_MODE_SELECT = 3'd1; 
     localparam S_RUN = 3'd2; 
     localparam S_PAUSE = 3'd3; 
     localparam S_OVER = 3'd4;
-    localparam S_LEADERBOARD = 3'd5;
     localparam S_NAME_INPUT = 3'd6;
     reg [2:0] state;
 
@@ -56,6 +57,7 @@ module dino_logic (
     reg [9:0] obs_w, obs_h;
     reg [9:0] obs_sprite_base;
     reg collision;
+    reg [11:0] temp_score; // Moved from inside always block
 
     reg [1:0] last_spawn_idx;
     reg [9:0] min_gap = 300; // Minimum gap between cactuses
@@ -122,18 +124,12 @@ module dino_logic (
     wire sensor_duck;
     wire key_jump;
     wire key_duck;
-
-
-    reg [1:0] selected_mode;    // 0: 合作, 1: 競技
     reg [3:0] user_speed;       // 玩家設定的速度
     reg [5:0] blink_cnt;
 
     reg prev_key_enter;
     wire key_enter_down = (key_down[9'h05A] || key_down[9'h029]); // Enter Key
     wire key_enter_pressed = key_enter_down && !prev_key_enter;
-
-    wire key_1_pressed     = key_down[9'h016] || key_down[9'h069]; // Main 1 or Numpad 1
-    wire key_2_pressed     = key_down[9'h01E] || key_down[9'h072]; // Main 2 or Numpad 2
     
     reg prev_key_pause;
     wire key_pause_raw     = key_down[9'h04D]; // P Key
@@ -167,15 +163,15 @@ module dino_logic (
                 // Determine dimensions based on type
                 case(cactus_type[i])
                     2'd0: begin // Small Cactus
-                        if ((DINO_X + curr_dino_w > cactus_x[i]) && (DINO_X < cactus_x[i] + CACTUS_S_W) && (col_y + col_h > GROUND_Y - CACTUS_S_H)) collision = 1'b1;
+                            if ((dino_x + curr_dino_w > cactus_x[i]) && (dino_x < cactus_x[i] + CACTUS_S_W) && (col_y + col_h > GROUND_Y - CACTUS_S_H)) collision = 1'b1;
                     end
                     2'd1: begin // Big Cactus
-                        if ((DINO_X + curr_dino_w > cactus_x[i]) && (DINO_X < cactus_x[i] + CACTUS_B_W) && (col_y + col_h > GROUND_Y - CACTUS_B_H)) collision = 1'b1;
+                            if ((dino_x + curr_dino_w > cactus_x[i]) && (dino_x < cactus_x[i] + CACTUS_B_W) && (col_y + col_h > GROUND_Y - CACTUS_B_H)) collision = 1'b1;
                     end
                     default: begin // Pterodactyl (Types 2 and 3)
                         // Check Y overlap with flying pterodactyl
                         // Ptero Y range: [GROUND_Y - PTERO_H - PTERO_FLY_OFFSET, GROUND_Y - PTERO_FLY_OFFSET]
-                        if ((DINO_X + curr_dino_w > cactus_x[i]) && (DINO_X < cactus_x[i] + PTERO_W) && 
+                            if ((dino_x + curr_dino_w > cactus_x[i]) && (dino_x < cactus_x[i] + PTERO_W) && 
                             (col_y + col_h > GROUND_Y - PTERO_H - PTERO_FLY_OFFSET) && 
                             (col_y < GROUND_Y - PTERO_FLY_OFFSET)) 
                             collision = 1'b1;
@@ -186,7 +182,7 @@ module dino_logic (
         if (drop_obs_active) begin
             // Collision box check against drop_obs_x and drop_obs_y
             // Note: drop_obs_y is top-left of the obstacle
-            if ((DINO_X + curr_dino_w > drop_obs_x) && (DINO_X < drop_obs_x + d_obs_w) && 
+                if ((dino_x + curr_dino_w > drop_obs_x) && (dino_x < drop_obs_x + d_obs_w) && 
                 (col_y + col_h > drop_obs_y) && (col_y < drop_obs_y + d_obs_h)) begin
                 collision = 1'b1;
             end
@@ -269,6 +265,7 @@ module dino_logic (
             last_key <= 9'h000;
             anim_cnt <= 0;
             drop_x <= 320;
+            dino_x <= DINO_X;
             prev_key_drop <= 0;
             prev_key_pause <= 0;
             drop_obs_active <= 0;
@@ -277,7 +274,6 @@ module dino_logic (
             drop_obs_grounded <= 0;
             selected_drop_type <= 2'd1; // Default to Big Cactus
             drop_obs_type <= 2'd1;
-            selected_mode <= 0; 
             user_speed <= 4;    
             blink_cnt <= 0;
             prev_key_enter <= 0;
@@ -294,11 +290,6 @@ module dino_logic (
             if (frame_tick) blink_cnt <= blink_cnt + 1;
             case (state)
                 S_MENU: begin
-                    if (key_enter_pressed) state <= S_MODE_SELECT;
-                end
-                S_MODE_SELECT: begin
-                    if (key_1_pressed) selected_mode <= 0;
-                    if (key_2_pressed) selected_mode <= 1;
                     if (key_enter_pressed) begin
                         state <= S_NAME_INPUT;
                         player_name[0] <= 26; player_name[1] <= 26; player_name[2] <= 26;
@@ -331,7 +322,14 @@ module dino_logic (
                 S_RUN: begin
                     if (key_pause_trigger) state <= S_PAUSE;
                     else if (collision) begin
+                        // Transition to game over and reset dino position/motion
                         state <= S_OVER;
+                        dino_x <= DINO_X;
+                        dino_y <= GROUND_Y - DINO_H;
+                        dino_vel <= 0;
+                        jumped <= 1'b0;
+                        ducking <= 1'b0;
+                        // preserve high score update
                         if (score > high_score) begin
                             high_score <= score;
                             hs_ones <= score_ones;
@@ -354,9 +352,7 @@ module dino_logic (
                     if (spd_5) user_speed <= 12;
                 end
                 S_OVER: if (key_enter_pressed) begin
-                            state <= S_LEADERBOARD;
-                        end
-                S_LEADERBOARD: if (key_enter_pressed) begin
+                            // Directly go back to menu and reset run state
                             state <= S_MENU;
                             dino_y <= GROUND_Y - DINO_H;
                             cactus_x[0] <= 630;
@@ -377,32 +373,26 @@ module dino_logic (
             if (frame_tick && state == S_RUN) begin
                 prev_key_drop <= drop_key_active; // Update prev_key_drop only on frame tick
 
-                if (key_down[9'h016] || key_down[9'h69]) selected_drop_type <= 2'd0; // Key 1 -> Small
-                if (key_down[9'h01E] || key_down[9'h72]) selected_drop_type <= 2'd1; // Key 2 -> Big
-                if (key_down[9'h026] || key_down[9'h7A]) selected_drop_type <= 2'd2; // Key 3 -> Ptero
+                // Only allow changing the selected drop type when there is no active dropped object
+                if (!drop_obs_active) begin
+                    if (key_down[9'h016] || key_down[9'h69]) selected_drop_type <= 2'd0; // Key 1 -> Small
+                    if (key_down[9'h01E] || key_down[9'h72]) selected_drop_type <= 2'd1; // Key 2 -> Big
+                    if (key_down[9'h026] || key_down[9'h7A]) selected_drop_type <= 2'd2; // Key 3 -> Ptero
+                end
 
                 for(i = 0; i < 3; i = i + 1) begin
                     // Always move cactus to allow large gaps
                     cactus_x[i] <= cactus_x[i] - user_speed - (score[9:4]);
                     if(cactus_active[i] && cactus_x[i] < -40) begin
                         cactus_active[i] <= 1'b0;
-                        score <= score + 1;
-                        if (score_ones == 9) begin
-                            score_ones <= 0;
-                            if (score_tens == 9) begin
-                                score_tens <= 0;
-                                if (score_hund == 9) begin
-                                    score_hund <= 0;
-                                    score_thou <= score_thou + 1;
-                                end else begin
-                                    score_hund <= score_hund + 1;
-                                end
-                            end else begin
-                                score_tens <= score_tens + 1;
-                            end
-                        end else begin
-                            score_ones <= score_ones + 1;
-                        end
+                        // Increase score faster: add 3 points per passed obstacle
+                        // Compute new score and update digit registers with carries
+                        temp_score = score + 3;
+                        score <= temp_score[9:0];
+                        score_ones <= temp_score % 10;
+                        score_tens <= (temp_score / 10) % 10;
+                        score_hund <= (temp_score / 100) % 10;
+                        score_thou <= (temp_score / 1000) % 10;
                     end
                 end
 
@@ -410,12 +400,10 @@ module dino_logic (
                     if(cactus_active[(last_spawn_idx + 1) % 3] == 0) begin
                         last_spawn_idx <= (last_spawn_idx + 1) % 3;
                         cactus_x[(last_spawn_idx + 1) % 3] <= 640;
-                        
-                        // Prevent Ptero after Cactus to avoid impossible jumps
-                        if (cactus_type[last_spawn_idx] < 2 && random_val[9:8] >= 2)
-                            cactus_type[(last_spawn_idx + 1) % 3] <= 2'b00; // Force Small Cactus
-                        else
-                            cactus_type[(last_spawn_idx + 1) % 3] <= random_val[9:8];
+
+                        // Select next obstacle type directly from the random value
+                        // This allows pterodactyls (types 2/3) to appear normally.
+                        cactus_type[(last_spawn_idx + 1) % 3] <= random_val[9:8];
 
                         cactus_active[(last_spawn_idx + 1) % 3] <= 1'b1;
                         next_spawn_offset <= random_val;
@@ -425,6 +413,37 @@ module dino_logic (
                 // Manual Drop Cursor Movement
                 if ((key_down[9'h16B] || key_down[9'h06B]) && drop_x > 10) drop_x <= drop_x - user_speed;
                 if ((key_down[9'h174] || key_down[9'h074]) && drop_x < 630) drop_x <= drop_x + user_speed;
+
+                // Dino left/right movement: A (0x1C) = move left, D (0x23) = move right
+                // If player attempts to move beyond bounds, trigger game over
+                if (key_down[9'h01C]) begin
+                    if (dino_x > 10) dino_x <= dino_x - user_speed;
+                    else begin
+                        // went off-left edge -> game over
+                        state <= S_OVER;
+                        dino_x <= DINO_X;
+                        dino_y <= GROUND_Y - DINO_H;
+                        dino_vel <= 0;
+                        jumped <= 1'b0;
+                        ducking <= 1'b0;
+                        cactus_active[0] <= 1'b0; cactus_active[1] <= 1'b0; cactus_active[2] <= 1'b0;
+                        drop_obs_active <= 1'b0;
+                    end
+                end
+                if (key_down[9'h023]) begin
+                    if (dino_x < 630 - curr_dino_w) dino_x <= dino_x + user_speed;
+                    else begin
+                        // went off-right edge -> game over
+                        state <= S_OVER;
+                        dino_x <= DINO_X;
+                        dino_y <= GROUND_Y - DINO_H;
+                        dino_vel <= 0;
+                        jumped <= 1'b0;
+                        ducking <= 1'b0;
+                        cactus_active[0] <= 1'b0; cactus_active[1] <= 1'b0; cactus_active[2] <= 1'b0;
+                        drop_obs_active <= 1'b0;
+                    end
+                end
 
 
                 // Manual Drop Trigger Logic
@@ -611,15 +630,6 @@ always @(*) begin
                 sprite_addr = (SP_WORD_Y + cy) * IMG_WIDTH + (SP_WORD_X + cx);
             end
         end
-        else if(state == S_MODE_SELECT) begin
-            if (h_cnt >= 100 && h_cnt < 100 + MODE_ICON_W &&
-                v_cnt >= 200 && v_cnt < 200 + MODE_ICON_H) begin
-                cx = h_cnt - 100;
-                cy = v_cnt - 200;
-                sprite_addr = (SP_MODE_COOP_Y + cy) * IMG_WIDTH + (SP_MODE_COOP_X + cx);
-            end
-            
-        end
         else if(state == S_PAUSE) begin
             if (h_cnt >= 310 && h_cnt < 310 + CONT_W &&
                 v_cnt >= 200 && v_cnt < 200 + CONT_H) begin
@@ -663,8 +673,8 @@ always @(*) begin
                 sprite_addr = (cy >> 1) * IMG_WIDTH + (prev_sp + (cx >> 1));
             end
             // Dino Rendering
-            if (h_cnt >= DINO_X && h_cnt < DINO_X + curr_dino_w && v_cnt >= dino_y && v_cnt < dino_y + curr_dino_h) begin
-                dx = h_cnt - DINO_X;
+            if (h_cnt >= dino_x && h_cnt < dino_x + curr_dino_w && v_cnt >= dino_y && v_cnt < dino_y + curr_dino_h) begin
+                dx = h_cnt - dino_x;
                 dy = v_cnt - dino_y;
                 if (jumped)          sp_x = SP_DINO_JUMP;
                 else if (ducking)    sp_x = (anim_cnt[4] == 1'b0) ? SP_DINO_DUCK1 : SP_DINO_DUCK2;
@@ -715,6 +725,8 @@ always @(*) begin
                 end
             end
         end
+        // Prevent duplicate cactus rendering outside RUN state
+        if (state == S_RUN) begin
             for(i = 0; i < 3; i = i + 1) begin
                 if(cactus_active[i]) begin
                     // Determine dimensions and sprite based on type
@@ -755,6 +767,7 @@ always @(*) begin
                 end
             end
         end
+    end
 
     reg score_pixel;
     reg [3:0] current_digit;
@@ -819,14 +832,13 @@ always @(*) begin
 
     reg [9:0] hs_base_x, hs_base_y;
     always @(*) begin
-        if (state == S_LEADERBOARD) begin
-            hs_base_x = 280;
-            hs_base_y = 200;
-        end else if (state == S_OVER) begin
-            hs_base_x = 280;
-            hs_base_y = 240;
+        // Move high score display to Game Over and position it left/higher
+        // Also shift the high score right by ~1/5 of the screen (128 px)
+        if (state == S_OVER) begin
+            hs_base_x = 100 + 128; // shifted right
+            hs_base_y = 140; // higher
         end else begin
-            hs_base_x = 20;
+            hs_base_x = 20 + 128;
             hs_base_y = 20;
         end
     end
@@ -858,7 +870,7 @@ always @(*) begin
                 14: get_char_pixel_func = (x==0 || x==4 || y==0 || y==6); // O
                 15: get_char_pixel_func = (x==0 || y==0 || y==3 || (x==4 && y<3)); // P
                 16: get_char_pixel_func = (x==0 || x==4 || y==0 || y==6 || (x==3 && y==5)); // Q
-                17: get_char_pixel_func = (x==0 || y==0 || y==3 || (x==4 && y<3) || (x==y && y>3)); // R
+                17: get_char_pixel_func = (x==0 || y==0 || y==3 || (x==4 && y<3) || (x==y && y>=3) || (x==3 && y==4) || (x==4 && y==5)); // R (explicit diagonal leg)
                 18: get_char_pixel_func = (y==0 || y==3 || y==6 || (x==0 && y<3) || (x==4 && y>3)); // S
                 19: get_char_pixel_func = (y==0 || x==2); // T
                 20: get_char_pixel_func = (x==0 || x==4 || y==6); // U
@@ -977,14 +989,14 @@ always @(*) begin
         // Note: sprite_data corresponds to the address from the PREVIOUS cycle (or 2 cycles ago).
         // This might cause a 1-2 pixel shift to the right.
         
-        if (sprite_data != 12'h000) begin
-             // We only draw the sprite if we are "inside" the box logic from the previous cycle.
-             // But since we don't easily know that here without pipelining, 
-             // we'll just trust the non-black pixel output.
-             // For better precision, we should pipeline the "is_dino" / "is_cactus" signals.
-             if(state == S_RUN || state == S_PAUSE || state == S_MENU || state == S_MODE_SELECT || state == S_OVER || state == S_LEADERBOARD || state == S_NAME_INPUT) pixel_out = 12'h000;
-             pixel_out = sprite_data;
-        end
+           if (sprite_data != 12'h000) begin
+               // Draw sprites only in states that render sprites.
+               // Sprite addresses are only set for relevant objects per-state above,
+               // so this prevents unrelated sprites from appearing in S_OVER.
+               if (state == S_RUN || state == S_MENU || state == S_PAUSE || state == S_OVER || state == S_NAME_INPUT) begin
+                  pixel_out = sprite_data;
+               end
+           end
         
         if (score_pixel || hs_pixel || char_pixel) pixel_out = 12'hFFF;
         
