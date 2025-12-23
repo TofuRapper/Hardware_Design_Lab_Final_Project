@@ -202,8 +202,8 @@ module dino_logic (
     end
 
     wire frame_tick = vsync && !prev_vsync;
-    assign sensor_jump = (distance > 20'd20 && distance < 20'd50);
-    assign sensor_duck = (distance < 20'd10 && distance > 20'd0);
+    assign sensor_jump = (distance > 20'd60 && distance < 20'd90);
+    assign sensor_duck = (distance < 20'd30);
     // Theme-aware input: in dark theme (theme_sel==1) keyboard WASD works;
     // in light theme (theme_sel==0) W/S do nothing and jump/duck are sensor-driven.
     wire key_jump_raw = key_down[9'h01D] || jump_signal; // W
