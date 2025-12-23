@@ -216,6 +216,7 @@ module dino_logic (
     reg [1:0] countdown_step; // 3,2,1
     reg [5:0] countdown_frame; // frame counter for each digit display
     reg initial_tone;
+    reg to_enter_run;
     
     // Theme selection: 0 = light, 1 = dark
     reg theme_sel;
@@ -304,6 +305,7 @@ module dino_logic (
             countdown_step <= 2'd0;
             countdown_frame <= 6'd0;
             initial_tone <= 1'b0;
+            to_enter_run <= 1'b0;
             
         end else begin
             prev_vsync <= vsync;
@@ -348,18 +350,22 @@ module dino_logic (
                             initial_tone <= 1'b0;
                             countdown_tone <= 3'd3;
                             countdown_event <= ~countdown_event;
+                        end else if (to_enter_run) begin
+                            state <= S_RUN;
+                            countdown_step <= 2'd0;
+                            countdown_frame <= 6'd0;
+                            to_enter_run <= 1'b0;
                         end else if (countdown_frame >= 6'd60) begin // ~1s per digit at 60Hz
-                            // move to next step
                             if (countdown_step == 2'd1) begin
-                                // finished countdown -> RUN
-                                state <= S_RUN;
-                                countdown_step <= 2'd0;
+                                countdown_tone <= 3'd1;
+                                countdown_event <= ~countdown_event;
+                                to_enter_run <= 1'b1;
                                 countdown_frame <= 6'd0;
                             end else begin
                                 countdown_step <= countdown_step - 1;
-                                countdown_frame <= 6'd0;
                                 countdown_tone <= countdown_step; // Set tone for new step
-                                countdown_event <= ~countdown_event; // Toggle for tone
+                                countdown_event <= ~countdown_event;
+                                countdown_frame <= 6'd0;
                             end
                         end
                     end

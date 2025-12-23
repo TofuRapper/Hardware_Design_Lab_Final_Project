@@ -87,6 +87,7 @@ module dino_top (
     reg land_sync0, land_sync1, prev_land_sync;
     reg countdown_sync0, countdown_sync1, prev_countdown_sync;
     reg [2:0] countdown_tone_latched;
+    reg [2:0] countdown_tone_sync0, countdown_tone_sync1;
     reg tone_active;
     reg [31:0] tone_counter;
     reg [31:0] tone_freq;
@@ -96,6 +97,9 @@ module dino_top (
         if (rst) begin
             jump_sync0 <= 1'b0; jump_sync1 <= 1'b0; prev_jump_sync <= 1'b0;
             land_sync0 <= 1'b0; land_sync1 <= 1'b0; prev_land_sync <= 1'b0;
+            countdown_sync0 <= 1'b0; countdown_sync1 <= 1'b0; prev_countdown_sync <= 1'b0;
+            countdown_tone_sync0 <= 3'd0; countdown_tone_sync1 <= 3'd0;
+            countdown_tone_latched <= 3'd0;
             tone_active <= 1'b0;
             tone_counter <= 32'd0;
             tone_freq <= `silence;
@@ -107,7 +111,9 @@ module dino_top (
             land_sync1 <= land_sync0;
             countdown_sync0 <= countdown_event_pclk;
             countdown_sync1 <= countdown_sync0;
-            countdown_tone_latched <= countdown_tone_pclk;
+            countdown_tone_sync0 <= countdown_tone_pclk;
+            countdown_tone_sync1 <= countdown_tone_sync0;
+            countdown_tone_latched <= countdown_tone_sync1;
 
             // detect toggle changes
             if (jump_sync1 != prev_jump_sync) begin
