@@ -15,7 +15,9 @@ module dino_logic (
     output reg [11:0] pixel_out,
     output reg [15:0] led_out,    // Debug LEDs
     output reg jump_event,        // Toggle on jump start (pclk domain)
-    output reg land_event         // Toggle on landing (pclk domain)
+    output reg land_event,        // Toggle on landing (pclk domain)
+    output reg countdown_event,   // Toggle to request a countdown tone (pclk domain)
+    output reg [2:0] countdown_tone // Tone selector for countdown (3->3,2->2,1->1)
 );
 
     localparam GROUND_Y = 350;
@@ -38,6 +40,7 @@ module dino_logic (
     localparam PTERO_FLY_OFFSET = 30; // Height above ground for Pterodactyl
 
     localparam S_MENU = 3'd0; 
+    localparam S_COUNT = 3'd1;
     localparam S_RUN = 3'd2; 
     localparam S_PAUSE = 3'd3; 
     localparam S_OVER = 3'd4;
@@ -209,6 +212,9 @@ module dino_logic (
     reg [9:0] high_score;
     reg [3:0] hs_ones, hs_tens, hs_hund, hs_thou;
     reg [1:0] lives; // 3 lives: 3,2,1,0
+    // Countdown state variables
+    reg [1:0] countdown_step; // 3,2,1
+    reg [5:0] countdown_frame; // frame counter for each digit display
     
     // Theme selection: 0 = light, 1 = dark
     reg theme_sel;
@@ -292,6 +298,10 @@ module dino_logic (
             prev_jumped_pclk <= 1'b0;
             lives <= 2'd3;
             prev_sel1 <= 1'b0; prev_sel2 <= 1'b0; prev_sel3 <= 1'b0;
+            countdown_event <= 1'b0;
+            countdown_tone <= 3'd0;
+            countdown_step <= 2'd0;
+            countdown_frame <= 6'd0;
             
         end else begin
             prev_vsync <= vsync;
@@ -310,16 +320,42 @@ module dino_logic (
                         end
                 end
                 S_NAME_INPUT: begin
-                    // Theme selection screen: Enter confirms selection and starts game
-                    if (key_enter_pressed) begin // Confirm selection
-                        // Apply theme (stub — visual-only here). Proceed to RUN.
-                        state <= S_RUN;
+                    // Theme selection screen: Enter confirms selection and starts countdown
+                    if (key_enter_pressed) begin // Confirm selection -> start countdown
+                        state <= S_COUNT;
+                        // initialize countdown (3,2,1)
+                        countdown_step <= 2'd3;
+                        countdown_frame <= 6'd0;
+                        countdown_event <= 1'b0;
+                        countdown_tone <= 3'd0;
+                        // reset game variables
                         score <= 0;
                         score_ones <= 0; score_tens <= 0; score_hund <= 0; score_thou <= 0;
                         dino_y <= GROUND_Y - DINO_H;
                         cactus_x[0] <= 630; cactus_active[0] <= 1;
                         cactus_active[1] <= 0; cactus_active[2] <= 0;
                         lives <= 2'd3;
+                    end
+                end
+                S_COUNT: begin
+                    // Wait for a few frames per digit and emit tones on each step
+                    if (frame_tick) begin
+                        countdown_frame <= countdown_frame + 1;
+                        if (countdown_frame >= 6'd30) begin // ~0.5s per digit at 60Hz
+                            // latch tone based on step (3->C4,2->D4,1->E4 mapped later in top)
+                            countdown_tone <= countdown_step;
+                            countdown_event <= ~countdown_event; // toggle to request tone
+                            // move to next step
+                            if (countdown_step == 2'd1) begin
+                                // finished countdown -> RUN
+                                state <= S_RUN;
+                                countdown_step <= 2'd0;
+                                countdown_frame <= 6'd0;
+                            end else begin
+                                countdown_step <= countdown_step - 1;
+                                countdown_frame <= 6'd0;
+                            end
+                        end
                     end
                 end
                 S_RUN: begin
@@ -831,7 +867,7 @@ always @(*) begin
                 4: get_char_pixel_func = (x==0 || y==0 || y==3 || y==6); // E
                 5: get_char_pixel_func = (x==0 || y==0 || y==3); // F
                 6: get_char_pixel_func = (x==0 || y==0 || y==6 || (x==4 && y>3) || (y==3 && x>2)); // G
-                7: get_char_pixel_func = (x==0 || x==4 || y==3); // H
+                7: get_char_pixel_func = (x==0 || x==4 || y==3 || (x==4 && y>0)); // H (stronger right leg)
                 8: get_char_pixel_func = (x==2 || y==0 || y==6); // I
                 9: get_char_pixel_func = (x==4 || y==6 || (x==0 && y>4)); // J
                 10: get_char_pixel_func = (x==0 || (x==4 && (y==0 || y==6)) || (x==2 && y==3) || (x==3 && (y==2 || y==4))); // K
@@ -888,6 +924,19 @@ always @(*) begin
                 // Highlight selection by drawing a simple underline box
                 if (theme_sel == 1'b0 && (h_cnt >= 240 && h_cnt < 306) && (v_cnt >= 214 && v_cnt < 220)) char_pixel = 1; // underline LIGHT
                 if (theme_sel == 1'b1 && (h_cnt >= 360 && h_cnt < 412) && (v_cnt >= 214 && v_cnt < 220)) char_pixel = 1; // underline DARK
+            end
+        end
+
+        // Countdown Display (large centered digit)
+        if (state == S_COUNT) begin
+            if (v_cnt >= 200 && v_cnt < 214) begin
+                char_dy = (v_cnt - 200) >> 1;
+                if (h_cnt >= 300 && h_cnt < 320) begin
+                    char_code = countdown_step; // 3,2,1 -> digit render
+                    char_dx = (h_cnt - 300) >> 1;
+                    // use digit renderer for numeric display
+                    char_pixel = get_digit_pixel(countdown_step, char_dx, char_dy);
+                end
             end
         end
 

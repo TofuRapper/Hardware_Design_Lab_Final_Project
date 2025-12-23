@@ -20,16 +20,17 @@ module dino_top (
     output wire audio_mclk,
     output wire audio_lrck,
     output wire audio_sck,
-    output wire audio_sdin
+    output wire audio_sdin,
+    input wire countdown_event_pclk,
+    input wire [2:0] countdown_tone_pclk
 );
 
     `define silence 32'd50000000
     `define c4 32'd262   // C4
     `define d4 32'd294   // D4
     `define e4 32'd330   // E4
-    `define f4 32'd349   // F4
-    `define g4 32'd392   // G4
     `define a4 32'd440   // A4
+    `define b4 32'd494   // B4
     `define b4 32'd494   // B4
 
     wire pclk;
@@ -86,6 +87,8 @@ module dino_top (
     // Event-driven tone logic (synchronized from pclk domain)
     reg jump_sync0, jump_sync1, prev_jump_sync;
     reg land_sync0, land_sync1, prev_land_sync;
+    reg countdown_sync0, countdown_sync1, prev_countdown_sync;
+    reg [2:0] countdown_tone_latched;
     reg tone_active;
     reg [31:0] tone_counter;
     reg [31:0] tone_freq;
@@ -104,6 +107,9 @@ module dino_top (
             jump_sync1 <= jump_sync0;
             land_sync0 <= land_event_pclk;
             land_sync1 <= land_sync0;
+            countdown_sync0 <= countdown_event_pclk;
+            countdown_sync1 <= countdown_sync0;
+            countdown_tone_latched <= countdown_tone_pclk;
 
             // detect toggle changes
             if (jump_sync1 != prev_jump_sync) begin
@@ -117,8 +123,21 @@ module dino_top (
                 tone_active <= 1'b1;
             end
 
+            // countdown tone event: choose frequency based on latched tone code
+            if (countdown_sync1 != prev_countdown_sync) begin
+                case (countdown_tone_latched)
+                    3'd3: tone_freq <= `c4;
+                    3'd2: tone_freq <= `d4;
+                    3'd1: tone_freq <= `e4;
+                    default: tone_freq <= `silence;
+                endcase
+                tone_counter <= 32'd8000000; // ~0.16s @ 50MHz
+                tone_active <= 1'b1;
+            end
+
             prev_jump_sync <= jump_sync1;
             prev_land_sync <= land_sync1;
+            prev_countdown_sync <= countdown_sync1;
 
             // countdown
             if (tone_active) begin
@@ -180,6 +199,8 @@ module dino_top (
         .led_out(led_out_wire),
         .jump_event(jump_event_pclk),
         .land_event(land_event_pclk),
+        .countdown_event(countdown_event_pclk),
+        .countdown_tone(countdown_tone_pclk),
         .distance(distance)
     );
 

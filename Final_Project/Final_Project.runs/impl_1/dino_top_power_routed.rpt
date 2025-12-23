@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date             : Tue Dec 23 14:41:59 2025
+| Date             : Tue Dec 23 14:55:37 2025
 | Host             : LAPTOP-9C9D7G8P running 64-bit major release  (build 9200)
 | Command          : report_power -file dino_top_power_routed.rpt -pb dino_top_power_summary_routed.pb -rpx dino_top_power_routed.rpx
 | Design           : dino_top
@@ -52,15 +52,15 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.004 |        3 |       --- |             --- |
-| Slice Logic    |     0.011 |     5752 |       --- |             --- |
-|   LUT as Logic |     0.010 |     3286 |     20800 |           15.80 |
+| Clocks         |     0.003 |        3 |       --- |             --- |
+| Slice Logic    |     0.011 |     5786 |       --- |             --- |
+|   LUT as Logic |     0.010 |     3316 |     20800 |           15.94 |
 |   CARRY4       |     0.001 |      678 |      8150 |            8.32 |
 |   Register     |    <0.001 |      653 |     41600 |            1.57 |
 |   BUFG         |    <0.001 |        3 |        32 |            9.38 |
-|   F7/F8 Muxes  |    <0.001 |       49 |     32600 |            0.15 |
+|   F7/F8 Muxes  |    <0.001 |       46 |     32600 |            0.14 |
 |   Others       |     0.000 |      115 |       --- |             --- |
-| Signals        |     0.010 |     4633 |       --- |             --- |
+| Signals        |     0.010 |     4675 |       --- |             --- |
 | Block RAM      |     0.003 |       27 |        50 |           54.00 |
 | DSPs           |     0.003 |       19 |        90 |           21.11 |
 | I/O            |     0.042 |       54 |       106 |           50.94 |
@@ -147,7 +147,7 @@ Table of Contents
 | dino_top             |     0.072 |
 |   B                  |     0.005 |
 |     u2               |     0.004 |
-|   game_inst          |     0.009 |
+|   game_inst          |     0.010 |
 |     sprite_rom       |     0.003 |
 |       U0             |     0.003 |
 |   kbd_decoder        |     0.002 |
