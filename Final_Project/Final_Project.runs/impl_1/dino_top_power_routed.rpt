@@ -1,8 +1,8 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date             : Tue Dec 23 15:46:21 2025
-| Host             : LAPTOP-9C9D7G8P running 64-bit major release  (build 9200)
+| Date             : Tue Dec 23 16:01:27 2025
+| Host             : R328-40 running 64-bit major release  (build 9200)
 | Command          : report_power -file dino_top_power_routed.rpt -pb dino_top_power_summary_routed.pb -rpx dino_top_power_routed.rpx
 | Design           : dino_top
 | Device           : xc7a35tcpg236-1
@@ -53,17 +53,17 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.003 |        3 |       --- |             --- |
-| Slice Logic    |     0.018 |     6020 |       --- |             --- |
-|   LUT as Logic |     0.016 |     3451 |     20800 |           16.59 |
+| Slice Logic    |     0.018 |     6008 |       --- |             --- |
+|   LUT as Logic |     0.015 |     3441 |     20800 |           16.54 |
 |   CARRY4       |     0.002 |      693 |      8150 |            8.50 |
-|   Register     |    <0.001 |      672 |     41600 |            1.62 |
-|   F7/F8 Muxes  |    <0.001 |       73 |     32600 |            0.22 |
+|   Register     |    <0.001 |      673 |     41600 |            1.62 |
+|   F7/F8 Muxes  |    <0.001 |       69 |     32600 |            0.21 |
 |   BUFG         |    <0.001 |        2 |        32 |            6.25 |
 |   Others       |     0.000 |      115 |       --- |             --- |
-| Signals        |     0.016 |     4867 |       --- |             --- |
+| Signals        |     0.016 |     4865 |       --- |             --- |
 | Block RAM      |     0.003 |       27 |        50 |           54.00 |
 | DSPs           |     0.003 |       20 |        90 |           22.22 |
-| I/O            |     0.044 |       54 |       106 |           50.94 |
+| I/O            |     0.045 |       54 |       106 |           50.94 |
 | Static Power   |     0.073 |          |           |                 |
 | Total          |     0.161 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
@@ -75,7 +75,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.054 |       0.043 |      0.010 |
+| Vccint    |       1.000 |     0.053 |       0.043 |      0.010 |
 | Vccaux    |       1.800 |     0.014 |       0.002 |      0.013 |
 | Vcco33    |       3.300 |     0.014 |       0.013 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -154,7 +154,7 @@ Table of Contents
 |     inst             |     0.001 |
 |       Ps2Interface_i |     0.001 |
 |   noteGen_00         |     0.015 |
-|   vga_inst           |     0.004 |
+|   vga_inst           |     0.005 |
 +----------------------+-----------+
 
 

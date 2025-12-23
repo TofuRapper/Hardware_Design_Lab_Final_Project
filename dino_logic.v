@@ -317,7 +317,8 @@ module dino_logic (
                     if (key_enter_pressed) begin
                             state <= S_NAME_INPUT;
                             theme_sel <= 1'b0; // default selection
-                        end
+                    end
+                    countdown_tone <= 3'd0;
                 end
                 S_NAME_INPUT: begin
                     // Theme selection screen: Enter confirms selection and starts countdown
@@ -327,7 +328,6 @@ module dino_logic (
                         countdown_step <= 2'd3;
                         countdown_frame <= 6'd0;
                         countdown_event <= 1'b0;
-                        countdown_tone <= 3'd0;
                         // reset game variables
                         score <= 0;
                         score_ones <= 0; score_tens <= 0; score_hund <= 0; score_thou <= 0;
@@ -336,6 +336,7 @@ module dino_logic (
                         cactus_active[1] <= 0; cactus_active[2] <= 0;
                         lives <= 2'd3;
                     end
+                    countdown_tone <= 3'd0;
                 end
                 S_COUNT: begin
                     // Wait for a few frames per digit and emit tones on each step
@@ -359,6 +360,7 @@ module dino_logic (
                     end
                 end
                 S_RUN: begin
+                    countdown_tone <= 3'd0;
                     if (key_pause_trigger) state <= S_PAUSE;
                         else if (collision || dino_x < 1 || dino_x > (640 - curr_dino_w - 1) || dino_y > (GROUND_Y + 100)) begin
                                 if (lives > 1) begin
@@ -393,6 +395,7 @@ module dino_logic (
                             end
                 end
                 S_PAUSE: begin
+                    countdown_tone <= 3'd0;
                     if (key_pause_trigger) state <= S_RUN;
                     
                     if (spd_1) user_speed <= 4;
@@ -401,23 +404,26 @@ module dino_logic (
                     if (spd_4) user_speed <= 10;
                     if (spd_5) user_speed <= 12;
                 end
-                S_OVER: if (key_enter_pressed) begin
-                            // Restart game directly from Game Over
-                            state <= S_MENU;
-                            dino_y <= GROUND_Y - DINO_H;
-                            cactus_x[0] <= 630;
-                            cactus_active[0] <= 1'b1;       
-                            cactus_active[1] <= 1'b0;
-                            cactus_active[2] <= 1'b0;
-                            last_spawn_idx <= 0;
-                            score <= 0;
-                            score_ones <= 0; score_tens <= 0; score_hund <= 0; score_thou <= 0;
-                            next_spawn_offset <= 0;
-                            dino_vel <= 0;
-                            cactus_type[0] <= 2'b0;
-                            drop_obs_active <= 0;
-                            lives <= 2'd3;
-                        end
+                S_OVER: begin
+                    if (key_enter_pressed) begin
+                        // Restart game directly from Game Over
+                        state <= S_MENU;
+                        dino_y <= GROUND_Y - DINO_H;
+                        cactus_x[0] <= 630;
+                        cactus_active[0] <= 1'b1;       
+                        cactus_active[1] <= 1'b0;
+                        cactus_active[2] <= 1'b0;
+                        last_spawn_idx <= 0;
+                        score <= 0;
+                        score_ones <= 0; score_tens <= 0; score_hund <= 0; score_thou <= 0;
+                        next_spawn_offset <= 0;
+                        dino_vel <= 0;
+                        cactus_type[0] <= 2'b0;
+                        drop_obs_active <= 0;
+                        lives <= 2'd3;
+                    end
+                    countdown_tone <= 3'd0;
+                end 
             endcase
 
             // --- THEME SELECTION (edge-detect on pclk using prev_key_down) ---
@@ -429,12 +435,13 @@ module dino_logic (
                 if ((key_down[9'h01C] || key_down[9'h023]) && !((prev_key_down[9'h01C] || prev_key_down[9'h023]))) begin
                     theme_sel <= ~theme_sel;
                 end
+                countdown_tone <= 3'd0;
             end
 
             // 2. PHYSICS UPDATE
             if (frame_tick && state == S_RUN) begin
                 prev_key_drop <= drop_key_active; // Update prev_key_drop only on frame tick
-
+                countdown_tone <= 3'd0;
                 // Latch selection on key press (edge detect)
                 if ((key_down[9'h016] || key_down[9'h069]) && !prev_sel1) selected_drop_type <= 2'd0; // Key 1 -> Small
                 if ((key_down[9'h01E] || key_down[9'h072]) && !prev_sel2) selected_drop_type <= 2'd1; // Key 2 -> Big
@@ -603,8 +610,8 @@ module dino_logic (
 
     // Heart sprite (top-left status)
     // Source image at (570,60) size 18x18 in pic.jpg
-    localparam SP_HEART_X = 570;
-    localparam SP_HEART_Y = 60;
+    localparam SP_HEART_X = 568;
+    localparam SP_HEART_Y = 64;
     localparam HEART_W = 18;
     localparam HEART_H = 18;
     // Display positions
