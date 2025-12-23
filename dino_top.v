@@ -20,9 +20,7 @@ module dino_top (
     output wire audio_mclk,
     output wire audio_lrck,
     output wire audio_sck,
-    output wire audio_sdin,
-    input wire countdown_event_pclk,
-    input wire [2:0] countdown_tone_pclk
+    output wire audio_sdin
 );
 
     `define silence 32'd50000000
