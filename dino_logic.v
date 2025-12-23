@@ -601,6 +601,17 @@ module dino_logic (
     localparam SP_CACTUS_B = 131;    // Big Cactus (132-191)
     localparam SP_CACTUS_S = 89;    // Small Cactus (90-131)
 
+    // Heart sprite (top-left status)
+    // Source image at (570,60) size 18x18 in pic.jpg
+    localparam SP_HEART_X = 570;
+    localparam SP_HEART_Y = 60;
+    localparam HEART_W = 18;
+    localparam HEART_H = 18;
+    // Display positions
+    localparam HEART_START_X = 10; // left padding from screen edge
+    localparam HEART_START_Y = 10; // top padding from screen edge
+    localparam HEART_SPACING = 22; // spacing between hearts
+
     localparam SP_TITLE_START_X = 0;
     localparam SP_TITLE_START_Y = 26;
     localparam TITLE_W        = 150; 
@@ -768,6 +779,20 @@ always @(*) begin
                             end
                         end
                     endcase
+                end
+            end
+
+            // Heart icons (top-left): show up to 3 hearts representing lives
+            // Draw hearts at HEART_START_X/HEART_START_Y, spacing HEART_SPACING
+            for (i = 0; i < 3; i = i + 1) begin
+                if (lives > i) begin
+                    if (h_cnt >= HEART_START_X + i*HEART_SPACING && h_cnt < HEART_START_X + i*HEART_SPACING + HEART_W &&
+                        v_cnt >= HEART_START_Y && v_cnt < HEART_START_Y + HEART_H) begin
+                        cx = h_cnt - (HEART_START_X + i*HEART_SPACING);
+                        cy = v_cnt - HEART_START_Y;
+                        // Direct mapping (sprite is 18x18)
+                        sprite_addr = (SP_HEART_Y + cy) * IMG_WIDTH + (SP_HEART_X + cx);
+                    end
                 end
             end
         end
